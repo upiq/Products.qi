@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="baseErrors python:view.getError('base')">
+    <h3>Mail Archives</h3>
+    <p class="description">
+        These are the Mailing Lists that you are subscribed to.
+        Click on a Mailing List to view the threads for that Mailing List.
+    </p>
+    <table width="90%" class="archive listing">
+        <tr>
+        <th width="90%" >
+            Mailing Lists
+        </th>
+        <th width="10%">
+            Number of threads
+        </th>
+        </tr>
+    <tr tal:repeat="mlist view/mylists">
+        <td valign="top">
+        <a href="moo" tal:attributes="href python:'threads?id=%s'%mlist.id;"
+         tal:content="mlist/listname">list name goes here</a>
+        <tal:project condition="mlist/project">
+            <br />Project: <tal:projectname content="mlist/project"/>
+        </tal:project>
+        <tal:team condition="mlist/team">
+            <br />Team: <tal:projectname content="mlist/team"/>
+        </tal:team>
+        <p class="description">
+            Description: <tal:description tal:content="mlist/description">
+            description goes here
+            </tal:description>
+        </p>
+        </td>
+        <td valign="top" tal:content="python:len(mlist.mailthread_set.all())">
+        </td>
+    </tr>
+    </table>
+</div>
+</body>
+</html>

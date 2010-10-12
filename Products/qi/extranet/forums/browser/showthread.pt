@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<div metal:fill-slot="main">
+    <h2 tal:content="context/title">Thread title</h2>
+    <a name="first" href="#last">Jump to bottom</a> 
+    <a href="files"> View all uploaded files</a>
+    <table style="width:800px;margin:20px;border:solid black 1px; border-collapse:collapse;">
+        <tal:posts repeat="post context/posts">
+            
+            <tr class="postrow" style="border-top:solid black 1px; border-left:solid black 1px; border-right:solid black 1px;">
+                <td class="ownerinfo" style="width:175px; height:100px; background-color:#DDDDDD;
+
+                    vertical-align:top; padding-top: 20px;padding-left:15px;">
+                    <a name="last" tal:condition="repeat/post/end"></a>
+                    <span class="username" tal:define="owner post/getOwner"
+                        tal:content="python: hasattr(owner,'getProperty')  and owner.getProperty('fullname') or owner.getId()" />
+                </td>
+                <td tal:content="structure post/body" 
+                        style="vertical-align:top; padding-top: 20px; padding-left:15px; ">
+                    POST CONTENT
+                </td>
+            </tr>
+            <tr style="background-color:#DDDDFF;border-bottom:solid black 1px; border-left:solid black 1px; border-right:solid black 1px;">
+                <td tal:content="python:post.posted.strftime('%m/%d/%Y')"></td>
+                <td>
+                    <tal:extras condition="post/canedit">
+                        <a href="editpost" tal:attributes="href python:'%s/editpost'%post.absolute_url()">edit</a>
+                        <a href="delete" tal:attributes="href python:'%s/delete'%post.absolute_url()">delete</a>
+                    </tal:extras>
+                    <tal:attachments define="attachments post/attachments" condition="attachments">
+
+                    
+                    <label>Attachments:</label>
+                        <tal:attachments repeat="attachment attachments">
+                            <a tal:attributes="href attachment/absolute_url" tal:content="attachment/title" />
+                        </tal:attachments>
+                    </tal:attachments>
+                </td>
+            </tr>
+        </tal:posts>
+    </table>
+    <a href="#first">Jump to top</a>
+    <form method="POST" tal:condition="view/allowsreplies"  tal:attributes="action python: '%s/reply'%context.absolute_url()">
+        <input type="submit" name="reply" value="reply" />
+    </form>
+</div>
+</html>

@@ -1,0 +1,33 @@
+<div>       
+<h2>Reports for <tal:name content="view/context/title"></tal:name></h2>
+    <tal:months repeat="month view/months">
+        <div>
+            <h3>
+            <tal:monthname content="month/name">
+            </tal:monthname>
+            <tal:year content="month/year">
+            </tal:year>
+            </h3>
+            <dl>
+                <tal:reportresults repeat="result month/results">
+                <dt tal:content="result/batch/report/reportname">
+                    
+                </dt>
+                <dd>
+                <a tal:attributes="
+        href python:'downloadfile?fileid=%i'%result.file.id;"
+                    tal:content="result/file/displayname">
+                    </a>
+                </dd>
+                <dd>
+                Completed at:
+                    <tal:completion content="result/batch/completiontime">
+                    
+                    </tal:completion>
+                </dd>
+                </tal:reportresults>
+                
+            </dl>
+        </div>
+    </tal:months>
+</div>

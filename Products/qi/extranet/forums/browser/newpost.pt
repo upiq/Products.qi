@@ -1,0 +1,10 @@
+<html>
+    <body>
+        <form>
+        <input type="text" name="threadtitle" />
+        <textarea name="postbody">
+        </textarea>
+        <input type="submit" value="submit"/>
+        </form>
+    </body>
+</html>

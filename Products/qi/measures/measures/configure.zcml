@@ -1,0 +1,29 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.qi">
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="measures.html"
+        class=".measures.Measures"
+        template="measures.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+        
+    <browser:page
+        for="*"
+        name="Add_Measure.html"
+        class=".measures.NewMeasure"
+        template="addedit.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+        
+    <browser:page
+        for="*"
+        name="Measure_Type.html"
+        class=".measures.AddMeasureType"
+        template="measureType.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+        
+</configure>

@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main">
+<fieldset>
+<legend>Orphaned Projects</legend>
+<ul>
+    <tal:projects repeat="project view/getProjects">
+        <li tal:content="project">
+            
+        </li>
+    </tal:projects>
+</ul>
+<form action="."
+method="post"
+tal:attributes="action view/url">
+    <input type="submit" name="cleanprojects" value="CLEAN 'EM!" />
+</form>
+</fieldset>
+<fieldset>
+<legend>Orphaned Teams</legend>
+<ul>
+    <tal:teams repeat="team view/getTeams">
+        <li tal:content="team">
+            
+        </li>
+    </tal:teams>
+</ul>
+<form action="."
+method="post"
+tal:attributes="action view/url">
+    <input type="submit" name="cleanteams" value="CLEAN 'EM!" />
+</form>
+</fieldset>
+
+</div>
+</body>
+</html>

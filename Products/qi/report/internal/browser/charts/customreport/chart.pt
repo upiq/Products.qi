@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main">
+	<h2 tal:content="view/context/title" />
+		<p tal:condition="exists:view/context/description" 
+			class="description" tal:content="view/context/description" />
+	<form>
+		<input type="hidden" id="teamid" />
+		<input type="hidden" id="measureid" />
+	</form>
+	<!-- amline script DEPENDS ON NON OPEN SOURCE amline software being installed on this server-->
+	   <script type="text/javascript" src="amline/swfobject.js"></script>
+	<tal:measures repeat="measureid view/measureids">
+		<!--<div tal:condition="python:not view.hasData(measureid)">
+			dropped chart
+		</div>-->
+		<h4 style="margin-top:10px; margin-bottom:2px;" tal:content="python:view.titlefor(measureid)">Chart title</h4>
+	   <div id="flashcontent" tal:attributes="id python:'flashcontentm-%i'%measureid" 
+			tal:condition="python:view.hasData(measureid)">
+	      <strong>This server does not have charts properly installed.   Please contact the site administrator for help. </strong>
+	   </div>
+	   <script tal:content="python:view.getVars(measureid)" />
+	   <script type="text/javascript">
+	// <![CDATA[
+
+		var so = new SWFObject("amline/amline.swf", "amline", "520", "400", "8", "#FFFFFF");
+		so.addVariable("path", basepath);
+		//var teamid=document.getElementById('teamid').value;
+		//var measureid=document.getElementById('measureid').value;
+		var baseurl=basepath+"/chartdata.xml";
+		var teamidstring="";
+		var teams='&teamid='
+		for(var i=0; i<teamids.length; i++)
+		{
+			teams+=teamidstring+teamids[i]
+			if (i<teamids.length-1)
+				teams+='|'
+		}
+		
+		var dataurl=baseurl+'?measureid='+measureid+teams+"&discarded="+new Date().getTime();
+		var baseurl=basepath+"/amline_settings.xml"
+		var settingsurl=baseurl+'?measureid='+measureid+teams;
+		
+		so.addVariable("settings_file", escape(settingsurl));  				// you can set two or more different settings files here (separated by commas)
+		so.addVariable("data_file", escape(dataurl));
+		// so.addVariable("chart_data", "");                                   // you can pass chart data as a string directly from this file
+		// so.addVariable("chart_settings", "");                               // you can pass chart settings as a string directly from this file
+		// so.addVariable("additional_chart_settings", "");                    // you can append some chart settings to the loaded ones
+		// so.addVariable("loading_settings", "LOADING SETTINGS");                 // you can set custom "loading settings" text here
+		// so.addVariable("loading_data", "LOADING DATA");                         // you can set custom "loading data" text here
+	   so.addVariable("preloader_color", "#228844");
+	   so.write("flashcontentm-"+measureid);
+	// ]]>
+	   </script>
+	</tal:measures>
+	<tal:computed repeat="computedid view/computedids">
+	   <script tal:content="python:view.getVars(computedid)" />
+       <h4 style="margin-top:10px; margin-bottom:2px;" tal:content="python:view.computedtitlefor(computedid)">Chart title</h4>
+	   <div id="flashcontent" tal:attributes="id python:'flashcontentd-%i'%computedid">
+	      <strong>This server does not have charts properly installed.   Please contact the site administrator for help.</strong>
+	   </div>
+	   <script type="text/javascript">
+	// <![CDATA[
+		var so = new SWFObject("amline/amline.swf", "amline", "520", "400", "8", "#FFFFFF");
+		so.addVariable("path", basepath);
+		//var teamid=document.getElementById('teamid').value;
+		//var measureid=document.getElementById('measureid').value;
+		var baseurl=basepath+"/chartdata.xml";
+		var teamidstring="";
+		var teams='&teamid='
+		for(var i=0; i<teamids.length; i++)
+		{
+			
+			teams+=teamidstring+teamids[i]
+			if (i<teamids.length-1)
+				teams+='|'
+		}
+		var dataurl=baseurl+'?derivedid='+measureid+teams+"&discarded="+new Date().getTime();
+		var baseurl=basepath+"/amline_settings.xml"
+		var settingsurl=baseurl+'?derivedid='+measureid+teams;
+		
+		so.addVariable("settings_file", escape(settingsurl));  				// you can set two or more different settings files here (separated by commas)
+		so.addVariable("data_file", escape(dataurl));
+		// so.addVariable("chart_data", "");                                   // you can pass chart data as a string directly from this file
+		// so.addVariable("chart_settings", "");                               // you can pass chart settings as a string directly from this file
+		// so.addVariable("additional_chart_settings", "");                    // you can append some chart settings to the loaded ones
+		// so.addVariable("loading_settings", "LOADING SETTINGS");                 // you can set custom "loading settings" text here
+		// so.addVariable("loading_data", "LOADING DATA");                         // you can set custom "loading data" text here
+	   so.addVariable("preloader_color", "#228844");
+	   so.write("flashcontentd-"+measureid);
+	// ]]>
+	   </script>
+	</tal:computed>
+	<tal:ommitted tal:condition="view/missingany">
+	<h3 class="note" >
+		Omitted Measures
+	</h3>
+	<p class="description">
+		The following measures were omitted from this report because no data
+		has been collected by any of the teams for them.
+	</p>
+	<table class="listing" >
+		<tr>
+			<th>
+				Measure name
+			</th>
+		</tr>
+		<tal:measures repeat="measure view/measures" >
+			<tr tal:condition="python: not view.hasData(measure.id)">
+				<td tal:content="measure/name">
+					MEASURE NAME
+				</td>
+			</tr>
+		</tal:measures>
+	</table>
+	</tal:ommitted>
+</div>
+</body>
+</html>

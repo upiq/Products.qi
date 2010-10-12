@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main">
+    <p class="description">
+        For each team put any appropriate tags for each team, separated by spaces.
+    </p>
+    <fieldset>
+    <form>
+
+        <tal:teams repeat="team context/getDBProject/team_set/all">
+            <div>
+                <span tal:content="team/name" />
+                <textarea width="10" height"50" 
+                    tal:attributes="id python:'tags-%i'%team.id"
+                    tal:content="python:' '.join([x.tag for x in team.teamtag_set.all()])"/>
+            </div>
+        </tal:teams>
+        <input type="submit" value="submit" name="submit" />
+    </form>
+    </fieldset>
+
+
+    
+</div>
+</body>
+</html>

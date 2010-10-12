@@ -1,0 +1,31 @@
+<div metal:define-macro="select">
+    <tal:wrapper define="errors python:view.getError(inputkey);
+						 fieldtext fieldtext | inputkey;
+						 required required | python:False;
+						 description description | string:;
+						 valueexists exists: value;
+						 value python:view.context.request.form.get(inputkey,valueexists and value or None);
+                         defaultvalue defaultvalue | string:-1;
+						 defaulttext defaulttext | nothing;
+						 choices choices | python:();">
+					 
+<div tal:attributes="class python:(errors and len(errors)>0) and 'error field' or 'field'">
+    <div class="FieldTitle">
+    	<label tal:attributes="for inputkey" tal:content="fieldtext" />
+    	<span class="fieldRequired" tal:condition="required">(required)</span>
+    </div>
+    <ul tal:condition="python:errors and len(errors)>0">
+        <li tal:repeat="error errors" tal:content="error" />
+    </ul>
+    <p class="description" tal:condition="python:len(description)>0" tal:content="description"/>
+    <select tal:attributes="name inputkey">
+        <option tal:condition="defaulttext" tal:content="defaulttext" tal:attributes="value defaultvalue" />
+        <tal:options repeat="choice choices">
+            <option tal:attributes="value python:choice.getUniqueId()"
+                tal:content="python:choice.getTextName()" />
+        </tal:options>
+    </select>
+</div>			
+					
+	</tal:wrapper>
+</div>

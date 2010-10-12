@@ -1,0 +1,38 @@
+
+<tal:menu condition="view/hasMenus">
+<div id="qimenu" class="qimenus qicontentActions"
+     i18n:domain="plone">
+
+    <table class="qimenus qitopmenu"><tr>
+    <tal:menus repeat="menu view/getMenus">
+    <td class="qitopmenu">
+    <span class="qimenu">
+        <dl class="actionMenu qimenus" tal:condition="menu/hasPermission">
+        <dt class="actionMenuHeader label-state-private">
+            <a tal:content="menu/name" class="qimenus"
+                tal:attributes="href menu/target">menu</a>
+        </dt>
+        <tal:childMenus condition="menu/hasChildren">
+        <dd class="qiactionMenuContent qimenus border">
+            <table ul class="qimenus">
+            <tal:menuitems repeat="item menu/items">
+            <tr class="qimenus class" tal:condition="item/hasPermission">
+                <td class="qimenus">
+                    <a tal:content="item/name" class="qimenus border"
+                        tal:attributes="href item/link"
+                        tal:omit-tag="not:item/islinked">
+                    menu item
+                </a></td><td>&nbsp</td>
+            </tr>
+            </tal:menuitems>
+            </table>
+        </dd>
+        </tal:childMenus>
+        </dl>
+    </span>
+    </td>
+    </tal:menus>
+    </tr></table>
+
+</div>
+</tal:menu>

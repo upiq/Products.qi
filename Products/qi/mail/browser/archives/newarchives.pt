@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="baseErrors python:view.getError('base')">
+    <table class="listing">
+        <tr>
+        <th width="20%">
+            Mailing Lists
+        </th>
+        <th width="20%">
+            Threads
+        </th>
+        <th width="60%">
+            Messages
+        </th>
+    </tr>
+    <tr>
+        <td id="lists" valign="top">
+            <ul class="expandable">
+            <tal:lists repeat="list view/getLists">
+            <form>            
+            <li class="getthreads clickable">
+
+                <input type="hidden" name="listid"
+                    tal:attributes="value list/id" />
+                <span class="getthreads">
+                <tal:name replace="list/listname" />
+                <tal:project condition="list/project" replace="list/project" />
+                <tal:team condition="list/team" replace="list/team" />
+                <tal:desc condition="list/description" 
+                    replace="list/description" />
+                </span>
+                
+            </li>
+            </form>
+            
+            </tal:lists>
+            </ul>
+        </td>
+        <td id="threads">
+        &nbsp
+        </td>
+        <td id="messages">
+        &nbsp
+        </td>
+    </tr>
+    </table>
+</div>
+</body>
+</html>

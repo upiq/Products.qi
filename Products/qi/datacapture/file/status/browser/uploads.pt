@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head metal:fill-slot="javascript_head_slot">
+	<script type="text/javascript">
+
+		function show(idval)
+		{
+
+			element=document.getElementById(idval)
+			element.style.display="block"
+		}
+		function hide(idval)
+		{
+			element=document.getElementById(idval)
+			element.style.display="none"
+		}
+
+	</script>
+</head>
+
+<body>
+<div metal:fill-slot="main">
+
+<!-- pending -->
+<h3>Currently Processing files</h3>
+<table class="listing" >
+	<tr>
+		<th style="width: 2in;">
+			File
+		</th>
+		<th style="width: 0.5in;">
+			Import started
+		</th>
+		<th style="width: 2in;">
+			Status
+		</th>
+		<th>
+			Rows processed
+		</th>
+		<th>
+			Errors detected
+		</th>
+	</tr>
+	<tal:pending repeat="pending view/getPendingUploads">
+		<tr>
+			<td>
+				<a tal:attributes="href python:view.link(pending)"
+				 tal:content="pending/tracked/displayname" />
+			</td>
+			<td tal:content="python:view.niceifydt(pending.initiated)" />
+			<td tal:content="pending/status" />
+			<td tal:content="python:pending.tracked.measurementchange_set.all().count()" />
+			<td tal:content="python:pending.uploaderror_set.all().count()" />
+		</tr>
+	</tal:pending>
+</table>
+<!--errors -->
+<h3>Files with validation errors.</h3>
+<fieldset style="width: 5in;">
+	<legend>
+		<a href="javascript:show('fileswitherrors')">Show</a>
+		&nbsp;
+		<a href="javascript:hide('fileswitherrors')">Hide</a>
+		
+	</legend>
+<table style="display:None" id="fileswitherrors" class="listing" >
+	<tr>
+		<th style="width: 0.1in;">
+			File
+		</th>
+		<th style="width: 0.5in;">
+			Import started
+		</th>
+		<th style="width: 2in;">
+			Status
+		</th>
+		<th>
+			Errors detected
+		</th>
+	</tr>
+	<tal:errors repeat="error view/getErrorUploads">
+		<tr>
+			<td>
+				<a tal:attributes="href python:view.link(error)"
+				 tal:content="error/tracked/displayname" />
+			</td>
+			<td tal:content="python:view.niceifydt(error.initiated)" />
+			<td tal:content="error/status" />
+			<td tal:content="python:error.uploaderror_set.all().count()" />
+		</tr>
+	</tal:errors>
+</table>
+</fieldset>
+<h3>Completed Files</h3>
+<fieldset>
+	<legend>
+		<a href="javascript:show('completefiles')">Show</a>
+		&nbsp;
+		<a href="javascript:hide('completefiles')">Hide</a>
+		
+	</legend>
+<table style="display:None" id="completefiles" class="listing" >
+	<tr>
+		<th style="width: 2in;">
+			File
+		</th>
+		<th style="width: 0.5in;">
+			Import Started
+		</th>
+		<th style="width: 2in;">
+			Status
+		</th>
+		<th>
+			Record Count
+		</th>
+		<th>
+			Historical Record Count
+		</th>
+	</tr>
+	<tal:complete repeat="success view/getFinishedUploads">
+		<tr>
+			<td>
+				<a tal:attributes="href python:view.link(success)"
+				 tal:content="success/tracked/displayname" />
+			</td>
+			<td tal:content="python:view.niceifydt(success.initiated)" />
+			<td tal:content="success/status" />
+			<td tal:content="python:success.tracked.measurementvalue_set.all().count()" />
+			<td tal:content="python:success.tracked.measurementchange_set.all().count()" />
+		</tr>
+	</tal:complete>
+</table>
+</fieldset>
+</div>
+</html>

@@ -1,0 +1,182 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="qiteamspace">
+<body>
+<head metal:fill-slot="javascript_head_slot">
+<script type="text/javascript">
+
+	function shownotes(id)
+	{
+	    divobj=document.getElementById(id)
+	    if (divobj.style.display=="inline-block")
+	    {
+	        divobj.style.display="none"
+        }
+        else
+        {
+	        divobj.style.display="inline-block"
+        }
+    }
+    function showhidden(name)
+    {
+        var elements=document.getElementsByName(name)
+        for (i=0;i<elements.length;i++)
+        {
+            element=elements[i]
+            if (element.style.display!='block')
+            {
+                element.style.display='block'
+            }
+            else
+            {
+                element.style.display='none'
+            }
+        }
+    }
+	
+</script>
+<style type="text/css">
+.dataentry td {
+    vertical-align: top;
+}
+.popup {
+	width: 100%;
+    position: absolute;
+    display: none;
+}
+.helpInfo {
+	position: relative;
+}
+.aligntop
+{
+    vertical-align: top;
+}
+.popup table.popup-contents {
+	background-color: #fff;
+	border: solid;
+	border-color: #0E6775;
+}
+
+.hiddenUntilClicked
+{
+    display: none;
+}
+
+</style>
+
+
+</head>
+
+<div metal:fill-slot="main">
+
+	<a tal:attributes="href python:'measuredates.html?period=%s&inputform=%s'%(view.context.request.form['period'],view.context.request.form['inputform'])">Back to dates</a>
+    <h3>Enter Data</h3>
+	
+	<fieldset>
+		<legend class="discreet">
+	    	<tal:f content="view/getFormName" /> measures for 
+				<tal:d content="python:view.getdate().name" />
+		</legend>
+	
+	<div tal:condition="python:view.isSubmitted(view.context.request.form)" >
+		Your changes were successfully submitted. <img src="confirm_icon.gif"> 
+	</div>
+	<a href="javascript:showhidden('previousValue')">Show previous values</a>
+	
+	<div>Please enter your data into the appropriate boxes below.</div>
+	<form action="periodmeasures.html" method="post" >
+
+	    <table class="form">
+	        <tal:measures repeat="formmeasure python:view.getMeasuresForForm()">
+			<tr style="height: 40px;" tal:define="notevalue python: view.getValueForMeasure(formmeasure.measure)['annotation']">
+				
+				<td class="dataentry aligntop" tal:content="formmeasure/measure/name">m</td>
+				
+				<td class="dataentry inputcell" align = "top">
+					<div class="helpInfo">
+				        <div tal:define="formindex repeat/formmeasure/index">
+				            <span name="previousValue" style="display:none"
+				                id="previousValue"
+				                tal:define="oldval python:view.getPreviousValueForMeasure(formmeasure.measure)">Previous Value: 
+				                <tal:preval content="python:oldval['value']" />
+				                <tal:preval condition="python:oldval['itemdate']" content="python:oldval['itemdate'].strftime('(%m/%Y)')" />
+				                <br />
+				            </span>
+				            <input type = "text"
+							tal:attributes="value python: view.getValueForMeasure(formmeasure.measure)['value']; name formmeasure/measure/id"/>
+
+				        </div>
+					</div>
+					
+			    </td>
+			    <td class="dataentry aligntop" >
+			        <span style="vertical-align:top;">
+    			        <img src="help.png" width="25" height="25"  style="cursor:pointer"
+    		                tal:attributes="onclick python:'javscript:shownotes(\'guidancediv-%s\')'%formmeasure.measure.id"/>
+		            </span>
+			        <div style="display:None; width:250px; border: 1px dashed black;" 
+			        tal:content="structure python:formmeasure.measure.guidance or 
+			            'No guidance available for this measure'"
+			        tal:attributes="id python:'guidancediv-%s'%formmeasure.measure.id">
+		            </div>
+		        </td>
+				<td class="dataentry aligntop" > 
+				    
+			        <span style="vertical-align:top;">
+			            <img src="notes.png" width="25" height="25" style="cursor:pointer"
+			                tal:attributes="onclick python:'javscript:shownotes(\'annotationdiv-%s\')'%formmeasure.measure.id"/>
+			            <span class="hasnotes" tal:condition="python:notevalue and len(notevalue.strip())>0">*</span>
+			        </span>
+				    <div class="hiddentextarea2" style="display: none; width:250px;" tal:attributes="id python:'annotationdiv-%s'%formmeasure.measure.id">
+				    <textarea 
+				        rows="5" cols="40"
+				        tal:content="
+				            python:notevalue or ''"
+					    tal:attributes="
+					        name formmeasure/measure/id" />
+				    </div>
+			        
+				</td>
+				
+				<td class="dataentry aligntop"
+					tal:define="errors python:view.getError(str(formmeasure.measure.id))">
+					<ul tal:condition="python:errors and len(errors)>0">
+					<tal:errors repeat="error errors">
+						<li tal:content="error" class="error" 
+						    tal:attributes="class python:error.startswith('Warning') and 'warning' or 'error'" />
+					</tal:errors>
+					</ul>
+				</td>
+
+			</tr>
+		    </tal:measures>
+	    </table>
+		<input type="hidden" name="period" tal:attributes="value python:view.context.request.form['period']" />
+		<input type="hidden" name="inputform" tal:attributes="value python:view.context.request.form['inputform']"/>
+		
+		<br />
+		
+		<input class="context" type="submit" name="save" value = "Save" />
+		
+
+	<br />
+	<div tal:condition="python:view.hasErrors() and view.maxError<6">
+	    The submission was rejected due to warnings.  
+	    If you wish to submit it anyways, please review the values with warnings and click confirm.
+	    <input type="submit" name="confirm" value="Confirm" />
+    </div>
+
+
+	</form>
+	</fieldset>
+	<br />
+	
+	
+	
+</div>
+
+</body>
+</html>

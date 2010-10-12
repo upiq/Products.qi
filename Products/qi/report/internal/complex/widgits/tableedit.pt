@@ -1,0 +1,20 @@
+<span style="display:inline-block">
+    Data Table:<br />
+    <tal:order repeat="order context/order">
+        <tal:replace replace="order" />
+        <tal:notes define="index repeat/order/index" >
+        <tal:rownote condition="python: index<2">(rows)</tal:rownote>
+        <tal:colnote condition="python: index>1">(column)</tal:colnote>  
+        </tal:notes>  
+        <a tal:condition="not:repeat/order/end"
+            tal:attributes="href python:'%s/swap?swapped=%s'%(context.absolute_url(),order)"> &lt;-&gt;</a>
+    </tal:order>
+    <br />
+    <input type="hidden" value="off" tal:attributes="name python:'%s/%s/printonly'%(context.getrow().id, context.id)" />
+    Print only: <input type="checkbox" tal:attributes="name python:'%s/%s/printonly'%(context.getrow().id, context.id);
+        CHECKED context/printonly;" />
+    <br />
+    <tal:filters content="structure context/filteredit">
+    </tal:filters>
+    
+</span>

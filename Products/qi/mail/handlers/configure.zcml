@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="Products.qi">
+    
+    
+    <subscriber
+        for="*
+             zope.app.publication.interfaces.BeforeTraverseEvent"
+        handler=".run.bootup"
+        />
+        <subscriber 
+        for="Products.qi.extranet.types.interfaces.ITeam
+             zope.app.container.interfaces.IObjectAddedEvent"
+        handler=".autocreate.addDefaultMailingList"
+        />
+    <subscriber 
+        for="Products.qi.extranet.types.interfaces.IProject
+             zope.app.container.interfaces.IObjectAddedEvent"
+        handler=".autocreate.addDefaultMailingList"
+        />
+    
+</configure>

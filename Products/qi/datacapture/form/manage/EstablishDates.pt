@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="qiteamspace">
+<body>
+    <div metal:fill-slot="main">
+        <h3>
+            Data Entry Reporting Periods
+        </h3>
+        <p class="description">
+            You can give the data entry reporting periods a name that will make it easier
+            for your users to know where to enter their data. 
+            In the name field below, enter a name that represents the time period of your data. 
+            For example, December 2009 or 12/01/2009 to 12/31/2009. The users will see this name.
+             In the report period date field, enter the start or end date of this period (project specific).
+        </p>
+        <div metal:use-macro="context/@@errormacro/macros/errorlist" />
+        <h4>Default Date Series</h4>
+        <p class="description">
+            
+        <table class="listing">
+            <tr>
+                <th style="width:20px;">&nbsp;</th>
+                <th style="width:250px;">Name</th>
+                <th style="width:90px;">Report Period Date</th>
+            </tr>
+            <tal:existing repeat="existing python:view.existing().filter(form__isnull=True)">
+                <tr>
+                    <td>
+                        <form action='.' tal:attributes="action view/url" method="post">
+            				<input type="image" src="delete_icon.gif" name="delete" value="Delete" />
+            				<input type = "hidden" name = "deleted" tal:attributes="value existing/id"/>
+            			</form>
+    			    </td>
+                    <td tal:content="existing/name">
+                        name
+                    </td>
+                    <td tal:content="existing/period">
+                        date
+                    </td>
+                </tr>
+            </tal:existing>
+        </table>
+        <tal:others repeat="form view/forms">
+            <div tal:define="objects python:view.existing().filter(form=form)" tal:condition="python:len(objects)>0">
+                <h4 tal:content="form/name" />
+                <table class="listing">
+                    <tr>
+                        <th style="width:20px;">&nbsp;</th>
+                        <th style="width:250px;">Name</th>
+                        <th style="width:90px;">Report Period Date</th>
+                    </tr>
+                    <tr tal:repeat="existing objects">
+                        <td>   
+                            <form action='.' tal:attributes="action view/url" method="post">
+                				<input type="image" src="delete_icon.gif" name="delete" value="Delete" />
+                				<input type = "hidden" name = "deleted" tal:attributes="value existing/id"/>
+                			</form>
+        			    </td>
+                        <td tal:content="existing/name">
+                            name
+                        </td>
+                        <td tal:content="existing/period">
+                            date
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </tal:others>
+        <form method="POST" tal:attributes="action view/url">
+            <fieldset>
+                <legend>Add new date</legend>
+                <tal:name define="
+					inputkey string:name;
+					required python:True;
+					fieldtext string:Name;
+					description string:Enter the name of this report period.  This will show on the data entry page.;" >
+					<div metal:use-macro="context/@@inputmacro/macros/validatedtext" />
+				</tal:name>
+                <tal:name define="
+					inputkey string:date;
+					required python:True;
+					fieldtext string:Report Period;
+					description string:(MM/DD/YYYY);" >
+					<div metal:use-macro="context/@@inputmacro/macros/validatedtext" />
+				</tal:name>
+				<tal:forForm define="
+				    fieldtext string:For which form;
+				    defaulttext string:All forms;
+				    choices view/forms;
+				    inputkey string:formid;">
+				    <div metal:use-macro="context/@@selectmacro/macros/select" />
+			    </tal:forForm>
+				    
+                <input type="submit" value="Submit" name="submit"/>
+            </fieldset>
+        </form>
+        <a href="ManageForms">Back to forms</a>
+    </div>
+</body>
+</html>

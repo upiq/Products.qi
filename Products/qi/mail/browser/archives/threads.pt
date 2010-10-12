@@ -1,0 +1,17 @@
+<td id="threads" valign="top">
+    <ul class="expandable">
+        <tal:threads repeat="thread view/threads">
+
+            <li>
+            <form>
+                <span class="getmessages">
+                <input type="hidden" name="threadid" 
+                    tal:attributes="value thread/id" />
+                <tal:subject replace="thread/subject" />
+                </span>
+            </form>
+            </li>
+
+        </tal:threads>
+    </ul>
+</td>

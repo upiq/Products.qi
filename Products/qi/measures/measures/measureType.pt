@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="name string:name;
+                baseErrors python:view.getError('base')">
+
+    <div tal:condition="view/hasErrors" class="error">
+        <h3>The action failed. Please see reasons below.</h3>
+        <ul>
+        <tal:generalErrors condition="baseErrors" repeat="err baseErrors">
+            <li class="error" tal:content="err">
+                General error
+            </li>
+        </tal:generalErrors>
+        </ul>
+    </div>
+    
+<h3>Measure Types</h3>
+<table tal:condition="python:len(view.existingTypes())>0" 
+	tal:define="errors python:view.getError('delimg')"
+	tal:attributes="class python:errors and 'field error' or 'field'">
+    <tr tal:repeat="item view/existingTypes">
+
+	    <td>
+			<form action='.' tal:attributes="action view/url" method="post">
+				<input type="image" src="delete_icon.gif" name="delimg" value="Delete" />
+				<input type = "hidden" name = "del" tal:attributes="value item/id"/>
+			</form>
+		</td>
+		<td tal:content="item/name"></td>
+
+    </tr>
+	<div class="error" tal:condition="view/hasErrors">
+		<tal:errors repeat="error errors">
+			<div tal:content="error">Validation error output</div>
+		</tal:errors>
+	</div>
+</table>
+
+
+
+<span tal:condition="python:len(view.existingTypes()) is 0">No measure types have been defined</span>
+
+
+<hr />
+<form
+    action='.'
+    tal:attributes="action view/url"
+  	method="post"
+  	id="upload_data">
+    <h3>Add a New Measure Type</h3>
+    <p>
+    To add a new measure type,
+     enter it in the field below and click the Add button.
+    </p>
+	<fieldset id="measuretype">
+		
+		<div class="field"
+ 			tal:define="localname name;
+ 			            errors python:view.getError(localname);
+ 			            localvalue python:request.get(localname, '')"
+ 			tal:attributes="class python:errors and 'field error' or 'field'">
+
+
+ 			<label i18n:translate="label_uploadtype_name"
+   				tal:attributes="for localname">Name</label>
+
+            <div><tal:errors repeat="error errors">
+                <div tal:content="error">Validation error output</div>
+            </tal:errors></div>
+
+			<input type="text"
+   				tal:attributes="name localname;
+   								id localname;
+   								value localvalue"
+   	        />
+        </div>
+        
+                
+                
+		<div class="formControls">
+
+			<input class="context"
+   				type="submit"
+   				name="create"
+   				value="Add"
+   				/>
+		</div>
+
+	</fieldset>
+
+</form>
+
+</div>
+</body>
+</html>

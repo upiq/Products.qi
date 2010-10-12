@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:cmf="http://namespaces.zope.org/cmf" 
+    i18n_domain="Products.qi">
+    
+    <browser:page
+        for="*"
+        name="Error.html"
+        class=".error.Error"
+        template="error.pt"
+        permission="zope2.View"
+        />
+    <include package=".contact" />
+</configure>

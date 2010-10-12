@@ -1,0 +1,5 @@
+<span>
+    <tal:charttype replace="context/charttype" /> chart
+    <tal:filters content="structure context/filteredit">
+    </tal:filters>
+</span>

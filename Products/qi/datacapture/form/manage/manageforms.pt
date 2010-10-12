@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="qiteamspace">
+	<head metal:fill-slot="javascript_head_slot">
+	    <script type="text/javascript">
+			function showlist(idval)
+			{
+				element=document.getElementById(idval)
+				element.style.display="block"
+			}
+			function hidelist(idval)
+			{
+				element=document.getElementById(idval)
+				element.style.display="none"
+			}
+
+	    </script>
+	</head>
+<body>
+	<div metal:fill-slot="main">
+		<h3>
+			Manage Forms
+		</h3>
+		<fieldset>
+			<legend>
+			    Instructions: 
+				<a href="javascript:showlist('page-instructions')">
+					Show
+				</a>
+				&nbsp;
+				<a href="javascript:hidelist('page-instructions')">
+					Hide
+				</a>
+			</legend>
+		<p class="description" id="page-instructions">
+			You must add Project Measures before you create a form. To add project measures, follow these steps.<br /> 
+			1. Go to your project tasks on the top menu bar. <br />
+			2. Select Manage Project Measure tasks >Add a Measure. <br />
+			3. Select the measures you want to add to your form by highlighting the measures in the double arrow field. <br />
+			4. You must enter the start date, the end date is optional. <br />
+			5. Click Add Measure.<br />
+			<br />
+			Then to create a form, follow these steps. <br />
+			6. Go to your project tasks menu >Manage Forms. <br />
+			7. Click Create New and enter the name of your form. <br />
+			8. Click on a measure below, when you see the green plus sign, drag it up next to the Save button until the blue up arrow appears and release the measure. <br />
+			9. Repeat step 2 until you have added all the measures you want. <br />
+			10. Click Save.<br />
+			<br />
+			To create the reporting periods, return to this page and follow these steps. <br />
+			1. Click Manage Report Periods. <br />
+			2. Enter the name of the report period. This name will show on the data entry page. <br />
+			3. Enter the report period in MM/DD/YYYY format. <br />
+			4. Click Submit.<br />
+            
+		</p>
+		</fieldset>
+		<div metal:use-macro="context/@@errormacro/macros/errorlist" />
+		<table class="listing">
+			<tr>
+				<th></th>
+				<th> Form name</th>
+				<th> Number of measures</th>
+				<th> QIC Form</th>
+			</tr>
+			<tal:forms repeat="form view/allforms">
+			<tr>
+				<td>
+					<form tal:attributes="action view/url" method="post">
+						<input type="hidden" name="deleted" value="-1" tal:attributes="value form/id" />
+						<input type="image" src="delete_icon.gif" name="delete" class="borderless" />
+					</form>
+				</td>
+				<td><a href="about:blank" tal:attributes="href python:view.linkfor(form)" tal:content="form/name"/></td>
+				<td tal:content="python:form.formmeasure_set.all().count()"></td>
+				<td tal:condition="not:form/qionly">No</td>
+				<td tal:condition="form/qionly">Yes</td>
+			</tr>
+			</tal:forms>
+		</table>
+		<form method="POST" action="DesignForm" >
+			<input type="submit" value="Create New" style="margin-bottom:5px;" />
+		</form>
+		<form method="POST" action="EstablishDates">
+		    <input type="submit" value="Manage Report Periods" />
+	    </form>
+	</div>
+</body>
+</html>

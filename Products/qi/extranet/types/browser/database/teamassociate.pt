@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="dbid string:dbid;
+                baseErrors python:view.getError('base')">
+
+    <div tal:condition="view/hasErrors" class="error">
+        <h3>The addition failed see reasons below</h3>
+        <ul>
+        <tal:generalErrors condition="baseErrors" repeat="err baseErrors">
+            <li class="error" tal:content="err">
+                General error
+            </li>
+        </tal:generalErrors>
+        </ul>
+    </div>
+    
+
+
+
+<form
+    action='.'
+    tal:attributes="action view/url"
+  	method="post"
+  	id="upload_data"
+  	enctype="multipart/form-data">
+
+	<fieldset id="upload">
+		
+		
+        <div class="field"
+ 			tal:define="localname dbid;
+ 			            errors python:view.getError(localname);
+ 			            localvalue context/getDBTeam"
+ 			tal:attributes="class python:errors and 'field error' or 'field'">
+
+
+ 			<label i18n:translate="label_uploadtype_name"
+   				tal:attributes="for localname">Database Project</label>
+
+            <div><tal:errors repeat="error errors">
+                <div tal:content="error">Validation error output</div>
+            </tal:errors></div>
+
+			<select
+   				tal:attributes="name localname;
+   								id localname;
+   								"
+   	        >
+   	            <option value="-1">-------</option>
+   	            <tal:choices repeat="choice view/getTeams">
+   	                <option 
+   	                    tal:attributes="value choice/id;
+   	                                    selected python:int(choice.id)==int(localvalue.id)" 
+   	                    tal:content="choice">
+   	                    </option>
+   	            </tal:choices>
+   	        </select>
+        </div>
+        
+                
+		<div class="formControls">
+
+			<input class="context"
+   				type="submit"
+   				name="change"
+   				value="Change"
+   				/>
+		</div>
+
+	</fieldset>
+
+</form>
+
+</div>
+</body>
+</html>

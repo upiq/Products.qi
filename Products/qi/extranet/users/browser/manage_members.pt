@@ -1,0 +1,216 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="qiteamspace">
+<body>
+
+<head metal:fill-slot="javascript_head_slot">
+    <script type="text/javascript">
+        function activate()
+        {
+            var element=document.getElementById("add_selected_users")
+            element.disabled=false
+        }
+		function showlist(idval)
+		{
+
+			element=document.getElementById(idval)
+			element.style.display="block"
+		}
+		function hidelist(idval)
+		{
+			element=document.getElementById(idval)
+			element.style.display="none"
+		}
+		
+    </script>
+</head>
+
+<div metal:fill-slot="main"
+     tal:define="   allmembers view/listProjectMembers;
+                    managers view/listManagers;
+                    faculty view/listFaculty;
+                    leads view/listLeads;
+                    qics view/listQics;
+					teammembers python:[k for k in allmembers if k not in leads];
+					projectmembers python:[k for k in allmembers if k not in faculty and k not in managers];
+					isteam python:hasattr(view.context,'getTeam');
+					nonmembersthingies python:(	 ('Managers',managers,not isteam,
+													('Remove Member','Revoke Manager Status'))
+												,('Leads',leads, isteam,
+													('Remove Member','Revoke Team Lead Status'))
+												,('Faculty',faculty,not isteam,
+													('Remove Member','Revoke Faculty Status','Grant Project Manager Status'))
+												,('QICs',qics, not isteam,
+												    ('Revoke QIC Status',))
+												,('Members',teammembers, isteam,
+														('Remove Member','Grant Team Lead Status'))
+												,('Members',projectmembers,not isteam		,
+																('Remove Member','Grant Faculty Status','Grant Project Manager Status','Make QIC'))
+											   )"
+					>
+
+<div class="error" tal:condition="view/errors">
+<h3>Error</h3>
+ <span
+    tal:condition="view/errors"
+    tal:content="view/errors">ERRORS</span>
+</div>
+
+<a href="userlist.html">Printable Member List</a>
+ <div>
+ <h3></h3>
+	
+	<tal:othergroups repeat="grouptuple python:nonmembersthingies">
+	<tal:wrapper define="name python:grouptuple[0];
+						membership python:grouptuple[1];
+						condition python:grouptuple[2];
+						buttons python:grouptuple[3];
+						count repeat/grouptuple/index"
+				condition="python:condition and len(membership)>0">
+		<h3>
+		    <tal:name content="python:context.title" /> 
+		    <tal:groupname content="name" /> 
+		    (<tal:count content="python:len(membership)" />)
+		</h3>
+
+	    <form method="POST" action="."
+	        tal:attributes="action view/url">
+		<fieldset>
+			<legend>
+				<a href="javascript:showlist('x')"
+					tal:attributes="href python:'javascript:showlist(\'%i\')'%count">
+					Show
+				</a>
+				&nbsp;
+				<a href="javascript:hidelist('x')"
+					tal:attributes="href python:'javascript:hidelist(\'%i\')'%count">
+					Hide
+				</a>
+			</legend>
+		<ul style="display:None" id="x" tal:attributes="id repeat/grouptuple/index">
+
+			<tal:members repeat="member membership">
+				<li>
+					<input type="checkbox" name="users:list" tal:attributes="value string:${member/id}" />
+					<img src="TeamLead.png"
+		                alt="Team Lead"
+		                tal:condition="python:not isteam and member['id'] in leads" />
+					<img src="ProjectManager.png"
+	                	alt="Project Manager"
+		                tal:condition="python:isteam and member['id'] in managers" />
+		            <img src="Faculty.png"
+		                alt="Project Faculty" 
+		                tal:condition="python:isteam and member['id'] in faculty"/>
+					<span tal:content="member/name">MEMBER NAME</span>
+		            <span tal:content="string:(${member/id})">(MEMBER_ID)</span> <br />
+					<span tal:condition="not:python:view.isUserOnline(member['id'])">
+						<tal:login define="login member/logintime">
+						last login: <span tal:content="login/Date" /> <span tal:content="login/TimeMinutes" />
+						</tal:login>
+					</span>
+					<span tal:condition="python:view.isUserOnline(member['id'])">
+						<img src="user.gif" alt="User Online">
+						Online
+					</span>
+				</li>
+			</tal:members>
+		</ul>
+		</fieldset>
+		<tal:buttons repeat="button buttons">
+		<input type="submit" tal:attributes="name button; value button;" />
+		</tal:buttons>
+		</form>
+	</tal:wrapper>
+	</tal:othergroups>
+</div>
+
+
+
+ <div style="padding-top: 3em">
+
+
+
+ <form method="POST" action="."
+       name="memberform"
+       tal:attributes="action view/url"
+       tal:define="widget view/getSearchWidget;
+                   results view/found;
+                  ">
+
+ <h3> Search Existing Members </h3>
+  <div class="explanationtext">
+    Search for members who are already registered for other 
+    projects and teams by name and add them to <tal:title content="context/title"/>.
+ </div>
+  <fieldset>
+
+  <label>Name</label>
+  <div tal:content="structure python:widget.render('users')" />
+
+  <p tal:repeat="result results">
+   <input type="checkbox" name="selected:list" onclick="activate()"
+          tal:attributes="value result/username" />
+   <span tal:content="result/fullname">MEMBER NAME</span>
+   <span tal:content="string:(${result/username})">(MEMBER_ID)</span>
+  </p>
+
+  <p tal:condition="python: 'users.search' in request.form and not results">
+   <em> No members matched your search.</em>
+  </p>
+
+  <input type="submit" 
+        tal:condition="python: 'users.search' in request.form and results"
+        id="add_selected_users" DISABLED
+        name="add_selected_users" value="Add selected users" />
+  </fieldset>
+ </form>
+ </div>
+
+ <div style="padding-top: 3em">
+ <h3> Add a member </h3>
+ <div class="explanationtext">
+    Create a new user and register them as a member of <tal:title content="context/title"/>.
+ </div>
+
+ <form method="POST" action="."
+       tal:attributes="action view/url">
+
+  <fieldset id="newuser">
+  <div>
+   <label>E-mail address</label><br />
+   <input type="text" id="email" name="email"
+          tal:attributes="value request/email|nothing" />
+
+
+
+   <em> The member's e-mail address will be the ID used to login. </em>
+	<br />
+   <input type="checkbox" name="notify" value="notify" />
+	Send user email containing login and password.
+   </div>
+   <div>
+   <label>Full Name</label><br />
+   <input type="text" id="full_name" name="full_name"
+          tal:attributes="value request/full_name|nothing" />
+   </div>
+   <div>
+   <label>Password</label><br />
+   <input type="password" id="password" name="password"
+   /><br />
+   <input type="password" id="confirm" name="confirm" />
+   <em> Re-type the password to confirm. </em>
+    </div>
+	
+  <input type="submit" name="add_new_user" value="Add new member" />
+  </fieldset>
+ </form>
+ </div>
+
+</div>
+
+
+</body>
+</html>

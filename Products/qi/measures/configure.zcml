@@ -1,0 +1,4 @@
+<configure>
+    <include package=".measures" />
+    <include package=".topics" />
+</configure>

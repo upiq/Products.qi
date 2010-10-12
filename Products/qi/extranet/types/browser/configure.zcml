@@ -1,0 +1,106 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.qi">
+    
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="teams.html"
+        class=".teamManagement.TeamManagement"
+        template="teams.pt"
+        permission="Products.qi.AddTeam"
+        />
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="view"
+        template="project.pt"
+        permission="zope2.View"
+        />
+       
+    
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="edit"
+        class=".project.ProjectEditForm"
+        permission="cmf.ModifyPortalContent"
+        />
+        
+    <browser:page
+        for="zope.app.container.interfaces.IAdding"
+        name="Products.qi.Project"
+        class=".project.ProjectAddForm"
+        permission="Products.qi.AddProject"
+        />
+
+        
+    <browser:addMenuItem
+        title="qiproject Project"
+        factory="Products.qi.Project"
+        view="Products.qi.Project"
+        permission="Products.qi.AddProject"
+        />
+        
+                        
+    <browser:resource
+        name="qiproject_icon.png"
+        image="project.png"
+        />
+
+	<browser:page
+	    for="Products.qi.extranet.types.interfaces.IProject"
+		name="timeline.html"
+	    class=".timeline.TimelineView"
+	    template="timeline.pt"
+	    permission="cmf.ModifyPortalContent"
+	    />
+
+
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.ITeam"
+        name="view"
+        template="team.pt"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.ITeam"
+        name="edit"
+        class=".team.TeamEditForm"
+        permission="cmf.ModifyPortalContent"
+        />
+        
+    <browser:page
+        for="zope.app.container.interfaces.IAdding"
+        name="Products.qi.Team"
+        class=".team.TeamAddForm"
+        permission="Products.qi.AddTeam"
+        />
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.ITeam"
+        name="identifiers.html"
+        class=".teamidentifiers.Identifiers"
+        template="identifiers.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+    
+    <browser:addMenuItem
+        title="qiteam Team"
+        factory="Products.qi.Team"
+        view="Products.qi.Team"
+        permission="Products.qi.AddTeam"
+        />
+    <browser:page
+        for="zope.app.container.interfaces.IAdding"
+        name="Products.qi.SubTeam"
+        class=".team.SubTeamAddForm"
+        permission="Products.qi.AddTeam"
+        />
+
+    <browser:addMenuItem
+        title="qisubteam SubTeam"
+        factory="Products.qi.SubTeam"
+        view="Products.qi.SubTeam"
+        permission="Products.qi.AddTeam"
+        />
+
+</configure>

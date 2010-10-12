@@ -1,0 +1,30 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.qi">
+
+    <browser:page
+        for="*"
+        name="clean.html"
+        class=".clean.Clean"
+        template="clean.pt"
+        permission="Products.qi.Maintain"
+        />
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="reassociate.html"
+        class=".associate.ProjectReassociateForm"
+        template="projectassociate.pt"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.ITeam"
+        name="reassociate.html"
+        class=".associate.TeamReassociateForm"
+        template="teamassociate.pt"
+        permission="zope2.View"
+        />
+
+        
+</configure>

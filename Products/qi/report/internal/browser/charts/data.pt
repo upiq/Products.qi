@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chart 
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="periods view/Periods">
+    <tal:nodata>
+        <series tal:condition="python:len(periods)==0">
+            <value>
+                No data
+            </value>
+        </series>
+    </tal:nodata>
+    
+	<series tal:condition="python:len(periods)>0">
+		<tal:series repeat="period periods">
+			<value tal:attributes="xid period" tal:content="period" />
+		</tal:series>
+	</series>
+	<graphs tal:condition="python:len(periods)>0">
+		<tal:goal define="goal view/goal" condition="goal">
+			<graph gid="goal">
+			<tal:periods repeat="period periods">
+				<value tal:attributes="xid period" tal:content="goal" />
+			</tal:periods>
+			</graph>
+		</tal:goal>
+		<tal:teams define="periods view/Periods" repeat="team view/teamids">
+		<graph tal:attributes="gid team" tal:condition="python:len(periods)>0">
+
+			<tal:periods repeat="period periods">
+				<tal:period condition="python:view.valueFor(period, team)"
+					 tal:define="measurevalue python:view.valueFor(period,team);
+					            fileexists exists:measurevalue/tfile;
+					            formexists exists:measurevalue/form">
+					<tal:realdata condition="python:fileexists or formexists" >
+						<value tal:attributes="xid period;
+	                        description python:getattr(measurevalue, 'annotation','');"
+
+						    tal:content="measurevalue/value" 
+							description="source: file"
+							bullet="round"
+							tal:condition="not:measurevalue/perseverated"/>
+						<value tal:attributes="xid period" tal:content="measurevalue/value"
+							bullet="round_outline"
+							description="Previous value carried forward"
+							tal:condition="measurevalue/perseverated" />
+					</tal:realdata>
+					<tal:fakedata tal:condition="not:python:fileexists or formexists">
+						<value tal:attributes="xid period;
+						    description python:getattr(measurevalue,'description','');
+						    bullet_color python:view.getColor(measurevalue);
+						    bullet python:view.getColor(measurevalue) and 'square' or 'circle';
+						    " tal:content="measurevalue/value"
+							bullet="square"
+							description="calculated"/>
+					</tal:fakedata>
+					
+				</tal:period>
+			</tal:periods>
+
+		</graph>
+		</tal:teams>
+	</graphs>
+</chart>

@@ -1,0 +1,5 @@
+<configure>
+    <include package=".model" />
+    <include package=".browser.charts" />
+    <include package=".complex" />
+</configure>

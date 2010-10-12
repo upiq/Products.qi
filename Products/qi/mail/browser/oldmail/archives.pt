@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="email string:email;
+                subject string:subject;
+                body string:body;
+                baseErrors python:view.getError('base')">
+    <div>
+        <h3><tal:name content="context/title">name</tal:name> Mail Archive</h3>
+        <p>This page lists email messages that have been sent to the
+            <tal:name content="context/title">name</tal:name> 
+            distribution list.</p>
+        <table class="listing mailArchive">
+<!--            
+            <tr>
+                <th class="mailArchiveSubject">Subject</th>
+                <th class="mailArchiveFrom">From</th>
+                <th class="mailArchiveMessage">Message</th>
+            </tr>
+-->
+        <tr>
+            <th colspan="2">Archives</th>
+        </tr>
+        <tal:messages repeat="history python:view.getHistory(member)">
+            
+            <tr class="even bordered">
+            <td colspan="2">
+                <strong>
+                Topic:
+                <tal:subject content="history/subject">
+                Subject
+                </tal:subject>
+                </strong>
+            </td>            </tr>
+            <tr class="even bordered"> 
+                <td class="managedwidth">
+                <tal:user content="history/fromuser">from</tal:user>
+                <br />
+                <tal:date content="python:view.niceifydt(history.sent)">
+                    date
+                </tal:date>
+                </td>
+                <td tal:content="structure python:view.parsebody(history.body)">
+                    body
+                </td>
+            </tr>
+            <tal:replies define="replygroup history/mailarchive_set;
+                                 replies python:replygroup.order_by('sent')">
+            <tal:replies condition="python:len(replies)>0"
+                repeat="reply replies">
+            <tr class="odd bordered">
+                <td>
+                <tal:user content="reply/fromuser">from</tal:user>
+                <br />
+                <tal:date content="python:view.niceifydt(reply.sent)">
+                    date
+                </tal:date>
+                </td>
+                
+                <td tal:content="structure python:view.parsebody(reply.body)">
+                    body
+                </td>
+            </tr>
+            </tal:replies>
+            </tal:replies>
+        </tal:messages>
+        </table>
+    </div>
+</div>
+</body>
+</html>

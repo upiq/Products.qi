@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="Products.qi">
+    
+    <genericsetup:registerProfile
+        name="baseline"
+        title="QI TeamSpace Site Policy Baseline"
+        directory="profiles/baseline"
+        description="QI TeamSpace baseline profile."
+        provides="Products.GenericSetup.interfaces.BASE"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        />
+        
+    <!-- install custom filesystem directory view -->
+    <cmf:registerDirectory
+        name="Qi-Images"/>
+
+    <cmf:registerDirectory
+        name="qi_plone_overrides"/>
+
+    <cmf:registerDirectory
+        name="qi-mail"/>
+
+	<cmf:registerDirectory
+		name="qi-macros" />
+    
+</configure>

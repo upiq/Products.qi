@@ -1,0 +1,21 @@
+<div id="portal-footer" metal:define-macro="portal_footer" i18n:domain="plone">
+
+<p>
+    <span i18n:translate="description_copyright" tal:omit-tag="">
+    The
+    <span i18n:name="qiteamspacecms" tal:omit-tag="">
+        <a href="http://www.qiteamspace.com" i18n:translate="label_qiteamspace_cms">QI TeamSpace Application</a>
+    </span>
+    is
+    <acronym title="Copyright" i18n:name="copyright" i18n:attributes="title title_copyright;">&copy;</acronym>
+    2008-2009<!-- -<span i18n:name="current_year"
+               tal:omit-tag=""
+               tal:define="now modules/DateTime/DateTime"
+               tal:content="now/year" /> -->
+    by the
+    <span i18n:name="chcq" tal:omit-tag="">
+        <a href="http://www.cincinnatichildrens.org/research/div/health-quality/" i18n:translate="label_chcq">Center for Health Care Quality</a></span>
+    </span>
+</p>
+
+</div>

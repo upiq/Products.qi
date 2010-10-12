@@ -1,0 +1,5 @@
+<span>
+    Small Multiple:
+    <tal:filters content="structure context/filteredit">
+    </tal:filters>
+</span>

@@ -1,0 +1,17 @@
+<!--<html>-->
+    <form method="post" action="addwidgit">
+        <select name="type">
+            <option value="datatable">Data Table</option>
+            <option value="annotations">Annotation Table</option>
+            <option value="smallmultiple">Small Multiple</option>
+            <option value="teamchart">Team Chart</option>
+            <option value="measurechart">Measure Chart</option>
+<!--            <option value="controlchart">Control Chart</option>-->
+            <option value="line">Horizontal Seperator</option>
+            <option value="title">Header</option>
+            <option value="paragraph">Paragraph</option>
+            <option value="googlemotion">Google Motion Chart</option>
+        </select>
+        <input type="submit" name="add" value="add">
+    </form>
+<!--</html>-->

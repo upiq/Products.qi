@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="id string:id;
+                active string:active;
+                start string:start;
+                end string:end;
+                teams view/teams">
+
+<tal:iderrors define="errors python:view.getError(id)">
+    <tal:errors repeat="error errors">
+        <div tal:content="error" class="error">Validation error output</div>
+    </tal:errors>
+</tal:iderrors>    
+
+<tal:starterrors define="errors python:view.getError(start)">
+    <tal:errors repeat="error errors">
+        <div tal:content="error" class="error">Validation error output</div>
+    </tal:errors>
+</tal:starterrors>
+<tal:enderrors define="errors python:view.getError(end)">
+    <tal:errors repeat="error errors">
+        <div tal:content="error" class="error">Validation error output</div>
+    </tal:errors>
+</tal:enderrors>
+    
+
+  	
+		<h2>Team Activation</h2>
+		<p>
+		To change the activation status or the start/end dates 
+		for one or more teams,
+		make the necessary changes in the table below,
+		then click the Update button for each team
+		that you are changing.
+		</p>  	
+        <form method="POST" tal:attributes="action view/url" tal:condition="teams">
+            <input type="hidden" name="id" value="arrayforcing" />
+            <input type="hidden" name="start" value="arrayforcing" />
+            <input type="hidden" name="end" value="arrayforcing" />
+            <input type="hidden" name="active" value="arrayforcing" />
+            <input type="hidden" name="qic" value="arrayforcing" />
+            <div style="float:right; width:90px; height:90px; margin-right: 80px;">
+            <input style="position: fixed; border-width: 0px" type="image" src="submit.png" name="update" value="submit changes" />
+            </div>
+        <table tal:define="cols string:4; qics view/qics" class="listing" style="width: 930px;">
+
+            <tr>
+                <th>Name</th>
+                <th>Active</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>QIC</th>
+                
+            </tr>
+            <tal:teams repeat="team teams">
+                <input type="hidden" name="id" id="id"
+                    tal:attributes="value team/id" />
+                <tr>
+                    <td> 
+						<tal:whatever content="team/name" />
+					</td>
+                    <td>
+                        <input type="checkbox" name="active" id="active"
+                            tal:attributes="CHECKED team/active;
+                            name python:'active-%i'%team.id" />
+                    </td>
+                    <td>
+                        <input type="text" name="start" id="start"
+                            style="width:75px;"
+                            tal:attributes="value 
+                            python:view.reformatdate(team.startdate)" />
+                    </td>
+                    <td>
+                        <input type="text" name="end" id="end"
+                            style="width:75px;"
+                            tal:attributes="value
+                            python:view.reformatdate(team.enddate)" />
+                    </td>
+                    <td>
+                        <select name="qic">
+                            <option value="none"></option>
+                            <option value="none">-----</option>
+                            <tal:qics repeat="qic qics">
+                                <option tal:attributes="value qic; 
+                                    selected python:qic==team.qic;"
+                                    tal:content="qic" />
+                            </tal:qics>
+                        </select>
+                    </td>
+                </tr>
+            </tal:teams>
+        </table>
+
+        </form>
+
+</div>
+</body>
+</html>

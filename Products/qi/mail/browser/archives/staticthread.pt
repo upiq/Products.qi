@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="baseErrors python:view.getError('base')">
+    <h3>
+        <tal:listname tal:content="view/listname">
+            list name
+        </tal:listname> Mailing List
+    </h3>
+    <p class="description">
+        Click any subject to view the emails sent in that thread.
+    </p>
+    <table width="90%" class="archive listing">
+        <tr>
+        <th width="75%" >
+            Subject
+        </th>
+        <th width="12.5%">
+            Number of messages
+        </th>
+        <th width="12.5%">
+            Thread originator
+        </th>
+        </tr>
+    <tr tal:repeat="thread view/getThreads" 
+        tal:condition="python:len(view.getThreads())>0">
+        <td valign="top">
+        <a href="moo" tal:attributes="href python:'messages?id=%s'%thread.id;"
+         tal:content="thread/subject">list name goes here</a>
+        </td>
+        <td valign="top" tal:content="python:len(thread.message_set.all())">
+        </td>
+        <td valign="top" tal:content="python:view.firstPoster(thread)">
+        </td>
+    </tr>
+    <tr tal:condition="python:len(view.getThreads())==0">
+        <td colspan="3">
+            <h3>
+                There are no threads in this mailing list.
+            </h3>
+        </td>
+    </tr>
+    </table>
+    Back to: 
+    <a href="archives.html">Main Archive</a>
+</div>
+</body>
+</html>

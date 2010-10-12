@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+	<div metal:fill-slot="main">
+		
+	<form tal:attributes="action python:'%s/%s' % (view.context.absolute_url(), 'view')"
+		method="get">
+		Measures: <br />
+		<table>
+		<tr tal:repeat="measure view/measures">
+			
+			<td tal:content="measure" tal:attributes="id measure">d</td>
+			<td><input size="2" maxlength="2" 
+				tal:attributes="value repeat/measure/index; name measure/id;"/>
+			</td>
+		</tr>
+		</table>
+		Computed Values: <br />
+		<table>
+		<tr tal:repeat="computed view/computedMeasures">
+			
+			<td tal:content="computed" tal:attributes="id computed">d</td>
+			<td><input size="2" maxlength="2" 
+				tal:attributes="value repeat/computed/index; name computed/id;"/>
+			</td>
+		</tr>
+		</table>
+		
+		<input type="submit" value="Order Charts" name="submitorder">
+	</form>
+	</div>
+</body>
+
+</html>

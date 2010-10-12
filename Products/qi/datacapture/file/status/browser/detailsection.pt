@@ -1,0 +1,145 @@
+<div id="detailsection" tal:define="upload view/getUpload">
+	<tal:errortable tal:condition="python:len(upload.uploaderror_set.all().filter(rownum=0))>0">
+	<h3>General File Errors:</h3>
+		<table class="listing">
+			<tr>
+			<th>
+				Error message
+			</th>
+			</tr>
+			<tal:errors repeat="error python:upload.uploaderror_set.all().filter(rownum=0)">
+			<tr>
+				<td>
+				</td>
+			</tr>
+			</tal:errors>
+		</table>
+	</tal:errortable>
+	<tal:errortable tal:condition="python:len(upload.uploaderror_set.all().filter(rownum__gte=0))>0">
+	<h3>Row Errors:</h3>
+		<table class="listing">
+			<tr>
+				<th>
+					Error Source(row)
+				</th>
+				<th>
+					Error message
+				</th>
+			</tr>
+			<tal:errors repeat="error python:upload.uploaderror_set.all().filter(rownum__gte=0).order_by('rownum')">
+			<tr>
+				<td tal:content="error/rownum" />
+				<td tal:content="error/message" />	
+			</tr>
+			</tal:errors>
+		</table>
+	</tal:errortable>
+
+	<tal:details define="currentquery python:upload.tracked.measurementvalue_set.all();
+						historicalquery python:upload.tracked.measurementchange_set.all();
+						alldata python:view.alldata();
+						baselink python:'%s/viewdata?fileid=%s&%s'%(view.context.absolute_url(),upload.tracked.id,'%s=%s')">
+	<h2>Details</h2>
+	<p>
+		Below is a summary of data loaded so far from this file.  The count column represents 
+		the amount of data imported from this file that is that is current.  The historical
+		count column represents the amount of data imported from this file that has since
+		been suppressed by a more recent data source.
+	</p>
+	<h3>Teams</h3>
+	<table class="listing">
+		<tr>
+			<th>Team</th>
+			<th>Count</th>
+			<th>Historical Count</th>
+		</tr>
+		<tal:teams repeat="teamgroup python:currentquery.values('team').distinct()">
+		<tal:meh
+					define="teamvalues python:alldata.filter(team=teamgroup['team']);
+							team python:view.DB().Team.objects.get(id=teamgroup['team'])">
+			<tr>
+				<td tal:content="team/name" />
+				<td>
+					 <a tal:content="python:currentquery.filter(team=team).count()" 
+						tal:attributes="href python:baselink%('teamid',team.id)" />
+				</td>
+				<td tal:content="python:historicalquery.filter(value__in=teamvalues).count()" />
+			</tr>
+		</tal:meh>
+		</tal:teams>
+	</table>
+
+	<h3>Measures</h3>
+	<table class="listing">
+		<tr>
+			<th>Measure</th>
+			<th>Count</th>
+			<th>Historical Count</th>
+		</tr>
+		<tal:teams repeat="measuregroup python:currentquery.values('measure').distinct()">
+		<tal:meh
+					define="measurevalues python:alldata.filter(measure=measuregroup['measure']);
+							measure python:view.DB().Measure.objects.get(id=measuregroup['measure'])">
+			<tr>
+				<td tal:content="measure/shortname" />
+				<td>
+					 <a tal:content="python:currentquery.filter(measure=measure).count()"
+						tal:attributes="href python:baselink%('measureid',measure.id)" />
+				</td>
+				<td tal:content="python:historicalquery.filter(value__in=measurevalues).count()" />
+			</tr>
+		</tal:meh>
+		</tal:teams>
+	</table>
+
+
+	<h3>Reporting Periods</h3>
+	<table class="listing">
+		<tr>
+			<th>Period</th>
+			<th>Count</th>
+			<th>Historical Count</th>
+		</tr>
+		<tal:teams repeat="dategroup python:currentquery.values('itemdate').distinct()">
+		<tal:meh define="datevalues python:alldata.filter(itemdate=dategroup['itemdate']) ;
+							itemdate python:dategroup['itemdate'];">
+			<tr>
+				<td tal:content="python:'%s, %s'%(itemdate.month,itemdate.year)" />
+				<td tal:content="python:currentquery.filter(itemdate=itemdate).count()" />
+				<td tal:content="python:historicalquery.filter(value__in=datevalues).count()" />
+			</tr>
+		</tal:meh>
+		</tal:teams>
+	</table>
+
+	<h3>Series</h3>
+	<table class="listing">
+		<tr>
+			<th>Series</th>
+			<th>Count</th>
+			<th>Historical Count</th>
+		</tr>
+		<tal:teams repeat="seriesgroup python:currentquery.values('series').distinct()">
+		<tal:meh
+					define="seriesvalues python:alldata.filter(series=seriesgroup['series']);
+							series python: seriesvalues and view.DB().Series.objects.get(id=seriesgroup['series'])
+								or None">
+			<tr>
+				<tal:isseries condition="series">
+					<td
+					 tal:content="python:'%s:%s'%(series.team.name,series.name)" />			
+					<td tal:content="python:currentquery.filter(series=series).count()" />
+					<td tal:content="python:historicalquery.filter(value__in=seriesvalues).count()" />
+				</tal:isseries>
+				<tal:noseries condition="not:series" define="seriesvalues python:alldata.filter(series__isnull=True);">
+					<td>total population</td>
+					<td tal:content="python:currentquery.filter(series__isnull=True).count()" />
+					<td tal:content="python:historicalquery.filter(value__in=seriesvalues).count()" />
+				</tal:noseries>
+
+			</tr>
+		</tal:meh>
+		</tal:teams>
+	</table>
+	</tal:details>
+</div>

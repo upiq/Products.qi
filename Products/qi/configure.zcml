@@ -1,0 +1,23 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="Products.qi">
+    
+    <five:registerPackage package="." initialize=".initialize" />
+	<include package="plone.app.portlets.portlets" />
+    
+    <include package=".extranet" />
+
+    <include package=".util" />
+    <include package=".datacapture" />
+    <include package=".mail" />
+    <include package=".measures" />
+    <include package=".report" />
+    
+
+    
+    <include file="profile.zcml" />
+    
+</configure>

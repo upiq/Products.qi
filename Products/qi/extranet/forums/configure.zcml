@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    >
+    <five:registerClass
+        class=".content.Forum"
+        meta_type="qiforum"
+        permission="cmf.ModifyPortalContent"
+        addview="qi.Forum"
+        />
+    <utility
+        component=".content.forumFactory"
+        name="qi.Forum"
+        />
+    <utility
+        component=".content.threadFactory"
+        name="qi.Thread"
+        />
+    <include package=".browser" />
+    
+</configure>

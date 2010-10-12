@@ -1,0 +1,30 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.qi">
+
+        
+    <browser:page
+        for="*"
+        name="Notify.html"
+        class=".newMailSend.NotifyForm"
+        template="notify.pt"
+        permission="zope2.View"
+        />
+    <browser:page
+        for="*"
+        name="mail_success.html"
+        class=".newMailSend.MailSuccess"
+        template="../../../extranet/pages/success.pt"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="*"
+        name="newsend.html"
+        class=".newMailSend.MailForm"
+        template="newsend.pt"
+        permission="zope2.View"
+        />
+
+</configure>

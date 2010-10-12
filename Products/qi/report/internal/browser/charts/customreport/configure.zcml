@@ -1,0 +1,43 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="Products.qi">
+
+    <browser:page
+        for="zope.app.container.interfaces.IAdding"
+        name="qi.Chart"
+        class=".Chart.AddForm"
+        permission="Products.qi.AddTeam"
+        />
+
+	<browser:addMenuItem
+	    title="qichart Chart"
+	    factory="qi.Chart"
+	    view="qi.Chart"
+	    permission="Products.qi.AddTeam"
+	    />
+    <browser:page
+        for="Products.qi.report.internal.model.interfaces.IChart"
+        name="view"
+		class=".Chart.View"
+        template="chart.pt"
+        permission="zope2.View"
+        />
+	
+    <browser:page
+        for="Products.qi.report.internal.model.interfaces.IChart"
+        name="edit"
+        class=".Chart.EditForm"
+        permission="cmf.ModifyPortalContent"
+        />
+
+    <browser:page
+        for="Products.qi.report.internal.model.interfaces.IChart"
+        name="order"
+        class=".Chart.View"
+		template="order.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+	
+</configure>

@@ -1,0 +1,18 @@
+<tal:editblurb>
+    <tal:groups repeat="group context/groups">
+    <span class="widgitgroup design" tal:attributes="style python:len(context.groups())==1 and 'width:100%' or '';">
+        <tal:widgits repeat="widgit group/widgits">
+            <a tal:attributes="href python:'%s/deletewidgit?deletedid=%s'%(context.absolute_url(),widgit.id)"
+                class="borderless"><img class="borderless" src="delete_icon.gif"></a>
+            <div tal:content="structure widgit/editblurb"  class="widgit design">
+            
+            </div>
+        </tal:widgits>
+        
+    </span>
+    </tal:groups>
+    <span tal:attributes="id context/absolute_url"  class="widgitgroup design">
+        
+    </span>
+    <a tal:attributes="href python: 'javascript:doadd(\'%s\',\'%s/addwidgit\')'%(context.absolute_url(),context.absolute_url())">add</a>
+</tal:editblurb>

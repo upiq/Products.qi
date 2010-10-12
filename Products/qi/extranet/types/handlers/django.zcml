@@ -1,0 +1,44 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="Products.qi">
+
+
+
+    <!--
+    <subscriber
+        for="
+         Products.PluggableAuthService.interfaces.events.IPrincipalCreatedEvent"
+        handler=".django.addUserToDjango"
+        />
+    <subscriber
+        for="
+        Products.PluggableAuthService.interfaces.events.IPrincipalDeletedEvent"
+        handler=".django.removeUserFromDjango"
+        /> 
+        -->
+
+    <subscriber
+        for="Products.qi.extranet.types.interfaces.ITeam
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".django.persistTeamToDjango"
+        />
+    
+    <subscriber
+        for="Products.qi.extranet.types.interfaces.IProject
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".django.persistProjectToDjango"
+        />
+        
+    <subscriber
+        for="Products.qi.extranet.types.interfaces.ITeam
+             zope.app.container.interfaces.IObjectAddedEvent"
+        handler=".django.persistTeamToDjango"
+        />
+    <!--
+
+    -->
+
+</configure>

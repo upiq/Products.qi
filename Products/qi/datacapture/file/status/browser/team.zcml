@@ -1,0 +1,58 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.qi">
+
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.ITeam"
+        name="UploadStatus.html"
+        class=".uploads.ProjectUploadsView"
+        template="uploads.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+	<browser:page
+	 	for="Products.qi.extranet.types.interfaces.ITeam"
+		 name="status"
+		 class=".uploads.UploadStatusView"
+		 template="upload.pt"
+		 permission="cmf.ModifyPortalContent"
+		 />
+		 
+ 	<browser:page
+ 	 	for="Products.qi.extranet.types.interfaces.ITeam"
+ 		 name="datacounts"
+ 		 class=".uploads.UploadStatusView"
+ 		 template="datacounts.pt"
+ 		 permission="cmf.ModifyPortalContent"
+ 		 />
+
+
+		
+	<browser:page
+	 	for="Products.qi.extranet.types.interfaces.ITeam"
+		 name="viewdata"
+		 class=".uploads.DetailView"
+		 template="details.pt"
+		 permission="cmf.ModifyPortalContent"
+		 />
+   	<browser:page
+	 	for="Products.qi.extranet.types.interfaces.ITeam"
+		 name="uploadstatus_kss"
+		 class=".uploads.StatusKss"
+		 permission="cmf.ModifyPortalContent"
+		 />
+   	<browser:page
+	 	for="Products.qi.extranet.types.interfaces.ITeam"
+		 name="uploaddetails_kss"
+		 class=".uploads.DetailsKss"
+		 template="detailsection.pt"
+		 permission="cmf.ModifyPortalContent"
+		 />
+	<browser:page
+	 	for="Products.qi.extranet.types.interfaces.ITeam"
+		 name="followup_kss"
+		 class=".uploads.FollowupKss"
+		 template="followup.pt"
+		 permission="cmf.ModifyPortalContent"
+		 />
+</configure>

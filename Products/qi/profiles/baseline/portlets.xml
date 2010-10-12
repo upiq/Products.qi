@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<portlets name="" meta_type="ComponentRegistry">
+ <portletmanager name="plone.dashboard1"
+    type="plone.app.portlets.interfaces.IDashboard"/>
+ <portletmanager name="plone.rightcolumn"
+    type="plone.app.portlets.interfaces.IRightColumn"/>
+ <portletmanager name="plone.leftcolumn"
+    type="plone.app.portlets.interfaces.ILeftColumn"/>
+ <portletmanager name="plone.dashboard2"
+    type="plone.app.portlets.interfaces.IDashboard"/>
+ <portletmanager name="plone.dashboard3"
+    type="plone.app.portlets.interfaces.IDashboard"/>
+ <portletmanager name="plone.dashboard4"
+    type="plone.app.portlets.interfaces.IDashboard"/>
+
+<!-- <portlet 
+   addview="portlets.Calendar"
+   title="Calendar portlet"
+   description="A portlet which can render a calendar."
+   />
+   -->
+   
+   
+ <portlet 
+   addview="portlets.qi.Calendar"
+   title="Project Calendar"
+   description="A portlet which can render a calendar."
+   />
+ <portlet
+   addview="Qi.Image"
+   title="Image"
+   description="A portlet which can render a single image and link"
+   />
+ <portlet 
+   addview="portlets.News"
+   title="News"
+   description="A portlet which can render a listing of recent news"
+   />
+ <portlet 
+   addview="portlets.Events"
+   title="Events"
+   description="A portlet which can render a listing of recent events"
+   />
+ <portlet 
+   addview="portlets.Login"
+   title="Login"
+   description="A portlet which can render a log-in box"
+   for="plone.app.portlets.interfaces.IColumn"
+   />
+ <portlet 
+   addview="portlets.Navigation"
+   title="Navigation"
+   description="A portlet which can render a navigation tree"
+   for="plone.app.portlets.interfaces.IColumn"
+   />
+ <portlet 
+   addview="portlets.Recent"
+   title="Recent items"
+   description="A portlet which can render a listing of recently changed items."
+   />
+ <portlet 
+   addview="portlets.qi.RecentNoDate"
+   title="Recent items-No date"
+   description="A portlet which can render a listing of recently changed items, but without dates."
+   />
+ <portlet 
+   addview="portlets.qi.EventNoDate"
+   title="Events-No date"
+   description="A portlet which shows recent events, but without dates."
+   />
+ <portlet 
+   addview="portlets.qi.NewsNoDate"
+   title="News-No date"
+   description="A portlet which shows the news, but without dates."
+   />
+ <portlet 
+   addview="portlets.rss"
+   title="RSS Feed"
+   description="A portlet which can receive and render an RSS feed."
+   />
+ <portlet 
+   addview="portlets.Search"
+   title="Search"
+   description="A portlet which shows a search box."
+   />
+</portlets>

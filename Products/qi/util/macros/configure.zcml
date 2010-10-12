@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+	<!-- require modify portal content because submitting a validated form usually does -->
+
+    <browser:page
+      for="*"
+      name="errormacro"
+      template="errors.pt"
+      permission="zope2.View"
+    />
+
+    <browser:page
+      for="*"
+      name="inputmacro"
+      template="validatedinput.pt"
+      permission="zope2.View"
+    />
+    
+    <browser:page
+     for="*"
+     name="selectmacro"
+     template="select.pt"
+     permission="zope2.View"
+    />
+</configure>

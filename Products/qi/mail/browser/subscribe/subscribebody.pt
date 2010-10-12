@@ -1,0 +1,90 @@
+<tbody id="listbody">
+   <tr class="odd">
+        <td width="33%" valign="top">
+        Description: Because of settings established by a project manager 
+        or team lead, you are automatically made a member of these
+         mailing lists.
+        </td>
+        <td width="33%" valign="top">
+        Description:These are mailing lists you have subscribed to or have been
+        subscribed to.
+        Click on a list to unsubscribe from it.
+        </td>
+        <td width="33%" valign="top">
+        Description: These are the mailing lists that you can join. 
+        Click on any list to subscribe to it.
+        </td>
+    </tr>
+
+<tr class="even">
+    <td id="locked" class="locked" valign="top" width="33%">
+        &nbsp
+        <tal:locked repeat="item view/getLockedLists">
+        <form>
+            <input type="hidden" name="listid"
+                 tal:attributes="value item/id" />
+            <div class="locked subupdate clickable">
+                <dl>
+                <dt tal:content="item/listname"></dt>
+                <dd>
+                    <tal:project tal:condition="item/project">
+                    Project: <tal:pn replace="item/project" /><br/>
+                    </tal:project>
+                    <tal:project tal:condition="item/team">
+                    Team: <tal:pn replace="item/team" /> <br/>
+                    </tal:project>
+                    Description: <tal:pn replace="item/description" />
+                </dd>
+                </dl>
+            </div>
+        </form>
+        </tal:locked>
+    </td>
+    <td id="joined" class="joined" valign="top">
+        &nbsp
+        <tal:joined repeat="item view/getRemoveableLists">
+        <form>
+            <input type="hidden" name="listid"
+                 tal:attributes="value item/id" />
+            <div class="joined subupdate clickable">
+                <dl>
+                <dt tal:content="item/listname"></dt>
+                <dd>
+                    <tal:project tal:condition="item/project">
+                    Project: <tal:pn replace="item/project" /><br/>
+                    </tal:project>
+                    <tal:project tal:condition="item/team">
+                    Team: <tal:pn replace="item/team" /> <br/>
+                    </tal:project>
+                    Description: <tal:pn replace="item/description" />
+                </dd>
+                </dl>
+            </div>
+        </form>
+        </tal:joined>
+    </td>
+    <td id="available" class="available" valign="top">
+        &nbsp
+        <tal:open repeat="item view/getAvailableLists">
+        <form>
+            <input type="hidden" name="listid"
+                 tal:attributes="value item/id" />
+            <div class="available subupdate clickable">
+                <dl>
+                <dt tal:content="item/listname"></dt>
+                <dd>
+                    <tal:project tal:condition="item/project">
+                    Project: <tal:pn replace="item/project" /><br/>
+                    </tal:project>
+                    <tal:project tal:condition="item/team">
+                    Team: <tal:pn replace="item/team" /> <br/>
+                    </tal:project>
+                    Description: <tal:pn replace="item/description" />
+                </dd>
+                </dl>
+            </div>
+        </form>
+        </tal:open>
+    </td>
+    </tr>
+</tbody>

@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<object name="portal_skins" meta_type="Plone Skins Tool" allow_any="False"
+   cookie_persistence="False" default_skin="Plone Default"
+   request_varname="plone_skin">
+ <object name="ATContentTypes" meta_type="Filesystem Directory View"
+    directory="Products.ATContentTypes:skins/ATContentTypes"/>
+ <object name="ATReferenceBrowserWidget" meta_type="Filesystem Directory View"
+    directory="Products.ATReferenceBrowserWidget:skins/ATReferenceBrowserWidget"/>
+ <object name="CMFEditions" meta_type="Filesystem Directory View"
+    directory="Products.CMFEditions:skins/CMFEditions"/>
+ <object name="CMFPlacefulWorkflow" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlacefulWorkflow:skins/CMFPlacefulWorkflow"/>
+ <object name="ChangeSet" meta_type="Filesystem Directory View"
+    directory="Products.CMFDiffTool:skins/ChangeSet"/>
+ <object name="LanguageTool" meta_type="Filesystem Directory View"
+    directory="Products.PloneLanguageTool:skins/LanguageTool"/>
+ <object name="PasswordReset" meta_type="Filesystem Directory View"
+    directory="Products.PasswordResetTool:skins/PasswordReset"/>
+ <object name="ResourceRegistries" meta_type="Filesystem Directory View"
+    directory="Products.ResourceRegistries:skins/ResourceRegistries"/>
+ <object name="archetypes" meta_type="Filesystem Directory View"
+    directory="Products.Archetypes:skins/archetypes"/>
+ <object name="archetypes_kss" meta_type="Filesystem Directory View"
+    directory="Products.Archetypes:skins/archetypes_kss"/>
+ <object name="clouseau" meta_type="Filesystem Directory View"
+    directory="Products.Clouseau:skins/Clouseau"/>
+ <object name="cmf_legacy" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/cmf_legacy"/>
+ <object name="cmfeditions_views" meta_type="Filesystem Directory View"
+    directory="Products.CMFEditions:skins/cmfeditions_views"/>
+ <object name="custom" meta_type="Folder"/>
+ <object name="gruf" meta_type="Filesystem Directory View"
+    directory="Products.GroupUserFolder:skins/gruf"/>
+ <object name="gruf_plone_2_0" meta_type="Filesystem Directory View"
+    directory="Products.GroupUserFolder:skins/gruf_plone_2_0"/>
+ <object name="kupu" meta_type="Filesystem Directory View"
+    directory="Products.kupu:common"/>
+ <object name="kupu_plone" meta_type="Filesystem Directory View"
+    directory="Products.kupu:plone/kupu_plone_layer"/>
+ <object name="kupu_references" meta_type="Filesystem Directory View"
+    directory="Products.kupu:plone/kupu_references"/>
+ <object name="kupu_tests" meta_type="Filesystem Directory View"
+    directory="Products.kupu:tests"/>
+ <object name="mimetypes_icons" meta_type="Filesystem Directory View"
+    directory="Products.MimetypesRegistry:skins/mimetypes_icons"/>
+ <object name="plone_3rdParty" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_3rdParty"/>
+ <object name="plone_content" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_content"/>
+ <object name="plone_deprecated" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_deprecated"/>
+ <object name="plone_ecmascript" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_ecmascript"/>
+ <object name="plone_form_scripts" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_form_scripts"/>
+ <object name="plone_forms" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_forms"/>
+ <object name="plone_images" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_images"/>
+ <object name="plone_kss" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_kss"/>
+ <object name="plone_login" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_login"/>
+ <object name="plone_portlets" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_portlets"/>
+ <object name="plone_prefs" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_prefs"/>
+ <object name="plone_scripts" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_scripts"/>
+ <object name="plone_styles" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_styles"/>
+ <object name="plone_templates" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_templates"/>
+ <object name="plone_wysiwyg" meta_type="Filesystem Directory View"
+    directory="Products.CMFPlone:skins/plone_wysiwyg"/>
+ <object name="Qi-Images"
+     meta_type="Filesystem Directory View"
+     directory="Products.qi:skins/Qi-Images"/>
+ <object name="qi-mail"
+     meta_type="Filesystem Directory View"
+     directory="Products.qi:skins/qi-mail"/>
+ <object name="qi-macros"
+     meta_type="Filesystem Directory View"
+     directory="Products.qi:skins/qi-macros"/>
+ <object name="qi_plone_overrides"
+     meta_type="Filesystem Directory View"
+     directory="Products.qi:skins/qi_plone_overrides"/>
+ <skin-path name="Plone Default">
+  <layer name="custom"/>
+  <layer name="qi-mail" />
+  <layer name="qi_plone_overrides"/>
+  <layer name="Qi-Images" />
+  <layer name="clouseau"/>
+  <layer name="CMFPlacefulWorkflow"/>
+  <layer name="LanguageTool"/>
+  <layer name="cmfeditions_views"/>
+  <layer name="CMFEditions"/>
+  <layer name="ChangeSet"/>
+  <layer name="kupu_plone"/>
+  <layer name="kupu"/>
+  <layer name="kupu_tests"/>
+  <layer name="archetypes"/>
+  <layer name="archetypes_kss"/>
+  <layer name="mimetypes_icons"/>
+  <layer name="plone_kss"/>
+  <layer name="ATContentTypes"/>
+  <layer name="ATReferenceBrowserWidget"/>
+  <layer name="ResourceRegistries"/>
+  <layer name="PasswordReset"/>
+  <layer name="gruf"/>
+  <layer name="plone_ecmascript"/>
+  <layer name="plone_wysiwyg"/>
+  <layer name="plone_prefs"/>
+  <layer name="plone_portlets"/>
+  <layer name="plone_templates"/>
+  <layer name="plone_styles"/>
+  <layer name="plone_form_scripts"/>
+  <layer name="plone_scripts"/>
+  <layer name="plone_forms"/>
+  <layer name="plone_images"/>
+  <layer name="plone_content"/>
+  <layer name="plone_login"/>
+  <layer name="plone_deprecated"/>
+  <layer name="plone_3rdParty"/>
+  <layer name="cmf_legacy"/>
+ </skin-path>
+</object>

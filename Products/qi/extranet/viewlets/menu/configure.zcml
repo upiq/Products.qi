@@ -1,0 +1,15 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="Products.qi">
+    
+    
+    <browser:viewlet
+        name="qi.menu"
+        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+        class=".menuviewlet.QIMenu"
+        permission="zope2.View" 
+        />
+        
+</configure>

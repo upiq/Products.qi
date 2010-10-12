@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+    <metal:noborder fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1)" />
+</head>
+
+<body>
+<div metal:fill-slot="main">
+
+	<h2>
+		Change location mode:
+	</h2>
+	<p class="description">
+		Due to current technical restrictions in the system, qiteamspace folders being moved to a distinct organization level
+		must be modified to match the permission and content structures before being moved.  This page enables you to alter a folder's
+		mode to match its destination before being cut and pasted
+	</p>
+	<h3>
+		Instructions
+	</h3>
+	<p class="description instructions">
+		<ol class="instructions">
+			<li>Pick a destination for this folder.</li>
+			<li>Determine if this new location is the property of a project, team, or subteam.</li>
+			<li>Select the appropriate option on this page.</li>
+			<li>Click Save</li>
+			<li>From the actions menu, select cut</li>
+			<li>Finally, paste this folder to the new destination</li>
+		</ol>
+		Additionally, this page may be used to "fix" folders that are "set" at the wrong level.
+	<p>
+	<fieldset>
+		<form action="."
+			method="GET"
+			tal:attributes="action view/url"
+			tal:define="currentval view/currentType">
+			<input type="radio" name="typename" value="Project_Folder" tal:attributes="CHECKED python:currentval=='Project_Folder'"/>
+				Project <br />
+			<input type="radio" name="typename" value="Team_Folder" tal:attributes="CHECKED python:currentval=='Team_Folder'"/>
+				Team <br />
+			<input type="radio" name="typename" value="Subteam_Folder" tal:attributes="CHECKED python:currentval=='Subteam_Folder'"/>
+				Subteam <br />
+			<input type="submit" name="change" value="change" />
+		</form>
+	</fieldset>
+</div>	
+</body>
+</html>

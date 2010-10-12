@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main">
+	<form>
+		<input type="hidden" id="teamid" tal:attributes="value python:view.context.request.form['teamid']" />
+		<input type="hidden" id="measureid" tal:attributes="value python:view.context.request.form['measureid']" />
+	</form>
+	<!-- amline script-->
+	   <script type="text/javascript" src="amline/swfobject.js"></script>
+	   <div id="flashcontent">
+	      <strong>You need to upgrade your Flash Player</strong>
+	   </div>
+
+	   <script type="text/javascript">
+	// <![CDATA[
+		var so = new SWFObject("amline/amline.swf", "amline", "520", "400", "8", "#FFFFFF");
+		so.addVariable("path", "amline/");
+		var teamid=document.getElementById('teamid').value;
+		var measureid=document.getElementById('measureid').value;
+		var baseurl="chartdata.xml";
+		var dataurl=baseurl+'?teamid='+teamid+'&measureid='+measureid;
+		var baseurl="amline_settings.xml"
+		var settingsurl=baseurl+'?teamid='+teamid+'&measureid='+measureid;
+		alert(settingsurl)
+		so.addVariable("settings_file", escape(settingsurl));  				// you can set two or more different settings files here (separated by commas)
+		so.addVariable("data_file", escape(dataurl));
+		// so.addVariable("chart_data", "");                                   // you can pass chart data as a string directly from this file
+		// so.addVariable("chart_settings", "");                               // you can pass chart settings as a string directly from this file
+		// so.addVariable("additional_chart_settings", "");                    // you can append some chart settings to the loaded ones
+		// so.addVariable("loading_settings", "LOADING SETTINGS");                 // you can set custom "loading settings" text here
+		// so.addVariable("loading_data", "LOADING DATA");                         // you can set custom "loading data" text here
+	   so.addVariable("preloader_color", "#999999");
+	   so.write("flashcontent");
+	// ]]>
+	   </script>
+	
+	
+	
+</div>
+</body>
+</html>

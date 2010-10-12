@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="email string:email;
+                baseErrors python:view.getError('base')">
+
+
+<h3>Modify Project Contact Info</h3>
+<p>
+    Use the field below to identify the primary project contact address.
+    This is the email address that will receive messages
+     sent through the contact page 
+    (i.e., the page accessed through the "Contact" link at the top right).
+    You may provide the email address of a mailing list to have all members of
+    that list contacted.
+</p>
+    <div tal:condition="view/hasErrors" class="error">
+        <h3>The changed faile</h3>
+        <ul>
+        <tal:generalErrors condition="baseErrors" repeat="err baseErrors">
+            <li class="error" tal:content="err">
+                General error
+            </li>
+        </tal:generalErrors>
+        </ul>
+    </div>
+    
+
+
+
+<form
+    action='.'
+    tal:attributes="action view/url"
+  	method="post"
+  	id="contact-info">
+
+	<fieldset id="contact">
+		
+		<div class="field"
+ 			tal:define="localname email;
+ 			            errors python:view.getError(localname);
+ 			            localvalue python:request.get(localname,
+ 			                 view.getCurrentEmail());"
+ 			tal:attributes="class python:errors and 'field error' or 'field'">
+
+
+ 			<label i18n:translate="label_uploadtype_name"
+   				tal:attributes="for localname">Email address</label>
+
+            <div><tal:errors repeat="error errors">
+                <div tal:content="error">Validation error output</div>
+            </tal:errors></div>
+
+			<input type="text"
+   				tal:attributes="name localname;
+   								id localname;
+   								value localvalue"
+   	        />
+   	        Currently sending to:
+   	            <tal:currentaddress tal:content="view/getProjectEmail" />
+        </div>
+        
+        
+                
+		<div class="formControls">
+
+			<input class="context"
+   				type="submit"
+   				name="update"
+   				value="Set"
+   				/>
+		</div>
+
+	</fieldset>
+
+</form>
+
+</div>
+</body>
+</html>

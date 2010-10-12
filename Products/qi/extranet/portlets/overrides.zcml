@@ -1,0 +1,58 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="Products.qi">
+    
+    <plone:portlet
+        name="portlets.Events"
+        interface="plone.app.portlets.portlets.events.IEventsPortlet"
+        assignment="plone.app.portlets.portlets.events.Assignment"
+        renderer=".events.Renderer"
+        addview="plone.app.portlets.portlets.events.AddForm"
+        editview="plone.app.portlets.portlets.events.EditForm"
+        />
+    <plone:portlet
+        name="portlets.News"
+        interface="plone.app.portlets.portlets.news.INewsPortlet"
+        assignment="plone.app.portlets.portlets.news.Assignment"
+        renderer=".news.Renderer"
+        addview="plone.app.portlets.portlets.news.AddForm"
+        editview="plone.app.portlets.portlets.news.EditForm"
+        />
+    <plone:portlet
+        name="portlets.Recent"
+        interface="plone.app.portlets.portlets.recent.IRecentPortlet"
+        assignment="plone.app.portlets.portlets.recent.Assignment"
+        renderer=".recent.Renderer"
+        addview="plone.app.portlets.portlets.recent.AddForm"
+        editview="plone.app.portlets.portlets.recent.EditForm"
+        />
+    <browser:viewlet
+        name="plone.searchbox"
+        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        class=".searchbox.SearchBoxViewlet"
+        permission="zope2.View" 
+        />
+        
+        
+    <plone:portlet
+        name="portlets.Search"
+        interface=".search.ISearchPortlet"
+        assignment=".search.Assignment"
+        renderer=".search.Renderer"
+        addview=".search.AddForm"
+        editview=".search.EditForm"
+        />
+
+    <plone:portlet
+        name="portlets.rss"
+        interface="plone.app.portlets.portlets.rss.IRSSPortlet"
+        assignment="plone.app.portlets.portlets.rss.Assignment"
+        renderer=".rss.Renderer"
+        addview="plone.app.portlets.portlets.rss.AddForm"
+        editview="plone.app.portlets.portlets.rss.EditForm"
+        />
+
+
+</configure>

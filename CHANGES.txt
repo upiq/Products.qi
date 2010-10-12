@@ -1,0 +1,12 @@
+Products.qi Changelog
+=====================
+
+release-1.1 (unreleased)
+------------------------
+
+- Added dynamic view support to the 'qiproject' and 'qiteam' content types.
+
+release-1.0 (2008-02-20)
+------------------------
+
+- Version demonstrated on February 20.

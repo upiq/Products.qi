@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+
+
+<div metal:fill-slot="main"
+	tal:define="pageparts view/getCurrentDetails;
+				form view/context/request/form;
+				page python:pageparts[0];
+				pagelist python:pageparts[1]">
+<div>
+	<form
+		method="get"
+		tal:attributes="target view/url">
+		<!-->
+		<label for="teamid">Team<label>
+		<select name="teamid" tal:define="teamid python:form.get('teamid')">
+			<option value="-1" tal:attributes="selected python:pageid=='-1'" tal:content="string:All teams"/>
+			<tal:teams>
+			</tal:teams>
+		</select>
+		
+		
+		<input type="submit" value="filter">
+		<-->
+	</form>
+</div>
+<h3>Data</h3>
+	<table class="listing">
+		<tr>
+			<th>Period</th>
+			<th>Measure</th>
+			<th>Team</th>
+			<th>Date</th>
+			<th>Series</th>
+			<th>Value</th>
+			<th>Annotation</th>
+			<th>Value History</th>
+		</tr>
+		<tal:rows repeat="row python:page.object_list">
+		<tr>
+			<td tal:content="row/itemdate" />
+			<td tal:content="row/measure/name" />
+			<td tal:content="row/team/name" />
+			<td tal:content="row/reportdate" />
+			<td tal:condition="not:row/series">Total Population</td>
+			<td tal:condition="row/series" tal:content="row/series/name"/>
+			<td tal:content="row/value" />
+			<td tal:content="row/annotation" />
+			<td tal:condition="python:row.measurementchange_set.all().count()>0">
+				<a tal:attributes="href python:view.history(row)">History of changes</a>
+			</td>
+			<td tal:condition="python:row.measurementchange_set.all().count()==0">
+				New
+			</td>
+		</tr>
+		</tal:rows>
+	</table>
+	<fieldset>
+		<legend>
+			pages
+		</legend>
+	<a tal:condition="page/has_previous" tal:attributes="href python:view.urlWithDifferentPage(page.previous_page_number())">
+		Previous
+	</a>
+	<tal:pages repeat="pagenum pagelist">
+		<a tal:content="pagenum" tal:attributes="href python:view.urlWithDifferentPage(pagenum)"
+		 	tal:omit-tag="python:page.number==pagenum"/>
+	</tal:pages>
+	<a tal:condition="page/has_next" tal:attributes="href python:view.urlWithDifferentPage(page.next_page_number())">
+		Next
+	</a>
+	</fieldset>
+	
+	<form name="xlsform" action="exportexcel" method="get">
+		<tal:r define="form python:view.context.request.form" repeat="key form">
+			<input type="hidden" tal:attributes="name key; value python:form[key];">
+		</tal:r>
+	</form>
+    <form name="xmlform" action="exportxml" method="post">
+		<tal:r define="form python:view.context.request.form" repeat="key form">
+			<input type="hidden" tal:attributes="name key; value python:form[key];">
+		</tal:r>
+	</form>
+	<a href="javascript: void(0);" tal:attributes="href view/excelLink">Export results to Excel</a>
+	<a href="javascript: void(0);" onclick="document.xmlform.submit();">Build new xml Export</a>
+	<tal:active condition="python: getattr(context,'exportingXML',False)"> (Running) </tal:active>
+	<div class="Export Status" tal:condition="python: hasattr(context,'lastexport')">
+	    Last export prepared: <a href="getExportResult" tal:content="context/lastexporttime" />
+    </div>
+
+</div>
+</html>

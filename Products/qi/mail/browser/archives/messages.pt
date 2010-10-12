@@ -1,0 +1,19 @@
+<td id="messages" valign="top">
+    <ul class="expandable">
+        <tal:threads repeat="message view/getMessages">
+            <li>
+                <dl>
+                <dt>
+                    <tal:user replace="message/fromuser" />
+                    <tal:sent replace="message/sent" />
+                </dt>
+                <dd>
+                    <tal:body
+                        replace="structure python:view.cleanbody(
+                        message.body)" />
+                </dd>
+                </dl>
+            </li>
+        </tal:threads>
+    </ul>
+</td>

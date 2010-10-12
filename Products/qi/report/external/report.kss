@@ -1,0 +1,28 @@
+
+
+
+input.reportrunner:click {
+    action-server: startreport;
+    startreport-reportid: currentFormVar("reportid");
+    action-server: updatestatus;
+    updatestatus-reportid: currentFormVar("reportid");
+}
+
+span.invoked:timeout
+{
+    evt-timeout-delay:      5000;
+    action-server:          updatestatus;
+    updatestatus-reportid:  currentFormVar("reportid")
+}
+
+input.expandbatch:click
+{
+    action-server: expandbatches;
+    expandbatches-reportid: currentFormVar("reportid");
+}
+
+input.collapsebatch:click
+{
+    action-server: collapsebatches;
+    collapsebatches-reportid: currentFormVar("reportid");
+}

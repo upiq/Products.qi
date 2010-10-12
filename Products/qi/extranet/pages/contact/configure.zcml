@@ -1,0 +1,22 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="Products.qi">
+    
+
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="contact-info"
+        class=".contactinfo.ContactView"
+        template="contact-info.pt"
+        permission="zope2.View"
+        />
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="edit-contact.html"
+        class=".projectContact.ProjectContactForm"
+        template="projectContact.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+</configure>

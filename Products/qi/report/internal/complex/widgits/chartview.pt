@@ -1,0 +1,31 @@
+
+<tal:team tal:condition="context/getTextBlurb"
+     replace="context/getTextBlurb">Description or title if any</tal:team>
+<span style="width:1in; height:0.25in; border-style:solid; border-width: 0;"
+    tal:attributes="style context/chartstyle">
+	   <span tal:condition="python:hasattr(context,'chartTitle')" tal:content="context/chartTitle"></span>
+	   <span id="flashcontent" tal:attributes="id python:'chart-%s/%s'%(context.getrow().id,context.id)">
+	      <strong>You need to upgrade your Flash Player</strong>
+	   </span>
+
+	   <img id="printimage" style="display:None;" tal:attributes="id python:'chart-%s/%s:image'%(context.getrow().id,context.id)" />
+	   <script type="text/javascript" tal:content="context/locationJS" />
+	   <script type="text/javascript">
+	// <![CDATA[
+
+		var so = new SWFObject("amline/amline.swf", "chart-"+idval+":flash", chartwidth, chartheight, "8", "#FFFFFF");
+		so.addVariable("path", basepath+"amline/");
+		so.addVariable("chart_id", "chart-"+idval+":flash");
+		//so.addParam("wmode", "Transparent");
+		var baseurl=basepath+"/data.xml";
+		var dataurl=baseurl
+		var settingsurl=basepath+"/settings.xml"
+		
+		
+		so.addVariable("settings_file", escape(settingsurl));  				// you can set two or more different settings files here (separated by commas)
+		so.addVariable("data_file", escape(dataurl));
+	    so.addVariable("preloader_color", "#228844");
+        so.write("chart-"+idval);
+	// ]]>
+	   </script>
+</span>

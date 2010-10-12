@@ -1,0 +1,54 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    >
+    <class class=".row.ChartRow">
+        <implements interface=".interfaces.IChartRow" />
+        <implements interface="Products.CMFDynamicViewFTI.interface.ISelectableBrowserDefault" />
+    </class>
+    
+    <utility
+        component=".row.rowfactory"
+        name="qi.ChartRow"
+        />
+    <browser:resource
+        name="ajaxadd.js"
+        image="ajaxadd.js"
+        />
+        
+    <five:registerClass
+        class=".row.ChartRow"
+        meta_type="qi.ChartRow"
+        permission="cmf.ModifyPortalContent"
+        addview="qi.ChartRow"
+        icon="chart_icon.png"
+        />
+    <browser:page
+        name="displayblurb"
+        for=".interfaces.IChartRow"
+        template="displayblurb.pt"
+        permission="zope2.View"
+        />
+    <browser:page
+        name="editblurb"
+        for=".interfaces.IChartRow"
+        template="editblurb.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+    <browser:page
+        name="addwidgit"
+        for=".interfaces.IChartRow"
+        class=".addwidgit.AddWidgit"
+        template="addwidgit.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+    <browser:page
+        name="deletewidgit"
+        for=".interfaces.IChartRow"
+        template="_blank.pt"
+        class=".addwidgit.DeleteWidgit"
+        permission="cmf.ModifyPortalContent"
+        />
+    
+</configure>

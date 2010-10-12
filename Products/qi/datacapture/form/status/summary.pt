@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="here/main_template/macros/master"
+    i18n:domain="qiteamspace">
+
+    <div metal:fill-slot="main">
+        <script type="text/javascript">
+        function showhide(objid)
+        {
+            gotid="box-"+objid
+            showid='show-'+objid
+            hideid='hide-'+objid
+            show=document.getElementById(showid)
+            hide=document.getElementById(hideid)
+            got=document.getElementById(gotid)
+            if (got.style.display=="none")
+            {
+                got.style.display="block"
+                show.style.display="none"
+                hide.style.display="block"
+            }
+            else
+            {
+                got.style.display="none"
+                hide.style.display="none"
+                show.style.display="block"
+            }
+        }
+        </script>
+        <h3><tal:submission content="view/form/name" /> Submissions</h3>
+        <ul>
+        <li><a tal:attributes="href python:'%s/viewdata'%context.absolute_url()" href="viewdata">View raw data for entire project</a></li>
+        <li><a tal:attributes="href python:'%s/teamroster'%context.absolute_url()" href="teamroster">Team Roster Report</a></li>
+        </ul>
+        <p>
+            Below is the number of teams which have entered data through QI TeamSpace for each
+            reporting period.  Click the show link to display details of which teams submitted data.
+            Teams that have submitted data for the report period are displayed with a
+            <span style="background-color:#AAFFAA">green background</span>.
+            Teams that have not submitted data for the report period are displayed with a
+            <span style="background-color:#FFAAAA">red background</span>.
+            Teams that have partially submitted data(such as from an old version of the form, or a data upload import)
+             for the report period are displayed with a
+            <span style="background-color:#FFFF44">yellow background</span>.
+        </p>
+        <table>
+            <tal:dates repeat="date python:reversed(sorted(view.dates.keys()))">
+            
+            <tr>
+                <td style="padding-right:0.8em">
+                    <a href="javascript:showhide(this)" tal:attributes="id python:'show-%s'%(date);
+                        href python:'''javascript:showhide('%s')'''%(date)">
+                        show
+                    </a>
+                    <a style="display: none" href="javascript:showhide(this)" tal:attributes="id python:'hide-%s'%(date);
+                        href python:'''javascript:showhide('%s')'''%(date)">
+                        hide
+                    </a>
+                </td>
+                <td style="padding-right:0.8em" tal:content="python:len(view.dates[date][1])" />
+
+                <td  style="font-size: 125%;">Active teams with data for: </td>
+                <td  style="font-size: 125%;" tal:content="python:view.dates[date][0]"></td>
+            </tr>
+            
+            <tr >
+                <td >&nbsp;</td>
+                <td >&nbsp;</td>
+                <td> 
+                    
+                    <table class="listing" style="display:none; width: 100%; border-bottom-width:0px;" tal:attributes="id python:'box-%s'%(date);" >
+                        <tr>
+                            <th>
+                                Team name
+                            </th>
+                            <th>
+                                First submitted
+                            </th>
+                            <th>
+                                Last updated
+                            </th>
+                            <th>
+                                View Data
+                            </th>
+                        </tr>
+                        <tbody>
+                        <tal:teams define="teams python:view.dates[date][1]" repeat="info view/teams">
+                        <tr tal:attributes="style python:view.colorfor(info.name,date)">
+                            <td tal:content="info/name" />
+                            <td tal:content="python:view.reportfor(info.name,date).oldest" />
+                            <td tal:content="python:view.reportfor(info.name,date).newest" />
+                            <td>
+                                <a tal:condition="python:view.dates[date][1].has_key(info.name)" tal:attributes="
+                                    href python:'viewdata?teamid=%s&period=%s'%(
+                                        info.id,
+                                        view.dates[date][1][info.name].date.strftime('%m/%d/%Y'))">
+                                    View Data
+                                </a>
+                            </td>
+                        </tr>
+                        </tal:teams>
+                    </tbody>
+                    </table>
+                    
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            </tal:dates>
+        </table>
+		
+		<br />
+		<a href="datasummary.html">Back to Forms</a>
+
+    </div>
+ 
+</html>

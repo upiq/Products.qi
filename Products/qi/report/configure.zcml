@@ -1,0 +1,4 @@
+<configure>
+    <include package=".external" />
+    <include package=".internal" />
+</configure>

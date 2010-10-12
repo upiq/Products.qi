@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+<div metal:fill-slot="main">
+    <h2 tal:content="context/title" />
+    <tal:subforums define="subforums context/subforums" condition="subforums">
+
+    <form action="postthread" tal:attributes="action python: '%s/postthread'%context.absolute_url()"
+        style="display:inline">
+        <input type="submit" value="Create new thread" />
+    </form>
+    <form action="+/qi.Forum/" style="display:inline">
+        <input type="submit" value="Add subforum" />
+    </form>
+
+        <h3>Subforums</h3>
+        <table style="width:800px;" class="listing">
+            <tr>
+                <th>Forum Name</th>
+                <th>Description</th>
+            </tr>
+            <tal:subforum repeat="subforum subforums">
+            <tr >
+                <td><a tal:content="subforum/title"  tal:attributes="href subforum/absolute_url"/> </td>
+                <td tal:content="subforum/description" />
+            </tr>
+            </tal:subforum>
+        </table>
+    </tal:subforums>
+    <tal:addsubforum condition="view/allowssubforums">
+
+    </tal:addsubforum>
+    <tal:threads define="threads context/threads" condition="threads">
+        <h3>Discussion Threads</h3>
+        <table style="width:800px;" class="listing">
+            <tr style="border: margin:0; padding:0; border-width:0;">
+                <th style="background-color:#DDDDDD">Subject</th>
+                <th style="background-color:#DDDDFF">Creator</th>
+                <th style="background-color:#DDDDDD">Posted on</th>
+                <th style="background-color:#DDDDFF">Last post</th>
+            </tr>
+        <tal:thread repeat="thread threads">
+            <tr>
+                <td style="background-color:#DDDDDD;"> <a tal:attributes="href thread/absolute_url" tal:content="thread/title">subject</a> </td>
+                <td style="background-color:#DDDDFF;" tal:content="thread/owner" >creator</td>
+
+                <td style="background-color:#DDDDDD;text-align:center;"  tal:content="python:thread.date.strftime('%m/%d/%Y')">posted on</td>
+                <td style="background-color:#DDDDFF;text-align:center;" tal:content="python:thread.mostrecentpost().posted.strftime('%m/%d/%Y')">last post</td>
+            </tr>
+        </tal:thread>
+        </table>
+    </tal:threads>
+    <tal:addthread condition="view/allowsthreads">
+        <form action="postthread" tal:attributes="action python: '%s/postthread'%context.absolute_url()" style="display:inline">
+            <input type="submit" value="Create new thread" />
+        </form>
+        <form action="+/qi.Forum/" style="display:inline">
+            <input type="submit" value="Add subforum" />
+        </form>
+    </tal:addthread>
+    <tal:subscribe condition="python: view.user() not in context.subscribers">
+        <a href="subscribe">subscribe</a>
+    </tal:subscribe>
+    <tal:subscribe condition="python: view.user() in context.subscribers">
+        <a href="unsubscribe">unsubscribe</a>
+    </tal:subscribe>
+</div>
+</html>

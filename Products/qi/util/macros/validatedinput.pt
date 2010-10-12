@@ -1,0 +1,45 @@
+<div metal:define-macro="validatedtext">
+	<tal:wrapper define="errors python:view.getError(inputkey);
+						 fieldtext fieldtext | inputkey;
+						 required required | False;
+						 description description | string:;
+						 valueexists exists: value;
+						 value python:view.context.request.form.get(inputkey,valueexists and value or '');
+						 islargetext islargetext | python:False">
+						
+					<div tal:attributes="class python:(errors and len(errors)>0) and 'error field' or 'field'">
+						<div class="FieldTitle">
+							<label tal:attributes="for inputkey" tal:content="fieldtext">
+							</label>
+							<span class="fieldRequired" tal:condition="required">
+								(required)
+							</span>
+						</div>
+						<p class="description" tal:content="description">
+							
+						</p>
+						<ul tal:condition="python:errors and len(errors)>0">
+							<tal:errors repeat="error errors">
+								<li tal:content="error">
+								</li>
+							</tal:errors>
+						</ul>
+					
+						<tal:oneline condition="not:islargetext">
+							<input 	
+								type="text"
+								name="unnamed"
+								value=""
+								tal:attributes="
+									name inputkey;
+									value value;"
+								/>
+						</tal:oneline>
+						<tal:multiline condition="islargetext">
+							<textarea width="50" height="5" tal:attributes="name inputkey" tal:content="value">
+								this represents a text area
+							</textarea>
+						</tal:multiline>
+					</div>
+	</tal:wrapper>
+</div>

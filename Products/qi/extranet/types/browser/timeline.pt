@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="qiteamspace">
+<body>
+	
+	<div metal:fill-slot="main">
+			<h3> Project Dates </h3>
+
+		
+			<form action='.'  tal:attributes="action view/url" method="post" >
+			
+				<p tal:condition="not:view/projectTimelineExists">
+				<tal:projname content="context/title" /> does not yet have a timeline, please enter one below.
+				</p>
+		
+				<div tal:condition="view/projectTimelineExists">
+				<tal:projname content="context/title" /> starts on
+				<span tal:content="view/showStartDate">dates</span>
+				and ends on
+				<span tal:content="view/showEndDate">dates</span>.
+				
+				<br /><br />
+				<p> You may change the start or end dates of the project below. </p>
+					
+				</div>
+				
+				<fieldset>
+					<tal:startdate define="
+						inputkey string:startdate;
+						required python:True;
+						fieldtext string:Start Date;
+						description string:MM/DD/YYYY;">
+						<div metal:use-macro="context/@@inputmacro/macros/validatedtext" />
+					</tal:startdate>
+					
+					<tal:enddate define="
+						inputkey string:enddate;
+						required python:True;
+						fieldtext string:End Date;
+						description string:MM/DD/YYYY;">
+						<div metal:use-macro="context/@@inputmacro/macros/validatedtext" />
+					</tal:enddate>
+		
+				  
+				
+				<input class="context" type="submit" name="submitdates" value = "Save" />
+				
+				</fieldset>
+				
+			</form>
+					
+	</div>	
+	
+</body>
+
+</html>

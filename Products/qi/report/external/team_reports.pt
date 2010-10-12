@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+
+</head>
+
+<body>
+<div metal:fill-slot="main">       
+<h2>Reports for <tal:name content="view/context/title"></tal:name></h2>
+<table class="listing">
+    <tal:months repeat="month view/months">
+        <tr>
+            <th colspan="3">
+                <tal:monthname content="month/name" />
+                <tal:year content="month/year" />
+            </th>
+        </tr>
+            <tal:reportresults repeat="result month/results">
+                <tr>
+                <td tal:content="result/batch/report/reportname">
+                    
+                </td>
+                <td>
+                <a tal:attributes="
+        href python:'downloadfile?fileid=%i'%result.file.id;"
+                    tal:content="result/file/displayname">
+                    </a>
+                </td>
+                <td>
+                Completed at:
+                    <tal:completion content="result/batch/completiontime">
+                    
+                    </tal:completion>
+                </td>
+                </tr>
+            </tal:reportresults>
+    </tal:months>
+</table>
+</div>
+</body>
+</html>

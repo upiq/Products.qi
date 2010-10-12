@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<archetypetool>
+ <catalogmap>
+  <type portal_type="ATPathCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATBooleanCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATImage">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATTopic">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATSelectionCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATBTreeFolder">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATDocument">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATSimpleStringCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATCurrentAuthorCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATDateCriteria">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATFavorite">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATEvent">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATReferenceCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATSimpleIntCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATListCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATFolder">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATLink">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATNewsItem">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATFile">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATDateRangeCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATSortCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATRelativePathCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+  <type portal_type="ATPortalTypeCriterion">
+   <catalog value="portal_catalog"/>
+  </type>
+ </catalogmap>
+</archetypetool>

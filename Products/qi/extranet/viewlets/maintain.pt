@@ -1,0 +1,7 @@
+<div class="warning" tal:condition="not:view/alternateContent">
+The qi teamspace site will be down from 4:30 PM to 6:30 PM this afternoon for
+maintenance.  Changes made after 4:00 PM will be disabled.
+</div>
+<div tal:condition="view/alternateContent" tal:content="structure view/content">
+	CONTENT GOES HERE
+</div>

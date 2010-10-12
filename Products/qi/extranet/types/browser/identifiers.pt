@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="Products.qi">
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="name string:name;
+                type string:type;
+                nameval python:request.get(name,'');
+                baseErrors python:view.getError('base')">
+
+                
+                
+<table class="listing" tal:condition="python:len(view.getIdentifiers())>0">
+    <tr><th></th><th>Current Nicknames</th></tr>
+    <tal:identifiers repeat="identifier view/getIdentifiers">
+
+    <tr>
+		<td>
+			<form action='.' tal:attributes="action view/url" method="post">
+			<input type="image" src="delete_icon.gif" name="delimg" value="Delete" />
+			<input type = "hidden" name = "del" tal:attributes="value identifier/value"/>
+			</form>
+		</td>
+        <td tal:content="identifier/value">name </td>
+    </tr>
+    </tal:identifiers>
+</table>
+<h3 tal:condition="python:len(view.getIdentifiers())==0">
+No nicknames have been specified for this team.
+</h3>
+
+
+<form
+    action='.'
+    tal:attributes="action view/url"
+  	method="post"
+  	id="add">
+
+	<fieldset id="upload">
+		
+		<div class="field"
+ 			tal:define="error python:view.getError(name)"
+ 			tal:attributes="class python:error and 'field error' or 'field'">
+
+
+ 			<label
+   				tal:attributes="for name">Nickname
+   				<span class="fieldRequired" title="Required">
+                    (Required)
+                </span>
+   				</label>
+   	        <p class="explanation">
+   	        This is a reference that may be used in some documents
+   	         to describe your team.
+   	        </p>
+
+			<div tal:content="error">Validation error output</div>
+
+			<input type="text"
+   				tal:attributes="name name;
+   								id name;
+   								value nameval;
+   								"
+   	        />
+   	        
+        </div>
+		<div class="formControls">
+
+			<input class="context"
+   				type="submit"
+   				name="add"
+   				value="Add"
+   				/>
+
+		</div>
+
+	</fieldset>
+
+</form>
+
+</div>
+</body>
+</html>

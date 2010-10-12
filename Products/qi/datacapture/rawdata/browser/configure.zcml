@@ -1,0 +1,14 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.qi">
+
+    <browser:page
+        for="*"
+        name="ValueChanges"
+        class=".history.HistoryView"
+        template="valuehistory.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+    
+</configure>

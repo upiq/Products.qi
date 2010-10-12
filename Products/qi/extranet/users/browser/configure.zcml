@@ -1,0 +1,56 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.qi">
+    
+
+
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="members.html"
+        class=".managemembers.TeamMembersView"
+        template="manage_members.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+	
+	<browser:page
+	    for="Products.qi.extranet.types.interfaces.IProject"
+		name="userlist.html"
+	    class=".userlist.UserList"
+	    template="userlist.pt"
+	    permission="cmf.ModifyPortalContent"
+	    />
+	
+	<browser:page
+	    for="Products.qi.extranet.types.interfaces.ITeam"
+		name="userlist.html"
+	    class=".userlist.UserList"
+	    template="userlist.pt"
+	    permission="cmf.ModifyPortalContent"
+	    />
+
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.ITeam"
+        name="members.html"
+        class=".managemembers.TeamMembersView"
+        template="manage_members.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+    
+
+    <browser:page
+	    for="*"
+		name="updatestatus.html"
+	    class=".usertracker.UserTracker"
+	    permission="zope2.View"
+	    />
+    
+	
+	<browser:page
+	    for="*"
+		name="currentusers.html"
+	    class=".currentusers.CurrentUsers"
+	    template="currentusers.pt"
+	    permission="cmf.ModifyPortalContent"
+	    />
+</configure>

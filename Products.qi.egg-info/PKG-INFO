@@ -1,0 +1,30 @@
+Metadata-Version: 1.0
+Name: Products.qi
+Version: trunk-
+Summary: QIWorkspace
+Home-page: http://ursadev.user.openhosting.com/qiworkspace
+Author: Ursa Logic Corporation
+Author-email: mailto:qiworkspace-dev@ursa3.user.openhosting.com
+License: Proprietary
+Description: Products.qi README
+        ==================
+        
+        This product defines the site configuration for the Plone portion
+        of QITeamspace.
+        
+        
+        Products.qi Changelog
+        =====================
+        
+        release-1.1 (unreleased)
+        ------------------------
+        
+        - Added dynamic view support to the 'qiproject' and 'qiteam' content types.
+        
+        release-1.0 (2008-02-20)
+        ------------------------
+        
+        - Version demonstrated on February 20.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python

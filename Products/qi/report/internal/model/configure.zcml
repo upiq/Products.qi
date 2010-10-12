@@ -1,0 +1,49 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="Products.qi">
+
+	<permission
+        id="qi.AddChart"
+        title="Add Feedback Charts"
+        />
+
+	<five:registerClass
+	    class=".content.Chart"
+	    meta_type="qichart"
+	    permission="Products.qi.AddTeam"
+	    addview="qi.Chart"
+	    icon="chart_icon.png"
+	    />
+
+    <utility
+        component=".content.chartFactory"
+        name="qi.Chart"
+        />
+
+    <utility
+        component=".vocabularies.Measures"
+        provides="zope.app.schema.vocabulary.IVocabularyFactory"
+        name="qi.vocab.Measures"
+        />
+
+    <utility
+        component=".vocabularies.DerivedMeasures"
+        provides="zope.app.schema.vocabulary.IVocabularyFactory"
+        name="qi.vocab.DerivedMeasures"
+        />
+        
+    <utility
+        component=".vocabularies.ChartDates"
+        provides="zope.app.schema.vocabulary.IVocabularyFactory"
+        name="qi.vocab.ChartDates"
+        />
+
+    <utility
+        component=".vocabularies.Teams"
+        provides="zope.app.schema.vocabulary.IVocabularyFactory"
+        name="qi.vocab.Teams"
+        />
+</configure>

@@ -1,0 +1,144 @@
+
+a.navTreeCurrentItem:click {
+    action-server: responseexample;
+}
+
+.addlist:click
+{
+    action-server: addMailingList;
+    addMailingList-listname: currentFormVar("listname");
+    addMailingList-description: currentFormVar("newdescription");
+}
+
+.mailinglistexpandable:click
+{
+    action-server: showmembers;
+    showmembers-listid: currentFormVar("listid");
+    showmembers-expanded: currentFormVar("expanded");
+    action-server: hidemembers;
+    hidemembers-listid: currentFormVar("listid");
+    hidemembers-expanded: currentFormVar("expanded");
+    action-server: switchstate;
+    switchstate-target: currentFormVar("listid");
+    switchstate-expanded: currentFormVar("expanded");
+}
+
+.addgroup:click
+{
+    action-server: addgroup;
+    addgroup-listid: currentFormVar("listid");
+    addgroup-groupids: currentFormVar("availablegroups");
+    action-server: showmembers;
+    showmembers-listid: currentFormVar("listid");
+    showmembers-expanded: 0;
+}
+
+.removegroup:click
+{
+    action-server: removegroup;
+    removegroup-listid: currentFormVar("listid");
+    removegroup-groupids: currentFormVar("removegroups");
+    action-server: showmembers;
+    showmembers-listid: currentFormVar("listid");
+    showmembers-expanded: 0;
+}
+
+input.listupdate:click
+{
+    action-server: updatelist;
+    updatelist-replyable: currentFormVar("replyable");
+    updatelist-joinable: currentFormVar("joinable");
+    updatelist-listid: currentFormVar("listid");
+}
+
+
+input.addusers:click
+{
+    action-server: addusers;
+    addusers-kssSubmitForm: currentForm();
+    action-server: showmembers;
+    showmembers-listid: currentFormVar("listid");
+    showmembers-expanded: 0;
+}
+
+input.removeusers:click
+{
+    action-server: removeusers;
+    removeusers-kssSubmitForm: currentForm();
+    action-server: showmembers;
+    showmembers-listid: currentFormVar("listid");
+    showmembers-expanded: 0;
+}
+
+
+input.addteams:click
+{
+    action-server: addteams;
+    addteams-kssSubmitForm: currentForm();
+    action-server: showmembers;
+    showmembers-listid: currentFormVar("listid");
+    showmembers-expanded: 0;
+}
+
+
+input.savedesc:click
+{
+    action-server: setdesc;
+    setdesc-kssSubmitForm: currentForm();
+}
+
+input.removeteams:click
+{
+    action-server: removeteams;
+    removeteams-kssSubmitForm: currentForm();
+    action-server: showmembers;
+    showmembers-listid: currentFormVar("listid");
+    showmembers-expanded: 0;
+}
+
+
+div.available:click
+{
+    action-server: subscribeto;
+    subscribeto-listid: currentFormVar("listid");
+}
+
+div.joined:click
+{
+    action-server: unsubscribeto;
+    unsubscribeto-listid: currentFormVar("listid");
+}
+
+
+div.subupdate:click
+{
+    action-server: updatesubscribe;
+}
+
+
+.memberupdate:click
+{
+    action-server: showmembers;
+    showmembers-listid: currentFormVar("listid");
+    showmembers-expanded: 0;
+}
+
+.getthreads:click
+{
+    action-server: getthreads;
+    getthreads-listid: currentFormVar("listid");
+    action-server: emptymessages;
+    
+}
+
+.getmessages:click 
+{
+    action-server: getmessages;
+    getmessages-threadid: currentFormVar("threadid");
+}
+
+
+td.holder:click
+{
+
+}

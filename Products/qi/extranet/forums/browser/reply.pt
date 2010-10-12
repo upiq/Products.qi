@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/general/macros/master"
+      i18n:domain="Products.qi">
+    <head metal:fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="++resource++forumutils.js">
+
+        </script>
+    </head>
+    <div metal:fill-slot="main">
+        <tal:errors define="errors view/getErrors" condition="errors">
+            <div class="error">
+                <h3>The following errors occured</h3>
+                <ul>
+                    <li tal:repeat="error errors" tal:content="error" />
+                </ul>
+            </div>
+        </tal:errors>
+        <form method="POST" enctype="multipart/form-data">
+            <h4>Reply to <tal:threadtitle content="context/title" /></h4>
+            <textarea name="postbody" style="width:625px;height:250px;"></textarea>
+            <div id="attachments">
+            </div>
+            <input type="button" value="add attachment" onclick="addattachment()"/><br />
+            <input type="submit" name="post" value="Post Reply" />
+        </form>
+    </div>
+</html>

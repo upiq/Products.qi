@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="here/main_template/macros/master"
+    i18n:domain="qiteamspace">
+<div metal:fill-slot="main">
+    <ul>
+    <li><a tal:attributes="href python: '%s/datasummary.html'%context.absolute_url()">back to form status</a></li>
+    <li><a tal:attributes="href python: '%s/excelroster'%context.absolute_url()">download as excel file</a></li>
+    </ul>
+    <h2>
+        Team Roster Report
+    </h2>
+    <p>
+        The below table shows an overview of data submission by all teams in <tal:name content="context/title" />
+    </p>
+    <table class="listing">
+        <tr>
+            <th tal:repeat="index view/indices" tal:content="index" />
+        </tr>
+        <tal:teams repeat="team view/teams">
+            <tr>
+                <td tal:repeat="data team"> <a tal:define="href python:getattr(data, 'href',None)" tal:content="data" 
+                    tal:attributes="href href" tal:omit-tag="not:href"/> </td>
+            </tr>
+        </tal:teams>
+    </table>
+</div>
+</html>

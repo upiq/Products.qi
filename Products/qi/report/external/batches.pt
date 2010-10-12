@@ -1,0 +1,53 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+
+</head>
+
+<body>
+<div metal:fill-slot="main"
+	tal:define="report view/report;
+	           ">   
+	<h2>Results Log for <tal:reportname content="report/reportname" /></h2>
+	<a href="reports.html">Return to Report List</a>
+	<p class="description">
+		The table below shows all previous runs for this report. 
+		Click the completion date to view the files produced by a particular run.
+	</p>
+    <table class="listing">
+        <tr>
+            <th>
+                Completion date
+            </th>
+			<th>
+				Count of files produced
+			</th>
+            <th>
+                Viewable By
+            </th>
+        </tr>
+        <tal:batches repeat="batch python:report.reportbatch_set.all().order_by('completiontime')">
+            <tr>
+
+                <td> <a tal:attributes="href python:'approve?id=%i'%batch.id"
+	 					tal:content="python:view.niceifydt(batch.completiontime)" />
+                </td>
+                <td tal:content="python:len(batch.reportfile_set.all())" />
+                <td tal:define="
+                    color python:batch.approvalstate and 'Green' or 'Red'">
+                    <font tal:attributes="color color"
+        tal:content="python:batch.approvalstate and 'Distribution Lists' or 'Project Manager'">
+                    </font>
+                </td>
+            </tr>
+        </tal:batches>
+    </table>
+</div>
+</body>
+</html>

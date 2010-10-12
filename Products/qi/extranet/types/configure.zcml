@@ -1,0 +1,86 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="Products.qi">
+
+
+
+    <five:registerClass
+        class=".project.Project"
+        meta_type="qiproject"
+        permission="Products.qi.AddProject"
+        addview="Products.qi.Project"
+        icon="qiproject_icon.png"
+        />
+
+    <five:registerClass
+        class=".team.Team"
+        meta_type="qiteam"
+        permission="Products.qi.AddTeam"
+        addview="Products.qi.Team"
+        icon="qiproject_icon.png"
+        />
+
+    <five:registerClass
+        class=".subteam.SubTeam"
+        meta_type="qisubteam"
+        permission="Products.qi.AddTeam"
+        addview="Products.qi.SubTeam"
+        icon="qiproject_icon.png"
+        />
+        
+    <utility
+        component=".project.projectFactory"
+        name="Products.qi.Project"
+        />
+
+    <utility
+        component=".team.teamFactory"
+        name="Products.qi.Team"
+        />
+    <utility
+        component=".subteam.subTeamFactory"
+        name="Products.qi.SubTeam"
+        />
+
+    <utility
+        component=".vocabularies.globally_allowed_types"
+        provides="zope.app.schema.vocabulary.IVocabularyFactory"
+        name="Products.qi.AddableTypes"
+        />
+ 
+    <utility
+        component=".vocabularies.public_skins"
+        provides="zope.app.schema.vocabulary.IVocabularyFactory"
+        name="Products.qi.Skins"
+        />
+       
+    <utility
+        component=".vocabularies.getUploadableTypes"
+        provides="zope.app.schema.vocabulary.IVocabularyFactory"
+        name="Products.qi.UploadableTypes"
+        />
+
+    <class class=".project.Project">
+        
+        <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
+        <implements interface="Products.qi.datacapture.file.interfaces.IImportable" />
+        <implements interface="plone.app.layout.navigation.interfaces.INavigationRoot" />
+    </class>
+    <class class=".team.Team">
+        <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
+        <implements interface="Products.qi.datacapture.file.interfaces.IImportable" />
+    </class>
+    <class class=".subteam.SubTeam">
+        <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
+        <implements interface="Products.qi.datacapture.file.interfaces.IImportable" />
+    </class>
+
+
+
+    
+    <include package=".browser" />
+    <include package=".handlers" />
+</configure>

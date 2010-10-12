@@ -1,0 +1,17 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="Products.qi">
+
+    <include package=".subscribe" />
+    <include package=".archives" />
+    <!--<include package=".manage" /> -->
+    <include package=".send" />
+    <include package=".cleanmanage" />
+        
+    <browser:resource
+        file="mail.kss"
+        name="mail.kss"
+        />
+        
+</configure>

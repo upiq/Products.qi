@@ -1,0 +1,42 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+    <browser:page
+        for="zope.app.container.interfaces.IAdding"
+        name="qi.ChartHolder"
+        class=".holder.AddForm"
+        permission="cmf.ModifyPortalContent"
+        />
+        
+    <browser:page
+        for="Products.qi.report.internal.complex.interfaces.IChartHolder"
+        name="edit"
+        class=".holder.EditForm"
+        permission="cmf.ModifyPortalContent"
+        />
+    <browser:resource
+        name="translucent.png"
+        image="translucent.png"
+        />
+    <browser:addMenuItem
+        title="qi.ChartHolder"
+        factory="qi.ChartHolder"
+        view="qi.ChartHolder"
+        permission="cmf.ModifyPortalContent"
+        />
+        
+    <browser:page
+        for="Products.qi.report.internal.complex.interfaces.IChartHolder"
+        name="view"
+        class=".holder.ChartPresentation"
+        template="showcharts.pt"
+        permission="zope2.View"
+        />
+    <browser:page
+        for="Products.qi.report.internal.complex.interfaces.IChartHolder"
+        name="design"
+        class=".holder.AssignCharts"
+        template="design.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+</configure>

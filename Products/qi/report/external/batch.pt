@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+
+</head>
+
+<body>
+<div metal:fill-slot="main"
+	tal:define="batch view/batch;
+	           ">       
+<h3>Results for 
+    <tal:reportname tal:content="batch/report/reportname" /> 
+    at
+    <tal:reporttime tal:content="python:view.niceifydt(batch.completiontime)" />
+</h3>
+	Return to <a tal:attributes="href python:'ReportBatches?reportid=%i'%batch.report.id">Result log</a>.
+	<p class="description">
+		The table below lists all files produced by 
+			<tal:reportname tal:content="batch/report/reportname" /> 
+		    at
+		    <tal:reporttime tal:content="python:view.niceifydt(batch.completiontime)" />.
+		Use the radio buttons below the select who can view these files.
+		Click the filename to view or download a result file.
+	</p>
+    <table class="listing">
+        <tr>
+            <th>
+            File
+            </th>
+            <th>
+            Distribution List
+            </th>
+        </tr>
+        <tal:files repeat="rfile batch/reportfile_set/all">
+        <tr tal:define="odd repeat/rfile/odd"
+         tal:attributes="class python:odd and 'odd' or 'even'">
+            <td tal:define="file rfile/file">
+                <a href="download"
+                    tal:attributes="
+                    href python:'downloadfile?fileid=%i'%file.id"
+                    tal:content="file/displayname">
+                    Filename
+                </a>
+            </td>
+			<td>
+                <tal:projectonly 
+                    condition="python: rfile.team is None">
+                    Project
+                </tal:projectonly>
+                <tal:team 
+                    condition="python: rfile.team is not None"
+                    content="rfile/team/name">
+                    Team name
+                </tal:team>
+            </td>
+
+        </tr>
+        </tal:files>
+    </table>
+    <form
+        action="." method="post"
+        tal:attributes="action view/url">
+		<fieldset>
+        <input type="hidden" name="id" value="batch/id" 
+            tal:attributes="value batch/id" />
+		<tal:radio tal:define="public batch/approvalstate">
+
+			<legend>View options</legend>
+		<input type="radio" name="approval" value="private" tal:attributes="checked not:public" />
+			Only project managers can view these files.
+			<br/>
+		<input type="radio" name="approval" value="public" tal:attributes="checked public" />
+			Members in the distribution lists shown above can view these files.
+			<br/>
+		</tal:radio>
+        <input type="submit" value="Change State"
+            name="ChangeState"
+            />
+		</fieldset>
+    </form>
+</div>
+</body>
+</html>
