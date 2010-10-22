@@ -310,7 +310,7 @@ class StateRule(FunctionRule):
     functionName='state'
     def runValidation(self,value,otherMeasures):
         try:
-            value=str(value)
+            value=str(value).strip()
         except:
             self.message='%s is not a state'%value
             return 10

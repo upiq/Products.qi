@@ -153,8 +153,8 @@ class DetailView(BrowserPlusView):
     def teams(self):
         dbproj,dbteam=self.getDBProjectTeam()
         if dbteam is not None:
-            result= [p for p in dbteam.team_set.all()]
-            result.append(dbteam)
+            result= dbteam.team_set.all()
+            result= result | DB.Team.objects.filter(id=dbteam.id)
         else:
             result = dbproj.team_set.all()
         if dbproj.hideinactiveteams : result = result.filter(active=True)
