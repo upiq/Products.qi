@@ -46,9 +46,10 @@ class ReportPage(BrowserPlusView):
 class AddReportForm(BrowserPlusView):
     processFormButtons=('add',)
     def allProjects(self):
-        catalog=self.context.portal_catalog
-        brains=catalog.searchResults(meta_type='qiproject')
-        return [brain.getObject() for brain in brains]
+        return DB.Project.objects.all()
+        #catalog=self.context.portal_catalog
+        #brains=catalog.searchResults(meta_type='qiproject')
+        #return [brain.getObject() for brain in brains]
         
         
     

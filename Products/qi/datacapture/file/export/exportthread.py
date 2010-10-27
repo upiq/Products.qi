@@ -11,8 +11,8 @@ from ZODB import FileStorage, DB as ZopeDB
 """
 from Products.qi.datacapture.file.export.exportthread import XMLExportThread as X
 from qi.sqladmin import models as DB
-query=DB.MeasurementValue.objects.filter(team__project__id=1)
-t=X(query,'/qiteamspace/project1')
+query=DB.MeasurementValue.objects.filter(team__project__id=1, team__active=True)
+t=X(query,'/qiteamspace/ipip/')
 from datetime import datetime
 start=datetime.now()
 print t.fastbuild(query)
@@ -45,7 +45,8 @@ class XMLExportThread(Thread):
         self.context.exportprogress=0
         self.context.exporttarget=self.target
         transaction.commit()
-        result= "<dataset>\n"+self.buildseries(self.query)+"\n</dataset>"
+        #result= "<dataset>\n"+self.buildseries(self.query)+"\n</dataset>"
+        result=self.fastbuild(self.query)
         transaction.abort()
         self.context.exportingXML=False
         self.context.lastexport=result
@@ -66,6 +67,7 @@ class XMLExportThread(Thread):
         measure=None
         self.itemdateXML=None
         itemdate=None
+        lastmeasure=None
         self.xmlDoc=impl.createDocument(None, "dataset", None)
         self.datasetXML=self.xmlDoc.documentElement
         for record in query:
@@ -78,7 +80,10 @@ class XMLExportThread(Thread):
                 measure=None
                 self.addTeamNode(team, record)
             if record.measure!=measure:
+                self.fixMeasure(lastmeasure)
                 measure=record.measure
+                #doubling up this tracking variable so we can clean up more easily
+                lastmeasure=measure
                 itemdate=None
                 self.addMeasureNode(measure,record)
             if record.measure.userdefined and record.measure.userdefined.find('excludeXML')>-1:
@@ -89,7 +94,22 @@ class XMLExportThread(Thread):
             self.addValueNode(record)
         return self.xmlDoc.toprettyxml()
 
-        
+    def fixMeasure(self,measure):
+        if self.measureXML is None:
+            return
+        maxdate=None
+        if measure.userdefined and measure.userdefined.find('forceperiod')>-1:
+            found=re.search('forceperiod\\((.*)\\)', measure.userdefined)
+            if found:
+                override=datetime(*time.strptime(found.group(1),"%m-%d-%Y")[:3])
+                count=0
+                for reportPeriod in self.measureXML.childNodes:
+                    if count==0:
+                        reportPeriod.setAttribute('name',override.strftime("%Y-%m-%d"))
+                    else:
+                        self.measureXML.removeChild(reportPeriod)
+                    count+=1
+            
     def addSeriesNode(self,series, record):
         self.seriesXML=self.xmlDoc.createElement('series')
         if record.series is None:
@@ -114,15 +134,7 @@ class XMLExportThread(Thread):
         self.teamXML.appendChild(self.measureXML)
     def addPeriodNode(self,period, record):
         self.itemdateXML=self.xmlDoc.createElement('reportperiod')
-        if record.measure.userdefined and record.measure.userdefined.find('forceperiod')>-1:
-            measure=record.measure
-            found=re.search('forceperiod\\((.*)\\)', measure.userdefined)
-            if found:
-                override=datetime(*strptime(found.group(1),"%m-%d-%Y")[:3])
-            else:
-                #FIXME record dates and clear them through a measure
-                #painful, but necessary for the NC->National direction
-                pass
+
         self.itemdateXML.setAttribute('name',record.itemdate.strftime("%Y-%m-%d"))
         self.measureXML.appendChild(self.itemdateXML)
     def addValueNode(self, record):
@@ -188,7 +200,7 @@ class XMLExportThread(Thread):
                 subset=subset.filter(itemdate=lastdate)
                 found=re.search('forceperiod\\((.*)\\)', measure.userdefined)
                 if found:
-                    override=datetime(*strptime(found.group(1),"%m-%d-%Y")[:3])
+                    override=datetime(*time.strptime(found.group(1),"%m-%d-%Y")[:3])
                 else:
                     override=latestdate
             else:

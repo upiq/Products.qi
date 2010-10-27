@@ -64,7 +64,7 @@
 
 
              <label i18n:translate="label_uploadtype_name"
-                   tal:attributes="for localname">Available</label>
+                   tal:attributes="for localname">Data Format</label>
 
             <div><tal:errors repeat="error errors">
                 <div tal:content="error">Validation error output</div>
