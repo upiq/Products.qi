@@ -10,7 +10,7 @@
             </h3>
             <dl>
                 <tal:reportresults repeat="result month/results">
-                <dt tal:content="result/batch/report/reportname">
+                <dt tal:content="result/batch/report/displayname">
                     
                 </dt>
                 <dd>

@@ -22,7 +22,7 @@
         </tr>
             <tal:reportresults repeat="result month/results">
                 <tr>
-                <td tal:content="result/batch/report/reportname">
+                <td tal:content="result/batch/report/displayname">
                     
                 </td>
                 <td>

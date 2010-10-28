@@ -62,6 +62,7 @@ class AddReportForm(BrowserPlusView):
     def validate(self, form):
         self.requiredAvailable(DB.ReportTrigger.objects.all(), 'reportname',
             'reportname','report name')
+        self.required('displayname')
         self.requiredInTable(DB.Project.objects.all(),'projectid', 'Project')
     
     def action(self, form, action):
@@ -70,6 +71,7 @@ class AddReportForm(BrowserPlusView):
         name=form['reportname']
         created=DB.ReportTrigger()
         created.reportname=name
+        created.displayname=form['displayname']
         created.project=project
         created.reportstate=0
         created.save()

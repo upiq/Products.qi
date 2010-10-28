@@ -14,14 +14,14 @@
 	tal:define="batch view/batch;
 	           ">       
 <h3>Results for 
-    <tal:reportname tal:content="batch/report/reportname" /> 
+    <tal:reportname tal:content="batch/report/displayname" /> 
     at
     <tal:reporttime tal:content="python:view.niceifydt(batch.completiontime)" />
 </h3>
 	Return to <a tal:attributes="href python:'ReportBatches?reportid=%i'%batch.report.id">Result log</a>.
 	<p class="description">
 		The table below lists all files produced by 
-			<tal:reportname tal:content="batch/report/reportname" /> 
+			<tal:reportname tal:content="batch/report/displayname" /> 
 		    at
 		    <tal:reporttime tal:content="python:view.niceifydt(batch.completiontime)" />.
 		Use the radio buttons below the select who can view these files.

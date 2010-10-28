@@ -14,7 +14,7 @@
 <div metal:fill-slot="main"
 	tal:define="report view/report;
 	           ">   
-	<h2>Results Log for <tal:reportname content="report/reportname" /></h2>
+	<h2>Results Log for <tal:reportname content="report/displayname" /></h2>
 	<a href="reports.html">Return to Report List</a>
 	<p class="description">
 		The table below shows all previous runs for this report. 

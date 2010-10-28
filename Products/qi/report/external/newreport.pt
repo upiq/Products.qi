@@ -11,6 +11,7 @@
 <div metal:fill-slot="main"
     tal:define="  projectid string:projectid;
  	              reportname string:reportname;
+ 	              displayname string:displayname;
  	              baseErrors python:view.getError('base')">
  	              
     <div tal:condition="baseErrors" class="error">
@@ -73,6 +74,27 @@
 
  			<label i18n:translate="label_uploadtype_name"
    				tal:attributes="for localname">Report name</label>
+
+            <div><tal:errors repeat="error errors">
+                <div tal:content="error">Validation error output</div>
+            </tal:errors></div>
+
+			<input type="text"
+   				tal:attributes="name localname;
+   								id localname;
+   								value localvalue"
+   	        />
+        </div>
+        
+        <div class="field"
+ 			tal:define="localname displayname;
+ 			            errors python:view.getError(localname);
+   			            localvalue python:request.get(localname, '')"
+ 			tal:attributes="class python:errors and 'field error' or 'field'">
+
+
+ 			<label i18n:translate="label_uploadtype_name"
+   				tal:attributes="for localname">Display name</label>
 
             <div><tal:errors repeat="error errors">
                 <div tal:content="error">Validation error output</div>

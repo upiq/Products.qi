@@ -31,7 +31,7 @@
             tal:define="oddrow repeat/report/odd;"
             tal:attributes="class python:oddrow and 'odd' or 'even'">
                 <td> 
-					<a tal:content="report/reportname" tal:attributes="href python:'ReportBatches?reportid=%i'%report.id" />
+					<a tal:content="report/displayname" tal:attributes="href python:'ReportBatches?reportid=%i'%report.id" />
 				</td>
                 <td tal:content="python:view.niceifydt(report.lasttriggertime)" />
               	<td tal:content="python:view.status(report.reportstate)" />
