@@ -5,21 +5,26 @@ import datetime
 from Products.qi.util import utils
 from calendar import month_name
 
+formformat="""
+<form
+action="%s"
+method="post">
+<input type=hidden name="reportid" value="%i"/>
+Not running
+<input type="button" class="reportrunner" value="run" />
+</form>
+"""
+
 def getReportStatus(report, url):
     if report.reportstate==0:
-        return """
-            <form
-            action="%s"
-            method="post">
-            <input type=hidden name="reportid" value="%i"/>
-            Not running
-            <input type="button" class="reportrunner" value="run" />
-            </form>
-            """%(url, report.id)
+        return formformat%(url, report.id)
+    elif report.reportstate==-1:
+        return "<b>Report failed on previous run</b><br/>"+formformat%(url,report.id)
     else:
         value={1:'Waiting to be run',
              2:'Running',
-             3:'Delivering'}.get(report.reportstate, 'Unknown State')
+             3:'Delivering',
+             }.get(report.reportstate, 'Unknown State')
         result= """
             <form>
             <input type=hidden name="reportid" value="%i"/>
@@ -38,7 +43,8 @@ class ReportPage(BrowserPlusView):
         return dbproj.reporttrigger_set.all()
     
     def status(self, value):
-        return {0:'Not running',
+        return {-1:'Report failed on previous run',
+                0:'Not running',
                 1:'Waiting to be run',
                 2:'Running',
                 3:'Delivering'}.get(value, 'Unknown State')
