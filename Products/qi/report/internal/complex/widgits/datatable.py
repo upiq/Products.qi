@@ -14,6 +14,11 @@ from datetime import datetime
 
 from Products.qi.report.internal.complex.filter.filter import AllFiltered
 
+class ResultVal:
+    def __init__(self, value, note):
+        self.value=value
+        self.note=note
+
 class Widgit(Container, AllFiltered):
     widgitname='generic widgit'
     implements(IWidgit)
@@ -47,10 +52,39 @@ class Widgit(Container, AllFiltered):
     
 
             
-                
-
-        
+    def populatevalues(self):
+        alldatadict={}
+        for measure in self.measures():
+            measuredict={}
+            alldatadict[measure]=measuredict
+            for team in self.teams():
+                teamdict=self.buildline(measure, team)
+                measuredict[team]=teamdict
+                #TODO get the values packed in, hopefully with a minimum of computation
+            
+        self.REQUEST['measures']=alldatadict
+    def buildline(self,measure, team):
+        if isinstance(team,AggregateStandIn):
+            if not team.team:
+                records=measure.getValues(aggregate=team.agg, project_id=team.proj.id)
+            else:
+                records=measure.getValues(team_id=team.team.id,aggregate=team.agg)
+        else:
+            records=measure.getValues(team_id=team.id)
+        result={}
+        for period,note,value in records:
+            
+            result[period]=ResultVal(value, note)
+        return result
+            
     def valuefor(self, measure,team,date):
+        request=self.REQUEST
+        #print request.get('measures','fake result')
+        
+        if not request.get('measures',None):
+            self.populatevalues()
+        return request.get('measures',{}).get(measure,{}).get(team,{}).get(date,ResultVal(None,None)).value
+        #return request.get('measures').get(measure,{}).get(team,{}).get(date,None)
         if isinstance(measure,DB.Measure):
             #simple case return straight from db
             if isinstance(team, AggregateStandIn):
@@ -75,6 +109,12 @@ class Widgit(Container, AllFiltered):
             else:
                 return measure.newGetValue(team, date,  self.perseverate)
     def notefor(self, measure, team, date):
+        request=self.REQUEST
+        #print request.get('measures','fake result')
+        
+        if not request.get('measures',None):
+            self.populatevalues()
+        return request.get('measures',{}).get(measure,{}).get(team,{}).get(date,ResultVal(None,None)).note
         if isinstance(measure,DB.Measure):
             #simple case return straight from db
             if isinstance(team, AggregateStandIn):

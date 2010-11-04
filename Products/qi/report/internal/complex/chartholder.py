@@ -32,6 +32,8 @@ class AggregateStandIn:
         else:
             self.id='%s'%( self.agg)
             self.name='%s'%( aggnames[self.agg])
+    def __hash__(self):
+        return hash(self.proj)+ hash(self.team)+hash(self.agg)
     def __cmp__(self, other):
         if type(other)==CurrentTeamStandIn:
             #always let [current team] go in front
