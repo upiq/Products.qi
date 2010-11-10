@@ -1,9 +1,6 @@
 import os
 here = os.path.split(__file__)[0]
 
-from ez_setup import use_setuptools
-use_setuptools()
-
 from setuptools import setup, find_packages
 
 def _readFile(filename):
@@ -20,12 +17,15 @@ setup(name='Products.qi',
       long_description='\n\n'.join((README, CHANGES)),
       classifiers=[
         "Programming Language :: Python",
+        "Framework :: Plone",
+        "Framework :: Zope2",
+        "License :: OSI Approved :: GNU General Public License (GPL)",
         ],
       keywords = '',
       author = 'Ursa Logic Corporation',
       author_email='mailto:qiworkspace-dev@ursa3.user.openhosting.com',
-      url='http://ursadev.user.openhosting.com/qiworkspace',
-      license='Proprietary',
+      url='http://launchpad.net/qiteamspace',
+      license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['Products'],
       include_package_data=True,
