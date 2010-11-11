@@ -16,7 +16,11 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
 
-from plone.app.portlets.portlets import feedparser
+try:
+    import feedparser
+except ImportError:
+    from plone.app.portlets.portlets import feedparser
+
 import time, socket
 
 from DateTime import DateTime
