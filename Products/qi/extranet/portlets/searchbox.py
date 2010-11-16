@@ -24,8 +24,8 @@ class SearchBoxViewlet(ViewletBase):
                                             name=u'plone_portal_state')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
-
-        self.portal_url = portal_state.portal_url()
+        
+        self.site_url = portal_state.portal_url()
 
         props = getToolByName(self.context, 'portal_properties')
         livesearch = props.site_properties.getProperty('enable_livesearch', False)

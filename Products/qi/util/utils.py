@@ -1,10 +1,17 @@
+import os
+import re
+
 from Products.CMFCore.utils import getToolByName 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.qi.util.logger import logger
+
 from qi.sqladmin import models as DB
 from general import BrowserPlusView
-import  re
+from Products.qi.util.logger import logger
 from Products.qi.extranet.types import project, team
+from Products.qi.util.config import PathConfig
+
+SQLPATH = PathConfig().get('sql', 'src/sql') 
+
 
 def getProjectsInContext(context):
     #check is project(return?)
@@ -381,7 +388,8 @@ testquery("ProjAggChartLine",project_id=1, percentage_id=1, func='max')
 testquery("formdates", project_id=31, form_id=13)
 """
 def testquery(query, **kw):
-    querytext=open("src/sql/paramqueries/%s.sql"%query).read()
+    queryfile = open(os.path.join(SQLPATH, 'paramqueries/%s.sql' % query))
+    querytext=queryfile.read()
     from django.db import connection, transaction
     
 
