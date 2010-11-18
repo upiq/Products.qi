@@ -25,6 +25,12 @@ def loadcfg():
         _prod_cfg_locked = False
 
 
+def getcfg():
+    if not _prod_cfg:
+        loadcfg()
+    return _prod_cfg
+
+
 class PathConfig(object):
     """
     get a configured path by name (prefixed with paths.") from Product
