@@ -18,7 +18,7 @@ from Products.CMFCalendar.permissions import ManagePortal
 
 #override the two values we care about
 class QICalendarTool(BaseModule.CalendarTool):
-    def getEventsForCalendar(self, month='1', year='2002',project=None):
+    def getEventsForCalendar(self, month='1', year='2002', **kw):
         """ recreates a sequence of weeks, by days each day is a mapping.
             {'day': #, 'url': None}
         """
@@ -32,8 +32,9 @@ class QICalendarTool(BaseModule.CalendarTool):
         #  [28, 29, 30, 31, 0, 0, 0]]
         daysByWeek = self._getCalendar().monthcalendar(year, month)
         weeks = []
-
-        events = self.catalog_getevents(year, month,project)
+        
+        project = kw.get('project', None)
+        events = self.catalog_getevents(year, month, project)
 
         for week in daysByWeek:
             days = []
