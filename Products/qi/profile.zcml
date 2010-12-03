@@ -4,7 +4,9 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
-    
+
+
+    <!-- ## DISABLED BASE PROFILE, REMOVED IN FAVOR OF EXTENSION ##
     <genericsetup:registerProfile
         name="baseline"
         title="QI TeamSpace Site Policy Baseline"
@@ -13,7 +15,16 @@
         provides="Products.GenericSetup.interfaces.BASE"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         />
-        
+    -->
+    
+    <genericsetup:registerProfile
+        name="default"
+        title="QI TeamSpace Site Policy"
+        directory="profiles/default"
+        description="QI TeamSpace extension profile."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+    
     <!-- install custom filesystem directory view -->
     <cmf:registerDirectory
         name="Qi-Images"/>
