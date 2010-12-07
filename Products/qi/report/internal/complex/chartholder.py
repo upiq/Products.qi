@@ -12,10 +12,11 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from qi.sqladmin import models as DB
 
 from Products.qi.report.internal.complex.rows.row import rowfactory
-
+from Products.qi.util.utils import PLONE_VERSION
 
 
 from Products.qi.report.internal.complex.rows.interfaces import IChartRow
+
 
 class AggregateStandIn:
     #this is designed to stand in for a team for all the ways we use one in this charting system
@@ -128,8 +129,9 @@ def sortrow(a,b):
 
 
 class ChartHolder(BrowserDefaultMixin, OrderSupport, Container):
-    __implements__ = (BrowserDefaultMixin.__implements__ +
-                      (OrderSupport.__implements__,))
+    if PLONE_VERSION == 3:
+        __implements__ = (BrowserDefaultMixin.__implements__ +
+                         (OrderSupport.__implements__,))
     implements(IChartHolder,)
     title=""
     description=""

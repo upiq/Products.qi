@@ -6,12 +6,7 @@ from ZODB.POSException import ConflictError
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 
-try: 
-    # Plone 4 and higher 
-    import plone.app.upgrade 
-    PLONE_VERSION = 4 
-except ImportError: 
-    PLONE_VERSION = 3
+from Products.qi.util.utils import PLONE_VERSION
 
 
 class ContactView(BrowserPlusView):

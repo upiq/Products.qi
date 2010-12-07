@@ -10,12 +10,15 @@ from datetime import datetime
 from Acquisition import aq_self
 from Products.CMFDefault.interfaces import IFile
 
+from Products.qi.util.utils import PLONE_VERSION
+
 
 class Forum(Container,BrowserDefaultMixin):
     portal_type="qi.Forum"
     subscribers=set()
     implements(IForum,INameFromTitle, ISubscribable)
-    __implements__=BrowserDefaultMixin.__implements__
+    if PLONE_VERSION == 3:
+        __implements__=BrowserDefaultMixin.__implements__
     lastemail=None
     def __init__(self):
         self.lastemail=datetime.now()
