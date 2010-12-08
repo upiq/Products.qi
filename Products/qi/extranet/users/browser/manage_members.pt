@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
@@ -112,7 +114,7 @@
 						</tal:login>
 					</span>
 					<span tal:condition="python:view.isUserOnline(member['id'])">
-						<img src="user.gif" alt="User Online">
+						<img src="user.gif" alt="User Online" />
 						Online
 					</span>
 				</li>
@@ -163,7 +165,7 @@
 
   <input type="submit" 
         tal:condition="python: 'users.search' in request.form and results"
-        id="add_selected_users" DISABLED
+        id="add_selected_users" disabled="disabled"
         name="add_selected_users" value="Add selected users" />
   </fieldset>
  </form>

@@ -18,7 +18,7 @@
         <tal:teams repeat="team context/getDBProject/team_set/all">
             <div>
                 <span tal:content="team/name" />
-                <textarea width="10" height"50" 
+                <textarea width="10" height="50" 
                     tal:attributes="id python:'tags-%i'%team.id"
                     tal:content="python:' '.join([x.tag for x in team.teamtag_set.all()])"/>
             </div>

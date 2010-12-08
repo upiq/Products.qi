@@ -7,7 +7,7 @@
 <body>
 <head metal:fill-slot="javascript_head_slot">
 <script type="text/javascript">
-
+//<![CDATA[
 	function shownotes(id)
 	{
 	    divobj=document.getElementById(id)
@@ -36,7 +36,7 @@
             }
         }
     }
-	
+//]]>
 </script>
 <style type="text/css">
 .dataentry td {
@@ -72,7 +72,7 @@
 
 <div metal:fill-slot="main">
 
-	<a tal:attributes="href python:'measuredates.html?period=%s&inputform=%s'%(view.context.request.form['period'],view.context.request.form['inputform'])">Back to dates</a>
+	<a tal:attributes="href python:'measuredates.html?period=%s\x26inputform=%s'%(view.context.request.form['period'],view.context.request.form['inputform'])">Back to dates</a>
     <h3>Enter Data</h3>
 	
 	<fieldset>
@@ -82,7 +82,7 @@
 		</legend>
 	
 	<div tal:condition="python:view.isSubmitted(view.context.request.form)" >
-		Your changes were successfully submitted. <img src="confirm_icon.gif"> 
+		Your changes were successfully submitted. <img src="confirm_icon.gif" /> 
 	</div>
 	<a href="javascript:showhidden('previousValue')">Show previous values</a>
 	
@@ -163,7 +163,7 @@
 		
 
 	<br />
-	<div tal:condition="python:view.hasErrors() and view.maxError<6">
+	<div tal:condition="python:view.hasErrors() and view.maxError &lt; 6">
 	    The submission was rejected due to warnings.  
 	    If you wish to submit it anyways, please review the values with warnings and click confirm.
 	    <input type="submit" name="confirm" value="Confirm" />

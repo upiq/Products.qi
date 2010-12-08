@@ -15,20 +15,21 @@
     <div tal:condition="baseErrors" class="error">
     <h3>Import Error</h3>
     <p>
-    The import was cancelled due to one or more problems that were encountered.
-    The problems are listed below.
+     The import was cancelled due to one or more problems that were encountered.
+     The problems are listed below.
     </p>
     <p>
-    Import problems may indicate that there are errors in the data file you are
+     Import problems may indicate that there are errors in the data file you are
      trying to import, or they may indicate that changes need to be made in 
      your project setup 
-    (for example, measure definitions, team nicknames, etc.).
+     (for example, measure definitions, team nicknames, etc.).
     </p>
     <p>
-    Please review the list of problems below, make the necessary changes to the
+     Please review the list of problems below, make the necessary changes to the
      import file or the project setup, and re-import the data file. 
      If you need assistance in making the necessary changes, 
-     please contact a project manager or the QI TeamSpace help desk. 
+     please contact a project manager or the QI TeamSpace help desk.
+    </p>
     </div>
     
     <tal:generalErrors condition="baseErrors" repeat="err baseErrors">

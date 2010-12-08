@@ -67,7 +67,7 @@
 
 	<body>
 		<div align="center">
-		<img tal:condition="view/getLogo" tal:attributes="src view/getLogo">
+		<img tal:condition="view/getLogo" tal:attributes="src view/getLogo" />
 		<h3 tal:condition="not:view/getLogo" tal:content="python:view.context.getProject().title"> User List </h3>
 		<p tal:condition="python:view.context.isSubTeam()" tal:content="view/upperTeam"></p>
 		<p tal:content="view/getUserListTitle"> </p>
@@ -75,16 +75,13 @@
 			<tal:bleh define="user view/getUserList">
 			<th align="left">Name</th>
 			<th align="left">Email</th> 
-
 			</tal:bleh>
 			
 			<tr	tal:repeat="user view/getUserList">	
 					<td tal:content="python: user.getProperty('fullname')">f</td>
-					
 					<td tal:content="python: user.getProperty('email')">b</td>
-
 			</tr>
-		<table>
+		</table>
 		</div>
 	</body>
 </html>

@@ -1,5 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      lang="en"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
 
@@ -11,6 +15,7 @@
     tal:define="errors options/state/getErrors | nothing">
     <tal:main-macro metal:define-macro="main">
 	<script type="text/javascript">
+	//<![CDATA[
 	function showhide(hidden, buttonobj)
 	{
 		element=document.getElementById(hidden)
@@ -25,6 +30,7 @@
 			buttonobj.value="+"
 		}
 	}
+	//]]>
 	</script>
     <div class="documentEditable">
 	<h3>My Projects</h3>
@@ -80,7 +86,7 @@
 		This is a list of all active users in the projects you are a member of.
 	</p>
 	<div tal:repeat="user view/otherUsers">
-		<p> <img src="user.gif" alt="User Online"> <span tal:content="user" /> </p>
+		<p> <img src="user.gif" alt="User Online" /> <span tal:content="user" /> </p>
 	</div>
 	</div>
 	

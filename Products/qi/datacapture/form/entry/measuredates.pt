@@ -17,15 +17,15 @@
 	
 	<div>Select the report period to enter data</div>
 	
-    <table id="thetable" cellpadding="3" tal:condition="python: len(view.getMeasureDates())>0" >
-		<tr tal:repeat="list python:view.getMeasureDates()">
-			
-			<form  action="periodmeasures.html" method="post">	
-				<td name tal:content="list/name">Date name</td>
+    <table id="thetable" cellpadding="3" tal:condition="python: len(view.getMeasureDates()) &gt; 0">
+        <tr tal:repeat="list python:view.getMeasureDates()">
+            
+            <form action="periodmeasures.html" method="post">
+                <td name="" tal:content="list/name">Date name</td>
 				<input type="hidden" name="period" tal:attributes="value list/id" />
 				<input type="hidden" name="inputform" 
-					tal:attributes="value python:view.context.request.form['inputform']">
-				<td><input type="submit" tal:attributes="value python:list['isnew'] and 'Add' or 'Edit'" value="Edit"/></td>
+					tal:attributes="value python:view.context.request.form['inputform']" />
+				<td><input type="submit" tal:attributes="value python:list['isnew'] and 'Add' or 'Edit'" value="Edit" /></td>
 			</form>
 			
 		</tr>
@@ -35,7 +35,7 @@
 	<br />
 <form  tal:attributes="action view/url" method="get">
 	<input type="hidden" name="inputform" 
-		tal:attributes="value python:view.context.request.form['inputform']">
+		tal:attributes="value python:view.context.request.form['inputform']" />
 
     <!--
 	<tal:period define="

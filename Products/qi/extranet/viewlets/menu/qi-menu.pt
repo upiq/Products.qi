@@ -14,7 +14,7 @@
         </dt>
         <tal:childMenus condition="menu/hasChildren">
         <dd class="qiactionMenuContent qimenus border">
-            <table ul class="qimenus">
+            <table class="qimenus">
             <tal:menuitems repeat="item menu/items">
             <tr class="qimenus class" tal:condition="item/hasPermission">
                 <td class="qimenus">
@@ -22,7 +22,7 @@
                         tal:attributes="href item/link"
                         tal:omit-tag="not:item/islinked">
                     menu item
-                </a></td><td>&nbsp</td>
+                </a></td><td>&nbsp;</td>
             </tr>
             </tal:menuitems>
             </table>

@@ -6,6 +6,7 @@
       i18n:domain="qiteamspace">
 <head metal:fill-slot="javascript_head_slot">
 	<script type="text/javascript">
+	//<![CDATA[
 	document.onmousemove=movemouse
 	document.onmouseup=unclick
 	var mousepos
@@ -223,7 +224,7 @@
         }
         return null;
     }
-	
+	//]]>
 	</script>
 
 </head>

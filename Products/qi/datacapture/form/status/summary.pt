@@ -7,6 +7,7 @@
 
     <div metal:fill-slot="main">
         <script type="text/javascript">
+        //<![CDATA[
         function showhide(objid)
         {
             gotid="box-"+objid
@@ -28,6 +29,7 @@
                 show.style.display="block"
             }
         }
+        //]]>
         </script>
         <h3><tal:submission content="view/form/name" /> Submissions</h3>
         <ul>
@@ -93,7 +95,7 @@
                             <td tal:content="python:view.reportfor(info.name,date).newest" />
                             <td>
                                 <a tal:condition="python:view.dates[date][1].has_key(info.name)" tal:attributes="
-                                    href python:'viewdata?teamid=%s&period=%s'%(
+                                    href python:'viewdata?teamid=%s\x26period=%s'%(
                                         info.id,
                                         view.dates[date][1][info.name].date.strftime('%m/%d/%Y'))">
                                     View Data

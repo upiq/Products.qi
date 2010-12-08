@@ -15,7 +15,7 @@
 		<tal:bleh content="view/context/title" />.
 	</p>
 		<div metal:use-macro="context/@@errormacro/macros/errorlist" />
-	<h4><tal:name content=context/title /> Mailing Lists</h4>
+	<h4><tal:name content="context/title" /> Mailing Lists</h4>
 	<table class="listing">
 		<tr>
 			<th>
@@ -70,7 +70,7 @@
 		</fieldset>
 	</form>
 	
-	<h4><tal:name content=context/title /> Suborganization Mailing Lists</h4>
+	<h4><tal:name content="context/title" /> Suborganization Mailing Lists</h4>
 	<table class="listing">
 		<tr>
 			<th>

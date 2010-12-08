@@ -3,8 +3,8 @@
     <tal:order repeat="order context/order">
         <tal:replace replace="order" />
         <tal:notes define="index repeat/order/index" >
-        <tal:rownote condition="python: index<2">(rows)</tal:rownote>
-        <tal:colnote condition="python: index>1">(column)</tal:colnote>  
+        <tal:rownote condition="python: index &lt; 2">(rows)</tal:rownote>
+        <tal:colnote condition="python: index &gt; 1">(column)</tal:colnote>  
         </tal:notes>  
         <a tal:condition="not:repeat/order/end"
             tal:attributes="href python:'%s/swap?swapped=%s'%(context.absolute_url(),order)"> &lt;-&gt;</a>
