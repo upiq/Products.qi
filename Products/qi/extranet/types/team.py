@@ -10,7 +10,7 @@ from zope.interface import implements
 from qi.sqladmin import models as DB
 from psycopg2 import ProgrammingError
 from Products.qi.util.logger import logger
-from Products.qi.util.utils import PLONE_VERSION
+from Products.qi.util import PLONE_VERSION
 
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.interfaces._referenceable import IReferenceable
