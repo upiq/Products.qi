@@ -6,7 +6,7 @@ from ZODB.POSException import ConflictError
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 
-from Products.qi.util.utils import PLONE_VERSION
+from Products.qi.util import PLONE_VERSION
 
 
 class ContactView(BrowserPlusView):

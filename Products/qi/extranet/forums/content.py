@@ -10,7 +10,7 @@ from datetime import datetime
 from Acquisition import aq_self
 from Products.CMFDefault.interfaces import IFile
 
-from Products.qi.util.utils import PLONE_VERSION
+from Products.qi.util import PLONE_VERSION
 
 
 class Forum(Container,BrowserDefaultMixin):

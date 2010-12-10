@@ -15,7 +15,7 @@ from plone.app.content.interfaces import INameFromTitle
 from plone.app.content.container import Container
 from Products.Archetypes.interfaces._referenceable import IReferenceable
 
-from Products.qi.util.utils import PLONE_VERSION
+from Products.qi.util import PLONE_VERSION
 
 
 class Chart(SimpleItem,BrowserDefaultMixin, Container):
