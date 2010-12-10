@@ -19,7 +19,8 @@
                tal:define="dummy here/setupCurrentSkin" />
 </tal:block>
 
-<div metal:fill-slot="main">
+<div metal:fill-slot="main" 
+     tal:define="isAnon context/@@plone_portal_state/anonymous">
   <div tal:condition="not:isAnon">
     <div tal:define="came_from request/came_from|nothing;
                      initial_login request/initial_login|nothing;

@@ -22,7 +22,14 @@
 
 <body>
 <div metal:fill-slot="main"
-     tal:define="use_types_blacklist request/use_types_blacklist | python:True;
+     tal:define="normalizeString nocall:context/@@plone/normalizeString;
+                 isAnon context/@@plone_portal_state/anonymous;
+                 toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                 site_properties context/portal_properties/site_properties;
+                 wf_state context/@@plone_context_state/workflow_state;
+                 here_url context/@@plone_context_state/object_url;
+                 syntool context/portal_syndication;
+                 use_types_blacklist request/use_types_blacklist | python:True;
                  use_navigation_root request/use_navigation_root | python:True;
                  results python:here.queryCatalog(REQUEST=request,use_types_blacklist=use_types_blacklist, use_navigation_root=use_navigation_root);
                  results python:[result for result in results if hasattr(result.getObject(),'getProject') and result.getObject().getProject()== context.getProject()];

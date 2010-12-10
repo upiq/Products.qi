@@ -13,8 +13,11 @@
 
 <body>
 <div metal:fill-slot="main"
-     tal:define="portal view/fakeportal;
-     email_from_address portal/email_from_address">
+     tal:define="isAnon context/@@plone_portal_state/anonymous;
+                 member context/@@plone_portal_state/member;
+                 portal context/@@plone_portal_state/portal;
+                 portal view/fakeportal;
+                 email_from_address portal/email_from_address">
 
     <h1 class="documentFirstHeading"
         i18n:translate="heading_contact_form">Contact form</h1>

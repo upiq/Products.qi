@@ -12,7 +12,11 @@
 <body>
 
 <div metal:fill-slot="main"
-     tal:define="results python:container.portal_catalog(sort_on='modified',sort_order='reverse');
+     tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                 wf_state context/@@plone_context_state/workflow_state;
+                 mtool context/portal_membership;
+                 normalizeString nocall:context/@@plone/normalizeString;
+                 results python:container.portal_catalog(sort_on='modified',sort_order='reverse');
                  results python:[result for result in results if result.getObject().getProject()==context.getProject()];
                  Batch python:modules['Products.CMFPlone'].Batch;
                  DateTime python:modules['DateTime'].DateTime;

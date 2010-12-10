@@ -13,6 +13,7 @@
                 subject string:subject;
                 listserve string:list;
                 body string:body;
+                member context/@@plone_portal_state/member;
                 baseErrors python:view.getError('base')">
     
     <tal:warnings condition="python:len(view.availableMailingLists())==0">

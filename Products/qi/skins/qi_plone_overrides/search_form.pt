@@ -12,7 +12,13 @@
     <metal:block fill-slot="column_two_slot" />
 
 <div metal:fill-slot="main">
-
+<tal:block tal:define=normalizeString nocall:context/@@plone/normalizeString;
+                 isAnon context/@@plone_portal_state/anonymous;
+                 member context/@@plone_portal_state/member;
+                 portal context/@@plone_portal_state/portal;
+                 portal_properties context/portal_properties;
+                 wtool context/portal_workflow;
+                 putils context/plone_utils">
     <h1 class="documentFirstHeading"
         i18n:translate="heading_advanced_search">Advanced search for content</h1>
 
@@ -290,6 +296,7 @@
     
     </form>
 
+</tal:block>
 </div>
 
 </html>
