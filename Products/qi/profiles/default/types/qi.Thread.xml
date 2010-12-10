@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<object name="qi.Thread"
+   meta_type="Factory-based Type Information with dynamic views"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">A discussion thread</property>
+ <property name="description">A thread for discussing a QI document</property>
+ <property name="content_icon"></property>
+ <property name="content_meta_type">qi.Thread</property>
+ <property name="product"></property>
+ <property name="factory">Products.qi</property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">False</property>
+ <property name="allowed_content_types">
+  <element value="qi.Post"/>
+ </property>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">view</property>
+ <property name="view_methods">
+  <element value="view"/>
+ </property>
+ <property name="default_view_fallback">True</property>
+ <alias from="(Default)" to="view"/>
+</object>

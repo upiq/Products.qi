@@ -18,7 +18,7 @@
 
 <tr class="even">
     <td id="locked" class="locked" valign="top" width="33%">
-        &nbsp
+        &nbsp;
         <tal:locked repeat="item view/getLockedLists">
         <form>
             <input type="hidden" name="listid"
@@ -41,7 +41,7 @@
         </tal:locked>
     </td>
     <td id="joined" class="joined" valign="top">
-        &nbsp
+        &nbsp;
         <tal:joined repeat="item view/getRemoveableLists">
         <form>
             <input type="hidden" name="listid"
@@ -64,7 +64,7 @@
         </tal:joined>
     </td>
     <td id="available" class="available" valign="top">
-        &nbsp
+        &nbsp;
         <tal:open repeat="item view/getAvailableLists">
         <form>
             <input type="hidden" name="listid"

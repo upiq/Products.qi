@@ -37,7 +37,7 @@
               	<td tal:content="python:view.status(report.reportstate)" />
                 <td>
     				<form tal:attributes="id python:'%i-details'%report.id"
-						action="ReportBatches" tal:condition="python:report.reportstate<1">
+						action="ReportBatches" tal:condition="python:report.reportstate &lt; 1">
                         <input type="hidden" name="reportid" value="%i" 
                             tal:attributes="value report/id"/>
                         <input value="Run" name="Run" type="submit"/>

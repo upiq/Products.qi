@@ -3,7 +3,7 @@
     <span class="widgitgroup design" tal:attributes="style python:len(context.groups())==1 and 'width:100%' or '';">
         <tal:widgits repeat="widgit group/widgits">
             <a tal:attributes="href python:'%s/deletewidgit?deletedid=%s'%(context.absolute_url(),widgit.id)"
-                class="borderless"><img class="borderless" src="delete_icon.gif"></a>
+                class="borderless"><img class="borderless" src="delete_icon.gif" /></a>
             <div tal:content="structure widgit/editblurb"  class="widgit design">
             
             </div>

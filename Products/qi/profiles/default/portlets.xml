@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<portlets>
+ <portlet 
+   addview="portlets.qi.Calendar"
+   title="Project Calendar"
+   description="A portlet which can render a calendar."
+   />
+ <portlet 
+   addview="portlets.qi.RecentNoDate"
+   title="Recent items-No date"
+   description="A portlet which can render a listing of recently changed items, but without dates."
+   />
+ <portlet 
+   addview="portlets.qi.EventNoDate"
+   title="Events-No date"
+   description="A portlet which shows recent events, but without dates."
+   />
+ <portlet 
+   addview="portlets.qi.NewsNoDate"
+   title="News-No date"
+   description="A portlet which shows the news, but without dates."
+   />
+</portlets>

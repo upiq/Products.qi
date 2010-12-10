@@ -33,7 +33,7 @@
 		</tr>
 		</table>
 		
-		<input type="submit" value="Order Charts" name="submitorder">
+		<input type="submit" value="Order Charts" name="submitorder" />
 	</form>
 	</div>
 </body>

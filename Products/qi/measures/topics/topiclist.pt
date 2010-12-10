@@ -23,7 +23,7 @@
 			<th>
 				<form
 					action="Edit_Topic.html">
-				<input type="hidden" name="topicid" tal:attributes="value topic/id">
+				<input type="hidden" name="topicid" tal:attributes="value topic/id" />
 				<input type="submit" class="context"
                 	name="ModifyItem" 
                 	value="edit" />

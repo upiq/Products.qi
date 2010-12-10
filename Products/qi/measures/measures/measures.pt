@@ -6,6 +6,7 @@
       i18n:domain="Products.qi">
 <head metal:fill-slot="javascript_head_slot">
 	<script type="text/javascript">
+	//<![CDATA[
 		function showlist(table)
 		{
 			thetrs = document.getElementById(table).getElementsByTagName("tr");
@@ -23,6 +24,7 @@
 				thetrs[i].style.display = 'none';
 			}
 		}
+    //]]>
 	</script>
 </head>
 
@@ -55,8 +57,8 @@
 			</legend>
 		
 		<p  tal:condition="python:not(hasMeasures)">There are no subscribed measures for this project.</p>
-        <table class="listing" id="measureTable" tal:define="cols string:7;" 
-            class="datatable" tal:condition="hasMeasures">
+        <table class="listing datatable" id="measureTable" tal:define="cols string:7;" 
+            tal:condition="hasMeasures">
             <tal:measurepart condition="hasMeasures" >
                 <tr>
                     <!--<th>&nbsp</th>-->
@@ -283,8 +285,8 @@
 		</legend>
 		
 	<p tal:condition="python:not(hasTopics)">There are no subscribed topics for this project.</p>
-    <table  class="listing" id="topicTable" tal:define="cols string:7"
-        class="datatable" tal:condition="python:hasTopics">
+    <table  class="listing datatable" id="topicTable" tal:define="cols string:7"
+        tal:condition="python:hasTopics">
 
         <tal:topicpart condition="hasTopics">
             <tr style='design:none'>

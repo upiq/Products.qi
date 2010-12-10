@@ -6,6 +6,8 @@ from ZODB.POSException import ConflictError
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 
+from Products.qi.util.utils import PLONE_VERSION
+
 
 class ContactView(BrowserPlusView):
     processFormButtons=('form.button.Send',)
@@ -58,9 +60,16 @@ class ContactView(BrowserPlusView):
         try:
             message = self.context.site_feedback_template(self.context,
                     **variables)
-            result = host.secureSend(message, send_to_address, envelope_from,
+            if PLONE_VERSION==3:
+                result = host.secureSend(message, send_to_address, envelope_from,
                     subject=subject, subtype='plain', charset=encoding,
                     debug=False, From=sender_from_address)
+            else:
+                #Plone4 removes SecureMailHost; instead use stock setup with
+                #   Zope mailhost, zope.sendmail
+                result = host.send(message, send_to_address, envelope_from,
+                          subject=subject, encode=None) #encode 7bit default
+                                                                                
         except:
             raise
             

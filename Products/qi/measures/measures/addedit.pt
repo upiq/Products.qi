@@ -6,6 +6,7 @@
       i18n:domain="Products.qi">
 <head metal:fill-slot="javascript_head_slot">
 	<script type="text/javascript">
+	//<![CDATA[
 		function showlist()
 		{
 			thetrs = document.getElementById("measureTable").getElementsByTagName("tr");
@@ -22,6 +23,7 @@
 					thetrs[i].style.display = 'none';
 			}
 		}
+    //]]>
 	</script>
 </head>
 

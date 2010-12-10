@@ -112,7 +112,7 @@ class Renderer(base.Renderer):
         context = self.context.getProject()
         year = self.year
         month = self.month
-        weeks = self.calendar.getEventsForCalendar(month, year, context)
+        weeks = self.calendar.getEventsForCalendar(month, year, project=context)
         for week in weeks:
             for day in week:
                 daynumber = day['day']

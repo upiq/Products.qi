@@ -36,7 +36,7 @@ Use this section to add individual members to the Mailing List.
 <tr class="even">
     <td>
         <h4>Subscribed Members</h4>
-        <select multiple=true name="removemembers:list" size="10">
+        <select multiple="true" name="removemembers:list" size="10">
             <tal:users repeat="avail view/subscribedMembers">
             <option value="who"
                 tal:attributes="value avail/id"
@@ -50,7 +50,7 @@ Use this section to add individual members to the Mailing List.
     </td>
     <td>
         <h4>Available Members</h4>
-        <select multiple=true name="addmembers:list" size="10">
+        <select multiple="true" name="addmembers:list" size="10">
             <tal:users repeat="avail view/nonsubscribedMembers">
             <option value="who"
                 tal:attributes="value avail/id"
@@ -188,6 +188,7 @@ This description will show in the archive list and on the subscription list.
 </textarea>
 <br />
 <input type="button" value="Update Description" class="savedesc" />
+</td>
 </tr>
 <tr class="odd">
 <td colspan="2">

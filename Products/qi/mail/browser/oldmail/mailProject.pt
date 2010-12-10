@@ -21,7 +21,7 @@
 If you attempt to send an email, none will be sent.
 Please add users to your project or team and send this message again or
 contact your project manager or team lead to add users.
-        <div>
+        </div>
     </tal:warnings>
     
     <div tal:condition="baseErrors" class="error">

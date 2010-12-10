@@ -5,8 +5,8 @@
       metal:use-macro="context/general/macros/master"
       i18n:domain="Products.qi">
 <head metal:fill-slot="javascript_head_slot">
-	<script type="text/javascript">
-	
+    <script type="text/javascript">
+    //<![CDATA[
     var count=0
 	function connect()
     {
@@ -132,6 +132,7 @@
         }
     }
     window.onload=doupdate
+    //]]>
 	</script>
 </head>
 
@@ -162,8 +163,8 @@
 <div class="uploadstatus" tal:define="
         complete python:errorlevel>-1;
         noerrors python:errorlevel==0;
-        warnings python:errorlevel<6 and errorlevel>0;
-        errors python:errorlevel>5;
+        warnings python:errorlevel &lt; 6 and errorlevel &gt; 0;
+        errors python:errorlevel &gt; 5;
         showthings python:(noerrors or warnings) and complete;">
     <div>
     <form>
@@ -198,6 +199,7 @@
         <tr>
             <td colspan="2">
             </td>
+        </tr>
         <tr>
             <td>
                 Reprocessing Options
@@ -210,7 +212,7 @@
                 a new version of this file.
             </div>
             <div class="lineitem" id="restart" tal:attributes="style python:'display: %s'%(complete and 'block' or 'none')">
-                <a tal:attributes="href python:'status?fileid=%s&Restart'%upload.tracked.id">
+                <a tal:attributes="href python:'status?fileid=%s\x26Restart'%upload.tracked.id">
                     Reprocess the data
                 </a> 
                 without uploading again. 
@@ -259,7 +261,7 @@
 			    repeat="error python:upload.uploaderror_set.all().filter(errorlevel__gt=5).order_by('rownum')">
 			<tr>
 				<td tal:content="error/rownum" tal:condition="python:error.rownum>-1" />
-				<td tal:condition="python:error.rownum<0">General</td>
+				<td tal:condition="python:error.rownum &lt; 0">General</td>
 				<td tal:content="error/message" />	
 			</tr>
 			</tal:errors>

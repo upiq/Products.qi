@@ -10,7 +10,7 @@ from zope.interface import implements
 from qi.sqladmin import models as DB
 from psycopg2 import ProgrammingError
 from Products.qi.util.logger import logger
-
+from Products.qi.util.utils import PLONE_VERSION
 
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.interfaces._referenceable import IReferenceable
@@ -31,15 +31,17 @@ from Products.qi.extranet.types.handlers.django import persistProjectToDjango
 
 from plone.portlets.interfaces import ILocalPortletAssignable
 
+
 class Project(BrowserDefaultMixin, OrderSupport, Container):
     """  QITeamspace implemenation of a project
     """
     implements(IQIProject, ITTWLockable, INameFromTitle, ILocalPortletAssignable, IReferenceable)
-    # XXX: required because Plone's getObjPositionInParent
-    # is using Z2-style interfaces.  See:
-    # http://dev.plone.org/plone/ticket/6081
-    __implements__ = (BrowserDefaultMixin.__implements__ +
-                      (OrderSupport.__implements__,))
+    if PLONE_VERSION == 3:
+        # XXX: required because Plone (3) getObjPositionInParent
+        # is using Z2-style interfaces.  See:
+        # http://dev.plone.org/plone/ticket/6081
+        __implements__ = (BrowserDefaultMixin.__implements__ +
+                         (OrderSupport.__implements__,))
     security = ClassSecurityInfo()
     portal_type = "qiproject"
     dbid=None

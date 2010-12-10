@@ -37,7 +37,7 @@
     <div class="chartholder design">
         <form method="POST" action="." tal:attributes="action view/url">
         <tal:rows repeat="row context/rows">
-            <div class="chartrow design" class="insertrow" >
+            <div class="chartrow design insertrow">
                 <form method="POST">
                     <input type="hidden" name="rowid" tal:attributes="value row/id" />
                     <input type="hidden" name="insertbefore" tal:attributes="value row/rowindex" />

@@ -12,6 +12,6 @@
             <option value="paragraph">Paragraph</option>
             <option value="googlemotion">Google Motion Chart</option>
         </select>
-        <input type="submit" name="add" value="add">
+        <input type="submit" name="add" value="add" />
     </form>
 <!--</html>-->

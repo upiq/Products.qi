@@ -11,9 +11,9 @@
     <div metal:fill-slot="main"
     	tal:define="upload view/getUpload">
     	<tal:details define="currentquery python:upload.tracked.measurementvalue_set.all();
-    						historicalquery python:upload.tracked.measurementchange_set.all();
-    						alldata python:view.alldata();
-    						baselink python:'%s/viewdata?fileid=%s&%s'%(view.context.absolute_url(),upload.tracked.id,'%s=%s')">
+                        historicalquery python:upload.tracked.measurementchange_set.all();
+                        alldata python:view.alldata();
+                        baselink python:'%s/viewdata?fileid=%s\x26%s'%(view.context.absolute_url(),upload.tracked.id,'%s=%s')">
     
     <h2 class="filetitle" tal:content="upload/tracked/displayname" />
     <table class="formattable">

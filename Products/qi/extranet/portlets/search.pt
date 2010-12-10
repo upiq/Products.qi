@@ -34,7 +34,7 @@
                    name="path" 
                    style="visibility: hidden"
                    tal:attributes="value view/folder_path"
-                   CHECKED/>
+                   checked="checked" />
             </div>
           <div class="LSResult" style="" tal:condition="livesearch">
             <div class="LSShadow"></div>

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="qi_forum"
+             title="Workflow for forums"
+             description="Responsible for controlling the posting states for a forum."
+             state_variable="review_state"
+             initial_state="QIC">
+ <permission>View</permission>
+ <permission>Post Threads</permission>
+ <state state_id="Project" title="Project forum">
+  <description>Can be viewed and posted in by project members, cannot be viewed by users who are not logged in.</description>
+  <exit-transition transition_id="Make public"/>
+  <exit-transition transition_id="Restrict to QICS"/>
+  <permission-map name="Post Threads" acquired="True">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>ProjectViewer</permission-role>
+   <permission-role>QIC</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>ProjectViewer</permission-role>
+   <permission-role>QIC</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="Public" title="Publicly Viewable">
+  <description>This forum can be viewed by the public at large, and posted in by any project members.</description>
+  <exit-transition transition_id="Restrict to QICS"/>
+  <exit-transition transition_id="Restrict to members"/>
+  <permission-map name="Post Threads" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>ProjectViewer</permission-role>
+   <permission-role>QIC</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>ProjectViewer</permission-role>
+   <permission-role>QIC</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="QIC"
+        title="For QICS and Project Managers only">
+  <description>This forum is only visible to project managers and QICS, who may post there.</description>
+  <exit-transition transition_id="Make public"/>
+  <exit-transition transition_id="Restrict to members"/>
+  <permission-map name="Post Threads" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>QIC</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>QIC</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="Make public" title="Make public"
+             new_state="Public" trigger="USER"
+             before_script="" after_script="">
+  <description>Allow any user, even those not logged in to view the forum.</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=Make public"
+          category="workflow">Make Public</action>
+  <guard>
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="Restrict to QICS"
+             title="Restrict to QICS" new_state="QIC"
+             trigger="USER" before_script="" after_script="">
+  <description>Allow only QICS and project managers to view and post in this forum.</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=Restrict to QICS"
+          category="workflow">Restrict to QICS</action>
+  <guard>
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="Restrict to members"
+             title="Restrinct to Members"
+             new_state="Project" trigger="USER"
+             before_script="" after_script="">
+  <description>Allow only project members to view and post in this forum.</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=Restict to Members"
+          category="workflow">Restrict to members</action>
+  <guard>
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+ </transition>
+ <variable variable_id="comments" for_catalog="True"
+           for_status="True" update_always="True">
+  <default>
+   
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>

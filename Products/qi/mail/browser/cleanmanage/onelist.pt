@@ -33,9 +33,9 @@
 		</td>
 	
 		<td>
-			<input type="submit" name="removemembers" value=">>>">
+			<input type="submit" name="removemembers" value="&gt;&gt;&gt;" />
 			<br />
-			<input type="submit" name="addmembers" value="<<<">
+			<input type="submit" name="addmembers" value="&lt;&lt;&lt;" />
 		</td>
 		<td>
 			<h4 class="formhead">
@@ -57,7 +57,7 @@
 
 	<div class="onegroup">
 		<form method="post" action="." tal:attributes="action view/url">
-			<input type="hidden" name="listid" tal:attributes="value view/dblist/id">
+			<input type="hidden" name="listid" tal:attributes="value view/dblist/id" />
 		<table><tr>
 		<td>
 			<h4 class="formhead">
@@ -70,9 +70,9 @@
 			</select>
 		</td>
 		<td>
-			<input type="submit" name="removegroups" value=">>>">
+			<input type="submit" name="removegroups" value="&gt;&gt;&gt;" />
 			<br />
-			<input type="submit" name="addgroups" value="<<<">
+			<input type="submit" name="addgroups" value="&lt;&lt;&lt;" />
 		
 		</td>
 		<td>
@@ -91,7 +91,7 @@
 
 	<div class="onegroup" tal:condition="python:len(view.allteams)>0">
 		<form method="post" action="." tal:attributes="action view/url">
-			<input type="hidden" name="listid" tal:attributes="value view/dblist/id">
+			<input type="hidden" name="listid" tal:attributes="value view/dblist/id" />
 		<table><tr>
 		<td>
 			<h4 class="formhead">
@@ -108,9 +108,9 @@
 			</select>
 		</td>
 		<td>
-			<input type="submit" name="removeteams" value=">>>">
+			<input type="submit" name="removeteams" value="&gt;&gt;&gt;" />
 			<br />
-			<input type="submit" name="addteams" value="<<<">
+			<input type="submit" name="addteams" value="&lt;&lt;&lt;" />
 		</td>
 		<td>
 			<h4 class="formhead">
@@ -132,7 +132,7 @@
 	</div>
 	<div class="onegroup">
 		<form method="post" action="." tal:attributes="action view/url">
-			<input type="hidden" name="listid" tal:attributes="value view/dblist/id">
+			<input type="hidden" name="listid" tal:attributes="value view/dblist/id" />
 		
 		<div class="formcolumn">
 			<h4 class="formhead">
