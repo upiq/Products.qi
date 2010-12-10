@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <object name="qi_content_workflow" meta_type="Workflow"/>
+ <object name="qi_default_workflow" meta_type="Workflow"/>
+ <object name="qi_forum" meta_type="Workflow"/>
+ <object name="qi_project_workflow" meta_type="Workflow"/>
+ <bindings>
+  <default>
+   <bound-workflow workflow_id="qi_content_workflow"/>
+  </default>
+  <type type_id="qi.Forum">
+   <bound-workflow workflow_id="qi_forum"/>
+  </type>
+  <type type_id="qi.Post">
+   <bound-workflow workflow_id="qi_forum"/>
+  </type>
+  <type type_id="qi.Thread">
+   <bound-workflow workflow_id="qi_forum"/>
+  </type>
+  <type type_id="qiproject">
+   <bound-workflow workflow_id="qi_project_workflow"/>
+  </type>
+  <type type_id="qiteam">
+   <bound-workflow workflow_id="qi_content_workflow"/>
+  </type>
+ </bindings>
+</object>

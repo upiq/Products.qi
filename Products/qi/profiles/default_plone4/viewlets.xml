@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<object>
+  <!-- inject these viewlets relative to existing viewlet names: -->
+  <order manager="plone.portaltop" skinname="Plone Default">
+    <viewlet name="qi.menu" insert-after="plone.header" />
+  </order>
+  <order manager="plone.portalheader" skinname="Plone Default">
+    <viewlet name="qi.maintenance" insert-after="plone.logo" />
+  </order>
+  <!-- hide these viewlets: -->
+  <hidden manager="plone.portalheader" skinname="Plone Default">
+    <viewlet name="plone.global_sections"/>
+    <viewlet name="qi.maintenance"/>
+    <viewlet name="plone.skip_links"/>
+    <!-- for Plone 4: hide language selector from portalheader -->
+    <viewlet name="plone.app.i18n.locales.languageselector"/>
+  </hidden>
+  <hidden manager="plone.portaltop" skinname="Plone Default">
+    <!-- for Plone 3: hide language selector from portaltop -->
+    <viewlet name="plone.app.i18n.locales.languageselector"/>
+  </hidden>
+</object>
