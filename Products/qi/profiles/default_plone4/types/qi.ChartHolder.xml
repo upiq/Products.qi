@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<object name="qi.ChartHolder"
+   meta_type="Factory-based Type Information with dynamic views"
+   i18n:domain="Products.qi" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">Super Report</property>
+ <property name="description"
+    i18n:translate="">A collection of charting tools to present data</property>
+ <property name="content_icon">++resource++qichart_icon.png</property>
+ <property name="content_meta_type">qi.ChartHolder</property>
+ <property name="product"></property>
+ <property name="factory">qi.ChartHolder</property>
+ <property name="add_view_expr">string:${folder_url}/+/qi.ChartHolder</property>
+ <property name="immediate_view">@@edit</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">view</property>
+ <property name="view_methods">
+  <element value="view"/>
+ </property>
+ <property name="default_view_fallback">True</property>
+ <alias from="(Default)" to="view"/>
+ <alias from="edit" to="design"/>
+ <alias from="sharing" to="@@sharing"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    url_expr="string:${object_url}" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Design" action_id="design" category="object" condition_expr=""
+    url_expr="string:${object_url}/design" visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+</object>

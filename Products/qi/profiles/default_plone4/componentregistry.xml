@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<componentregistry>
+  <utilities>
+    <utility interface="Products.qi.mail.tools.imaphost.IIMAP"
+             object="IMapHost"/>
+  </utilities>
+</componentregistry>

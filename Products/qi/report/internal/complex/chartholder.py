@@ -12,7 +12,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from qi.sqladmin import models as DB
 
 from Products.qi.report.internal.complex.rows.row import rowfactory
-from Products.qi.util.utils import PLONE_VERSION
+from Products.qi.util import PLONE_VERSION
 
 
 from Products.qi.report.internal.complex.rows.interfaces import IChartRow

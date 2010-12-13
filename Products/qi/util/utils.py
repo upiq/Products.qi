@@ -10,14 +10,6 @@ from Products.qi.util.logger import logger
 from Products.qi.extranet.types import project, team
 from Products.qi.util.config import PathConfig
 
-# usage: >>> from Products.qi.util.utils import PLONE_VERSION
-try:
-    # Plone 4 and higher 
-    import plone.app.upgrade
-    PLONE_VERSION = 4
-except ImportError:
-    PLONE_VERSION = 3
-
 SQLPATH = PathConfig().get('sql', 'src/sql') 
 
 

@@ -70,7 +70,8 @@
 						membership python:grouptuple[1];
 						condition python:grouptuple[2];
 						buttons python:grouptuple[3];
-						count repeat/grouptuple/index"
+						count repeat/grouptuple/index;
+						member context/@@plone_portal_state/member"
 				condition="python:condition and len(membership)>0">
 		<h3>
 		    <tal:name content="python:context.title" /> 

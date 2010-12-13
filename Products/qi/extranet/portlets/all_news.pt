@@ -13,7 +13,12 @@
              
 <body>
 <div metal:fill-slot="main" id="content-news"
-     tal:define="results python:here.portal_catalog.searchResults(
+     tal:define="isAnon context/@@plone_portal_state/anonymous;
+                 portal context/@@plone_portal_state/portal;
+                 toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                 site_properties context/portal_properties/site_properties;
+                 mtool context/portal_membership;
+                 results python:here.portal_catalog.searchResults(
                             portal_type='News Item',
                             sort_on='Date',
                             sort_order='reverse',

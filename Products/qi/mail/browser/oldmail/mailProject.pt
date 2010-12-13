@@ -12,6 +12,7 @@
     tal:define="email string:email;
                 subject string:subject;
                 body string:body;
+                member context/@@plone_portal_state/member;
                 baseErrors python:view.getError('base')">
     
     <tal:warnings condition="not:view/hasUsers">
