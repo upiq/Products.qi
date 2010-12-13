@@ -250,7 +250,7 @@ class NewMeasure(BrowserPlusView):
             self.doRedirect('Add_Measure.html')
     
     def generalUpdate(self):
-        request=self.context.request
+        request=self.request
         if request.has_key('measureid') and int(request['measureid'])>0:
             #lazy verification that they didn't submit a form
             if not request.has_key('shortname'):

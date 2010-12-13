@@ -68,7 +68,7 @@ def get_profile_stats():
 class BeginPage(object):
     def __call__(self, *args, **kw):
         profile_on()
-        self.context.request.response.redirect("%s/view"%self.context.absolute_url())
+        self.request.response.redirect("%s/view"%self.context.absolute_url())
 
 def sortpairs(av,bv):
     a=av[1][2]

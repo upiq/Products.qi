@@ -268,11 +268,11 @@ class NoteTable(DataTable):
 
 class Swap(BrowserView):
     def __call__(self):
-        form=self.context.request.form
+        form=self.request.form
         swapped=form['swapped']
         self.context.swapdown(swapped)
         redirectTarget="%s/design"%self.context.charturl()
-        self.context.request.response.redirect(redirectTarget)
+        self.request.response.redirect(redirectTarget)
     
     
 annotationfactory=Factory(NoteTable, title="annotation table")

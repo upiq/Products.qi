@@ -40,7 +40,7 @@ class BrowserPlusView(BrowserView,Validator):
 
     
     def update(self, *args, **kw):
-        form=self.context.request.form
+        form=self.request.form
         self.first()
         for submission in self.processFormButtons:
             if submission in form:
@@ -69,7 +69,7 @@ class BrowserPlusView(BrowserView,Validator):
     #convenience, back to start kind of thing
     def doRedirect(self, subUrl=''):
         redirectTarget='%s/%s'%(self.context.absolute_url(),subUrl)
-        self.context.request.response.redirect(redirectTarget)
+        self.request.response.redirect(redirectTarget)
     
     def buildDate(self, string):
         if string.strip()=='':

@@ -52,7 +52,7 @@ class ChartPage(BrowserPlusView):
         if self.foundteams:
             return self.foundteams
         result=[]
-        for x in self.context.request.form['teamid'].split('|'):
+        for x in self.request.form['teamid'].split('|'):
             try:
                 added=int(x)
             except ValueError:
@@ -63,15 +63,15 @@ class ChartPage(BrowserPlusView):
             
     def goal(self):
         try:
-            if 'measureid' in self.context.request.form:
-                result = float(DB.Measure.objects.get(id=int(self.context.request.form['measureid'])).goal)
+            if 'measureid' in self.request.form:
+                result = float(DB.Measure.objects.get(id=int(self.request.form['measureid'])).goal)
             else:
-                result = float(DB.Percentage.objects.get(id=int(self.context.request.form['derivedid'])).goal)
+                result = float(DB.Percentage.objects.get(id=int(self.request.form['derivedid'])).goal)
             return result
         except Exception, e:
             return None
     def Set(self, teamid):
-        form=self.context.request.form
+        form=self.request.form
         measureid=int(form['measureid'])
         #teamid=int(form['teamid'])
         measure=DB.Measure.objects.get(id=measureid)
@@ -99,7 +99,7 @@ class ChartPage(BrowserPlusView):
     def Periods(self):
         #teamids=self.teamids()
         
-        form=self.context.request.form
+        form=self.request.form
         if 'measureid' in form:
             self.LoadNonPercentageValues()
             return sorted([x for x in self.dates.keys() if self.includesdate(x)])
@@ -129,7 +129,7 @@ class ChartPage(BrowserPlusView):
             #return ['%s/%s/%s'%(x.month,x.day, x.year) for x in derived.dates(self.teamids())]
 
     def LoadNonPercentageValues(self):
-        form=self.context.request.form
+        form=self.request.form
         if self.dates is not None:
             return
         measure=DB.Measure.objects.get(id=int(form['measureid']))
@@ -147,7 +147,7 @@ class ChartPage(BrowserPlusView):
                 self.dates[month]=teamvalues
     
     def LoadAllPercentageValues(self):
-        form=self.context.request.form
+        form=self.request.form
         if self.dates is not None:
             return
         percentage=DB.Percentage.objects.get(id=int(form['derivedid']))
@@ -178,7 +178,7 @@ class ChartPage(BrowserPlusView):
         except:
             return "#FF0000"
     def valueFor(self, period, team):
-        form=self.context.request.form
+        form=self.request.form
         if 'measureid' in form:
             result=DummyValue()
             found=self.dates.get(period,{}).get(team, None)
@@ -198,7 +198,7 @@ class ChartPage(BrowserPlusView):
     def getDerived(self):
         if hasattr(self, 'derived'):
             return self.derived
-        derivedid=int(self.context.request.form['derivedid'])
+        derivedid=int(self.request.form['derivedid'])
         derived=DB.Percentage.objects.get(id=derivedid)
         self.derived=derived
         return self.derived
@@ -225,7 +225,7 @@ class ChartSettings(BrowserPlusView):
     
     def Teams(self):
         teams=[]
-        for x in self.context.request.form['teamid'].split('|'):
+        for x in self.request.form['teamid'].split('|'):
             try:
                 idval=int(x)
                 team=DB.Team.objects.get(id=idval)
@@ -241,13 +241,13 @@ class ChartSettings(BrowserPlusView):
             teams.append(team)
         return teams
     def Measure(self):
-        if 'measureid' in self.context.request.form:
-            measureid=int(self.context.request.form['measureid'])
+        if 'measureid' in self.request.form:
+            measureid=int(self.request.form['measureid'])
             return DB.Measure.objects.get(id=measureid)
         return None
     def DerivedMeasure(self):
-        if 'derivedid' in self.context.request.form:
-            derivedid=int(self.context.request.form['derivedid'])
+        if 'derivedid' in self.request.form:
+            derivedid=int(self.request.form['derivedid'])
             return DB.Percentage.objects.get(id=derivedid)
         return None
     def chartname(self):
@@ -287,7 +287,7 @@ class DynamicImageView(BrowserView):
             self.grouping=self.request['grouping']
         image=self.getImage()
         image.save(sent,'PNG')
-        response=self.context.request.response        
+        response=self.request.response        
         response.setHeader('Pragma', 'no-cache') 
         response.setHeader('Content-Type', 'image/png')
         

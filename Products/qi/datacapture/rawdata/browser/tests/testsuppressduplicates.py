@@ -37,7 +37,7 @@ class TestSuppression(unittest.TestCase):
         history.DB.MeasurementChange=FakeMeasureChange
         self.context=FakeContext()
         self.request=FakeRequest()
-        self.context.request=self.request
+        self.request=self.request
         result=history.HistoryView(self.context,self.request)
         self.request.form={}
         return result

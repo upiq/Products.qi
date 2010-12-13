@@ -55,7 +55,7 @@ class Validator(ErrorHolder):
             longname=key
         if not self.required(key, longname):
             return False
-        form=self.context.request.form
+        form=self.request.form
         value=form[key]
         if len(value)<length:
             self.addError(key,'%s must be %i characters or longer'%(longname,length))
@@ -64,7 +64,7 @@ class Validator(ErrorHolder):
     def required(self, key, longname=None):
         if longname is None:
             longname=key
-        form=self.context.request.form
+        form=self.request.form
         if not self.requiredInForm(key):
             return False
         if form[key]=='':
@@ -75,7 +75,7 @@ class Validator(ErrorHolder):
     def optionalDate(self, key, longname=None):
         if longname is None:
             longname=key
-        form=self.context.request.form
+        form=self.request.form
         if not self.requiredInForm(key,longname):
             return False
         if form[key].strip() != '':
@@ -86,7 +86,7 @@ class Validator(ErrorHolder):
     def requiredDate(self, key, longname=None):
         if longname is None:
             longname=key
-        form=self.context.request.form
+        form=self.request.form
         if not self.required(key,longname):
             return False
         string=form[key]
@@ -116,7 +116,7 @@ class Validator(ErrorHolder):
     def requiredInForm(self, key, longname=None):
         if longname is None:
             longname=key
-        form=self.context.request.form
+        form=self.request.form
         if key not in form:
             self.addError(key,'%s is missing'%longname)
             self.addError('base','%s was missing in the form'%longname)
@@ -126,7 +126,7 @@ class Validator(ErrorHolder):
     def requiredInTable(self, query, key,longname=None,nullable=False):
         if longname is None:
             longname=key
-        form=self.context.request.form
+        form=self.request.form
         if not self.required(key,longname):
             return False
         value=form[key]
@@ -153,7 +153,7 @@ class Validator(ErrorHolder):
             longname=key
         if column is None:
             column=key
-        form=self.context.request.form
+        form=self.request.form
         if not self.required(key,longname):
             #no further validation possible
             return False
@@ -170,7 +170,7 @@ class Validator(ErrorHolder):
     def requiredValidation(self, key, longname=None):
         if longname==None:
             longname=key
-        form=self.context.request.form
+        form=self.request.form
         if not self.requiredInForm(key,longname):
             return False
         value=form[key]
@@ -194,7 +194,7 @@ class Validator(ErrorHolder):
         return True
     
     def requiredInt(self,key, longname=None):
-        form=self.context.request.form
+        form=self.request.form
         if longname is None:
             longname=key
         if not self.required(key, longname):
@@ -210,7 +210,7 @@ class Validator(ErrorHolder):
     def requiredVersionNumber(self, key, longname=None):
         if longname is None:
             longname=key
-        form = self.context.request.form
+        form = self.request.form
         if not self.required(key, longname):
             return False
         versionparts=form[key].split('.')
@@ -224,13 +224,13 @@ class Validator(ErrorHolder):
         return True
     
     def present(self,key):
-        form=self.context.request.form
+        form=self.request.form
         return key in form and form[key].strip()!=""
         
     def requiredEmail(self, key, longname=None):
         if longname is None:
             longname=key
-        form=self.context.request.form
+        form=self.request.form
         if not self.required(key, longname):
             return False
         expression='^[A-Za-z][A-Za-z0-9_.]*@[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)+$'
@@ -242,7 +242,7 @@ class Validator(ErrorHolder):
             return False
         return True
     def daterange(self,startkey, endkey,startoptional=False,endoptional=False):
-        form=self.context.request.form
+        form=self.request.form
         if not startoptional:
             if not self.requiredDate(startkey,'Start Date'):
                 return False

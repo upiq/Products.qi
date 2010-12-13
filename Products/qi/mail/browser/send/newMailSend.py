@@ -82,7 +82,7 @@ Please resend the message from your email client instead.
         return -1
         
     def getList(self):
-        form=self.context.request.form
+        form=self.request.form
         listid=int(form['list'])
         return DB.MailingList.objects.get(id=listid)
         

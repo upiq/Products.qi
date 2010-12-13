@@ -32,7 +32,7 @@ messageformat=\
 
 class Status(BrowserView):
     def __call__(self, *args, **kw):
-        form=self.context.request.form
+        form=self.request.form
         try:
             status=DB.UploadStatus.objects.get(tracked__id=form['fileid'])
         except:
@@ -42,8 +42,8 @@ class Status(BrowserView):
             errorlevel=0
         else:
             errorlevel=max(map(lambda x: x.errorlevel, status.uploaderror_set.all()))
-        self.context.request.response.setHeader("Content-type","text/xml")
-        self.context.request.response.setHeader("Pragma","no-cache")
+        self.request.response.setHeader("Content-type","text/xml")
+        self.request.response.setHeader("Pragma","no-cache")
         statusinfo={'status':status.status,
         'errorlevel':errorlevel,
         'complete':status.complete,

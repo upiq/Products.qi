@@ -37,10 +37,10 @@ class SmallMultiple(Chart):
 from Products.Five.browser import BrowserView
 class SmallMultipleApplyChanges(BrowserView):
     def __call__(self):
-        self.context.measureid=int(self.context.request.form['measure'])
-        self.context.teamid=int(self.context.request.form['team'])
+        self.context.measureid=int(self.request.form['measure'])
+        self.context.teamid=int(self.request.form['team'])
         redirectTarget="%s/design"%self.context.charturl()
-        self.context.request.response.redirect(redirectTarget)
+        self.request.response.redirect(redirectTarget)
 """
 
 

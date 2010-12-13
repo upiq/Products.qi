@@ -90,7 +90,7 @@ class PostThread(BrowserPlusView):
         thread=getattr(self.context,added.id)
         thread._setObject(firstpost.id,firstpost )
         self.context.orderObjects('dateadded')
-        self.context.request.response.redirect(thread.absolute_url())
+        self.request.response.redirect(thread.absolute_url())
         
         if 'attachment' in form:
             attachments=form['attachment']
@@ -130,7 +130,7 @@ class Reply(BrowserPlusView):
             attachments=[]
         self.context._setObject(post.id, post)
         self.context.orderObjects('dateadded')
-        self.context.request.response.redirect('%s#last'%self.context.absolute_url())
+        self.request.response.redirect('%s#last'%self.context.absolute_url())
         newlyadded=getattr(self.context,post.id)
         for attached in attachments:
             if attached and attached.filename:
@@ -155,11 +155,11 @@ class DeletePost(BrowserPlusView):
         deleted=self.context
         thread=deleted.getThread()
         thread._delOb(deleted.id)
-        #deleted.DELETE(self.context.request, self.context.request.response)
+        #deleted.DELETE(self.request, self.request.response)
         thread._objects = tuple([info for info in thread._objects
                               if info['id']!=(deleted.id)])
         thread._p_changed=1
-        self.context.request.response.redirect(thread.absolute_url())
+        self.request.response.redirect(thread.absolute_url())
 
 class EditPost(BrowserPlusView):
     processFormButtons=("edit",)
@@ -174,7 +174,7 @@ class EditPost(BrowserPlusView):
                 attachments=[attachments]
         else:
             attachments=[]
-        self.context.request.response.redirect('%s#last'%self.context.getThread().absolute_url())
+        self.request.response.redirect('%s#last'%self.context.getThread().absolute_url())
         newlyadded=post
         post.body=form['postbody']
         post._p_changed=1

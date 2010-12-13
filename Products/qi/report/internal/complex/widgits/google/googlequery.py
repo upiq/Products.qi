@@ -3,7 +3,7 @@ class QueryData(BrowserView):
     def __call__(self, *args, **kw):
         self.measureA=self.context.measures()[0]
         self.measureB=self.context.measures()[1]
-        form=self.context.request.form
+        form=self.request.form
         tqxinfo=form['tqx'].split(';')
         tqxdict={}
         for x in tqxinfo:

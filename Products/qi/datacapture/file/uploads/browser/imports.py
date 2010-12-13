@@ -18,7 +18,7 @@ class UploadStatusView(BrowserPlusView):
         restarted.save()
         self.doRedirect("status?fileid=%i"%restarted.tracked.id)
     def getUpload(self):
-        uploadid=int(self.context.request.form.get('fileid',-1))
+        uploadid=int(self.request.form.get('fileid',-1))
         result=None
         try:
             result=DB.UploadStatus.objects.select_related(depth=5).get(tracked__id=uploadid)

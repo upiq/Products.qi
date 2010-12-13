@@ -28,7 +28,7 @@ class ChartCacher(BrowserView):
     def __call__(self, *args, **kw):
         
         print "cache being readied"
-        form=self.context.request.form
+        form=self.request.form
         width=int(form['width'])
         height=int(form['height'])
         result=Image.new('RGB', (width, height))
@@ -53,7 +53,7 @@ class ChartCacher(BrowserView):
         self.context.cachedimage=savefile.getvalue()
         self.context._p_changed=1
         savefile.close()
-        self.context.request.RESPONSE.setHeader('Content-Type', 'image/png')
+        self.request.RESPONSE.setHeader('Content-Type', 'image/png')
         return self.context.cachedimage
     def reversecolor(self,number):
         b=number//(256*256)
@@ -63,5 +63,5 @@ class ChartCacher(BrowserView):
 
 class ChartCacheValue(BrowserView):
     def __call__(self, *args, **kw):
-        self.context.request.RESPONSE.setHeader('Content-Type', 'image/png')
+        self.request.RESPONSE.setHeader('Content-Type', 'image/png')
         return self.context.cachedimage

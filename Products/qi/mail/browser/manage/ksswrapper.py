@@ -19,8 +19,8 @@ class AddGroup(KSSAction):
         self.requiredInForm('listid')
     def doKss(self, core):
         #not to create any actual kss
-        listid=int(self.context.request.form['listid'])
-        groupidsvar=self.context.request.form['groupids']
+        listid=int(self.request.form['listid'])
+        groupidsvar=self.request.form['groupids']
         if type(groupidsvar) is not list:
             groupidsvar=[groupidsvar]
         groupids=[int(k) for k in groupidsvar]
@@ -35,8 +35,8 @@ class RemoveGroup(KSSAction):
         self.requiredInForm('listid')
     def doKss(self, core):
         #not to create any actual kss
-        listid=int(self.context.request.form['listid'])
-        groupidsvar=self.context.request.form['groupids']
+        listid=int(self.request.form['listid'])
+        groupidsvar=self.request.form['groupids']
         if type(groupidsvar) is not list:
             groupidsvar=[groupidsvar]
         groupids=[int(k) for k in groupidsvar]
@@ -49,12 +49,12 @@ class RemoveGroup(KSSAction):
 class AddUsers(KSSAction):
     
     def condition(self):
-        return 'addmembers' in self.context.request.form
+        return 'addmembers' in self.request.form
     
     def doKss(self, core):
         #not to create any actual kss
-        listid=int(self.context.request.form['listid'])
-        usersadded=self.context.request.form['addmembers']
+        listid=int(self.request.form['listid'])
+        usersadded=self.request.form['addmembers']
         maillist=DB.MailingList.objects.get(id=listid)
         for user in usersadded:
             dbuser=DB.MailingListSubscriber()
@@ -64,12 +64,12 @@ class AddUsers(KSSAction):
         
 class RemoveUsers(KSSAction):
     def condition(self):
-        return 'removemembers' in self.context.request.form
+        return 'removemembers' in self.request.form
 
     def doKss(self, core):
         #not to create any actual kss
-        listid=int(self.context.request.form['listid'])
-        usersremoved=self.context.request.form['removemembers']
+        listid=int(self.request.form['listid'])
+        usersremoved=self.request.form['removemembers']
         dbusers=DB.MailingListSubscriber.objects.filter(list__id=listid
                 ,userid__in=usersremoved)
         for dbuser in dbusers:
@@ -79,12 +79,12 @@ class RemoveUsers(KSSAction):
 class AddTeams(KSSAction):
     
     def condition(self):
-        return 'addteams' in self.context.request.form
+        return 'addteams' in self.request.form
     
     def doKss(self, core):
         #not to create any actual kss
-        listid=int(self.context.request.form['listid'])
-        teamsadded=self.context.request.form['addteams']
+        listid=int(self.request.form['listid'])
+        teamsadded=self.request.form['addteams']
         dbteams=DB.Team.objects.filter(id__in=teamsadded)
         maillist=DB.MailingList.objects.get(id=listid)
         for dbteam in dbteams:
@@ -92,12 +92,12 @@ class AddTeams(KSSAction):
         
 class RemoveTeams(KSSAction):
     def condition(self):
-        return 'removeteams' in self.context.request.form
+        return 'removeteams' in self.request.form
 
     def doKss(self, core):
         #not to create any actual kss
-        listid=int(self.context.request.form['listid'])
-        teamsremoved=self.context.request.form['removeteams']
+        listid=int(self.request.form['listid'])
+        teamsremoved=self.request.form['removeteams']
         dblist=DB.MailingList.objects.get(id=listid)
         dbteams=dblist.teams.filter(id__in=teamsremoved)
         for dbteam in dbteams:
@@ -105,12 +105,12 @@ class RemoveTeams(KSSAction):
 
 class SetDescription(KSSAction):
     def condition(self):
-        return 'description' in self.context.request.form
+        return 'description' in self.request.form
 
     def doKss(self, core):
         #not to create any actual kss
-        listid=int(self.context.request.form['listid'])
-        description=self.context.request.form['description']
+        listid=int(self.request.form['listid'])
+        description=self.request.form['description']
         dblist=DB.MailingList.objects.get(id=listid)
         dblist.description=description
         dblist.save()
@@ -118,9 +118,9 @@ class SetDescription(KSSAction):
 class UpdateList(KSSAction):
     def doKss(self, core):
         #not to create any actual kss
-        listid=int(self.context.request.form['listid'])
+        listid=int(self.request.form['listid'])
         dblist=DB.MailingList.objects.get(id=listid)
-        form=self.context.request.form
+        form=self.request.form
         dblist.replyable= 'replyable' in form
         dblist.joinable= 'joinable' in form
         dblist.save()
@@ -130,7 +130,7 @@ class AddList(KSSAddWrapper):
     def validate(self):
         if self.requiredAvailable(DB.MailingList.objects,'listname','listname',
             'mailing list name'):
-            listname=self.context.request.form['listname']
+            listname=self.request.form['listname']
             self.validateListname(listname)
         self.required('description')
         
@@ -148,10 +148,10 @@ special characters).
         dbproj,dbteam=self.getDBProjectTeam()
         added.project=dbproj
         added.team=dbteam
-        added.listname=self.context.request.form['listname']
+        added.listname=self.request.form['listname']
         added.joinable=False
         added.replyable=True
-        added.description=self.context.request.form['description']
+        added.description=self.request.form['description']
         added.save()
         self.addedid=added.id
         return added
@@ -164,12 +164,12 @@ special characters).
 
 class ChangeExpansionState(KSSAction):
     def doKss(self,core):
-        currentvalue=int(self.context.request.form['expanded'])
+        currentvalue=int(self.request.form['expanded'])
         if currentvalue==0:
             currentvalue=1
         else:
             currentvalue=0
-        target=self.context.request.form['target']
+        target=self.request.form['target']
         
         target='#%s-expanded'%target
         core.setAttribute(target,"value",str(currentvalue))
@@ -179,7 +179,7 @@ class ShowMembers(KSSReplaceWrapper):
     def delay(self):
         return True
     def viewedlist(self):
-        listid=int(self.context.request.form['listid'])
+        listid=int(self.request.form['listid'])
         dblist=DB.MailingList.objects.get(id=listid)
         return dblist
 
@@ -250,31 +250,31 @@ class ShowMembers(KSSReplaceWrapper):
 
 
     def condition(self, *args, **kw):
-        expanded=int(self.context.request.form['expanded'])
+        expanded=int(self.request.form['expanded'])
         if expanded>0:
             return False
         return True
         
     def getTarget(self, *args, **kw):
-        listid=int(self.context.request.form['listid'])
+        listid=int(self.request.form['listid'])
         return 'table-%s'%listid
         
         
 class HideMembers(KSSReplaceWrapper):
 
     def viewedlist(self):
-        listid=int(self.context.request.form['listid'])
+        listid=int(self.request.form['listid'])
         dblist=DB.MailingList.objects.get(id=listid)
         return dblist
 
     def condition(self, *args, **kw):
-        expanded=int(self.context.request.form['expanded'])
+        expanded=int(self.request.form['expanded'])
         if expanded>0:
             return True
         return False
         
     def getTarget(self, *args, **kw):
-        listid=int(self.context.request.form['listid'])
+        listid=int(self.request.form['listid'])
         return 'table-%s'%listid
     
     def buildHtml(self):

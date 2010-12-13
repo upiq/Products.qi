@@ -22,7 +22,7 @@ class UploadStatusView(BrowserPlusView):
         restarted.save()
         self.doRedirect("status?fileid=%i"%restarted.tracked.id)
     def getUpload(self):
-        uploadid=int(self.context.request.form.get('fileid',-1))
+        uploadid=int(self.request.form.get('fileid',-1))
         result=None
         try:
             result=DB.UploadStatus.objects.select_related(depth=5).get(tracked__id=uploadid)
@@ -102,7 +102,7 @@ class DetailView(BrowserPlusView):
     clearform=False
     
     def getID(self, name):
-        form=self.context.request.form
+        form=self.request.form
         try:
             result= int(form[name])
             return result
@@ -111,7 +111,7 @@ class DetailView(BrowserPlusView):
     
     def applyFilters(self, base):
         result=base
-        form=self.context.request.form
+        form=self.request.form
         if 'fileid' in form:
             fileid=self.getID('fileid')
             if fileid>0:
@@ -141,7 +141,7 @@ class DetailView(BrowserPlusView):
         
         return result
     def getPage(self):
-        form=self.context.request.form
+        form=self.request.form
         if 'page' in form:
             try:
                 return int(form['page'])
@@ -170,7 +170,7 @@ class DetailView(BrowserPlusView):
         format="%s/%s?valueid=%i"
         return format%(self.context.absolute_url(),"ValueChanges",measurementvalue.id)
     def urlChangeOrAdd(self, key, value):
-        form=self.context.request.form
+        form=self.request.form
         varformat="viewdata?%s=%s"
         changed=varformat%(key,value)
         result=changed
@@ -181,7 +181,7 @@ class DetailView(BrowserPlusView):
 
         return result
     def excelLink(self):
-        form=self.context.request.form
+        form=self.request.form
         varformat="?%s=%s"
         result="exportexcel"
         for fkey in form:
@@ -197,7 +197,7 @@ class DetailView(BrowserPlusView):
 class StatusKss(KSSAction):
     def getStatus(self):
         return None
-        statusid=int(self.context.request.form['fileid'])
+        statusid=int(self.request.form['fileid'])
         return DB.UploadStatus.objects.get(tracked__id=statusid)
     def doKss(self, core):
         return
@@ -207,13 +207,13 @@ class StatusKss(KSSAction):
 class FollowupKss(KSSInnerWrapper):
     def condition(self):
         return False
-        objectid=int(self.context.request.form['fileid'])
+        objectid=int(self.request.form['fileid'])
         watched=DB.UploadStatus.objects.get(tracked__id=objectid)
         if watched.complete and watched.uploadstatus_set.all().count()>0:
             return True
         return False
     def followup(self):
-        objectid=int(self.context.request.form['fileid'])
+        objectid=int(self.request.form['fileid'])
         watched=DB.UploadStatus.objects.get(tracked__id=objectid)
         return watched.uploadstatus_set.all().latest('tracked_id')
     
@@ -225,7 +225,7 @@ class DetailsKss(KSSReplaceWrapper):
     def getTarget(self):
         return "detailsection"
     def getUpload(self):
-        uploadid=int(self.context.request.form.get('fileid',-1))
+        uploadid=int(self.request.form.get('fileid',-1))
         result=None
         try:
             result=DB.UploadStatus.objects.select_related(depth=5).get(tracked__id=uploadid)

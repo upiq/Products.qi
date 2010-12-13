@@ -79,23 +79,23 @@ class AddReportForm(BrowserPlusView):
 
 class UpdateRunningState(KSSInnerWrapper):
     def getTarget(self):
-        reportid=self.context.request.form['reportid']
+        reportid=self.request.form['reportid']
         return '%s-status'%reportid
         
     def buildHtml(self):
-        reportid=int(self.context.request.form['reportid'])
+        reportid=int(self.request.form['reportid'])
         report=DB.ReportTrigger.objects.get(id=reportid)
         url='%s/%s'%(self.context.absolute_url(),'reports.html')
         return '%s'%(getReportStatus(report, url))
 
 class ExpandBatches(KSSInnerWrapper):
     def getTarget(self):
-        reportid=self.context.request.form['reportid']
+        reportid=self.request.form['reportid']
         return '%s-details'%reportid
     
     def report(self):
         
-        id=int(self.context.request.form['reportid'])
+        id=int(self.request.form['reportid'])
         return DB.ReportTrigger.objects.get(id=id)
     
 class Batches(BrowserPlusView):
@@ -103,7 +103,7 @@ class Batches(BrowserPlusView):
     clearform=False
     def report(self):
 
-        id=int(self.context.request.form['reportid'])
+        id=int(self.request.form['reportid'])
         return DB.ReportTrigger.objects.get(id=id)    
     def validate(self, form):
         pass
@@ -114,18 +114,18 @@ class Batches(BrowserPlusView):
         report.save()
 class CollapseBatches(KSSInnerWrapper):
     def getTarget(self):
-        reportid=self.context.request.form['reportid']
+        reportid=self.request.form['reportid']
         return '%s-details'%reportid
         
     def buildHtml(self):
         return """
 <input type="hidden" name="reportid" value="%s" />
 <input class="expandbatch" value="+" type="button"/>
-Results"""%self.context.request.form['reportid']
+Results"""%self.request.form['reportid']
         
 class StartReport(KSSAction):
     def doKss(self,core):
-        reportid=int(self.context.request.form['reportid'])
+        reportid=int(self.request.form['reportid'])
         report=DB.ReportTrigger.objects.get(id=reportid)
         if report.reportstate==0:
             report.reportstate=1
@@ -226,8 +226,8 @@ class ProjectReports(BrowserPlusView):
 class Batch(BrowserPlusView):
     processFormButtons=('ChangeState',)
     def batch(self):
-        if 'id' in self.context.request.form:
-            id=int(self.context.request.form['id'])
+        if 'id' in self.request.form:
+            id=int(self.request.form['id'])
         else:
             return None
         return DB.ReportBatch.objects.get(id=id)

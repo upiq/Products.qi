@@ -4,15 +4,15 @@ from qi.sqladmin import models as DB
 class Download(BrowserPlusView):
 
     def __call__(self,*args,**kw):
-        if 'fileid' in self.context.request:
+        if 'fileid' in self.request:
 
             #security goes here
-            target=int(self.context.request['fileid'])
+            target=int(self.request['fileid'])
             filename=self.getFile(target)
             data=open(filename).read()
             displayname=self.baseQuery().get(
                 id=target).displayname
-            RESPONSE=self.context.request.response
+            RESPONSE=self.request.response
             
             if filename.lower().endswith('.xls') or filename.lower().endswith('.xlsx'):
                 RESPONSE.setHeader('Content-Type', 'application/excel')

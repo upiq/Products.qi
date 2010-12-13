@@ -9,7 +9,7 @@ class ViewList(BrowserPlusView):
     processFormButtons=('addteams','removeteams','addmembers','removemembers','addgroups',\
         'removegroups','updatesettings')
     def first(self):
-        self.dblist=DB.MailingList.objects.get(id=int(self.context.request.form['listid']))
+        self.dblist=DB.MailingList.objects.get(id=int(self.request.form['listid']))
 
     def generalUpdate(self):
         self.allusers=self.allUsers()
@@ -172,7 +172,7 @@ class ViewList(BrowserPlusView):
 
 class Overview(BrowserPlusView):
     def first(self):
-        self.dblist=DB.MailingList.objects.get(id=int(self.context.request.form['listid']))
+        self.dblist=DB.MailingList.objects.get(id=int(self.request.form['listid']))
     def listname(self):
         return self.dblist.listname
     def members(self):

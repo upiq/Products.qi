@@ -24,7 +24,7 @@ class MeasureDates(BrowserPlusView):
     
     #Gets the dates for the measures associated with the given form   
     def getMeasureDates(self):
-        """formid = self.context.request.form['inputform']
+        """formid = self.request.form['inputform']
 
         output=[]
         
@@ -34,7 +34,7 @@ class MeasureDates(BrowserPlusView):
         mvals = DB.MeasurementValue.objects.filter(measure__id__in=ids, \
             team=self.context.getDBTeam())
         """
-        formid = int(self.context.request.form['inputform'])
+        formid = int(self.request.form['inputform'])
         mvals=DB.DataDate.objects.filter(project=self.context.getDBProject,form__id=formid).order_by('-period')
         if mvals.count()==0:
             mvals=DB.DataDate.objects.filter(project=self.context.getDBProject(), form__isnull=True).order_by('-period')
@@ -60,7 +60,7 @@ class MeasureDates(BrowserPlusView):
         #date=datetime.combine(date, datetime.time(0))
         #give a huge threshold so we can do date comparison
         forwarddate=datetime.max.date()
-        dbform=DB.Form.objects.get(id=self.context.request.form['inputform'])
+        dbform=DB.Form.objects.get(id=self.request.form['inputform'])
         if dbform.daysforwardwindow is not None:
             forwarddate=(timedelta(dbform.daysforwardwindow)+datetime.now()).date()
         if self.context.getDBTeam().enddate is not None:
@@ -85,7 +85,7 @@ class MeasureDates(BrowserPlusView):
     
     #For display purposes 
     def getFormName(self):
-        formid = self.context.request.form['inputform']
+        formid = self.request.form['inputform']
         theform = DB.Form.objects.get(id=formid)
         return theform.name
 
@@ -140,7 +140,7 @@ class EntryList(BrowserPlusView):
             return False
     
     def getdate(self):
-        form=self.context.request.form
+        form=self.request.form
         return DB.DataDate.objects.get(id=int(form['period']))
     
     #The meat of actually changing the measure values and annotation. 
@@ -205,18 +205,18 @@ class EntryList(BrowserPlusView):
                        
     #Get all the measures for the working form in the selected period.
     def getMeasuresForForm(self):
-        form = self.context.request.form['inputform']
+        form = self.request.form['inputform']
         formmeasure = DB.FormMeasure.objects.filter(form=form).select_related(1).order_by('order')
         return formmeasure
     
     #Gets the value for the given measure, to display in the periodmeasures table.
     def getValueForMeasure(self, measure):
-        form=self.context.request.form
+        form=self.request.form
         #retain existing form information
         if str(measure.id) in form:
             return dict(measure=measure.name,value=form[str(measure.id)][0],annotation=form[str(measure.id)][1])
         try:
-            #period = self.context.request.form['period'].split("/")
+            #period = self.request.form['period'].split("/")
             #idate = datetime(int(period[2]), int(period[0]), int(period[1]))
             idate=self.getdate().period
             result = DB.MeasurementValue.objects.get(measure=measure, team=self.context.getDBTeam(), itemdate=idate)
@@ -226,9 +226,9 @@ class EntryList(BrowserPlusView):
        
         return dict(measure=measure, value=result.value, annotation=result.annotation)
     def getPreviousValueForMeasure(self, measure):
-        form=self.context.request.form
+        form=self.request.form
         try:
-            #period = self.context.request.form['period'].split("/")
+            #period = self.request.form['period'].split("/")
             #idate = datetime(int(period[2]), int(period[0]), int(period[1]))
             idate=self.getdate().period
             result = DB.MeasurementValue.objects. \
@@ -241,7 +241,7 @@ class EntryList(BrowserPlusView):
         
     #Just for displaying purposes
     def getFormName(self):
-        formid = self.context.request.form['inputform']
+        formid = self.request.form['inputform']
         theform = DB.Form.objects.get(id=formid)
         return theform.name
         

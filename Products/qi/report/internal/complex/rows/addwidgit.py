@@ -38,7 +38,7 @@ class AddWidgit(BrowserPlusView):
         self.context.addwidgitobject(added)
         target=self.context[added.id]
         redirectTarget="%s/editblurb"%target.absolute_url()
-        self.context.request.response.redirect(redirectTarget)
+        self.request.response.redirect(redirectTarget)
 
 class DeleteWidgit(BrowserPlusView):
     
@@ -51,4 +51,4 @@ class DeleteWidgit(BrowserPlusView):
         delattr(self.context,deletedid)
         self.context._p_changd=1
         redirectTarget="%s/design"%self.context.charturl()
-        self.context.request.response.redirect(redirectTarget)
+        self.request.response.redirect(redirectTarget)

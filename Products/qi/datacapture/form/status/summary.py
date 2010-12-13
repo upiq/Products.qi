@@ -138,7 +138,7 @@ class FormStatus(BrowserPlusView):
         return [(x.period,x.name) for x in globalnames]
     
     def loadForm(self):
-        formid=self.context.request.form['formid']
+        formid=self.request.form['formid']
         self.form=DB.Form.objects.get(id=formid)
     
     def loadDates(self):
@@ -226,7 +226,7 @@ class Roster(BrowserPlusView):
     def teams(self):
         self.loadExistingRecords()
         """yeilds a list of (list of data) for each team in the current project structured based on what should be in this report"""
-        form=self.context.request.form
+        form=self.request.form
         if 'parentid' in form:
             result=[self.buildteam(team) for team 
                 in DB.Team.objects.get(id=int(form['parentid'])).team_set.all().order_by('name') 
@@ -321,7 +321,7 @@ class Roster(BrowserPlusView):
 
 class ExcelRoster(Roster):
     def __call__(self,*args,**kw):
-        response=self.context.request.response
+        response=self.request.response
         response.setHeader("Content-type","application/vnd.ms-excel")
         response.setHeader("Content-disposition","attachment;filename=teamroster.xls")
         return self.buildExcel()

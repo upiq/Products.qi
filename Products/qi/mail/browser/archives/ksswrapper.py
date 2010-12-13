@@ -6,7 +6,7 @@ class GetThreads(KSSReplaceWrapper):
         return 'threads'
         
     def threads(self):
-        listid=int(self.context.request.form['listid'])
+        listid=int(self.request.form['listid'])
         result= DB.MailingList.objects.get(id=listid).mailthread_set.all()
         return result
 
@@ -22,7 +22,7 @@ class GetMessages(KSSReplaceWrapper):
         return 'messages'
         
     def getMessages(self):
-        threadid=int(self.context.request.form['threadid'])
+        threadid=int(self.request.form['threadid'])
         return DB.Message.objects.filter(thread__id=threadid)
         
     def cleanbody(self, body):

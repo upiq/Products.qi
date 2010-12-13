@@ -12,14 +12,14 @@ from Products.qi.util.ksswrapper import KSSAddWrapper, SimpleResponse
 class UnSubscribe(KSSAction):
 
     def doKss(self, core):
-        listid=int(self.context.request.form['listid'])
+        listid=int(self.request.form['listid'])
         dbuser=DB.MailingListSubscriber.objects.filter(list__id=listid,
             userid=self.user())
         dbuser.delete()
         
 class Subscribe(KSSAction):
     def doKss(self, core):
-        listid=int(self.context.request.form['listid'])
+        listid=int(self.request.form['listid'])
         dbuser=DB.MailingListSubscriber()
         dbuser.list=DB.MailingList.objects.get(id=listid)
         dbuser.userid=self.user()

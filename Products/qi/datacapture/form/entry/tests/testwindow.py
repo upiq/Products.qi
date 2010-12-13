@@ -44,7 +44,7 @@ class WindowTest(unittest.TestCase):
         self.request=FakeRequest()
         self.request.form={}
         self.context=FakeContext()
-        self.context.request=self.request
+        self.request=self.request
         self.context.dbteamobj=self.teamobj
         self.request.form['inputform']=None
         result=entry.MeasureDates(self.context,self.request)

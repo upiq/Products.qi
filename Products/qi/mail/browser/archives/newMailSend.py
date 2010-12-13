@@ -28,9 +28,9 @@ class MailingLists(BrowserPlusView):
 #handles display of threads page in archive
 class Threads(BrowserPlusView):
     def getThreads(self):
-        if 'id' not in self.context.request.form:
+        if 'id' not in self.request.form:
             return ()
-        id=int(self.context.request.form['id'])
+        id=int(self.request.form['id'])
         return DB.MailingList.objects.get(id=id).mailthread_set.all()
         
     def firstPoster(self,thread):
@@ -40,23 +40,23 @@ class Threads(BrowserPlusView):
         return "None"
     
     def listname(self):
-        if 'id' not in self.context.request.form:
+        if 'id' not in self.request.form:
             return ()
-        id=int(self.context.request.form['id'])
+        id=int(self.request.form['id'])
         return DB.MailingList.objects.get(id=id).listname
         
 #handles display of messages page for archives
 class Messages(BrowserPlusView):
     def getMessages(self):
-        if 'id' not in self.context.request.form:
+        if 'id' not in self.request.form:
             return ()
-        id=int(self.context.request.form['id'])
+        id=int(self.request.form['id'])
         return DB.MailThread.objects.get(id=id).message_set.all()
         
     def subject(self):
-        if 'id' not in self.context.request.form:
+        if 'id' not in self.request.form:
             return None
-        id=int(self.context.request.form['id'])
+        id=int(self.request.form['id'])
         return DB.MailThread.objects.get(id=id).subject
         
     def cleanbody(self, body):
@@ -66,8 +66,8 @@ class Messages(BrowserPlusView):
         return result.replace("\n","<br />")
 
     def mailinglist(self):
-        if 'id' not in self.context.request.form:
+        if 'id' not in self.request.form:
             return False
-        id= int(self.context.request.form['id'])
+        id= int(self.request.form['id'])
         return DB.MailThread.objects.get(id=id).list
         

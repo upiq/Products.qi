@@ -19,7 +19,7 @@ class ContactView(BrowserPlusView):
             self.addError('base','This project has no managers')
         self.required('subject')
         self.required('message')
-        form=self.context.request.form
+        form=self.request.form
         code_generated = self.context.portal_captcha.getGeneratedCaptchaCode(form['hidden_captcha_code'])
         if code_generated!=form['code_entered_by_user']:
             self.addError('captcha','Please enter the code from the image on the left')

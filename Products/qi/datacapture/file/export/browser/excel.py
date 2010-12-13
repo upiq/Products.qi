@@ -12,7 +12,7 @@ class ExcelExport(DetailView):
     colstart=2
     rowstart=0
     def __call__(self,*args,**kw):
-        response=self.context.request.response
+        response=self.request.response
         response.setHeader("Content-type","application/vnd.ms-excel")
         response.setHeader("Content-disposition","attachment;filename=results.xls")
         return self.buildExcel(self.applyFilters(self.getBaseQuery()))

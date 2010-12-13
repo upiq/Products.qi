@@ -66,7 +66,7 @@ class FormDesign(BrowserPlusView):
         if self.dbform is not None:
             return self.dbform
         try:
-            return DB.Form.objects.get(id=self.context.request.form['formid'])
+            return DB.Form.objects.get(id=self.request.form['formid'])
         except Exception, e:
             print 'exception occured %s'%e
             return None
@@ -81,7 +81,7 @@ class AllForms(BrowserPlusView):
                 self.addError('base','Users have submitted data with this form, it cannot be deleted')
     
     def action(self, form, action):
-        deleted=DB.Form.objects.get(id=int(self.context.request.form['deleted']))
+        deleted=DB.Form.objects.get(id=int(self.request.form['deleted']))
         deleted.delete()
     
     def allforms(self):

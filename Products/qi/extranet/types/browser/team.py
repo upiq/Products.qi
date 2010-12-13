@@ -64,7 +64,7 @@ class TeamAddForm(base.AddForm):
         return super(TeamAddForm,self).validate(action,data)
             
     def teamAlreadyExists(self):
-        form=self.context.request.form
+        form=self.request.form
         if 'form.title' in form:
             teamname=form['form.title']
             project=self.context.getProject()
@@ -108,7 +108,7 @@ class SubTeamAddForm(base.AddForm):
         return super(SubTeamAddForm,self).validate(action,data)
 
     def teamAlreadyExists(self):
-        form=self.context.request.form
+        form=self.request.form
         if 'form.title' in form:
             teamname=form['form.title']
             project=self.context.getProject()
@@ -349,18 +349,18 @@ class AvailableReportsView(BrowserView):
             return self.index(self, *args, **kw)
         
     def update(self, *arge, **kw):
-        if 'target' in self.context.request:
-            if not self.validate(self.context.request):
+        if 'target' in self.request:
+            if not self.validate(self.request):
                 return True
             #security goes here
-            target=self.context.request['target']
+            target=self.request['target']
             #turn the file into bytes
             pdf=open(target).read()
             
             pieces=target.split('/')
             name=pieces[len(pieces)-1]
             
-            RESPONSE=self.context.request.response
+            RESPONSE=self.request.response
             RESPONSE.setHeader("Content-Length",len(pdf))
             RESPONSE.setHeader('Content-Type', 'application/pdf')
             RESPONSE.setHeader('Content-disposition','inline; filename="%s"' % (name))

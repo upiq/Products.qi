@@ -3,7 +3,7 @@ from qi.sqladmin import models as DB
 
 class HistoryView(BrowserPlusView):
     def value(self):
-        form=self.context.request.form
+        form=self.request.form
         if 'valueid' not in form:
             return None
         try:

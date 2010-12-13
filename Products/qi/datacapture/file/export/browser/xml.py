@@ -16,13 +16,13 @@ class XMLExport(DetailView):
         from Products.qi.datacapture.file.export.exportthread import XMLExportThread
         batchjob=XMLExportThread(query, '/'.join(self.context.getPhysicalPath()))
         batchjob.start()
-        self.context.request.response.redirect(self.context.absolute_url()+'/viewdata')
+        self.request.response.redirect(self.context.absolute_url()+'/viewdata')
         
         return
 
 class GetExportResult(BrowserPlusView):
     def __call__(self):
-        response = self.context.request.response
+        response = self.request.response
         response.setHeader("Content-type","text/xml")
         response.setHeader("Content-disposition","attachment;filename=export.xml")
         return self.context.lastexport
@@ -39,7 +39,7 @@ class OldXMLExport(DetailView):
         result= "<dataset>\n"+self.buildseries(query)+"\n</dataset>"
 
         
-        response = self.context.request.response
+        response = self.request.response
         response.setHeader("Content-type","text/xml")
         response.setHeader("Content-disposition","attachment;filename=export.xml")
         #request.response.setHeader("Pragma","no-cache")
