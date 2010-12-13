@@ -6,12 +6,14 @@
     <dependency step="componentregistry"/>
     Import IMAP settings
  </import-step>
+<!--
  <import-step id="rdb_connection"
               version="20080401-01"
               handler="Products.qi.setuphandlers.setupRDBConnection"
               title="RDB Connection Setup">
     Setup RDB (ZPsycopgDA instance) connection.
  </import-step>
+-->
  <!--
  <import-step id="CMFPlacefulWorkflow"
               version="20071003-01"
