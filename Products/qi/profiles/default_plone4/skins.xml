@@ -11,10 +11,10 @@
      directory="Products.qi:skins/qi-macros"/>
  <object name="qi_plone4_overrides"
      meta_type="Filesystem Directory View"
-     directory="Products.qi:skins/qi_plone_overrides"/>
- <skin-path name="Plone Default">
+     directory="Products.qi:skins/qi_plone4_overrides"/>
+ <skin-path name="Sunburst Theme">
   <layer name="qi-mail" insert-after="custom" />
-  <layer name="qi_plone_overrides" insert-after="custom" />
+  <layer name="qi_plone4_overrides" insert-after="custom" />
   <layer name="Qi-Images" insert-after="custom" />
  </skin-path>
 </object>

@@ -43,6 +43,9 @@
         name="qi_plone_overrides"/>
 
     <cmf:registerDirectory
+        name="qi_plone4_overrides"/>
+
+    <cmf:registerDirectory
         name="qi-mail"/>
 
 	<cmf:registerDirectory
