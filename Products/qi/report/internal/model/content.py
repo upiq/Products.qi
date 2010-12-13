@@ -13,7 +13,7 @@ from OFS.SimpleItem import SimpleItem
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.content.container import Container
-from Products.Archetypes.interfaces._referenceable import IReferenceable
+from Products.Archetypes.interfaces import IReferenceable
 
 from Products.qi.util import PLONE_VERSION
 

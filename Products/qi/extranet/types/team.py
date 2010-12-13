@@ -13,7 +13,7 @@ from Products.qi.util.logger import logger
 from Products.qi.util import PLONE_VERSION
 
 from Products.CMFCore.utils import getToolByName
-from Products.Archetypes.interfaces._referenceable import IReferenceable
+from Products.Archetypes.interfaces import IReferenceable
 
 from Products.qi.extranet.viewlets.menu.menu import MenuItem
 
