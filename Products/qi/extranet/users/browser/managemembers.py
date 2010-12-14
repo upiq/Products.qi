@@ -1,4 +1,3 @@
-
 from zope.component import createObject
 from zope.formlib import form
 
@@ -8,6 +7,9 @@ from Acquisition import aq_inner
 from zExceptions import BadRequest
 #from Products.Five.browser import BrowserView
 from Products.qi.util.general import BrowserPlusView
+
+from DateTime import DateTime
+from Products.ATContentTypes.utils import DT2dt
 from Products.CMFCore.utils import getToolByName
 
 from plone.app.form import base
@@ -91,19 +93,18 @@ class TeamMembersView(BrowserPlusView):
              ], compareMembers)
 
     def isUserOnline(self, user):
-        ntime = datetime.now()
         acl = self.context.acl_users
         user = acl.getUserById(user)
-        props = acl.mutable_properties.getPropertiesForUser(user).propertyItems() #gets user property sheet
-        lact = dict([(m[0],m[1]) for m in props])['last_activity'] #turn list of tuples into dict
-                                                                    #to get user's last activity
-        if lact is not '':
-            #it seems wrong to go from a object of a date to a string to a slightly different
-            #date object, but it appears to be necessary
-            curtime = datetime(*time.strptime(str(lact)[:10],'%Y/%m/%d')[:6])
-            if((ntime - curtime).seconds <= 900): #any activity within the last 15 mins?
+        user_prop_sheet = acl.mutable_properties.getPropertiesForUser(user)
+        props = dict(user_prop_sheet.propertyItems())
+        login_time = props.get('last_activity', props.get('login_time', None))
+        if isinstance(login_time, DateTime):
+            login_time = DT2dt(login_time)
+            # get seconds since login via timedelta
+            since_login = datetime.now(login_time.tzinfo) - login_time
+            since_login = abs(since_login.seconds + since_login.days*86400)
+            if since_login <= 900:
                 return True
-
         return False
 
 

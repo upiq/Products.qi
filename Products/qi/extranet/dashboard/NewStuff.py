@@ -30,8 +30,7 @@ class MyTeamspace(BrowserPlusView):
         acl = self.context.acl_users
         user = acl.getUserById(user)
         props = acl.mutable_properties.getPropertiesForUser(user).propertyItems() #gets user property sheet
-        lact = dict([(m[0],m[1]) for m in props])['last_activity'] #turn list of tuples into dict
-                                                                    #to get user's last activity
+        lact = dict(props).get('last_activity', '') # '' if property absent
         if lact is not '':
             curtime = DateTime(lact)
             if(time - curtime <= .01): #any activity within the last 15 mins?

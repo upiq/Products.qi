@@ -25,7 +25,7 @@ class CurrentUsers(BrowserPlusView):
         for user in acl.getUsers(): #for every user, get their last activity
             props = acl.mutable_properties.getPropertiesForUser(user).propertyItems()
 
-            lact = dict([(m[0],m[1]) for m in props])['last_activity']
+            lact = dict([(m[0],m[1]) for m in props]).get('last_activity', '')
 
             if lact is not '':
                 curtime = DateTime(lact)
