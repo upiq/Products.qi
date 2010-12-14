@@ -4,7 +4,7 @@
 						 required required | python:False;
 						 description description | string:;
 						 valueexists exists: value;
-						 value python:view.context.request.form.get(inputkey,valueexists and value or None);
+						 value python:view.request.form.get(inputkey,valueexists and value or None);
                          defaultvalue defaultvalue | string:-1;
 						 defaulttext defaulttext | nothing;
 						 choices choices | python:();">

@@ -4,7 +4,7 @@
 						 required required | False;
 						 description description | string:;
 						 valueexists exists: value;
-						 value python:view.context.request.form.get(inputkey,valueexists and value or '');
+						 value python:view.request.form.get(inputkey,valueexists and value or '');
 						 islargetext islargetext | python:False">
 						
 					<div tal:attributes="class python:(errors and len(errors)>0) and 'error field' or 'field'">

@@ -8,7 +8,7 @@
 
 <div metal:fill-slot="main"
 	tal:define="pageparts view/getCurrentDetails;
-				form view/context/request/form;
+				form view/request/form;
 				page python:pageparts[0];
 				pagelist python:pageparts[1]">
 <div>
@@ -76,12 +76,12 @@
 	</fieldset>
 	
 	<form name="xlsform" action="exportexcel" method="get">
-		<tal:r define="form python:view.context.request.form" repeat="key form">
+		<tal:r define="form python:view.request.form" repeat="key form">
 			<input type="hidden" tal:attributes="name key; value python:form[key];" />
 		</tal:r>
 	</form>
     <form name="xmlform" action="exportxml" method="post">
-		<tal:r define="form python:view.context.request.form" repeat="key form">
+		<tal:r define="form python:view.request.form" repeat="key form">
 			<input type="hidden" tal:attributes="name key; value python:form[key];" />
 		</tal:r>
 	</form>

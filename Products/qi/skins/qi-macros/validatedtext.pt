@@ -3,7 +3,7 @@
 						 fieldtext fieldtext | inputkey;
 						 required required | False;
 						 description description | string:;
-						 value value | python:view.context.request.form.get(inputkey,'');
+						 value value | python:view.request.form.get(inputkey,'');
 						 islargetext islargetext | python:False">
 						 
 					<div tal:attributes="class python:len(errors>0) and 'error field' or 'field'">

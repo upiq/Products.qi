@@ -10,8 +10,8 @@
 <body>
 <div metal:fill-slot="main">
 	<form>
-		<input type="hidden" id="teamid" tal:attributes="value python:view.context.request.form['teamid']" />
-		<input type="hidden" id="measureid" tal:attributes="value python:view.context.request.form['measureid']" />
+		<input type="hidden" id="teamid" tal:attributes="value python:view.request.form['teamid']" />
+		<input type="hidden" id="measureid" tal:attributes="value python:view.request.form['measureid']" />
 	</form>
 	<!-- amline script-->
 	   <script type="text/javascript" src="amline/swfobject.js"></script>

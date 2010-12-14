@@ -72,7 +72,7 @@
 
 <div metal:fill-slot="main">
 
-	<a tal:attributes="href python:'measuredates.html?period=%s\x26inputform=%s'%(view.context.request.form['period'],view.context.request.form['inputform'])">Back to dates</a>
+	<a tal:attributes="href python:'measuredates.html?period=%s\x26inputform=%s'%(view.request.form['period'],view.request.form['inputform'])">Back to dates</a>
     <h3>Enter Data</h3>
 	
 	<fieldset>
@@ -81,7 +81,7 @@
 				<tal:d content="python:view.getdate().name" />
 		</legend>
 	
-	<div tal:condition="python:view.isSubmitted(view.context.request.form)" >
+	<div tal:condition="python:view.isSubmitted(view.request.form)" >
 		Your changes were successfully submitted. <img src="confirm_icon.gif" /> 
 	</div>
 	<a href="javascript:showhidden('previousValue')">Show previous values</a>
@@ -154,8 +154,8 @@
 			</tr>
 		    </tal:measures>
 	    </table>
-		<input type="hidden" name="period" tal:attributes="value python:view.context.request.form['period']" />
-		<input type="hidden" name="inputform" tal:attributes="value python:view.context.request.form['inputform']"/>
+		<input type="hidden" name="period" tal:attributes="value python:view.request.form['period']" />
+		<input type="hidden" name="inputform" tal:attributes="value python:view.request.form['inputform']"/>
 		
 		<br />
 		
