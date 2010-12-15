@@ -4,11 +4,21 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="Products.qi">
     
+
+    <browser:viewlet
+        name="qi.menu4"
+        description="QI menu for Plone 4"
+        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+        class=".menuviewlet.QIMenu"
+        template="qi-menu4.pt"
+        permission="zope2.View"
+        />
     
     <browser:viewlet
         name="qi.menu"
         manager="plone.app.layout.viewlets.interfaces.IPortalTop"
         class=".menuviewlet.QIMenu"
+        template="qi-menu.pt"
         permission="zope2.View" 
         />
         

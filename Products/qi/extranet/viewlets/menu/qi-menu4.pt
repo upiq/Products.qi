@@ -1,0 +1,33 @@
+
+<tal:menu condition="view/hasMenus">
+<div id="appmenu" class="appmenu">
+  <tal:menus repeat="menu view/getMenus">
+    <dl class="actionMenu appmenu-group" id=""
+        tal:condition="menu/hasPermission"
+        tal:attributes="id python:'menu-%s' % menu.name.replace(' ','_')">
+      <dt class="actionMenuHeader">
+        <a tal:content="menu/name"
+           tal:attributes="href menu/target">menu</a>
+      </dt>
+      <tal:childMenus condition="menu/hasChildren">
+      <dd class="actionMenuContent">
+        <ul class="appmenu-items">
+          <tal:menuitems repeat="item menu/items">
+            <li tal:condition="item/hasPermission">
+                <a tal:content="item/name"
+                   tal:attributes="href item/link"
+                   tal:condition="item/islinked">
+                    menu item
+                </a>
+                <span tal:condition="python: not(item.name.startswith('--') or item.islinked)">non-linked</span>
+                <hr class="divider" tal:condition="python: item.name.startswith('--') and not item.islinked" />
+            </li>
+          </tal:menuitems>
+        </ul>
+      </dd>
+      </tal:childMenus>
+    </dl>
+  </tal:menus>
+  <div class="appmenu-end"> </div>
+</div>
+</tal:menu>

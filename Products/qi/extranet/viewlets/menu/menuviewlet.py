@@ -7,7 +7,11 @@ class IMenu(IViewletManager):
     pass
 
 class QIMenu(ViewletBase):
-    render = ViewPageTemplateFile('qi-menu.pt')
+    #render = ViewPageTemplateFile('qi-menu.pt')
+    
+    def render(self, *args, **kw):
+        return self.index(*args,**kw)
+    
     def hasMenus(self):
         return True
 

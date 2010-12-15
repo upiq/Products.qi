@@ -35,7 +35,7 @@ class MenuItem:
             return True
         else:
             return False
-    def __init__(self,context=None,target="javascript:void()",
+    def __init__(self,context=None,target="javascript:void(0)",
                 name="Untitled Menu Option", permission=None):
         self.context=context
         self.target=target

@@ -2,7 +2,7 @@
 <object>
   <!-- inject these viewlets relative to existing viewlet names: -->
   <order manager="plone.portaltop" skinname="Plone Default">
-    <viewlet name="qi.menu" insert-after="plone.header" />
+    <viewlet name="qi.menu4" insert-after="plone.header" />
   </order>
   <order manager="plone.portalheader" skinname="Plone Default">
     <viewlet name="qi.maintenance" insert-after="plone.logo" />
@@ -25,5 +25,7 @@
          and ZCML Plone-version-agnostic, and deal with differences
          in profile setup xml like this... -->
     <viewlet name="plone.path_bar" />
+    <!-- hide plone3 version of QI menu from Plone 4 setup -->
+    <viewlet name="qi.menu" />
   </hidden>
 </object>

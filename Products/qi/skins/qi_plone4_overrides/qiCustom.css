@@ -1,14 +1,3 @@
-div.qimenus, ul.qimenus, table.qimenus, a:link.qimenus, a:visited.qimenus
-{
-text-align: left;
-list-style-type: none;
-text-decoration: none;
-color: #C3E2DD;
-background-color: #0E6775;
-/* line-height: 17.6px; */
-}
-
-
 tr.bordered
 {
 border-top-width: 1px;
@@ -28,59 +17,6 @@ td.managedwidth
 width: 150px;
 }
 
-a.qimenus
-{
-margin: 2px 0 2px 0;
-}
-
-dt.actionMenuHeader a.qimenus
-{
-margin: 0;
-}
-
-a:link.qimenus, 
-a:visited.qimenus
-{
-background-color: transparent;
-}
-
-li:hover.qimenus,
-tr:hover.qimenus,
-a:hover.qimenus
-{
-background-color: #011A23
-}
-
-dt.actionMenuHeader a:link.qimenus, 
-dt.actionMenuHeader a:visited.qimenus,
-dt.actionMenuHeader li:hover.qimenus,
-dt.actionMenuHeader tr:hover.qimenus,
-dt.actionMenuHeader a:hover.qimenus,
-dl.actionMenu.qimenus,
-dd.qimenus
-{
-background-color: #0E6775;
-}
-
-div.qimenus
-{
-float: left;
-}
-
-
-
-li.qimenus,
-tr.qimenus
-{
-background-color: #0E6775;
-/*border: 1px solid DarkSeaGreen;*/
-color: #C3E2DD;
-min-width: 7em;
-float: left;
-z-index:100;
-margin-bottom: 0px
-}
-
 dd.border
 {
 border: 1px solid #011A23;
@@ -89,87 +25,6 @@ border: 1px solid #011A23;
 a.border
 {
     margin-left: 5px;
-}
-
-ul.qitopmenu,
-table.qitopmenu
-{
-margin-top: 0pt
-}
-
-
-
-span.qimenu
-{
-z-index:100;
-float: left;
-}
-
-ul.qiMenuList,
-table.qiMenuList
-{
-z-index:100;
-background-color: #0E6775;
-
-}
-
-
-dl.qimenus, 
-dt.qimenus, 
-dd.qimenus li.qimenus,
-dd.qimenus tr.qimenus
-{
-/* min-width: 15em; */
-width: 200px;
-}
-
-dd.qiactionMenuContent
-{
-display:none;
-height:auto;
-margin:2pt 0 0 0;
-padding:0pt;
-position:absolute;
-right:-1px;
-top:1.2em;
-z-index:100;
-}
-
-.actionMenu.deactivated .qiactionMenuContent {
-display:none !important;
-}
-
-
-.actionMenu.activated .qiactionMenuContent {
-display:block !important;
-}
-
-.actionMenu.activated .qiactionMenuContent {
-border-collapse:collapse;
-border-spacing:0pt;
-display:table !important;
-}
-
-.actionMenu .qiactionMenuContent ul,
-.actionMenu .qiactionMenuContent table {
-background:#0E6775 none repeat scroll 0%;
-border-color:#013F4C;
-border-style:none solid solid;
-border-width:1px;
-display:block;
-margin:-2px 0pt 0pt;
-padding:0pt;
-}
-
-.qicontentActions {
-background-color:#0E6775;
-color:#578308;
-height:1.6em;
-padding:0pt 0pt 0pt 1em;
-position:relative;
-text-align:right;
-text-transform:none;
-z-index:100;
 }
 
 #portal-footer a:visited {
@@ -197,11 +52,6 @@ table.mailArchive td
 padding: 3px;
 vertical-align: top;
 } 
-
-#portal-header {
-margin-bottom: 2px;
-}
-
 
 div.warning {
 background-color:#FFDD00;
@@ -232,7 +82,19 @@ border:1px solid #888888;
 }
 
 .state-private {
-color: Red !important;
+    color: Red !important;
+}
+.state-visible {
+    color: #74AE0B !important;
+}
+.state-published {
+    color: #436976 !important;
+}
+.state-pending {
+    color: #FFA500 !important;
+}
+.state-expired {
+    color: Red !important;
 }
 
 .state-sub_team
@@ -242,15 +104,162 @@ color: Red !important;
 
 .state-project_private,
 .state-restrict_to_managers {
-color: DarkGoldenrod !important;
+  color: DarkGoldenrod !important;
 }
 
 .state-restrict_to_team {
-color: DarkGreen !important;
+  color: DarkGreen !important;
 }
 
 .state-visible {
-color: Blue !important;
+   color: Blue !important;
 }
 
+/* alternate app menu customization for Plone 4/sunburst: */
+
+div.appmenu dl {
+    float:left;
+    padding:0.3em 1em;
+}
+
+div.appmenu dt.actionMenuHeader a:after {
+    content: " ▼";
+    font-size:80%;
+    padding-left:0.5em;
+}
+
+div.appmenu {
+    width:99%;
+    background-color:#427597;
+    display:block;
+    position:relative;
+    z-index:6;
+    width:100%;
+    border-bottom:0.1em solid #000;
+    border-top:0.1em solid #ddd;
+    padding:0;
+    margin-bottom:0.2em;
+    font-size:90%;
+}
+
+/* personaltools menu above qi app menu */
+#portal-header { z-index:7 !important; }
+
+div.appmenu dl dd {
+    background-color:#427597;
+    border-bottom:0.5em solid #427597;
+}
+div.appmenu dl dt a {
+    color:#fff;
+}
+div.appmenu dl.activated dt a {
+    color:#ffc;
+}
+div.appmenu dl dd {
+    padding-top:0.3em;
+    color:#fff;
+}
+div.appmenu dl dd ul li {
+    line-height:180%;
+}
+div.appmenu dl dd ul li hr {
+    width:96%;
+    height:1px;
+    border:none;
+    background-color:#689;
+    color:#999;
+    margin-left:0.25em;
+}
+div.appmenu dl dd ul li a {
+    padding-left:0.5em;
+    padding-right:0;
+    color:#fff;
+}
+div.appmenu dl dd ul li a:hover {
+    padding-left:0.2em;
+    padding-right:0.3em;
+    color:#427597;
+    background-color:#ddd;
+}
+
+div.appmenu-end { clear:both; margin:0; padding:0; }
+
+/* various sunburst customizations: */
+
+div#viewlet-above-content {
+  margin-left:0.25em;
+  margin-bottom:-0.5em;
+  padding:0.5em;
+  padding-bottom:0.5em;
+  padding-left:0.5em;
+  font-size:90%;
+  font-weight:bold;
+  color:#9bd;
+  border: 1px solid #ccb;
+  background-color:#ffd;
+}
+
+div#content {
+  margin-left:1em;
+}
+
+div#portal-columns div.documentEditable {
+    border: 0.1em solid #aaa;
+    background-color: #fff;
+}
+
+#content-views {
+    background-color: #444 !important;
+}
+
+div.contentActions ul#contentActionMenus {
+    background-color: #112;
+}
+
+div.contentActions ul#contentActionMenus li dl a {
+    background-color: #112;
+}
+
+div.contentActions ul#contentActionMenus li dl dd.actionMenuContent a {
+   padding-left:0.5em;
+}
+
+div.contentActions ul#contentActionMenus li dl dd.actionMenuContent a:hover {
+   color:#000;
+   padding-left:0.25em;
+   padding-right:0.25em;
+}
+
+div.contentActions ul#contentActionMenus li dd.actionMenuContent {
+   background-color:#112;
+   border-bottom:0.5em solid #112;
+}
+
+div#edit-bar {
+    margin-top: -0.6em;
+    margin-left: -0.1em;
+    margin-right: 0;
+    padding-bottom: 0;
+    background-color: #444;
+    border: 0.25em solid #444;
+    border-bottom:0.1em solid #ddd;
+}
+
+
+body {
+  background-color:#fff;
+}
+
+div#visual-portal-wrapper {
+  background-color:#fff;
+}
+
+
+div#portal-top {
+  background-color:#fff;
+}
+
+div#portal-columns {
+  background-color:#fff;
+}
 
