@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="IMapHost" meta_type="IMap Mail Host"
+   imap_host="imap.ursloagic.com" imap_port="993" imap_pass=""
+   imap_userid="whatever@ursloagic.com"/>
