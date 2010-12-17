@@ -93,6 +93,7 @@ class FormStatus(BrowserPlusView):
     def first(self):
         self.loadForm()
         self.runquery()
+        print self.dates #TODO:remove/debug
         #self.loadDates()
         #self.loadTeams()
     
@@ -133,7 +134,7 @@ class FormStatus(BrowserPlusView):
         project=self.context.getDBProject()
         localnames=DB.DataDate.objects.filter(project=project, form=self.form)
         if localnames.count()>0:
-            return [x.name for x in localnames]
+            return [(x.period,x.name) for x in localnames]
         globalnames=DB.DataDate.objects.filter(project=project, form__isnull=True)
         return [(x.period,x.name) for x in globalnames]
     
