@@ -15,5 +15,5 @@ class TagTeams(BrowserPlusView):
                     added.save()
     
     def existingtags(self):
-        return DB.TeamTag.objects.filter(team__project=self.context.getDBProject()).select_related(1)
+        return DB.TeamTag.objects.filter(team__project=self.context.getDBProject()).select_related(depth=1)
         

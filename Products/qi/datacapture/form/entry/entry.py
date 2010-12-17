@@ -146,7 +146,7 @@ class EntryList(BrowserPlusView):
     #The meat of actually changing the measure values and annotation. 
     def changeMeasures(self, form):
         args = form
-        time = datetime.now().strftime("%m/%d/%Y")
+        today = datetime.now().date()
         #period = args['period'].split("/")
         idate = self.getdate().period
         #idate = date(int(period[2]), int(period[0]), int(period[1]))
@@ -167,7 +167,7 @@ class EntryList(BrowserPlusView):
                           args[i][1], mv.reportdate, mv.tfile, mv.form)
                           
                     mv.itemdate=idate
-                    mv.reportdate=time
+                    mv.reportdate=today
                     mv.value=args[i][0]
                     mv.annotation = args[i][1]
                     mv.team=self.context.getDBTeam()
@@ -176,7 +176,7 @@ class EntryList(BrowserPlusView):
                     
                 except DB.MeasurementValue.DoesNotExist:
                     mv = DB.MeasurementValue.objects.create( \
-                        measure=m, value=args[i][0], reportdate=time, itemdate=idate)
+                        measure=m, value=args[i][0], reportdate=today, itemdate=idate)
                     mv.annotation = args[i][1]
                     mv.team=self.context.getDBTeam()
                     mv.form = formsubmit
@@ -206,7 +206,7 @@ class EntryList(BrowserPlusView):
     #Get all the measures for the working form in the selected period.
     def getMeasuresForForm(self):
         form = self.request.form['inputform']
-        formmeasure = DB.FormMeasure.objects.filter(form=form).select_related(1).order_by('order')
+        formmeasure = DB.FormMeasure.objects.filter(form=form).select_related(depth=1).order_by('order')
         return formmeasure
     
     #Gets the value for the given measure, to display in the periodmeasures table.
