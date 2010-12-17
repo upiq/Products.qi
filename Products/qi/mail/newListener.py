@@ -184,10 +184,18 @@ class MailListener(Thread):
         
         rejectAddresses=[x.strip() for x in self.context2.IMapHost.bounce_addr.split(',')]
         sender=self.context2.MailHost
+        portal = getToolByName(self.context2, 'portal_url').getPortalObject()
+        from_addr = portal.getProperty('email_from_address', '')
+        if not from_addr:
+            from_addr = 'admin@qiteamspace.com'
 
         if len(rejectAddresses)>0:
-            errormessage="From: <%s>\nTo: %s\nSubject: Rejected mail\n\n the following was rejected because %s\n\n%s"%('admin@qiteamspace.com',
-                            'Nobody',reason,str(message))
+            errormessage="From: <%s>\nTo: %s\nSubject: Rejected mail\n\n the"
+                         " following was rejected because %s\n\n%s" % (
+                            from_addr,
+                            'Nobody',
+                            reason,
+                            str(message))
             print errormessage
             sender.send(errormessage,rejectAddresses)
         
