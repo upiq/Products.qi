@@ -93,7 +93,6 @@ class FormStatus(BrowserPlusView):
     def first(self):
         self.loadForm()
         self.runquery()
-        print self.dates #TODO:remove/debug
         #self.loadDates()
         #self.loadTeams()
     
