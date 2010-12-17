@@ -29,8 +29,10 @@ class XMLExportThread(Thread):
         #app=Zope2.app()
         #print 'app gotted'
     def getContext(self):
-        from Products.qi.mail.newListener import clientport
-        self.storage=ZEO.ClientStorage.ClientStorage(('localhost', clientport))
+        from Products.qi.util.config import ZEO_ADDRESS
+        zeoaddr = ZEO_ADDRESS.split(':')        # hostname:portnum
+        zeoaddr = (zeoaddr[0], int(zeoaddr[1])) # port: str->int
+        self.storage=ZEO.ClientStorage.ClientStorage(zeoaddr)
         self.db=ZopeDB(self.storage)
         self.connection=self.db.open()
         self.root=self.connection.root()
