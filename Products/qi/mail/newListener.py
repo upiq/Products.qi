@@ -20,8 +20,8 @@ from Products.CMFPlone.Portal import PloneSite
 from Products.MailHost.interfaces import IMailHost
 from Products.qi.util.utils import getProjectsInContext, getTeamsInContext
 from Products.qi.util.logger import maillog as logger
+from Products.qi.util.config import ZEO_ADDRESS
 
-clientport=8288
 zopeport=9995
 from Products.qi.util.thread import profile_on
 
@@ -46,7 +46,9 @@ class MailListener(Thread):
         #we'd simply like to make sure that we don't break anything by profiling this thread
         #we can still clear it later?
         logger.logText("booting up the mail listener")
-        self.storage=ZEO.ClientStorage.ClientStorage(('localhost', clientport))
+        zeoaddr = ZEO_ADDRESS.split(':')        # hostname:portnum
+        zeoaddr = (zeoaddr[0], int(zeoaddr[1])) # port: str->int
+        self.storage=ZEO.ClientStorage.ClientStorage(zeoaddr)
         self.db=ZopeDB(self.storage)
         self.connection=self.db.open()
         self.root=self.connection.root()
