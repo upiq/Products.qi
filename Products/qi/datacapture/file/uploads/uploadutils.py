@@ -1,10 +1,16 @@
-from Products.qi.util.lib.pyExcelerator import ImportXLS
 import datetime
-from qi.sqladmin import models as DB
 import random
 import os
 import os.path
 import time
+
+from Products.qi.util.lib.pyExcelerator import ImportXLS
+from Products.qi.util.config import PathConfig
+from qi.sqladmin import models as DB
+
+
+VARPATH = PathConfig().get('var', 'var')
+
       
 def fromExcelDate(number):
     #correct python's library by 2 days
@@ -45,7 +51,7 @@ def makeFile(originalfilename, fileobject,extension, group):
     datedname="%s_%s"%(str(datetime.datetime.now()),trimmedname)
     
     filename='%s.%s'%(datedname,extension)
-    folder='var/qiteamspace/uploads/%s'%group
+    folder=os.path.join(VARPATH, 'qiteamspace/uploads/%s'%group)
     if not os.path.isdir(folder):
         os.makedirs(folder)
     path='%s/%s'%(folder,filename)

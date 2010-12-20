@@ -190,7 +190,7 @@ class MailListener(Thread):
             from_addr = 'admin@qiteamspace.com'
 
         if len(rejectAddresses)>0:
-            errormessage="From: <%s>\nTo: %s\nSubject: Rejected mail\n\n the"
+            errormessage="From: <%s>\nTo: %s\nSubject: Rejected mail\n\n the"\
                          " following was rejected because %s\n\n%s" % (
                             from_addr,
                             'Nobody',

@@ -1,11 +1,17 @@
 from datetime import datetime
+import os
 import sys
 import traceback
+
 from django.db import connection
 
+from Products.qi.util.config import PathConfig
+LOGPATH = PathConfig().get('log', 'log') 
+
+
 class LogHandler:
-    target="log/qiteamspace.log"
-    globalerror=open('log/errorlist.log','a')
+    target=os.path.join(LOGPATH, 'qiteamspace.log')
+    globalerror=open(os.path.join(LOGPATH, 'errorlist.log'),'a')
     def bootup(self):
         self.lasttime=datetime.now()
         self.out=open(self.target,'a')
@@ -57,17 +63,17 @@ logger=LogHandler()
 logger.bootup()
 
 actionlog=LogHandler()
-actionlog.target="log/actions.log"
+actionlog.target=os.path.join(LOGPATH, "actions.log")
 actionlog.bootup()
 
 maillog=LogHandler()
-maillog.target="log/mailinglist.log"
+maillog.target=os.path.join(LOGPATH, "mailinglist.log")
 maillog.bootup()
 
 importlog=LogHandler()
-importlog.target="log/import.log"
+importlog.target=os.path.join(LOGPATH, "import.log")
 importlog.bootup()
 
 projectlog=LogHandler()
-projectlog.target="log/projects.log"
+projectlog.target=os.path.join(LOGPATH, "projects.log")
 projectlog.bootup()
