@@ -10,7 +10,7 @@
  <property name="factory">Products.qi</property>
  <property name="add_view_expr">string:${folder_url}/+/qi.Thread</property>
  <property name="immediate_view">view</property>
- <property name="global_allow">True</property>
+ <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
   <element value="qi.Post"/>
