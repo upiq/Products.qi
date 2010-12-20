@@ -10,6 +10,7 @@
     <permission name="Add portal member" acquire="False">
       <role name="Manager"/>
       <role name="Owner"/>
+      <role name="Anonymous"/><!-- allow self-registration -->
     </permission>
     <permission name="Enter Data" acquire="True">
       <role name="TeamMember" />
