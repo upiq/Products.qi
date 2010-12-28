@@ -1,6 +1,6 @@
 
 from Products.MailHost.interfaces import IMailHost
-from Products.qi.mails.tools.imaphost import IIMAP
+from Products.qi.mail.tools.imaphost import IIMAP
 import xml.dom.minidom as XML
 
 from zope.component import getSiteManager
@@ -13,6 +13,7 @@ from Products.GenericSetup.utils import importObjects
 def importMailHost(context):
     """Import mailhost settings from an XML file.
     """
+    print 'importMailHost'
     try:
         sm = getSiteManager(context.getSite())
         tool = sm.getUtility(IIMAP)

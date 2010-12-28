@@ -199,13 +199,18 @@ div#viewlet-above-content {
   background-color:#ffd;
 }
 
+/*
 div#content {
   margin-left:1em;
 }
+*/
 
-div#portal-columns div.documentEditable {
-    border: 0.1em solid #aaa;
-    background-color: #fff;
+div.documentEditable {
+    border:0.1em solid #ddd;
+}
+
+div.documentEditable, #content {
+  background-color:#fff;
 }
 
 #content-views {
@@ -254,12 +259,106 @@ div#visual-portal-wrapper {
   background-color:#fff;
 }
 
-
-div#portal-top {
-  background-color:#fff;
+#portal-top {
+    background-color:#fff;
+    border-bottom:0.1em solid #ccc;
+    margin-bottom:0.2em;
 }
 
-div#portal-columns {
-  background-color:#fff;
+#portal-columns {
+    background-color: #f4f4f4;
+    width:100%;
+}
+
+#portal-header {
+    border-bottom:0.1em solid #999;
+}
+
+table#portal-columns td {
+  vertical-align:top;
+}
+
+td#portal-column-one, td#portal-column-two {
+  padding-right:0.4em;
+}
+
+#portal-searchbox {
+    margin:0.2em;
+    margin-top:0.6em;
+}
+
+#portal-top #portal-header #portal-globalnav {
+    padding:0;
+    margin:0;
+    margin-top:0.3em;
+    background-color:#fff;
+    /* x-platform vertical gradient */
+    background: -moz-linear-gradient(top, #FFFFFF, #BFC4C0);
+    background: -webkit-gradient(linear,
+                left top, left bottom, from(#FFFFFF), to(#BFC4C0));
+    filter: progid:DXImageTransform.Microsoft.Gradient(
+                StartColorStr='#FFFFFF', EndColorStr='#BFC4C0', GradientType=0);
+}
+
+#portal-top #portal-header #portal-globalnav li a {
+    padding-bottom:1em;
+}
+
+#portal-top #portal-header #portal-globalnav li.plain a {
+    background-color:transparent;
+    color:#245;
+}
+
+#portal-top #portal-header #portal-globalnav li.plain a:hover {
+    background-color:#444;
+    color:#ffc;
+}
+
+#portal-top #portal-header #portal-globalnav li.selected a {
+    background-color:#000;
+}
+
+#portal-top #portal-header #portal-globalnav li.selected a:hover {
+    background-color:#444;
+    color:#ffc;
+}
+
+#portal-column-one, #portal-column-two {
+    min-width:8em;
+    max-width:13em;
+}
+
+dl.portlet {
+    border:0.1em solid #ddd;
+}
+
+dl.portlet dt.portletHeader {
+    background-color:#abc;
+    /* x-platform vertical gradient */
+    background: -moz-linear-gradient(top, #FFFFFF, #AFBFCF);
+    background: -webkit-gradient(linear,
+                left top, left bottom, from(#FFFFFF), to(#AFBFCF));
+    filter: progid:DXImageTransform.Microsoft.Gradient(
+                StartColorStr='#FFFFFF', EndColorStr='#AFBFCF', GradientType=0); 
+}
+
+
+dl.portletNavigationTree dd.portletItem ul.navTree {
+    background-color:#fff;
+}
+
+dl.portletNavigationTree dd.portletItem ul.navTree li.navTreeCurrentNode {
+    background-color:#fff;
+}
+
+dl.portletNavigationTree dd.portletItem ul.navTree li {
+    border:0.1em dotted #ddd;
+}
+
+dl.portletNavigationTree dd.portletItem ul.navTree li.navTreeCurrentNode a.navTreeCurrentItem {
+    background-color:#242;
+    color:#fff;
+    padding:0 0.2em;
+    border:0.1em solid #242;
 }
 
