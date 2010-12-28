@@ -333,6 +333,10 @@ dl.portlet {
 }
 
 dl.portlet dt.portletHeader {
+    text-align:center;
+    font-weight:normal;
+    font-size:90%;
+    color:#89a;
     background-color:#abc;
     /* x-platform vertical gradient */
     background: -moz-linear-gradient(top, #FFFFFF, #AFBFCF);
@@ -342,6 +346,9 @@ dl.portlet dt.portletHeader {
                 StartColorStr='#FFFFFF', EndColorStr='#AFBFCF', GradientType=0); 
 }
 
+dl.portlet dt.portletHeader a.tile {
+    color:#89a;
+}
 
 dl.portletNavigationTree dd.portletItem ul.navTree {
     background-color:#fff;
