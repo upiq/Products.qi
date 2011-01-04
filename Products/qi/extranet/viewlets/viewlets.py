@@ -49,6 +49,9 @@ class LogoViewlet(BrowserView):
 class PathViewlet(common.PathBarViewlet):
     render = ViewPageTemplateFile('QI.path_bar.pt')
     
+    def domainStrip(self, url):
+        return UtilitiesView(self.context, self.request).domainStrip(url)
+ 
     
 class TitleViewlet(common.ViewletBase):
 

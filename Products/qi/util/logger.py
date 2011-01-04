@@ -9,12 +9,21 @@ from Products.qi.util.config import PathConfig
 LOGPATH = PathConfig().get('log', 'log') 
 
 
+def safe_logopen(path):
+    """return open file handle for log for writing, or stderr"""
+    try:
+        f = open(path, 'a')
+        return f
+    except IOError:
+        return sys.stderr
+
+
 class LogHandler:
     target=os.path.join(LOGPATH, 'qiteamspace.log')
-    globalerror=open(os.path.join(LOGPATH, 'errorlist.log'),'a')
+    globalerror=safe_logopen(os.path.join(LOGPATH, 'errorlist.log'))
     def bootup(self):
         self.lasttime=datetime.now()
-        self.out=open(self.target,'a')
+        self.out=safe_logopen(self.target)
     def logText(self, text):
         self.out.write(str(datetime.now())+":  "+str(text)+'\n')
         self.out.flush()

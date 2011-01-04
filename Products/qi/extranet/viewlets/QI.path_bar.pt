@@ -2,8 +2,7 @@
      i18n:domain="plone">
 
     <tal:qimod define="curUrl context/absolute_url;
-        qi_utilities nocall:here/qi_utilities;
-        domain python: qi_utilities.domainStrip(curUrl);
+        domain python: view.domainStrip(curUrl);
         issite python: domain=='localhost' or domain=='qiteamspace.com' or domain=='www.qiteamspace.com'
         or domain == 'qiteamspace-demo.com' or domain== 'www.qiteamspace-demo.com';
         crumbs view/breadcrumbs;
