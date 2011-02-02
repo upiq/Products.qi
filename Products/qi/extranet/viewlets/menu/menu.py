@@ -46,6 +46,8 @@ class MenuItem:
         return len(self.items)>0
         
     def link(self):
+        if self.target.startswith('http'):
+            return self.target #absolute, not context-relative URL
         format="%s/%s"
         return format%(self.context.absolute_url(),self.target)
         
