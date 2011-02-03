@@ -189,23 +189,13 @@
 
 
 
-   <em> The member's e-mail address will be the ID used to login. </em>
-	<br />
-   <input type="checkbox" name="notify" value="notify" />
-	Send user email containing login and password.
+   <em> The member's e-mail address will be the ID used to login.  By adding a new user, an initial random password and notification email to the user's email will be generated.  The link sent to the user in the notification email will present the opportunity for the user to select their own password.</em>
    </div>
    <div>
    <label>Full Name</label><br />
    <input type="text" id="full_name" name="full_name"
           tal:attributes="value request/full_name|nothing" />
    </div>
-   <div>
-   <label>Password</label><br />
-   <input type="password" id="password" name="password"
-   /><br />
-   <input type="password" id="confirm" name="confirm" />
-   <em> Re-type the password to confirm. </em>
-    </div>
 	
   <input type="submit" name="add_new_user" value="Add new member" />
   </fieldset>

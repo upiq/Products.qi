@@ -41,6 +41,22 @@ class TeamMembersView(BrowserPlusView):
     users = None
     search_widget = None
 
+
+    def _cache_tool(self, name):
+        """get, cache in local state: tool by name"""
+        attrname = '_%s' % name
+        if not hasattr(self, attrname):
+            setattr(self, attrname, getToolByName(self.context, name))
+        return getattr(self, attrname)
+
+    @property
+    def reg_tool(self):
+        return self._cache_tool('portal_registration')
+
+    @property
+    def mtool(self):
+        return self._cache_tool('portal_membership')
+
     def getSearchWidget(self):
         if self.users is None:
             self.users = UsersSource(self.context)
@@ -84,7 +100,7 @@ class TeamMembersView(BrowserPlusView):
     def getUserObjects(self, ids):
          if len(ids)==0:
              return []
-         mtool= getToolByName(self.context,'portal_membership')
+         mtool = self.mtool
          names=[mtool.getMemberInfo(x)['fullname'] for x in ids]
          logintimes=[mtool.getMemberById(x).getProperty('last_login_time') for x in ids]
          return sorted([
@@ -109,17 +125,19 @@ class TeamMembersView(BrowserPlusView):
 
 
     def addNewUser(self, email, password, full_name):
-        reg_tool = getToolByName(self.context, 'portal_registration')
+        reg_tool = self.reg_tool
         reg_tool.addMember(email,
                            password,
                            properties={'fullname': full_name,
                                        'email': email,
                                        'username': email,
                                       })
+        reg_tool.registeredNotify(email)
         self._addUserToGroup(email)
 
     def update(self, *args, **kw):
-        mtool = getToolByName(self.context, 'portal_membership')
+        mtool = self.mtool
+        reg_tool = self.reg_tool
         form = self.request.form
 
         self.found = self.getSearchWidget().results('users') or ()
@@ -141,19 +159,9 @@ class TeamMembersView(BrowserPlusView):
             form.clear()
 
         if 'add_new_user' in form:
-            password, confirm = form['password'], form['confirm']
-
-
             if 'email' not in form or form['email']=='':
                 self.errors = 'The email field was blank.'
                 return 
-            if password != confirm:
-                self.errors = 'The password and confirmation do not match.'
-                return
-
-            if len(password)<5:
-                self.errors= 'The password is shorter than 5 characters.'
-                return
             errorformat='The full name contained an invalid character.'
             for c in form['full_name']:
                 if ord(c)>128:
@@ -161,10 +169,11 @@ class TeamMembersView(BrowserPlusView):
                     return
 
             try:
-                self.addNewUser(form['email'],
-                            password,
-                            form['full_name'],
-                           )
+                password = reg_tool.generatePassword()
+                self.addNewUser(
+                    form['email'],
+                    password,
+                    form['full_name'], )
             except ValueError:
                 self.errors="The email address is invalid or already in use."
                 return
