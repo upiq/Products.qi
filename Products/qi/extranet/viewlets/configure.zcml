@@ -16,6 +16,24 @@
         class=".viewlets.UtilitiesView"
         permission="zope2.View"
         />
+
+    <!-- QI Teamspace specific footer -->
+    <browser:viewlet
+        name="qi.footer"
+        for="*"
+        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+        template="footer.pt"
+        permission="zope.Public"
+        />
+
+    <browser:viewlet
+        name="qi.colophon"
+        for="*"
+        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+        template="colophon.pt"
+        permission="zope.Public"
+        />
+
     <include package=".menu" />
     
 </configure>

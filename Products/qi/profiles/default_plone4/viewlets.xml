@@ -7,6 +7,10 @@
   <order manager="plone.portalheader" skinname="Plone Default">
     <viewlet name="qi.maintenance" insert-after="plone.logo" />
   </order>
+  <order manager="plone.portalfooter">
+    <viewlet name="qi.footer" insert-after="plone.footer" />
+    <viewlet name="qi.colophon" insert-after="plone.colophon" />
+  </order>
   <!-- hide these viewlets: -->
   <hidden manager="plone.portalheader" skinname="Plone Default">
     <viewlet name="plone.global_sections"/>
@@ -27,5 +31,11 @@
     <viewlet name="plone.path_bar" />
     <!-- hide plone3 version of QI menu from Plone 4 setup -->
     <viewlet name="qi.menu" />
+  </hidden>
+  <!-- hide stock Plone colophon, footer viewlets since
+       Products.qi defines suitable replacements -->
+  <hidden manager="plone.portalfooter" skinname="Plone Default">
+    <viewlet name="plone.footer" />
+    <viewlet name="plone.colophon" />
   </hidden>
 </object>
