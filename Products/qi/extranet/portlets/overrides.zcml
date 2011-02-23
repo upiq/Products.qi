@@ -28,13 +28,6 @@
         addview="plone.app.portlets.portlets.recent.AddForm"
         editview="plone.app.portlets.portlets.recent.EditForm"
         />
-    <browser:viewlet
-        name="plone.searchbox"
-        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
-        class=".searchbox.SearchBoxViewlet"
-        permission="zope2.View" 
-        />
-        
         
     <plone:portlet
         name="portlets.Search"
