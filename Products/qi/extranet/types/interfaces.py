@@ -50,6 +50,7 @@ class IProject(ISelectableBrowserDefault, IOrderedContainer):
     projectTheme =  schema.Choice(
         title=u"Theme",
         description=u"Project theme",
+        default=u"Sunburst Theme",
         vocabulary="Products.qi.Skins",
         required=True)
 
