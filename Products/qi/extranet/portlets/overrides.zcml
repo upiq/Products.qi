@@ -38,6 +38,7 @@
         editview=".search.EditForm"
         />
 
+    <!--
     <plone:portlet
         name="portlets.rss"
         interface="plone.app.portlets.portlets.rss.IRSSPortlet"
@@ -46,6 +47,6 @@
         addview="plone.app.portlets.portlets.rss.AddForm"
         editview="plone.app.portlets.portlets.rss.EditForm"
         />
-
+    -->
 
 </configure>
