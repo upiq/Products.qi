@@ -21,6 +21,7 @@
   <element value="File"/>
   <element value="Image"/>
   <element value="Link"/>
+  <element vlaue="Folder"/>
   <element value="News Item"/>
   <element value="Team_Folder"/>
   <element value="Topic"/>
