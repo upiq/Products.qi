@@ -8,6 +8,6 @@
     <include file="security.zcml" />
     <include file="django.zcml" />
     <include file="lookandfeel.zcml" />
-    <include file="content.zcml" />
 
 </configure>
+
