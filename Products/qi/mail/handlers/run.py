@@ -1,7 +1,4 @@
 from Products.CMFCore.utils import getToolByName
-from Products.qi.util.utils import get_factory_permission
-from Products.qi.extranet.types.interfaces import _PROJECT_LOGO_NAME
-from zExceptions import BadRequest
 from threading import Semaphore
 from Products.qi.mail.newListener import MailListener, imapEnabled
 from threading import currentThread

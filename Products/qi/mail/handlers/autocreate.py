@@ -1,5 +1,4 @@
 from Products.CMFCore.utils import getToolByName
-from Products.qi.util.utils import get_factory_permission
 from psycopg2 import IntegrityError 
 
 from django.contrib.auth.models import User 
