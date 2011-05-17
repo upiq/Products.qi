@@ -1,6 +1,7 @@
 import os
 import re
 
+from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
@@ -14,47 +15,48 @@ SQLPATH = PathConfig().get('sql', 'src/sql')
 
 
 def getProjectsInContext(context):
-    #check is project(return?)
-    results=[]
-    if isinstance(context, project.Project):
-        results.append(context)
-    #check has childnodes
-    try:
-        for child in context.getChildNodes():
-            results[len(results):]=getProjectsInContext(child)
-    except AttributeError:
-        #do nothing
-        pass
-    return results
+    catalog = getToolByName(context, 'portal_catalog')
+    path = '/'.join(context.getPhysicalPath())
+    query = {
+        'path' : {
+            'query' : path,
+            'depth' : 2
+            },
+        'Type' : 'QI Project',
+        }
+    return [b._unrestrictedGetObject() for b in cat.search(query)]
+
 
 def getTeamsInContext(context):
-    #check if team 
-    results=[]
-    if isinstance(context, team.Team):
-        results.append(context)
-    #check has childnodes
-    try:
-        for child in context.getChildNodes():
-            results[len(results):]=getTeamsInContext(child)
-    except AttributeError:
-        pass
-    return results
+    catalog = getToolByName(context, 'portal_catalog')
+    path = '/'.join(context.getPhysicalPath())
+    query = {
+        'path' : {
+            'query' : path,
+            'depth' : 2
+            },
+        'Type' : 'QI Team',
+        }
+    return [b._unrestrictedGetObject() for b in cat.search(query)]
+
 
 def getPloneProject(dbproject, context):
     if dbproject is None:
         return None
-    projects=getProjectsInContext(getSite(context))
+    projects=getProjectsInContext(getSite())
     for project in projects:
         if project.dbid==dbproject.id:
             return project
 
+
 def getPloneTeam(dbteam, context):
     if dbteam is None:
         return None
-    teams=getTeamsInContext(getSite(context))
+    teams=getTeamsInContext(getSite())
     for team in teams:
         if team.dbid==dbteam.id:
             return team 
+
 
 def getTeamGroups(project,dblist):
     plonegroups=[]
@@ -65,6 +67,7 @@ def getTeamGroups(project,dblist):
             plonegroups.append(kteam.getGroup())
     return plonegroups
     
+
 def getAllPloneGroups(dblist,project, team, context):
     plonegroups=[]
     groups=dblist.groups.all()
@@ -82,6 +85,7 @@ def getAllPloneGroups(dblist,project, team, context):
 def addgroups(plonegroups, groups):
     plonegroups[len(plonegroups):]=groups
     
+
 def getUsersForMailingList(dblist, context):
     userids={}
     if not dblist:
@@ -115,7 +119,7 @@ def getPloneGroupNames(group, project, team, context):
     result=[]
     if project is None:
         if group=='managers':
-            site=getSite(context)#rethink this later
+            site=getSite()
             allprojects=getProjectsInContext(site)
             for eachproject in allprojects:
                 result.appendeachproject.getProjectGroup('managers')
@@ -133,23 +137,12 @@ def getPloneGroupNames(group, project, team, context):
         target='%s-%s-%s'%(project.getId(),team.getId(),group)    
         return [target,]
 
-def getSite(context):
-    site=context
-    try:
-        site=context.Testbed
-    except:
-        pass
-    try:
-        site=context.qiteamspace
-    except:
-        pass
-    return site
 
 def getProjectsAndTeamsForUser(user, context):
     teams=[]
     projects=[]
     
-    site=getSite(context)
+    site=getSite()
     allprojects=getProjectsInContext(site)
     allteams=getTeamsInContext(site)
     for project in allprojects:
@@ -161,6 +154,7 @@ def getProjectsAndTeamsForUser(user, context):
             if teamuser==str(user):
                 teams.append(team)
     return projects,teams
+
 
 def getPossibleListsForUser(user, context):
     projects, teams=getProjectsAndTeamsForUser(user, context)
@@ -219,41 +213,6 @@ def getListsForUser(user, context):
         return DB.MailingList.objects.filter(id__in=allids)
     
 
-def getListsForUser2(user, context):
-    projects, teams=getProjectsAndTeamsForUser(user, context)
-    base=DB.MailingList.objects
-    lists=base.none()
-    ids=[]
-    newobjects=base.filter(project__isnull=True,team__isnull=True)
-    for mlist in newobjects:
-        if userIsMember(mlist, user,getSite(context)):
-            ids.append(mlist.id)
-    lists=lists|newobjects
-    
-    selectedteams={}
-    for project in projects:
-        dbproj=project.getDBProject()
-        newobjects=base.filter(project=dbproj,team__isnull=True)
-        ids=[]
-        for mlist in newobjects:
-            if userIsMember(mlist, user,getSite(context), project):
-                ids.append(mlist.id)
-        newobjects=newobjects.filter(id__in=ids)
-        lists=lists|newobjects
-    
-    for team in teams:
-        dbteam=team.getDBTeam()
-        dbproj=team.getDBProject()
-        newobjects=base.filter(project=dbproj,team=dbteam)
-        ids=[]
-        for mlist in newobjects:
-            if userIsMember(mlist, user,getSite(context),
-                    team.getProject(),team):
-                ids.append(mlist.id)
-        newobjects=newobjects.filter(id__in=ids)
-        lists=lists|newobjects
-        
-    return lists
 def userIsMember(mailinglist,user,site, project=None, team=None):
     user=str(user)
     subscribers=mailinglist.mailinglistsubscriber_set
@@ -309,6 +268,7 @@ def default_addable_types(context):
     
     return types
 
+
 def get_factory_permission(context, fti):
     """Return the factory perimssion of the given type information object.
     """
@@ -316,6 +276,7 @@ def get_factory_permission(context, fti):
     if role_permission is None:
         return None
     return role_permission.__name__
+
 
 def _get_role_permission_for_fti(context, fti):
     """Helper method to get hold of a RolePermission for a given FTI.
@@ -346,25 +307,33 @@ def _get_role_permission_for_fti(context, fti):
         return None
 
     return role_permission
+
+
 #this is only for the natsort function below    
 def convert(text):
     if text.isdigit():
         return int(text)
     else:
         return text
+
+
 def natsort(tosort, f=lambda arg: arg.lower()):
     alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', f(key)) ] 
     return sorted(tosort, key=alphanum_key )
+
     
 def compareMailingLists(leftList, rightList):
     return cmp(leftList.listname,rightList.listname)
+
     
 def compareMailingLists2(left, right):
     return cmp(left.listname.lower(), right.listname.lower())
 
+
 class fixUsers(BrowserPlusView):
     def __call__(self, *args, **kw):
         return fixTheUsers(self.context)
+
 
 def fixTheUsers(site):
     pm = site.portal_membership
@@ -382,6 +351,8 @@ def fixTheUsers(site):
             m.setMemberProperties({'wysiwyg_editor': 'FCKeditor',})
             out.append("Changed property for %s" % member)
     return "\n".join(out)
+
+
 """
 from Products.qi.util.utils import testquery
 testquery("ProjAggChartLine",project_id=1, percentage_id=1, func='max')
@@ -410,3 +381,4 @@ def testquery(query, **kw):
         
     cursor.close()
     return result
+
