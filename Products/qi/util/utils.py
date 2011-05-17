@@ -269,15 +269,6 @@ def default_addable_types(context):
     return types
 
 
-def get_factory_permission(context, fti):
-    """Return the factory perimssion of the given type information object.
-    """
-    role_permission = _get_role_permission_for_fti(context, fti)
-    if role_permission is None:
-        return None
-    return role_permission.__name__
-
-
 def _get_role_permission_for_fti(context, fti):
     """Helper method to get hold of a RolePermission for a given FTI.
     """
