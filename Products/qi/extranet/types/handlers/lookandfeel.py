@@ -15,6 +15,7 @@ def setProjectSkin(obj, event):
             theme=realobj.projectTheme
             obj.changeSkin(theme,event.request)
 
+
 def manage_project_logo(project, event):
     # bounce the formdata .logo field over to a logo subobject on add or edit
     if project.logo:

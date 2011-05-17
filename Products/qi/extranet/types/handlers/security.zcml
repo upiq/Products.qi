@@ -10,12 +10,11 @@
              zope.app.container.interfaces.IObjectAddedEvent"
         handler=".security.add_team_security"
         />
+
     <subscriber
         for="Products.qi.extranet.types.interfaces.IProject
              zope.app.container.interfaces.IObjectAddedEvent"
         handler=".security.add_project_security"
         />    
-
-
 
 </configure>
