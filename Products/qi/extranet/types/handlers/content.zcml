@@ -22,19 +22,4 @@
         handler=".content.enable_addable_types"
         />
 
-    <subscriber
-        for="Products.qi.extranet.types.interfaces.IProject
-             zope.app.container.interfaces.IObjectAddedEvent"
-        handler=".content.add_project_content"
-        />
-
-        <!--
-    <subscriber
-        for="Products.qi.extranet.types.interfaces.IProject
-             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-        handler=".content.manage_project_logo"
-        />
-
-    -->
-
 </configure>
