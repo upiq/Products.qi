@@ -11,8 +11,6 @@ from Products.qi import MessageFactory as _
 class AddForm(base.AddForm):
     form_fields=fields
     def setUpWidgets(self, ignore_request=False):
-        """default_addable = default_addable_types(aq_inner(self.context))"""
-
         self.widgets = form.setUpWidgets(
             self.form_fields, self.prefix, self.context, self.request,
             ignore_request=ignore_request)

@@ -23,7 +23,7 @@ from Products.qi.extranet.types.project import Project
 from Products.qi.extranet.types.handlers.users import add_leads
 from Products.qi import MessageFactory as _
 
-from Products.qi.util.utils import default_addable_types, getTeamsInContext
+from Products.qi.util.utils import getTeamsInContext
 import os.path
 import os
 import time
@@ -42,8 +42,6 @@ class TeamAddForm(base.AddForm):
     form_name = _(u"Team settings")
 
     def setUpWidgets(self, ignore_request=False):
-        default_addable = default_addable_types(aq_inner(self.context))
-
         self.widgets = form.setUpWidgets(
             self.form_fields, self.prefix, self.context, self.request,
             ignore_request=ignore_request)
@@ -86,8 +84,6 @@ class SubTeamAddForm(base.AddForm):
     form_name = _(u"Team settings")
 
     def setUpWidgets(self, ignore_request=False):
-        default_addable = default_addable_types(aq_inner(self.context))
-
         self.widgets = form.setUpWidgets(
             self.form_fields, self.prefix, self.context, self.request,
             ignore_request=ignore_request)

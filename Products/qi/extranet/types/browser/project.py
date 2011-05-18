@@ -33,8 +33,6 @@ from Products.CMFPlone.patches.unicodehacks import _unicode_replace
 from Products.qi.util import utils
 
 
-from Products.qi.util.utils import default_addable_types
-
 project_form_fields = form.Fields(IQIProject)
 #project_form_fields['managers'].custom_widget = UberMultiSelectionWidget
 #project_form_fields['faculty'].custom_widget = UberMultiSelectionWidget
@@ -48,7 +46,6 @@ class ProjectAddForm(base.AddForm):
     form_name = _(u"Project settings")
 
     def setUpWidgets(self, ignore_request=False):
-        """default_addable = default_addable_types(aq_inner(self.context))"""
 
         self.widgets = form.setUpWidgets(
             self.form_fields, self.prefix, self.context, self.request,

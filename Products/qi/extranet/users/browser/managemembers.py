@@ -25,7 +25,6 @@ from Products.qi import MessageFactory as _
 
 from qi.sqladmin import models as DB
 
-from Products.qi.util.utils import default_addable_types
 from datetime import datetime
 import time
 #team_form_fields = form.Fields(IQITeam)
