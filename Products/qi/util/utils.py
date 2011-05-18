@@ -213,42 +213,6 @@ def getListsForUser(user, context):
         return DB.MailingList.objects.filter(id__in=allids)
     
 
-def userIsMember(mailinglist,user,site, project=None, team=None):
-    user=str(user)
-    subscribers=mailinglist.mailinglistsubscriber_set
-    if len(subscribers.filter(userid=str(user)))>0:
-        return True
-    teamdict={}
-    if project is not None:
-        for ploneteam in getTeamsInContext(project):
-            teamdict[ploneteam.title]=ploneteam
-    for dbteam in mailinglist.teams.all():
-        if dbteam.name not in teamdict:
-            continue
-        if user in teamdict[dbteam.name].getTeamUsers():
-            return True
-
-    for group in mailinglist.groups.all():
-        groupname=group.groupname
-        if team:
-            if user in team.getTeamUsers(groupname):
-                return True
-        if project and not team:
-
-            if groupname=='leads':
-                for pteam in getTeamsInContext(project):
-                    if user in pteam.getTeamUsers(groupname):
-                        return True
-            else:
-                if user in project.getProjectUsers(groupname):
-                    return True
-        if not project:
-            for proj in getProjectsInContext(site):
-             if user in proj.getProjectUsers(groupname):
-                return True
-        return False
-                    
-
 #this is only for the natsort function below    
 def convert(text):
     if text.isdigit():
