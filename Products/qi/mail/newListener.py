@@ -3,6 +3,7 @@ import time
 import ZODB, transaction
 import ZEO.ClientStorage
 from ZODB import FileStorage, DB as ZopeDB
+from zope.app.component.hooks import setSite
 from zope.component import getUtility
 from zope.component import getSiteManager
 from Products.qi.mail.tools.imaphost import IIMAP
@@ -78,9 +79,11 @@ class MailListener(Thread):
         #self.app=self.root['Application']
         transaction.begin()
         self.context2=self.getContext(self.app)
+        setSite(self.context2)
         
     def end(self):
         transaction.commit()
+        setSite(None)
         #self.connection.close()
     
     def run(self):
