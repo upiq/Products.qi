@@ -51,6 +51,12 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
         self.managers = []
         self.addable_types = []
         self.reportLocations={}
+    
+    def Description(self):
+        """override CMF description accessor"""
+        if isinstance(self.description, unicode):
+            return self.description.encode('utf-8')
+        return self.description or ''
 
     def flagReport(self, folder):
         if not self.reportLocations:
