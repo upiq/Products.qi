@@ -29,14 +29,12 @@ import os
 import time
 import datetime
 
-team_form_fields = form.Fields(IQITeam)
-#team_form_fields['managers'].custom_widget = UberMultiSelectionWidget
 
 class TeamAddForm(base.AddForm):
     """Add form for teams
     """
 
-    form_fields = team_form_fields
+    form_fields = form.Fields(IQITeam)
 
     label = _(u"Add Team")
     form_name = _(u"Team settings")
@@ -72,13 +70,12 @@ class TeamAddForm(base.AddForm):
                     return True
         return False
 
-team_form_fields = form.Fields(IQISubTeam)
 
 class SubTeamAddForm(base.AddForm):
     """Add form for teams
     """
 
-    form_fields = team_form_fields
+    form_fields = form.Fields(IQISubTeam)
 
     label = _(u"Add Team")
     form_name = _(u"Team settings")
@@ -119,7 +116,7 @@ class TeamEditForm(base.EditForm):
     """Edit form for team
     """
 
-    form_fields = team_form_fields
+    form_fields = form.Fields(IQITeam) 
 
     label = _(u"Edit team")
     form_name = _(u"Team settings")
