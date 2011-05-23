@@ -57,7 +57,7 @@ class View(BrowserPlusView):
             
     def measureids(self):
         if not hasattr(self.context, 'orderlist'):
-            return self.context.measures._data.keys()
+            return list(self.context.measures) #iterate over set
         else:
             return self.context.orderlist['measure']
     def titlefor(self, x):
