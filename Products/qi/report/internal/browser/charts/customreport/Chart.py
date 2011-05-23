@@ -40,8 +40,8 @@ class View(BrowserPlusView):
     processFormButtons= ('submitorder',)
     
     def action(self, form, action):
-        self.getOrder(self.context.measures._data.keys(), form, 'measure')
-        self.getOrder(self.context.derived._data.keys(), form, 'derived')
+        self.getOrder(list(self.context.measures), form, 'measure')
+        self.getOrder(list(self.context.derived), form, 'derived')
 
     def validate(self, form):
         pass
@@ -53,7 +53,7 @@ class View(BrowserPlusView):
                 out.insert(self.context.orderlist['measure'].index(m), DB.Measure.objects.get(id=m))
             return out
         else:
-            return DB.Measure.objects.filter(id__in=self.context.measures._data.keys())
+            return DB.Measure.objects.filter(id__in=list(self.context.measures))
             
     def measureids(self):
         if not hasattr(self.context, 'orderlist'):
@@ -66,8 +66,8 @@ class View(BrowserPlusView):
         return DB.Percentage.objects.get(id=int(x))
         
     def getVars(self, measure):
-        teams=["'%s'"%str(x) for x in self.context.teams._data.keys()]
-        measures=self.context.measures._data.keys()
+        teams=["'%s'"%str(x) for x in list(self.context.teams)]
+        measures=list(self.context.measures)
         result="""
         var teamids=[%s];
         var measureid=%i;
@@ -82,7 +82,7 @@ class View(BrowserPlusView):
                     out.insert(self.context.orderlist['derived'].index(m), DB.Measure.objects.get(id=m))
                 return out
             else: 
-                return DB.Percentage.objects.filter(id__in=self.context.derived._data.keys())
+                return DB.Percentage.objects.filter(id__in=list(self.context.derived))
         else:
             return []
         
@@ -93,7 +93,7 @@ class View(BrowserPlusView):
             if hasattr(self.context, 'orderlist'):
                 return self.context.orderlist['derived']
             else:
-                return self.context.derived._data.keys()
+                return list(self.context.derived)
                 
     
     def missingany(self):
@@ -103,7 +103,7 @@ class View(BrowserPlusView):
         return False
     
     def hasData(self, measureid):
-        teamids=self.context.teams._data.keys()
+        teamids=list(self.context.teams)
         searchedids=[]
         for x in teamids:
             if isinstance(x,str) and (x.startswith('min') or x.startswith('max') or x.startswith('avg')):
