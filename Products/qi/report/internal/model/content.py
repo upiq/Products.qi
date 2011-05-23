@@ -13,13 +13,12 @@ from OFS.SimpleItem import SimpleItem
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.content.container import Container
-from Products.Archetypes.interfaces import IReferenceable
 
 from Products.qi.util import PLONE_VERSION
 
 
 class Chart(SimpleItem,BrowserDefaultMixin, Container):
-    implements(IQIChart, INameFromTitle, IReferenceable)
+    implements(IQIChart, INameFromTitle)
     if PLONE_VERSION == 3:
         __implements__ = (BrowserDefaultMixin.__implements__)
     portal_type="qichart"
