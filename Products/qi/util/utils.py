@@ -24,7 +24,7 @@ def getProjectsInContext(context):
             },
         'Type' : 'QI Project',
         }
-    return [b._unrestrictedGetObject() for b in cat.search(query)]
+    return [b._unrestrictedGetObject() for b in catalog.search(query)]
 
 
 def getTeamsInContext(context):
@@ -37,7 +37,7 @@ def getTeamsInContext(context):
             },
         'Type' : 'QI Team',
         }
-    return [b._unrestrictedGetObject() for b in cat.search(query)]
+    return [b._unrestrictedGetObject() for b in catalog.search(query)]
 
 
 def getPloneProject(dbproject, context):
