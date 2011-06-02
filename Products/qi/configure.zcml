@@ -5,7 +5,7 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
     
-    <five:registerPackage package="." initialize=".initialize" />
+    <five:registerPackage package="." initialize=".zope2.initialize" />
 	<include package="plone.app.portlets.portlets" />
     
     <include package=".extranet" />
