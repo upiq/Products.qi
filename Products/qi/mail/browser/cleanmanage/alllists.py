@@ -2,8 +2,7 @@ from Products.qi.util.general import BrowserPlusView
 from qi.sqladmin import models as DB
 from Products.qi.util import utils
 
-from Globals import InitializeClass
-
+from App.class_init import default__class_init__ as InitializeClass
 
 
 

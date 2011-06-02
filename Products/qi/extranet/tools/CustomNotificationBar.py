@@ -1,4 +1,5 @@
-from Globals import Persistent, DTMLFile, InitializeClass
+from Globals import Persistent
+from App.special_dtml import DTMLFile
 import Acquisition
 import OFS.SimpleItem
 from AccessControl.Role import RoleManager
@@ -6,7 +7,7 @@ from AccessControl.Role import RoleManager
 from AccessControl import ClassSecurityInfo
 from zope.interface import Interface,implements
 from Products.CMFCore.utils import registerToolInterface
-
+from App.class_init import default__class_init__ as InitializeClass
 
 class INotificationBar(Interface):
     pass

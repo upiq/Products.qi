@@ -9,8 +9,7 @@ from datetime import date
 from Products.qi.util.logger import logger
 from Products.CMFCore.utils import getToolByName
 import AccessControl
-from Globals import InitializeClass
-
+from App.class_init import default__class_init__ as InitializeClass
 
 from AccessControl import ClassSecurityInfo
 

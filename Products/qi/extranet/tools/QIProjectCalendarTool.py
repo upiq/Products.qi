@@ -5,7 +5,7 @@ import calendar
 
 from AccessControl import ClassSecurityInfo
 from DateTime import DateTime
-from Globals import InitializeClass
+from App.class_init import default__class_init__ as InitializeClass
 from OFS.SimpleItem import SimpleItem
 from zope.interface import implements
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile

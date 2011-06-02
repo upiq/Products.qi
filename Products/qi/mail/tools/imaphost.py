@@ -1,5 +1,6 @@
 from Products.MailHost.MailHost import MailHostError, MailBase
-from Globals import Persistent, DTMLFile, InitializeClass
+from Persistence import Persistent
+from App.special_dtml import DTMLFile
 import Acquisition
 import OFS.SimpleItem
 from AccessControl.Role import RoleManager

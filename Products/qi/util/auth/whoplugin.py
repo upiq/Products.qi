@@ -7,7 +7,7 @@ from Products.PluggableAuthService.plugins.BasePlugin import BasePlugin
 from Products.PluggableAuthService.interfaces import plugins as pluginifaces
 
 from AccessControl import ClassSecurityInfo
-from Globals import InitializeClass
+from App.class_init import default__class_init__ as InitializeClass
 
 class WhoPlugin(Folder, BasePlugin):
     """
