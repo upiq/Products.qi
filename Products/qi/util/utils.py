@@ -14,6 +14,16 @@ from Products.qi.util.config import PathConfig
 SQLPATH = PathConfig().get('sql', 'src/sql') 
 
 
+def getProjectParent(context):
+    path = context.getPhysicalPath()
+    portal = getSite()
+    all_projects = getProjectsInContext(portal)
+    for project in all_projects:
+        project_path = project.getPhysicalPath()
+        if project_path == path[:len(project_path)]:
+            return project
+
+
 def getProjectsInContext(context):
     catalog = getToolByName(context, 'portal_catalog')
     path = '/'.join(context.getPhysicalPath())
