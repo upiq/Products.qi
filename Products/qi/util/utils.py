@@ -14,14 +14,47 @@ from Products.qi.util.config import PathConfig
 SQLPATH = PathConfig().get('sql', 'src/sql') 
 
 
-def getProjectParent(context):
+def find_parents(context, typename=None, findone=False, start_depth=2):
+    if findone and typename is None:
+        parent = getattr(context, '__parent__', None)
+        if parent:
+            return parent #immediate parent of context
+    result = []
+    catalog = getToolByName(context, 'portal_catalog')
     path = context.getPhysicalPath()
-    portal = getSite()
-    all_projects = getProjectsInContext(portal)
-    for project in all_projects:
-        project_path = project.getPhysicalPath()
-        if project_path == path[:len(project_path)]:
-            return project
+    for subpath in [path[0:i] for i in range(len(path)+1)][start_depth:]:
+        query = {
+            'path' : { 
+                'query' : '/'.join(subpath),
+                'depth' : 0,
+                },
+            'Type' : typename,
+            }
+        if typename is None:
+            del(query['Type'])
+        brains = catalog.search(query)
+        if not brains:
+            continue
+        else:
+            item = brains[0]._unrestrictedGetObject()
+            if findone:
+                return item
+            result.append(item)
+    if findone:
+        return None # never found one
+    return result
+
+
+def find_parent(context, typename=None, start_depth=2):
+    return find_parents(context, typename, findone=True, start_depth=start_depth)
+
+
+def project_containing(context):
+    return find_parent(context, typename='QI Project')
+
+
+def team_containing(context):
+    return find_parent(context, typename='QI Team', start_depth=3)
 
 
 def getProjectsInContext(context):
