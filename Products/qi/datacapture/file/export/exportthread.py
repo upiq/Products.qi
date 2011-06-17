@@ -4,20 +4,11 @@ import os
 import re
 import time
 import sys
-import ZODB, transaction
-import ZEO.ClientStorage
-from ZODB import FileStorage, DB as ZopeDB
+import transaction
 
-"""
-from Products.qi.datacapture.file.export.exportthread import XMLExportThread as X
-from qi.sqladmin import models as DB
-query=DB.MeasurementValue.objects.filter(team__project__id=1, team__active=True)
-t=X(query,'/qiteamspace/ipip/')
-from datetime import datetime
-start=datetime.now()
-print t.fastbuild(query)
-end=datetime.now()
-"""
+from Products.qi.util.zodbconn import new_approot
+
+
 class XMLExportThread(Thread):
     def __init__(self,query, path):
         Thread.__init__(self)
@@ -25,23 +16,10 @@ class XMLExportThread(Thread):
         self.path=path
         self.progress=0
         self.target=query.count()
-        #import Zope2
-        #app=Zope2.app()
-        #print 'app gotted'
-    def getContext(self):
-        from Products.qi.util.config import ZEO_ADDRESS
-        zeoaddr = ZEO_ADDRESS.split(':')        # hostname:portnum
-        zeoaddr = (zeoaddr[0], int(zeoaddr[1])) # port: str->int
-        self.storage=ZEO.ClientStorage.ClientStorage(zeoaddr)
-        self.db=ZopeDB(self.storage)
-        self.connection=self.db.open()
-        self.root=self.connection.root()
-        app=self.root['Application']
-        return app.unrestrictedTraverse(self.path)
+        
     def run(self):
-        self.context=self.getContext()
-
-        import transaction
+        conn, approot = new_approot() #use zconfig, get conn, app
+        self.context = approot.unrestrictedTraverse(self.path)
         self.context.exportingXML=True
         self.context._p_changd=1
         self.context.exportprogress=0
@@ -55,6 +33,7 @@ class XMLExportThread(Thread):
         self.context.lastexporttime=datetime.now()
         self.context._p_changed=1
         transaction.commit()
+        conn.close() #thread is done running, close connection
     
     def fastbuild(self, query):
         from xml.dom.minidom import getDOMImplementation
@@ -256,7 +235,6 @@ class XMLExportThread(Thread):
             self.context.exporttarget=self.target
             self.context._p_changed=1
             print 'progress update', self.progress, self.target
-            import transaction
             transaction.commit()
         return """%(indentation)s<value>%(value)s</value>
 %(indentation)s<annotation>%(annotation)s</annotation>"""%{'indentation':indentation,

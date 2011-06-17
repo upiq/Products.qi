@@ -1,8 +1,6 @@
 from threading import Thread, currentThread
 import time
-import ZODB, transaction
-import ZEO.ClientStorage
-from ZODB import FileStorage, DB as ZopeDB
+import transaction
 from zope.app.component.hooks import setSite
 from zope.component import getUtility
 from zope.component import getSiteManager
@@ -21,11 +19,10 @@ from Products.CMFPlone.Portal import PloneSite
 from Products.MailHost.interfaces import IMailHost
 from Products.qi.util.utils import getProjectsInContext, getTeamsInContext
 from Products.qi.util.logger import maillog as logger
-from Products.qi.util.config import ZEO_ADDRESS
 
 zopeport=9995
 from Products.qi.util.thread import profile_on
-
+from Products.qi.util.zodbconn import new_approot
 from Products.qi.mail.extendedlist import ImprovedMessage as Message
 
 def imapEnabled(context):
@@ -39,23 +36,6 @@ class MailListener(Thread):
     connection=None
     db=None
     
-    
-
-    
-    def globalBegin(self):
-        #profile_on()
-        #we'd simply like to make sure that we don't break anything by profiling this thread
-        #we can still clear it later?
-        logger.logText("booting up the mail listener")
-        zeoaddr = ZEO_ADDRESS.split(':')        # hostname:portnum
-        zeoaddr = (zeoaddr[0], int(zeoaddr[1])) # port: str->int
-        self.storage=ZEO.ClientStorage.ClientStorage(zeoaddr)
-        self.db=ZopeDB(self.storage)
-        self.connection=self.db.open()
-        self.root=self.connection.root()
-        self.app=self.root['Application']
-
-        
     def getContext(self, app):
         resp = HTTPResponse(stdout=None)
         env = {
@@ -72,11 +52,6 @@ class MailListener(Thread):
             #if we can't find either of those propogate exception to thread level
     
     def begin(self):
-        #print dir(self.db)
-        #self.connection=self.db.open()
-        #self.connection.open()
-        #self.root=self.connection.root()
-        #self.app=self.root['Application']
         transaction.begin()
         self.context2=self.getContext(self.app)
         setSite(self.context2)
@@ -84,20 +59,19 @@ class MailListener(Thread):
     def end(self):
         transaction.commit()
         setSite(None)
-        #self.connection.close()
     
     def run(self):
+        logger.logText("Starting the mail listener thread.")
+        self.connection, self.app = new_approot()
         try:
             self.processMail()
         except Exception, e:
-            #self.connection.close()
             transaction.abort()
             logger.handleException(e)
-
-
+        logger.logText("Mail listener thread finished, closing DB.")
+        self.connection.close() #we are done with thread, close ZODB conn
+    
     def processMail(self):
-        #print 'newListener run'
-        self.globalBegin()
         self.tool = self.context.IMapHost
         i=0
         self.end()
