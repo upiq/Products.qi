@@ -48,7 +48,6 @@ class PathConfig(object):
         <product-config qi>
             paths.buildout  /path/to/some/build/of/qiteamspace
             paths.src       /path/to/some/build/of/qiteamspace/src
-            paths.sql       /path/to/some/build/of/qiteamspace/src/sql
         </product-config>
     
     Or this can be included in instance configuration in buildouts using the
@@ -64,7 +63,6 @@ class PathConfig(object):
         <product-config qi>
             paths.buildout  ${buildout:directory}
             paths.checkout  ${paths:checkout}
-            paths.sql       ${paths:checkout}/src/sql
         </product-config>
 
     Note: while the path names are qualified in configuration with the prefix

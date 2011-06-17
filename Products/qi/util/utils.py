@@ -1,6 +1,7 @@
 import os
 import re
 
+from zope import dottedname
 from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
@@ -10,8 +11,6 @@ from general import BrowserPlusView
 from Products.qi.util.logger import logger
 from Products.qi.extranet.types import project, team
 from Products.qi.util.config import PathConfig
-
-SQLPATH = PathConfig().get('sql', 'src/sql') 
 
 
 def find_parents(context, typename=None, findone=False, start_depth=2):
@@ -300,32 +299,20 @@ def fixTheUsers(site):
     return "\n".join(out)
 
 
-"""
-from Products.qi.util.utils import testquery
-testquery("ProjAggChartLine",project_id=1, percentage_id=1, func='max')
-testquery("formdates", project_id=31, form_id=13)
-"""
-def testquery(query, **kw):
-    queryfile = open(os.path.join(SQLPATH, 'paramqueries/%s.sql' % query))
-    querytext=queryfile.read()
+def namedquery(name, **kwargs):
+    name = 'Products.qi.util.queries.%s' % name
+    sql_template = dottedname.resolve.resolve(name)
     from django.db import connection, transaction
-    
-
     cursor=connection.cursor()
     try:
-        cursor.execute(querytext%kw)
-        result= [x[:] for x in cursor]
+        cursor.execute(querytext % kwargs)
+        return [x[:] for x in cursor]
     except Exception, e:
-        import sys
-        import traceback
+        import sys, traceback
         x,y,trace=sys.exc_info()
         print x, y
         traceback.print_tb(trace)
-        
-        #print trace
         connection._rollback()
         raise
-        
     cursor.close()
-    return result
 

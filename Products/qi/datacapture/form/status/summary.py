@@ -1,4 +1,5 @@
 from Products.qi.util.general import BrowserPlusView
+from Products.qi.util.utils import namedquery
 from qi.sqladmin import models as DB
 from xlwt import *
 from StringIO import StringIO
@@ -97,9 +98,8 @@ class FormStatus(BrowserPlusView):
         #self.loadTeams()
     
     def runquery(self):
-        from Products.qi.util.utils import testquery
         project=self.context.getDBProject()
-        data=[ReportInfo(x, self.form) for x in testquery("formdates", project_id=project.id, form_id=self.form.id)]
+        data=[ReportInfo(x, self.form) for x in namedquery("formdates", project_id=project.id, form_id=self.form.id)]
         if project.hideinactiveteams:
           self.teams=project.team_set.filter(active=True)
         else:
@@ -244,9 +244,8 @@ class Roster(BrowserPlusView):
         if self.datafor:
             return
         self.datafor={}
-        from Products.qi.util.utils import testquery
         project=self.context.getDBProject()
-        data=testquery("rosterinfo", project_id=project.id)
+        data = namedquery("rosterinfo", project_id=project.id)
         for x in data:
             self.datafor[(x[0],x[1])]=x[2]
     def forms(self):
