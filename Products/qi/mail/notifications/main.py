@@ -28,10 +28,10 @@ class UpdateProcess(object):
                         ob.lastemail=getattr(ob, 'lastemail', datetime.now())
                         if getattr(ob, 'lastpost', None):
                             catalog.reindexObject(ob)
-                            transaction.commit()
+                            transaction.get().commit()
                         else:
                             pass
-            transaction.commit()
+            transaction.get().commit()
             sleep(2000)
             
     

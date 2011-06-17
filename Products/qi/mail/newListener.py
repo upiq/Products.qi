@@ -57,7 +57,7 @@ class MailListener(Thread):
         setSite(self.context2)
         
     def end(self):
-        transaction.commit()
+        transaction.get().commit() #note, we omit notes: too noisy in undo log
         setSite(None)
     
     def run(self):

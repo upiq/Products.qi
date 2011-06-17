@@ -24,15 +24,22 @@ class XMLExportThread(Thread):
         self.context._p_changd=1
         self.context.exportprogress=0
         self.context.exporttarget=self.target
-        transaction.commit()
+        txn = transaction.get()
+        txn.note('/'.join(self.context.getPhysicalPath()))
+        txn.note('Flagged context as starting export of XML')
+        txn.commit()
         #result= "<dataset>\n"+self.buildseries(self.query)+"\n</dataset>"
         result=self.fastbuild(self.query)
-        transaction.abort()
+        txn = transaction.get()
+        txn.abort()
         self.context.exportingXML=False
         self.context.lastexport=result
         self.context.lastexporttime=datetime.now()
         self.context._p_changed=1
-        transaction.commit()
+        txn = transaction.get()
+        txn.note('/'.join(self.context.getPhysicalPath()))
+        txn.note('Flagged context as complete in exporting XML')
+        txn.commit()
         conn.close() #thread is done running, close connection
     
     def fastbuild(self, query):
@@ -235,7 +242,10 @@ class XMLExportThread(Thread):
             self.context.exporttarget=self.target
             self.context._p_changed=1
             print 'progress update', self.progress, self.target
-            transaction.commit()
+            txn = transaction.get()
+            txn.note('/'.join(self.context.getPhysicalPath()))
+            txn.note('Flagged context XML export progress')
+            txn.commit()
         return """%(indentation)s<value>%(value)s</value>
 %(indentation)s<annotation>%(annotation)s</annotation>"""%{'indentation':indentation,
             'value':self.escape(value), 'annotation':self.escape(annotation)}
