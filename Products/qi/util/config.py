@@ -1,8 +1,5 @@
 from App.config import getConfiguration
 
-# constants for defaults possibly overridden below in configuration:
-ZEO_ADDRESS = 'localhost:8788'
-
 
 # global, cached state for loaded configuration
 _prod_cfg = {}
@@ -32,10 +29,6 @@ def getcfg():
     if not _prod_cfg:
         loadcfg()
     return _prod_cfg
-
-
-# OVERRIDES FOR DEFAULT CONFIG VALUES:
-ZEO_ADDRESS = getcfg().get('zeo.address', ZEO_ADDRESS).strip()
 
 
 class PathConfig(object):
