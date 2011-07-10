@@ -9,6 +9,7 @@
         class=".clean.Clean"
         template="clean.pt"
         permission="Products.qi.Maintain"
+        layer="Products.qi.interfaces.IQIProductLayer"
         />
     <browser:page
         for="Products.qi.extranet.types.interfaces.IProject"

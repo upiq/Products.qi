@@ -8,12 +8,15 @@
         manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
         template="maintain.pt"
 		class=".maintain.Maintenance"
+        layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope2.View"
         />
+
     <browser:view
         for="*"
         name="qi_utilities"
         class=".viewlets.UtilitiesView"
+        layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope2.View"
         />
 
@@ -23,6 +26,7 @@
         for="*"
         manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
         template="footer.pt"
+        layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope.Public"
         />
 
@@ -31,6 +35,7 @@
         for="*"
         manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
         template="colophon.pt"
+        layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope.Public"
         />
 

@@ -11,6 +11,7 @@
         manager="plone.app.layout.viewlets.interfaces.IPortalTop"
         class=".menuviewlet.QIMenu"
         template="qi-menu4.pt"
+        layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope2.View"
         />
     
@@ -19,6 +20,7 @@
         manager="plone.app.layout.viewlets.interfaces.IPortalTop"
         class=".menuviewlet.QIMenu"
         template="qi-menu.pt"
+        layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope2.View" 
         />
         

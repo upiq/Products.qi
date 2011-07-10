@@ -32,6 +32,10 @@ setup(name='Products.qi',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'qi.sqladmin',
+          'feedparser',
+          'Products.CMFPlone', #shim <=4.0; Plone egg >= 4.1
+          'plone.browserlayer',
       ],
       entry_points="""
       """,

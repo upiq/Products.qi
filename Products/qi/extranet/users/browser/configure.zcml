@@ -18,22 +18,22 @@
         template="manage_members.pt"
         permission="cmf.ModifyPortalContent"
         />
-	
-	<browser:page
-	    for="Products.qi.extranet.types.interfaces.IProject"
-		name="userlist.html"
-	    class=".userlist.UserList"
-	    template="userlist.pt"
-	    permission="cmf.ModifyPortalContent"
-	    />
-	
-	<browser:page
-	    for="Products.qi.extranet.types.interfaces.ITeam"
-		name="userlist.html"
-	    class=".userlist.UserList"
-	    template="userlist.pt"
-	    permission="cmf.ModifyPortalContent"
-	    />
+    
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.IProject"
+        name="userlist.html"
+        class=".userlist.UserList"
+        template="userlist.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+    
+    <browser:page
+        for="Products.qi.extranet.types.interfaces.ITeam"
+        name="userlist.html"
+        class=".userlist.UserList"
+        template="userlist.pt"
+        permission="cmf.ModifyPortalContent"
+        />
 
     <browser:page
         for="Products.qi.extranet.types.interfaces.ITeam"
@@ -45,18 +45,20 @@
     
 
     <browser:page
-	    for="*"
-		name="updatestatus.html"
-	    class=".usertracker.UserTracker"
-	    permission="zope2.View"
-	    />
+        for="*"
+        name="updatestatus.html"
+        class=".usertracker.UserTracker"
+        layer="Products.qi.interfaces.IQIProductLayer"
+        permission="zope2.View"
+        />
     
-	
-	<browser:page
-	    for="*"
-		name="currentusers.html"
-	    class=".currentusers.CurrentUsers"
-	    template="currentusers.pt"
-	    permission="cmf.ModifyPortalContent"
-	    />
+    
+    <browser:page
+        for="*"
+        name="currentusers.html"
+        class=".currentusers.CurrentUsers"
+        template="currentusers.pt"
+        layer="Products.qi.interfaces.IQIProductLayer"
+        permission="cmf.ModifyPortalContent"
+        />
 </configure>

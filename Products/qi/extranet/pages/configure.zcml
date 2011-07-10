@@ -9,6 +9,7 @@
         name="Error.html"
         class=".error.Error"
         template="error.pt"
+        layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope2.View"
         />
     <include package=".contact" />

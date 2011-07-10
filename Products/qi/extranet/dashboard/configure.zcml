@@ -3,18 +3,19 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="Products.qi">
-	<browser:page
-	  for="Products.qi.extranet.types.interfaces.IProject"
-	  class="plone.app.portlets.browser.manage.ManageDashboardPortlets"
-	  name="manage-dashboard"
-	  template="manage-dashboard.pt"
-	  permission="plone.app.portlets.ManageOwnPortlets"
-	  />
-	<browser:page
-		for="*"
-		class=".NewStuff.MyTeamspace"
-		name="myqiteamspace"
-		template="my_projects.pt"
-		permission="zope2.View"
-		/>
+    <browser:page
+      for="Products.qi.extranet.types.interfaces.IProject"
+      class="plone.app.portlets.browser.manage.ManageDashboardPortlets"
+      name="manage-dashboard"
+      template="manage-dashboard.pt"
+      permission="plone.app.portlets.ManageOwnPortlets"
+      />
+    <browser:page
+        for="*"
+        class=".NewStuff.MyTeamspace"
+        name="myqiteamspace"
+        template="my_projects.pt"
+        layer="Products.qi.interfaces.IQIProductLayer"
+        permission="zope2.View"
+        />
 </configure>
