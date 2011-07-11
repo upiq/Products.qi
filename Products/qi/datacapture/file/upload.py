@@ -283,12 +283,12 @@ translate.default.PracticeTranslator'):
         logger.logWithElapsed('Saved row')
         
     def equiv(self,v1,v2):
-		try:
-			return float(str(v1))==float(str(v2))
-		except ValueError:
-			return str(v1)==str(v2)
-		except TypeError:
-			return str(v1)==str(v2)
+        try:
+            return float(str(v1))==float(str(v2))
+        except ValueError:
+            return str(v1)==str(v2)
+        except TypeError:
+            return str(v1)==str(v2)
 
     def addError(self, key, value):
         if self.errors.has_key(key):

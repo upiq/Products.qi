@@ -22,8 +22,8 @@ class IProject(ISelectableBrowserDefault, IOrderedContainer):
                               required=True)
 
     hideinactiveteams = schema.Bool(title=_(u"Hide inactive teams?"),
-									description=_(u"Keep inactive teams out of search results"),
-									required=False)
+                                    description=_(u"Keep inactive teams out of search results"),
+                                    required=False)
     """
     managers = schema.List(title=_(u"Managers"),
                            description=_(

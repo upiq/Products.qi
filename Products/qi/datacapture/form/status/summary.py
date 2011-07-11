@@ -186,7 +186,7 @@ class FormStatus(BrowserPlusView):
         project=self.context.getDBProject()
         teams=project.team_set.all()
         if project.hideinactiveteams:
-	       teams=teams.filter(active=True)
+           teams=teams.filter(active=True)
         #dates=project.datadate_set.all()
         dates={}
         for x in teams:
