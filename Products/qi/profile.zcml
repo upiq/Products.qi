@@ -6,25 +6,6 @@
     i18n_domain="Products.qi">
 
 
-    <!-- ## DISABLED BASE PROFILE, REMOVED IN FAVOR OF EXTENSION ##
-    <genericsetup:registerProfile
-        name="baseline"
-        title="QI TeamSpace Site Policy Baseline"
-        directory="profiles/baseline"
-        description="QI TeamSpace baseline profile."
-        provides="Products.GenericSetup.interfaces.BASE"
-        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        />
-    -->
-    
-    <genericsetup:registerProfile
-        name="default"
-        title="QI TeamSpace Site Policy"
-        directory="profiles/default"
-        description="QI TeamSpace extension profile."
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-        />
-
     <genericsetup:registerProfile
         name="default_plone4"
         title="QI TeamSpace Plone 4.x Site Policy"
@@ -32,8 +13,6 @@
         description="QI TeamSpace extension profile (Plone 4.0+ only)."
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
-
-
     
     <!-- install custom filesystem directory view -->
     <cmf:registerDirectory
