@@ -4,21 +4,6 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="Products.qi">
 
-    <browser:page
-        for="Products.qi.extranet.types.interfaces.IProject"
-        name="project_events.html"
-        template="all_events.pt"
-        permission="zope2.View"
-        />
-
-    <browser:page
-        for="Products.qi.extranet.types.interfaces.IProject"
-        name="project_news.html"
-        template="all_news.pt"
-        permission="zope2.View"
-        />
-    
-
     <plone:portlet
         name="portlets.qi.Calendar"
         interface=".calendar.ICalendarPortlet"
@@ -26,34 +11,5 @@
         renderer=".calendar.Renderer"
         addview=".calendar.AddForm"
         /> 
-
-    <plone:portlet
-        name="portlets.qi.RecentNoDate"
-        interface=".recentnodateportlet.IRecentNoDatePortlet"
-        assignment=".recentnodateportlet.RecentNoDateAssignment"
-        renderer=".recentnodateportlet.RecentNoDateRenderer"
-        addview=".recentnodateportlet.RecentNoDateAddForm"
-        editview="plone.app.portlets.portlets.recent.EditForm"
-        />
-
-    <plone:portlet
-        name="portlets.qi.EventNoDate"
-        interface=".eventnodateportlet.IEventNoDatePortlet"
-        assignment=".eventnodateportlet.EventNoDateAssignment"
-        renderer=".eventnodateportlet.EventNoDateRenderer"
-        addview=".eventnodateportlet.EventNoDateAddForm"
-        editview="plone.app.portlets.portlets.events.EditForm"
-        />
-
-    <plone:portlet
-        name="portlets.qi.NewsNoDate"
-        interface=".newsnodateportlet.INewsNoDatePortlet"
-        assignment=".newsnodateportlet.NewsNoDateAssignment"
-        renderer=".newsnodateportlet.NewsNoDateRenderer"
-        addview=".newsnodateportlet.NewsNoDateAddForm"
-        editview="plone.app.portlets.portlets.news.EditForm"
-        />
-
-
 
 </configure>
