@@ -13,19 +13,35 @@
   <exit-transition transition_id="restrict_to_team"/>
   <exit-transition transition_id="retract"/>
   <exit-transition transition_id="show"/>
-  <permission-map name="Access contents information"
-                  acquired="False">
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
+   <permission-role>Reader</permission-role>
   </permission-map>
-  <permission-map name="Modify portal content"
-                  acquired="False">
-   <permission-role>Owner</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
+  <permission-map name="Add portal topics" acquired="True">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="Enter Data" acquired="True">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reader</permission-role>
   </permission-map>
  </state>
  <state state_id="project_private"
