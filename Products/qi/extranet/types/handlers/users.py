@@ -1,15 +1,4 @@
 
-def addManagersAndFacultyAsMembers(project, event):
-    managers=project.managers
-    faculty=project.faculty
-    added=[k for k in managers]
-    added[len(added):]=faculty
-    plugin = project.acl_users.source_groups
-    for email in added:
-        group_id = project.getProjectGroup()
-        plugin.addPrincipalToGroup(email, group_id)
-
-
 def addLeadsAsMembers(team, event):
     leads=team.managers
     if hasattr(team, 'getProject'):

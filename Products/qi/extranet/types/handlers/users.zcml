@@ -6,19 +6,6 @@
     i18n_domain="Products.qi">
 
   <subscriber
-    for="Products.qi.extranet.types.interfaces.IProject
-         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler=".security.addManagersAndFacultyAsMembers"
-    />
-
-
-  <subscriber
-    for="Products.qi.extranet.types.interfaces.IProject
-         zope.app.container.interfaces.IObjectAddedEvent"
-    handler=".security.addManagersAndFacultyAsMembers"
-    />
-
-  <subscriber
     for="Products.qi.extranet.types.interfaces.ITeam
          zope.lifecycleevent.interfaces.IObjectModifiedEvent"
     handler=".security.addLeadsAsMembers"
