@@ -1,17 +1,3 @@
-
-def addLeadsAsMembers(team, event):
-    leads=team.managers
-    if hasattr(team, 'getProject'):
-        project=team.getProject()
-    else:
-        project=event.newParent.getProject()
-    plugin = project.acl_users.source_groups
-    for email in leads:
-        group_id = project.getProjectGroup()
-        team_group_id = team.getGroup()
-        plugin.addPrincipalToGroup(email, group_id)
-        plugin.addPrincipalToGroup(email, team_group_id)
-
 #rethink this
 def add_managers_and_faculty(project, changeevent):
     managers=project.managers
