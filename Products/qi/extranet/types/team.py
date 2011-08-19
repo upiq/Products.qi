@@ -10,7 +10,6 @@ from zope.interface import implements
 from qi.sqladmin import models as DB
 from psycopg2 import ProgrammingError
 from Products.qi.util.logger import logger
-from Products.qi.util import PLONE_VERSION
 
 from Products.CMFCore.utils import getToolByName
 
@@ -33,15 +32,11 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
     """  QITeamspace implemenation of a project
     """
     implements(IQITeam, ITTWLockable, INameFromTitle,ILocalPortletAssignable)
-    if PLONE_VERSION == 3:
-        __implements__=(OrderSupport.__implements__,)
     security = ClassSecurityInfo()
     portal_type = "qiteam"
     reportLocations=None
     upload_types=[]
     dbid=None
-    def UID(self):
-        return self.dbid
     title = u""
     description = u""
     groupname=None

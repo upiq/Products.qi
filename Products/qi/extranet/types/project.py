@@ -10,7 +10,6 @@ from zope.interface import implements
 from qi.sqladmin import models as DB
 from psycopg2 import ProgrammingError
 from Products.qi.util.logger import logger
-from Products.qi.util import PLONE_VERSION
 
 from Products.CMFCore.utils import getToolByName
 
@@ -35,17 +34,9 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     """  QITeamspace implemenation of a project
     """
     implements(IQIProject, ITTWLockable, INameFromTitle, ILocalPortletAssignable)
-    if PLONE_VERSION == 3:
-        # XXX: required because Plone (3) getObjPositionInParent
-        # is using Z2-style interfaces.  See:
-        # http://dev.plone.org/plone/ticket/6081
-        __implements__ = (BrowserDefaultMixin.__implements__ +
-                         (OrderSupport.__implements__,))
     security = ClassSecurityInfo()
     portal_type = "qiproject"
     dbid=None
-    """def UID(self):
-        return '%s-project'%self.id"""
     title = u""
     description = u""
     hideinactiveteams = False
