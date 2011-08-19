@@ -5,44 +5,30 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
 
-    <!--
-        <subscriber
-            for="Products.qi.extranet.types.interfaces.IProject
-                 zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-            handler=".security.add_managers_and_faculty"
-            />
-
-        <subscriber
-            for="Products.qi.extranet.types.interfaces.ITeam
-                 zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-            handler=".security.add_leads"
-            /> 
-            -->
-
-        <subscriber
-            for="Products.qi.extranet.types.interfaces.IProject
-                 zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-            handler=".security.addManagersAndFacultyAsMembers"
-            />
+  <subscriber
+    for="Products.qi.extranet.types.interfaces.IProject
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".security.addManagersAndFacultyAsMembers"
+    />
 
 
-        <subscriber
-            for="Products.qi.extranet.types.interfaces.IProject
-                 zope.app.container.interfaces.IObjectAddedEvent"
-            handler=".security.addManagersAndFacultyAsMembers"
-            />
+  <subscriber
+    for="Products.qi.extranet.types.interfaces.IProject
+         zope.app.container.interfaces.IObjectAddedEvent"
+    handler=".security.addManagersAndFacultyAsMembers"
+    />
 
-        <subscriber
-            for="Products.qi.extranet.types.interfaces.ITeam
-                 zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-            handler=".security.addLeadsAsMembers"
-            />
+  <subscriber
+    for="Products.qi.extranet.types.interfaces.ITeam
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".security.addLeadsAsMembers"
+    />
 
 
-        <subscriber
-            for="Products.qi.extranet.types.interfaces.ITeam
-                 zope.app.container.interfaces.IObjectAddedEvent"
-            handler=".security.addLeadsAsMembers"
-            />
+  <subscriber
+    for="Products.qi.extranet.types.interfaces.ITeam
+         zope.app.container.interfaces.IObjectAddedEvent"
+    handler=".security.addLeadsAsMembers"
+    />
 
 </configure>
