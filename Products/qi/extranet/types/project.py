@@ -1,5 +1,5 @@
 from AccessControl import ClassSecurityInfo
-from Acquisition import aq_base, aq_inner, aq_parent
+from Acquisition import aq_base
 from App.class_init import default__class_init__ as InitializeClass
 from BTrees.OOBTree import OOSet
 from OFS.OrderSupport import OrderSupport
@@ -8,7 +8,6 @@ from zExceptions import NotFound
 from zope.component.factory import Factory
 from zope.interface import implements
 from qi.sqladmin import models as DB
-from psycopg2 import ProgrammingError
 from Products.qi.util.logger import logger
 
 from Products.CMFCore.utils import getToolByName
@@ -55,15 +54,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     def getProject(self):
         return self
     
-    def getTeams(self):
-        raise Exception("a system component is looking for teams incorrectly")
-        resultTeams=[]
-        children=self.getChildNodes()
-        for item in children:
-            if isinstance(item, Team):
-                resultTeams.append(item)
-        return resultTeams
-    
     def getUploadTypes(self):
         if not self.UploadTypes:
             self.UploadTypes=[]
@@ -89,9 +79,8 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
             logger.handleException(e)
             return None
         return dbproject   
-    
-
-    
+   
+    # fixed project-level menu items: 
     baseItems=(
         ("MailingLists.html",
             "Manage Project Mailing Lists", "Use mailhost services"),
@@ -120,8 +109,8 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
         ("teams.html","Activate/Inactivate Teams","qiproject: Add Team"),
         ("timeline.html","View Project Timeline","Modify portal content"),
         
-        #("join.html","Request Membership","Role:Authenticated"),
         )
+    
     otherSources=()
     
     def getMenuItems(self):
@@ -138,7 +127,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
         result.append(projectMenu)
         return result
         
-
     security.declareProtected(View, 'HEAD')
     def HEAD(self, REQUEST, RESPONSE):
         """ Override HEAD method for HTTP HEAD requests.
@@ -180,6 +168,7 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
         
     def isSubTeam(self):
         return False
+    
     def isTeam(self):
         return False
         
