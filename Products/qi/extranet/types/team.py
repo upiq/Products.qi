@@ -1,14 +1,12 @@
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base, aq_inner, aq_parent
 from App.class_init import default__class_init__ as InitializeClass
-from BTrees.OOBTree import OOSet
 from OFS.OrderSupport import OrderSupport
 from zExceptions import MethodNotAllowed
 from zExceptions import NotFound
 from zope.component.factory import Factory
 from zope.interface import implements
 from qi.sqladmin import models as DB
-from psycopg2 import ProgrammingError
 from Products.qi.util.logger import logger
 
 from Products.CMFCore.utils import getToolByName
@@ -79,11 +77,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
     baseItems=( 
                 ("MailingLists.html",
                     "Manage Team Mailing Lists", "Modify portal content"),
-                #("MailArchives.html","View Team Mail Archive",
-                #    "Use mailhost services"),
-
-                #("topics.html","Project topics",None),
-
 
                 ("","-----------",
                     "Modify portal content"),    
