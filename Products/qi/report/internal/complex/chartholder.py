@@ -12,8 +12,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from qi.sqladmin import models as DB
 
 from Products.qi.report.internal.complex.rows.row import rowfactory
-from Products.qi.util import PLONE_VERSION
-
 
 from Products.qi.report.internal.complex.rows.interfaces import IChartRow
 
@@ -129,9 +127,6 @@ def sortrow(a,b):
 
 
 class ChartHolder(BrowserDefaultMixin, OrderSupport, Container):
-    if PLONE_VERSION == 3:
-        __implements__ = (BrowserDefaultMixin.__implements__ +
-                         (OrderSupport.__implements__,))
     implements(IChartHolder,)
     title=""
     description=""

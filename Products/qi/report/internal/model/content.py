@@ -14,13 +14,9 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.content.container import Container
 
-from Products.qi.util import PLONE_VERSION
-
 
 class Chart(SimpleItem,BrowserDefaultMixin, Container):
     implements(IQIChart, INameFromTitle)
-    if PLONE_VERSION == 3:
-        __implements__ = (BrowserDefaultMixin.__implements__)
     portal_type="qichart"
     title=u"Unnamed Chart"
     description=u"Undefined"
