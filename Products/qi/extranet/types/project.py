@@ -41,7 +41,7 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     hideinactiveteams = False
     faculty = () 
     UploadTypes=[]
-    projectTheme='Plone Default'
+    projectTheme='Sunburst Theme'
     groupname=None
 
     def __init__(self, id=None):
