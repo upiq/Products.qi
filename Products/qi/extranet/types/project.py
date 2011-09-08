@@ -44,8 +44,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     security = ClassSecurityInfo()
     portal_type = "qiproject"
     dbid=None
-    """def UID(self):
-        return '%s-project'%self.id"""
     title = u""
     description = u""
     hideinactiveteams = False

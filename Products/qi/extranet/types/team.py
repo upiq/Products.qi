@@ -40,8 +40,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
     reportLocations=None
     upload_types=[]
     dbid=None
-    def UID(self):
-        return self.dbid
     title = u""
     description = u""
     groupname=None
