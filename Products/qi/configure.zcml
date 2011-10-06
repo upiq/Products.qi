@@ -18,8 +18,6 @@
     <include package=".measures" />
     <include package=".report" />
     
-
-    
     <include file="profile.zcml" />
     
 </configure>
