@@ -64,18 +64,14 @@
         />
 
     <class class=".project.Project">
-        
         <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
-        <implements interface="Products.qi.datacapture.file.interfaces.IImportable" />
         <implements interface="plone.app.layout.navigation.interfaces.INavigationRoot" />
     </class>
     <class class=".team.Team">
         <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
-        <implements interface="Products.qi.datacapture.file.interfaces.IImportable" />
     </class>
     <class class=".subteam.SubTeam">
         <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
-        <implements interface="Products.qi.datacapture.file.interfaces.IImportable" />
     </class>
 
 
