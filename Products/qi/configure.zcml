@@ -14,7 +14,6 @@
 
     <include package=".util" />
     <include package=".datacapture" />
-    <include package=".mail" />
     <include package=".measures" />
     <include package=".report" />
     

@@ -22,13 +22,9 @@ class QIMenu(ViewletBase):
     baseItems=(
         ("Measure_Type.html","Manage Measure Types","Role:Manager"),
         ("Add_Measure.html","Create New Measure","Role:Manager"),
-        #("addreport.html","Create a Report","Role:Manager"),
         ("topics.html","Manage Topics","Role:Manager"))
     
-    personalItems=(
-        ("archives.html","View Mail Archives",'Role:Member'),
-        ("newsend.html","Send Mail to My Mailing Lists",'Role:Member'),
-        ("Subscribe.html","Subscribe to Mailing Lists",'Role:Member'))
+    personalItems=()
     
     def _siteroot_link(self):
         portal_url = getMultiAdapter(
@@ -51,14 +47,9 @@ class QIMenu(ViewletBase):
         for item in self.baseItems:
             systemMenu.items.append(MenuItem(context=targetcontext,
                 target=item[0], name=item[1],permission=item[2]))
-        personalMenu=MenuItem(context=self.context,name="Mail Options")
-        personalMenu.items=[]
-        for item in self.personalItems:
-            personalMenu.items.append(MenuItem(context=self.context,
-                target=item[0], name=item[1],permission=item[2]))
-        contextmenus=[systemMenu,personalMenu]
+        contextmenus=[systemMenu,]
         if self.contextHasMenus():
-            contextmenus[2:]= self.context.getMenuItems()
+            contextmenus[1:]= self.context.getMenuItems()
         removed=[]
         for menu in contextmenus:
             anySubItems=False
