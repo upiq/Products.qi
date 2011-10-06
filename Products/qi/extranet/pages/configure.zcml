@@ -4,13 +4,4 @@
     xmlns:cmf="http://namespaces.zope.org/cmf" 
     i18n_domain="Products.qi">
     
-    <browser:page
-        for="*"
-        name="Error.html"
-        class=".error.Error"
-        template="error.pt"
-        layer="Products.qi.interfaces.IQIProductLayer"
-        permission="zope2.View"
-        />
-
 </configure>

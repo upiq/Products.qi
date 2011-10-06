@@ -36,8 +36,6 @@ class BrowserPlusView(BrowserView,Validator):
                 return self.index(*args,**kw)
             except Exception, e:
                 logger.handleException(e, self)
-                self.doRedirect('Error.html')
-
     
     def update(self, *args, **kw):
         form=self.request.form
