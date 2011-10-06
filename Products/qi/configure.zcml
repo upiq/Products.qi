@@ -14,7 +14,6 @@
 
     <include package=".util" />
     <include package=".datacapture" />
-    <include package=".measures" />
     
     <include file="profile.zcml" />
     
