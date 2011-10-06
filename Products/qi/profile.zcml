@@ -5,7 +5,6 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
 
-
     <genericsetup:registerProfile
         name="default_plone4"
         title="QI TeamSpace Plone 4.x Site Policy"
@@ -17,9 +16,6 @@
     <!-- install custom filesystem directory view -->
     <cmf:registerDirectory
         name="Qi-Images"/>
-
-    <cmf:registerDirectory
-        name="qi_plone_overrides"/>
 
     <cmf:registerDirectory
         name="qi_plone4_overrides"/>
