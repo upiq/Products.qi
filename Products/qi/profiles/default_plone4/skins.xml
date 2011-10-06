@@ -3,9 +3,6 @@
  <object name="Qi-Images"
      meta_type="Filesystem Directory View"
      directory="Products.qi:skins/Qi-Images"/>
- <object name="qi-mail"
-     meta_type="Filesystem Directory View"
-     directory="Products.qi:skins/qi-mail"/>
  <object name="qi-macros"
      meta_type="Filesystem Directory View"
      directory="Products.qi:skins/qi-macros"/>
@@ -13,7 +10,6 @@
      meta_type="Filesystem Directory View"
      directory="Products.qi:skins/qi_plone4_overrides"/>
  <skin-path name="Sunburst Theme">
-  <layer name="qi-mail" insert-after="custom" />
   <layer name="qi_plone4_overrides" insert-after="custom" />
   <layer name="Qi-Images" insert-after="custom" />
  </skin-path>
