@@ -323,12 +323,4 @@ class TeamMembersView(BrowserPlusView):
         plugin=self._getGroupsPlugin()
         plugin.removePrincipalFromGroup(email, group_id)
         project, team=self.getProjectTeam()
-        if team is not None:
-            lists=self.context.getDBTeam().mailinglist_set.all()
-        else:
-            lists=self.context.getDBProject().mailinglist_set.all()
-        removed=DB.MailingListSubscriber.objects.filter(userid=email).filter(list__in=lists)
-        #next delete those
-        actionlog.logText('as user is removed from team: deleting %s from %s'%(email,removed))
-        removed.delete()
 
