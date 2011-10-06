@@ -15,8 +15,5 @@
     <include package=".types" />
     <include package=".users" />
     <include package=".viewlets" />
-    <include package=".forums" />
-    
-
     
 </configure>

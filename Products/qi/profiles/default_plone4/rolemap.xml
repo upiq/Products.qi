@@ -18,10 +18,6 @@
       <role name="Manager"/>
       <role name="Owner"/>
     </permission>
-    <permission name="Post Threads"  acquire="True">
-      <role name="Manager" />
-      <role name="Editor" />
-    </permission>
     <permission name="qiproject: Add Team"  acquire="True">
       <role name="Manager"/>
       <role name="QIC" />
