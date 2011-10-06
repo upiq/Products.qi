@@ -88,8 +88,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
         ("datasummary.html","View Roster and Data Summary", "qiproject: Add Team"),
         ("",
             "----------","Modify portal content"),
-        ("edit-contact.html",
-            "Modify Project Contact Info","Modify portal content"),
         ("teams.html","Activate/Inactivate Teams","qiproject: Add Team"),
         ("timeline.html","View Project Timeline","Modify portal content"),
         )

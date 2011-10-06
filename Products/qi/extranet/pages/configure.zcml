@@ -12,5 +12,5 @@
         layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope2.View"
         />
-    <include package=".contact" />
+
 </configure>
