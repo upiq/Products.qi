@@ -128,35 +128,6 @@ def addgroups(plonegroups, groups):
     plonegroups[len(plonegroups):]=groups
     
 
-def getUsersForMailingList(dblist, context):
-    userids={}
-    if not dblist:
-        return ()
-        
-    project=getPloneProject(dblist.project, context)
-    team=getPloneTeam(dblist.team, context)
-    individualUsers=dblist.mailinglistsubscriber_set.all()
-
-    for user in individualUsers:
-        userids[user.userid]=user.userid
-
-    plonegroups=[]
-
-    #if it's a project, append team groups
-    if project and not team:
-        addgroups(plonegroups,getTeamGroups(project,dblist))
-    
-    addgroups(plonegroups,getAllPloneGroups(dblist,project,team,context))
-    
-    userplugin=context.acl_users.source_groups
-    for plonegroup in plonegroups:
-        for user in userplugin.listAssignedPrincipals(plonegroup):
-            userids[user[0]]=user[0]
-    
-    result= [k for k in userids.iterkeys()]
-    return result
-    
-        
 def getPloneGroupNames(group, project, team, context):
     result=[]
     if project is None:
@@ -198,62 +169,6 @@ def getProjectsAndTeamsForUser(user, context):
     return projects,teams
 
 
-def getPossibleListsForUser(user, context):
-    projects, teams=getProjectsAndTeamsForUser(user, context)
-    base=DB.MailingList.objects
-    lists=base.filter(project__isnull=True,team__isnull=True)
-    for project in projects:
-        dbproj=project.getDBProject()
-        lists=lists | base.filter(project=dbproj,team__isnull=True)
-    for team in teams:
-        dbteam=team.getDBTeam()
-        dbproj=team.getDBProject()
-        lists=lists | base.filter(project=dbproj, team=dbteam)
-    return lists
-
-
-def getListsForUser(user, context):
-    userobj=context.acl_users.getUser(user)
-    if userobj is None:
-        logger.logText('invalid user detected, giving no lists: %s'%user)
-        return []
-    catalog=context.portal_catalog
-    grouptool=context.acl_users.source_groups
-    groups=userobj.getGroupIds()
-    alllists=[]
-    lists=DB.MailingList.objects.filter(mailinglistsubscriber__userid=user)
-    alllists.extend(lists)
-    #projectbrains=[]
-    #teambrains=[]
-    for x in groups:
-        try:
-            mainpart, trimmed=x.rsplit('-',1)
-            if trimmed=='lead':
-                trimmed='leads'
-        except ValueError:
-            continue
-        try:
-            specialgroup=DB.SpecialMailGroup.objects.get(groupname=trimmed)
-        except DB.SpecialMailGroup.DoesNotExist:
-            continue
-        members='%s-members'%mainpart
-        projects=catalog.searchResults(meta_type='qiproject',getProjectGroup=members)
-        for x in projects:
-            dblists=DB.MailingList.objects.filter(project__id=x.dbid, team__id__isnull=True,groups=specialgroup)
-            alllists.extend(dblists)
-        
-        teams=[]
-        teams.extend(catalog.searchResults(meta_type="qiteam",getGroup=members))
-        teams.extend(catalog.searchResults(meta_type="qisubteam",getGroup=members))
-        for x in teams:
-            dblists=DB.MailingList.objects.filter(team__id=x.dbid, groups=specialgroup)
-            alllists.extend(dblists)
-            if trimmed=="members":
-                dblists=DB.MailingList.objects.filter(teams=x.dbid)
-                alllists.extend(dblists)
-        allids=[o.id for o in alllists]
-        return DB.MailingList.objects.filter(id__in=allids)
-    
 
 #this is only for the natsort function below    
 def convert(text):
@@ -268,14 +183,6 @@ def natsort(tosort, f=lambda arg: arg.lower()):
     return sorted(tosort, key=alphanum_key )
 
     
-def compareMailingLists(leftList, rightList):
-    return cmp(leftList.listname,rightList.listname)
-
-    
-def compareMailingLists2(left, right):
-    return cmp(left.listname.lower(), right.listname.lower())
-
-
 class fixUsers(BrowserPlusView):
     def __call__(self, *args, **kw):
         return fixTheUsers(self.context)

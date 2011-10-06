@@ -75,10 +75,6 @@ actionlog=LogHandler()
 actionlog.target=os.path.join(LOGPATH, "actions.log")
 actionlog.bootup()
 
-maillog=LogHandler()
-maillog.target=os.path.join(LOGPATH, "mailinglist.log")
-maillog.bootup()
-
 importlog=LogHandler()
 importlog.target=os.path.join(LOGPATH, "import.log")
 importlog.bootup()
