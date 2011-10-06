@@ -4,7 +4,7 @@
  <property name="description">Welcome to QI TeamSpace</property>
  <property name="default_page" type="string">front-page</property>
  <property name="email_from_address"
-    type="string">support@ursalogic.com</property>
+    type="string">webmaster@projects.upiq.org</property>
  <property name="email_from_name"
-    type="string">QI TeamSpace Administrator</property>
+    type="string">UPIQ QI Workspaces Administrator</property>
 </site>
