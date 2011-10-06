@@ -5,21 +5,6 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
 
-
-
-    <!--
-    <subscriber
-        for="
-         Products.PluggableAuthService.interfaces.events.IPrincipalCreatedEvent"
-        handler=".django.addUserToDjango"
-        />
-    <subscriber
-        for="
-        Products.PluggableAuthService.interfaces.events.IPrincipalDeletedEvent"
-        handler=".django.removeUserFromDjango"
-        /> 
-        -->
-
     <subscriber
         for="Products.qi.extranet.types.interfaces.ITeam
              zope.lifecycleevent.interfaces.IObjectModifiedEvent"
@@ -37,8 +22,5 @@
              zope.app.container.interfaces.IObjectAddedEvent"
         handler=".django.persistTeamToDjango"
         />
-    <!--
-
-    -->
 
 </configure>
