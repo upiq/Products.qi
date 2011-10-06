@@ -75,32 +75,9 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
         return dbteam
         
     baseItems=( 
-                ("MailingLists.html",
-                    "Manage Team Mailing Lists", "Modify portal content"),
-
-                ("","-----------",
-                    "Modify portal content"),    
-
                 ("members.html","Manage Team Members","Modify portal content"),
-                
                 ("","-----------",
                     "Modify portal content"),   
-                ("dataentry.html","Enter Data", "Enter Data"), 
-                
-                ("", "-----------", "Modify portal content"),
-                
-                ("import.html","Import a Data File",
-                    "Add Documents, Images, and Files"),
-                ("UploadStatus.html","View Imported Data Files",
-                    "Add Documents, Images, and Files"),
-                ("reports.html","View Report Output",
-                    "Enter Data"),
-                
-                
-                
-                ("","-----------",
-                    "Modify portal content"),    
-                    
                 ("identifiers.html","Manage Team Nicknames",
                     "Modify portal content"),
                 )
