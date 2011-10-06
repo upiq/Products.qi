@@ -5,5 +5,4 @@
     i18n_domain="Products.qi">
 
     <include package=".extranet.viewlets" file="overrides.zcml"/>
-    <include package=".extranet.pages" file="overrides.zcml"/>
 </configure>

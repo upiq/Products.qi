@@ -16,8 +16,6 @@ class BrowserPlusView(BrowserView,Validator):
     
     #override to set buttons that cause an action
     processFormButtons=()
-    #deprecated
-    relatedPages=()
     #buttons that perform an action and skip validation(e.g. 'home')
     nonValidatedButtons=()
     #override or set to false to keep form data on success
@@ -83,9 +81,6 @@ class BrowserPlusView(BrowserView,Validator):
         
     def generalTemplate(self):
         return context['general.pt'].macros['mainpage']
-            
-    def getRelatedPages(self):
-        return self.relatedPages
     
     def validationSuportUrl(self):
         supportsite='http://ursa3.user.openhosting.com:8280/QITeamspaceSupport'
