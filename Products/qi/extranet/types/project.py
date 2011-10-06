@@ -82,33 +82,16 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
    
     # fixed project-level menu items: 
     baseItems=(
-        ("MailingLists.html",
-            "Manage Project Mailing Lists", "Use mailhost services"),
-        ("",
-            "----------","Use mailhost services"),    
         ("members.html","Manage Project Members","Modify portal content"),
         ("",
             "----------","Modify portal content"), 
-        ("measures.html","Manage Project Measures","Modify portal content"), 
-        ("ManageForms","Manage Forms","Modify Portal Content"),  
         ("datasummary.html","View Roster and Data Summary", "qiproject: Add Team"),
         ("",
             "----------","Modify portal content"),
-        ("import.html","Import a Data File","Modify portal content"),
-        ("UploadStatus.html","View Imported Data Files",
-            "Add Documents, Images, and Files"),
-        ("reports.html","Manage Project Reports","Role:Manager"),
-        ("show_reports.html","View Reports","Role:Reader"),
-        
-        ("",
-            "----------","Modify portal content"),
-        
         ("edit-contact.html",
             "Modify Project Contact Info","Modify portal content"),
-        
         ("teams.html","Activate/Inactivate Teams","qiproject: Add Team"),
         ("timeline.html","View Project Timeline","Modify portal content"),
-        
         )
     
     otherSources=()
