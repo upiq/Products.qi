@@ -32,7 +32,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
     implements(IQITeam, ITTWLockable, INameFromTitle,ILocalPortletAssignable)
     security = ClassSecurityInfo()
     portal_type = "qiteam"
-    reportLocations=None
     upload_types=[]
     dbid=None
     title = u""
@@ -43,23 +42,13 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
         super(Team, self).__init__(id)
         self.managers = []
         self.addable_types = []
-        self.reportLocations={}
     
     def Description(self):
         """override CMF description accessor"""
         if isinstance(self.description, unicode):
             return self.description.encode('utf-8')
         return self.description or ''
-
-    def flagReport(self, folder):
-        if not self.reportLocations:
-            self.reportLocations={}
-
-        if self.reportLocations.has_key(folder):
-            self.reportLocations[folder]=self.reportLocations[folder]+1
-        else:
-            self.reportLocations[folder]=1
-        
+    
     def getDBTeam(self):
         if not self.dbid:
             persistTeamToDjango(self, None)

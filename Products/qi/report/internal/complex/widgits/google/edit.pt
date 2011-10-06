@@ -1,5 +1,0 @@
-<span>
-    Google Motion Chart(Please pick exactly 2 measures):
-    <tal:filters content="structure context/filteredit">
-    </tal:filters>
-</span>

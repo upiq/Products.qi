@@ -23,9 +23,7 @@
   <element value="News Item"/>
   <element value="Project_Folder"/>
   <element value="Topic"/>
-  <element value="qichart"/>
   <element value="qiteam"/>
-  <element value="qi.ChartHolder"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">folder_listing</property>
