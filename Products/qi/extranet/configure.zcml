@@ -6,7 +6,6 @@
     i18n_domain="Products.qi">
     
     
-    <include package=".dashboard" />
     <include package=".foldermanagement" />
     <include package=".pages" />
     <include package=".security" />
