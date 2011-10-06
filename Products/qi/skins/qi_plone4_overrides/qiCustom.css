@@ -35,24 +35,6 @@ color:black;
 color:black;
 }
 
-table.mailArchive {
-width: 100%;
-}
-
-th.mailArchiveSubject {
-width: 100px;
-}
-
-th.mailArchiveFrom {
-width: 50px;
-}
-
-table.mailArchive td 
-{
-padding: 3px;
-vertical-align: top;
-} 
-
 div.warning {
 background-color:#FFDD00;
 border:1px solid #DDAA00;
