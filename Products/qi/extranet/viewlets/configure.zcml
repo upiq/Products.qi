@@ -3,15 +3,6 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="Products.qi">
         
-    <browser:viewlet
-        name="qi.maintenance"
-        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
-        template="maintain.pt"
-		class=".maintain.Maintenance"
-        layer="Products.qi.interfaces.IQIProductLayer"
-        permission="zope2.View"
-        />
-
     <browser:view
         for="*"
         name="qi_utilities"

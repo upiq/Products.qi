@@ -9,7 +9,6 @@
     <include package=".dashboard" />
     <include package=".foldermanagement" />
     <include package=".pages" />
-    <include package=".portlets" />
     <include package=".security" />
     <include package=".tools" />
     <include package=".types" />

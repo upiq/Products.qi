@@ -1,7 +1,0 @@
-import newListener
-newListener.clientport=8288
-newListener.zopeport=9995
-def initialize(context):
-    pass
-    
-    

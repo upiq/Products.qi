@@ -1,6 +1,0 @@
-<tal:page i18n:domain="cmf_default"
-> 
-Message from <tal:span tal:content="options/user">user email</tal:span>
-<tal:span
-    tal:content="options/text | default">message body</tal:span>
-</tal:page>
