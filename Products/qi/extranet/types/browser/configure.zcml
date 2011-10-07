@@ -5,13 +5,6 @@
     
     <browser:page
         for="Products.qi.extranet.types.interfaces.IProject"
-        name="teams.html"
-        class=".teamManagement.TeamManagement"
-        template="teams.pt"
-        permission="Products.qi.AddTeam"
-        />
-    <browser:page
-        for="Products.qi.extranet.types.interfaces.IProject"
         name="view"
         template="project.pt"
         permission="zope2.View"
