@@ -18,13 +18,5 @@
         layer="Products.qi.interfaces.IQIProductLayer"
         permission="zope2.View" 
         />
-        
-    <browser:viewlet
-    	name="plone.path_bar"
-    	manager="plone.app.layout.viewlets.interfaces.IPortalTop"
-    	class=".viewlets.PathViewlet"
-        layer="Products.qi.interfaces.IQIProductLayer"
-    	permission="zope2.View" 
-    	/>
-        
+
 </configure>

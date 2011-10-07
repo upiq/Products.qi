@@ -46,13 +46,7 @@ class LogoViewlet(BrowserView):
             homelink=self.context.absolute_url()
         return hometag%(homelink, logo.tag())
 
-class PathViewlet(common.PathBarViewlet):
-    render = ViewPageTemplateFile('QI.path_bar.pt')
-    
-    def domainStrip(self, url):
-        return UtilitiesView(self.context, self.request).domainStrip(url)
  
-    
 class TitleViewlet(common.ViewletBase):
 
     def update(self):
