@@ -19,10 +19,7 @@ class QIMenu(ViewletBase):
     def contextHasMenus(self):
         return hasattr(self.context,"getMenuItems")
     
-    baseItems=(
-        ("Measure_Type.html","Manage Measure Types","Role:Manager"),
-        ("Add_Measure.html","Create New Measure","Role:Manager"),
-        ("topics.html","Manage Topics","Role:Manager"))
+    baseItems=()
     
     personalItems=()
     
