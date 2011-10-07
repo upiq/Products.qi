@@ -5,8 +5,7 @@ from Acquisition import aq_inner, aq_parent
 
 from Acquisition import aq_inner
 from zExceptions import BadRequest
-#from Products.Five.browser import BrowserView
-from Products.qi.util.general import BrowserPlusView
+from Products.Five.browser import BrowserView
 
 from DateTime import DateTime
 from Products.ATContentTypes.utils import DT2dt
@@ -16,14 +15,11 @@ from plone.app.form import base
 from plone.app.form.widgets.uberselectionwidget import UberMultiSelectionWidget
 from plone.app.vocabularies.users import UsersSource
 from plone.app.vocabularies.users import UsersSourceQueryView
-from Products.qi.util.logger import actionlog
 
 from Products.qi.extranet.types.handlers.users import add_managers_and_faculty, add_leads
-
+from Products.qi.util.utils import project_containing, team_containing
 from Products.qi.extranet.types.interfaces import IQITeam
 from Products.qi import MessageFactory as _
-
-from qi.sqladmin import models as DB
 
 from datetime import datetime
 import time
@@ -34,7 +30,7 @@ def compareMembers(a,b):
     return cmp(a['id'].lower(),b['id'].lower())
 
 
-class TeamMembersView(BrowserPlusView):
+class TeamMembersView(BrowserView):
 
     errors = None
     users = None
@@ -55,6 +51,9 @@ class TeamMembersView(BrowserPlusView):
     @property
     def mtool(self):
         return self._cache_tool('portal_membership')
+
+    def getProjectTeam(self):
+        return project_containing(self.context), team_containing(self.context)
 
     def getSearchWidget(self):
         if self.users is None:
