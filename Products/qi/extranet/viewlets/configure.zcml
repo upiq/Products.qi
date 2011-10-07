@@ -21,15 +21,6 @@
         permission="zope.Public"
         />
 
-    <browser:viewlet
-        name="qi.colophon"
-        for="*"
-        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
-        template="colophon.pt"
-        layer="Products.qi.interfaces.IQIProductLayer"
-        permission="zope.Public"
-        />
-
     <include package=".menu" />
     
 </configure>
