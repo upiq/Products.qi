@@ -182,24 +182,6 @@ def natsort(tosort, f=lambda arg: arg.lower()):
     return sorted(tosort, key=alphanum_key )
 
     
-def fixTheUsers(site):
-    pm = site.portal_membership
-    members = pm.listMemberIds()
-
-    out = []
-    for member in members:
-        # now get the actual member
-        m = pm.getMemberById(member)
-        # get the editor property for that member
-        p = m.getProperty('wysiwyg_editor', None)
-
-        out.append("%s %s" % (p, member))
-        if p is not None and p != 'Epoz':
-            m.setMemberProperties({'wysiwyg_editor': 'FCKeditor',})
-            out.append("Changed property for %s" % member)
-    return "\n".join(out)
-
-
 def namedquery(name, **kwargs):
     name = 'Products.qi.util.queries.%s' % name
     sql_template = dottedname.resolve.resolve(name)
