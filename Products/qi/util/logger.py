@@ -3,8 +3,6 @@ import os
 import sys
 import traceback
 
-from django.db import connection
-
 from Products.qi.util.config import PathConfig
 LOGPATH = PathConfig().get('log', 'log') 
 
@@ -61,7 +59,6 @@ class LogHandler:
             self.logText('x: %s, y:%s'%(str(x),str(y)))
             self.logException(e,trace)
             self.logText('resetting transaction')
-            connection._rollback()
         except:
             try:
                 self.logText('unhandlable exception')

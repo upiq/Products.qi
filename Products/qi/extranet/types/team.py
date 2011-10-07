@@ -20,7 +20,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.qi import MessageFactory as _
 from interfaces import IQITeam
 from AccessControl.Permissions import view as View
-from Products.qi.extranet.types.handlers.django import persistTeamToDjango
 
 from plone.portlets.interfaces import ILocalPortletAssignable
 

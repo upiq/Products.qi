@@ -22,9 +22,6 @@ from Products.qi import MessageFactory as _
 from interfaces import IQIProject
 from AccessControl.Permissions import view as View
 
-from Products.qi.extranet.types.handlers.django import persistProjectToDjango
-
-
 from plone.portlets.interfaces import ILocalPortletAssignable
 
 

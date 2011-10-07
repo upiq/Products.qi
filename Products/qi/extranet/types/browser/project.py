@@ -8,7 +8,6 @@ from plone.app.form import base
 from Products.qi.extranet.types.interfaces import IQIProject
 from Products.qi import MessageFactory as _
 
-from Products.qi.extranet.types.handlers import django as dbhandlers
 from Products.qi.extranet.types import project as content
 
 
@@ -48,10 +47,8 @@ class Synchronize(BrowserView):
         project=self.context
         if not isinstance(project, content.Project):
             raise Exception
-        dbhandlers.persistProjectToDjango(project, None)
         for child in project.getChildNodes():
             if isinstance(child, content.Team):
-                dbhandlers.persistTeamToDjango(child,None)
         self.request.response.redirect(self.context.absolute_url())
     
     
