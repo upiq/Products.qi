@@ -1,6 +1,0 @@
-<tal:followupnotice condition="view/condition" define="followup view/followup">
-A secondary file was created.  Click the following link to view the sub-import progress:
-<a href="unknown" tal:content="followup/tracked/displayname" 
-	tal:attributes="href python:'%s/status?fileid=%i'%(view.context.absolute_url(),followup.tracked_id)"/>
-	<br />
-</tal:followupnotice>

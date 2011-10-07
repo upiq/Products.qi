@@ -1,7 +1,0 @@
-
-
-div.otherclass:click
-{
-	action-server:			uploadstatus_kss;
-
-}

@@ -2,8 +2,6 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser">
     
-    <include package=".macros" />
-    
     <browser:page
         for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
         name="BeginThreadProfiling"

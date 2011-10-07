@@ -13,7 +13,6 @@
     <include package=".extranet" />
 
     <include package=".util" />
-    <include package=".datacapture" />
     
     <include file="profile.zcml" />
     

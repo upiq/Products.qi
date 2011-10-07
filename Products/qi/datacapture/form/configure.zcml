@@ -1,5 +1,0 @@
-<configure>
-    <include package=".entry" />
-    <include package=".manage" />
-    <include package=".status" />
-</configure>
