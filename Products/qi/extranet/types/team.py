@@ -64,12 +64,8 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
         return dbteam
         
     baseItems=( 
-                ("members.html","Manage Team Members","Modify portal content"),
-                ("","-----------",
-                    "Modify portal content"),   
-                ("identifiers.html","Manage Team Nicknames",
-                    "Modify portal content"),
-                )
+        ("members.html","Manage Team Members","Modify portal content"),
+        )
 
     otherSources=()
     
