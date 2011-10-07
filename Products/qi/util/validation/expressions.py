@@ -46,32 +46,6 @@ class StringExpression(Expression):
     def buildName(self, otherMeasures):
         return self.text[1:-1]
 
-measureFormat=re.compile('^[a-zA-Z][a-zA-Z0-9]+$')        
-class MeasureExpression(Expression):
-    
-    def fits(self,text):
-        return measureFormat.match(text)
-    def buildValue(self,otherMeasures):
-        try:
-            #print 'looking for %s'%self.text
-            result=otherMeasures[self.text].latestdate.value
-        except KeyError:
-            raise builder.MissingMeasureException(self.buildName(otherMeasures))
-        try:
-            return float(result)
-        except ValueError:
-            pass
-        try:
-            return str(result)
-        except:
-            return result
-    def buildName(self, otherMeasures):
-        try:
-            result=DB.Measure.objects.get(shortname=self.text).name
-        except DB.Measure.DoesNotExist:
-            result="Unknown measure: %s"%self.text
-        return result
-        
 
 parenFormat=re.compile('^\\(.*\\)$')
 class ParentheticalExpression(ComplexExpression):

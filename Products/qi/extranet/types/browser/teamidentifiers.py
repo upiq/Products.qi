@@ -35,7 +35,7 @@ class Identifiers(BrowserView):
         foundErrors=False
         #basic form validation
         if 'name' not in form or form['name'].strip()=='':
-            self.addError('name', 'Please enter a name')
+            self.addError('name','Please enter a name')
             foundErrors=True
         if foundErrors:
             return False

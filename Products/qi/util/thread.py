@@ -1,5 +1,3 @@
-from general import BrowserPlusView
-
 from time import time
 import threading
 import sys

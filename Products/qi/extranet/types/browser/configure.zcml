@@ -46,15 +46,6 @@
         image="project.png"
         />
 
-	<browser:page
-	    for="Products.qi.extranet.types.interfaces.IProject"
-		name="timeline.html"
-	    class=".timeline.TimelineView"
-	    template="timeline.pt"
-	    permission="cmf.ModifyPortalContent"
-	    />
-
-
     <browser:page
         for="Products.qi.extranet.types.interfaces.ITeam"
         name="view"

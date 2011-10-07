@@ -1,6 +1,4 @@
 from Products.Five.browser import BrowserView
-#from Products.qi.datacapture.file import validationrules
-#from Products.qi.datacapture.validation.rules import InvalidFunction
 from qi.sqladmin import models as DB
 from psycopg2 import IntegrityError 
 import sys

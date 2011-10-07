@@ -7,7 +7,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 from qi.sqladmin import models as DB
-from general import BrowserPlusView
 from Products.qi.util.logger import logger
 from Products.qi.extranet.types import project, team
 from Products.qi.util.config import PathConfig
@@ -183,11 +182,6 @@ def natsort(tosort, f=lambda arg: arg.lower()):
     return sorted(tosort, key=alphanum_key )
 
     
-class fixUsers(BrowserPlusView):
-    def __call__(self, *args, **kw):
-        return fixTheUsers(self.context)
-
-
 def fixTheUsers(site):
     pm = site.portal_membership
     members = pm.listMemberIds()

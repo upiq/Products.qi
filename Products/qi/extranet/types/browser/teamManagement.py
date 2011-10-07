@@ -16,13 +16,13 @@ class TeamManagement(BrowserPlusView):
                 try:
                     self.buildDate(start)
                 except:
-                    self.addError('start','the starting date %s was incorrectly formatted'%start)
+                    raise ValueError('the starting date %s was incorrectly formatted'%start)
                 try:
                     self.buildDate(end)
                 except:
-                    self.addError('end','the ending date %s was incorrectly formatted'%end)
+                    raise ValueError('the ending date %s was incorrectly formatted'%end)
         except:
-            self.addError('id','The form submitted was incorrectly formatted.')
+            raise ValueError('The form submitted was incorrectly formatted.')
         #self.requiredInTable(self.teams(),'id')
         #self.optionalDate('start')
         #self.optionalDate('end')

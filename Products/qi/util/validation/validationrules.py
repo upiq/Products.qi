@@ -1,19 +1,9 @@
-import re
-
 import expressions as exp
 import rules
 
 
-class MissingMeasureException(Exception):
-
-    measurename=''
-    def __init__(self, measurename):
-        self.measurename=measurename
-
-    
-
 knownSimpleExpressions=(exp.NumericExpression, \
-    exp.EmptyExpression, exp.StringExpression,exp.MeasureExpression)
+    exp.EmptyExpression, exp.StringExpression,)
 #insert with a mind to order of operations
 knownComplexExpressions=(exp.ParentheticalExpression,exp.MultiplyExpression,\
     exp.DivideExpression,exp.AddExpression,exp.SubtractExpression)
