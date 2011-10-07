@@ -41,15 +41,3 @@ class ProjectEditForm(base.EditForm):
     label = _(u"Edit Project")
     form_name = _(u"Project settings")
 
- 
-class Synchronize(BrowserView):
-    def __call__(self, *args, **kw):
-        project=self.context
-        if not isinstance(project, content.Project):
-            raise Exception
-        for child in project.getChildNodes():
-            if isinstance(child, content.Team):
-        self.request.response.redirect(self.context.absolute_url())
-    
-    
-    
