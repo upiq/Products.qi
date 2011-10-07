@@ -2,25 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="Products.qi">
-        
-    <browser:view
-        for="*"
-        name="qi_utilities"
-        class=".viewlets.UtilitiesView"
-        layer="Products.qi.interfaces.IQIProductLayer"
-        permission="zope2.View"
-        />
-
-    <!-- QI Teamspace specific footer -->
-    <browser:viewlet
-        name="qi.footer"
-        for="*"
-        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
-        template="footer.pt"
-        layer="Products.qi.interfaces.IQIProductLayer"
-        permission="zope.Public"
-        />
-
+    
     <include package=".menu" />
     
 </configure>
