@@ -83,13 +83,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     # fixed project-level menu items: 
     baseItems=(
         ("members.html","Manage Project Members","Modify portal content"),
-        ("",
-            "----------","Modify portal content"), 
-        ("datasummary.html","View Roster and Data Summary", "qiproject: Add Team"),
-        ("",
-            "----------","Modify portal content"),
-        ("teams.html","Activate/Inactivate Teams","qiproject: Add Team"),
-        ("timeline.html","View Project Timeline","Modify portal content"),
         )
     
     otherSources=()
