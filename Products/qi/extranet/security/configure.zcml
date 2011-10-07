@@ -3,7 +3,6 @@
     
     <!-- Local roles managed in the @@sharing view -->
     
-    
     <permission
         id="Products.qi.AddProject"
         title="qiproject: Add Project"
@@ -13,6 +12,7 @@
         id="Products.qi.AddTeam"
         title="qiproject: Add Team"
         />
+    
     <permission
         id="Products.qi.AddSubTeam"
         title="qiteam: Add SubTeam"

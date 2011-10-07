@@ -7,7 +7,6 @@ from zExceptions import MethodNotAllowed
 from zExceptions import NotFound
 from zope.component.factory import Factory
 from zope.interface import implements
-from qi.sqladmin import models as DB
 from Products.qi.util.logger import logger
 
 from Products.CMFCore.utils import getToolByName
@@ -66,20 +65,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     def addType(self,uploadType):
         self.UploadTypes.append(uploadType)
     
-    def getDBProject(self):
-        if not self.dbid:
-            persistProjectToDjango(self, None)
-        try:
-            try:
-                dbproject=DB.Project.objects.get(id=self.dbid)
-            except DB.Project.DoesNotExist:
-                persistProjectToDjango(self,None)
-                dbproject=DB.Project.objects.get(id=self.dbid)
-        except Exception, e:
-            logger.handleException(e)
-            return None
-        return dbproject   
-   
     # fixed project-level menu items: 
     baseItems=(
         ("members.html","Manage Project Members","Modify portal content"),

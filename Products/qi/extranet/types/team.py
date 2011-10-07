@@ -6,7 +6,6 @@ from zExceptions import MethodNotAllowed
 from zExceptions import NotFound
 from zope.component.factory import Factory
 from zope.interface import implements
-from qi.sqladmin import models as DB
 from Products.qi.util.logger import logger
 
 from Products.CMFCore.utils import getToolByName
@@ -49,20 +48,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
             return self.description.encode('utf-8')
         return self.description or ''
     
-    def getDBTeam(self):
-        if not self.dbid:
-            persistTeamToDjango(self, None)
-        try:
-            try:
-                dbteam=DB.Team.objects.get(id=self.dbid)
-            except DB.Team.DoesNotExist:
-                persistTeamToDjango(self,None)
-                dbteam=DB.Team.objects.get(id=self.dbid)
-        except Exception, e:
-            logger.handleException(e)
-            return None
-        return dbteam
-        
     baseItems=( 
         ("members.html","Manage Team Members","Modify portal content"),
         )

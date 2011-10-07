@@ -6,7 +6,6 @@ from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
-from qi.sqladmin import models as DB
 from Products.qi.util.logger import logger
 from Products.qi.extranet.types import project, team
 from Products.qi.util.config import PathConfig
@@ -180,22 +179,4 @@ def convert(text):
 def natsort(tosort, f=lambda arg: arg.lower()):
     alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', f(key)) ] 
     return sorted(tosort, key=alphanum_key )
-
-    
-def namedquery(name, **kwargs):
-    name = 'Products.qi.util.queries.%s' % name
-    sql_template = dottedname.resolve.resolve(name)
-    from django.db import connection, transaction
-    cursor=connection.cursor()
-    try:
-        cursor.execute(querytext % kwargs)
-        return [x[:] for x in cursor]
-    except Exception, e:
-        import sys, traceback
-        x,y,trace=sys.exc_info()
-        print x, y
-        traceback.print_tb(trace)
-        connection._rollback()
-        raise
-    cursor.close()
 

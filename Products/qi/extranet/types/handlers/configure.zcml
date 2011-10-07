@@ -6,7 +6,6 @@
     i18n_domain="Products.qi">
 
     <include file="security.zcml" />
-    <include file="django.zcml" />
     <include file="lookandfeel.zcml" />
 
 </configure>

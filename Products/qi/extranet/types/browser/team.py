@@ -7,7 +7,6 @@ from Products.Five.browser import BrowserView
 from string import upper
 from Products.CMFCore.utils import getToolByName
 
-from qi.sqladmin import models as DB
 from DateTime import DateTime
 
 from plone.app.form import base
