@@ -4,7 +4,6 @@ from zope.formlib import form
 from Acquisition import aq_inner, aq_self, aq_parent
 from zExceptions import BadRequest
 from Products.Five.browser import BrowserView
-from Products.qi.util.general import BrowserPlusView
 from string import upper
 from Products.CMFCore.utils import getToolByName
 

@@ -52,13 +52,4 @@
         permission="zope2.View"
         />
     
-    
-    <browser:page
-        for="*"
-        name="currentusers.html"
-        class=".currentusers.CurrentUsers"
-        template="currentusers.pt"
-        layer="Products.qi.interfaces.IQIProductLayer"
-        permission="cmf.ModifyPortalContent"
-        />
 </configure>
