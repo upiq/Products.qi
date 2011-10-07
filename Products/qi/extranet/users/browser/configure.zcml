@@ -20,36 +20,11 @@
         />
     
     <browser:page
-        for="Products.qi.extranet.types.interfaces.IProject"
-        name="userlist.html"
-        class=".userlist.UserList"
-        template="userlist.pt"
-        permission="cmf.ModifyPortalContent"
-        />
-    
-    <browser:page
-        for="Products.qi.extranet.types.interfaces.ITeam"
-        name="userlist.html"
-        class=".userlist.UserList"
-        template="userlist.pt"
-        permission="cmf.ModifyPortalContent"
-        />
-
-    <browser:page
         for="Products.qi.extranet.types.interfaces.ITeam"
         name="members.html"
         class=".managemembers.TeamMembersView"
         template="manage_members.pt"
         permission="cmf.ModifyPortalContent"
-        />
-    
-
-    <browser:page
-        for="*"
-        name="updatestatus.html"
-        class=".usertracker.UserTracker"
-        layer="Products.qi.interfaces.IQIProductLayer"
-        permission="zope2.View"
         />
     
 </configure>
