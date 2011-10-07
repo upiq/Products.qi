@@ -66,13 +66,6 @@
         class=".team.TeamAddForm"
         permission="Products.qi.AddTeam"
         />
-    <browser:page
-        for="Products.qi.extranet.types.interfaces.ITeam"
-        name="identifiers.html"
-        class=".teamidentifiers.Identifiers"
-        template="identifiers.pt"
-        permission="cmf.ModifyPortalContent"
-        />
     
     <browser:addMenuItem
         title="qiteam Team"
@@ -80,7 +73,8 @@
         view="Products.qi.Team"
         permission="Products.qi.AddTeam"
         />
-    <browser:page
+   
+     <browser:page
         for="zope.app.container.interfaces.IAdding"
         name="Products.qi.SubTeam"
         class=".team.SubTeamAddForm"
