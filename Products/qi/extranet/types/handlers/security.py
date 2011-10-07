@@ -1,5 +1,4 @@
 from Products.CMFCore.utils import getToolByName
-from Products.qi.util.logger import logger
 
 
 def add_project_security(project, event):
@@ -68,7 +67,6 @@ def add_team_security(team, event):
                 )
 
         except KeyError,e:
-            logger.handleException(e)
             #do nothing the group already exists(created, deleted, recreated e.g.)
             pass
     viewerName="TeamViewer"

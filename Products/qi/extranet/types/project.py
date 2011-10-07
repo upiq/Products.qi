@@ -7,7 +7,6 @@ from zExceptions import MethodNotAllowed
 from zExceptions import NotFound
 from zope.component.factory import Factory
 from zope.interface import implements
-from Products.qi.util.logger import logger
 
 from Products.CMFCore.utils import getToolByName
 

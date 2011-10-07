@@ -6,7 +6,6 @@ from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
-from Products.qi.util.logger import logger
 from Products.qi.extranet.types import project, team
 from Products.qi.util.config import PathConfig
 
