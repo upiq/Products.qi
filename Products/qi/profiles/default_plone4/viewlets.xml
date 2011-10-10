@@ -4,17 +4,9 @@
   <order manager="plone.portaltop" skinname="Plone Default">
     <viewlet name="qi.menu4" insert-after="plone.header" />
   </order>
-  <order manager="plone.portalheader" skinname="Plone Default">
-    <viewlet name="qi.maintenance" insert-after="plone.logo" />
-  </order>
-  <order manager="plone.portalfooter">
-    <viewlet name="qi.footer" insert-after="plone.footer" />
-    <viewlet name="qi.colophon" insert-after="plone.colophon" />
-  </order>
   <!-- hide these viewlets: -->
   <hidden manager="plone.portalheader" skinname="Plone Default">
     <viewlet name="plone.global_sections"/>
-    <viewlet name="qi.maintenance"/>
     <viewlet name="plone.skip_links"/>
     <!-- for Plone 4: hide language selector from portalheader -->
     <viewlet name="plone.app.i18n.locales.languageselector"/>

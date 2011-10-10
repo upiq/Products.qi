@@ -5,7 +5,7 @@
  <property name="title" i18n:translate="">QI Project</property>
  <property name="description"
     i18n:translate="">A quality improvement project workspace</property>
- <property name="content_icon">++resource++qiproject_icon.png</property>
+ <property name="content_icon">++resource++homefolder.png</property>
  <property name="content_meta_type">qiproject</property>
  <property name="product"></property>
  <property name="factory">Products.qi.Project</property>

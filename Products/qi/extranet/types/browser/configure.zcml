@@ -9,36 +9,28 @@
         template="project.pt"
         permission="zope2.View"
         />
-       
-    
+     
     <browser:page
         for="Products.qi.extranet.types.interfaces.IProject"
         name="edit"
         class=".project.ProjectEditForm"
         permission="cmf.ModifyPortalContent"
         />
-        
+    
     <browser:page
         for="zope.app.container.interfaces.IAdding"
         name="Products.qi.Project"
         class=".project.ProjectAddForm"
         permission="Products.qi.AddProject"
         />
-
-        
+    
     <browser:addMenuItem
         title="qiproject Project"
         factory="Products.qi.Project"
         view="Products.qi.Project"
         permission="Products.qi.AddProject"
         />
-        
-                        
-    <browser:resource
-        name="qiproject_icon.png"
-        image="project.png"
-        />
-
+    
     <browser:page
         for="Products.qi.extranet.types.interfaces.ITeam"
         name="view"
@@ -81,4 +73,16 @@
         permission="Products.qi.AddTeam"
         />
 
+    <!-- resources: content type icons -->
+    
+    <browser:resource
+        name="workspace.png"
+        image="workspace.png"
+        />
+    
+    <browser:resource
+        name="homefolder.png"
+        image="homefolder.png"
+        />
+    
 </configure>
