@@ -1,0 +1,48 @@
+Historical changelog: Products.qi
+=================================
+
+*Contained below are upstream historical changes to Products.qi from
+original upstream development by Ursa Logic.  For recent changes and
+new development in the UPIQ fork or Products.qi, see CHANGES.txt in
+the root of this distribution.*
+
+release-1.1 (unreleased)
+------------------------
+
+* 2010-11-04  adrian.cline@gmail.com
+
+  - I made the back end faster, and more reliable, I think?
+
+* 2010-10-28  adrian.cline@gmail.com
+
+  - added a new column to reporttrigger
+
+* 2010-10-28  adrian.cline@gmail.com
+
+  - added a command line report monitoring subsystem
+
+* 2010-10-27  adrian.cline@gmail.com
+
+  - I fixed up some bugs in the export prcoess, changed some text on
+    uploads, updated buildout, made external reports functioning again, and 
+    patched the chartline sql file
+
+* 2010-10-22  adrian.cline@gmail.com
+
+  - I changed a lot of things, especially with regard to exporting xml 
+
+* 2010-10-14  adrian.cline@gmail.com
+
+  - I got ignores set up properly(I think)
+
+* 2010-10-12  adrian.cline@gmail.com
+
+  - I pulled our svn version, removed non-opensource components.
+    Committed.
+
+* Added dynamic view support to the 'qiproject' and 'qiteam' content types.
+
+release-1.0 (2008-02-20)
+------------------------
+
+* Version demonstrated on February 20.

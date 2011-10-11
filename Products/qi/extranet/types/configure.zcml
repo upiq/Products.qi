@@ -12,7 +12,7 @@
         meta_type="qiproject"
         permission="Products.qi.AddProject"
         addview="Products.qi.Project"
-        icon="qiproject_icon.png"
+        icon="homefolder.png"
         />
 
     <five:registerClass
@@ -20,7 +20,7 @@
         meta_type="qiteam"
         permission="Products.qi.AddTeam"
         addview="Products.qi.Team"
-        icon="qiproject_icon.png"
+        icon="workspace.png"
         />
 
     <five:registerClass
@@ -28,7 +28,7 @@
         meta_type="qisubteam"
         permission="Products.qi.AddTeam"
         addview="Products.qi.SubTeam"
-        icon="qiproject_icon.png"
+        icon="workspace.png"
         />
         
     <utility

@@ -1,0 +1,37 @@
+========================
+Copying and distribution
+========================
+
+This package (Products.qi) is free software licensed under GPL v2.
+
+Credits, copyright
+------------------
+
+*This package is a fork of Products.qi, part of QI Teamspace, originally
+authored by Ursa Logic Corporation.*  It is actively
+`maintained <https://teamspace.upiq.org/trac/>`_ by the
+Utah Pediatric Partnership to Improve Healthcare Quality (UPIQ).
+
+Copyright, 2011 The University of Utah.
+
+- Developed and maintained for `UPIQ <http://upiq.org>`_ by:
+
+  + Sean Upton <sean.upton@hsc.utah.edu>, 
+    University of Utah Health Sciences Center
+    University of Utah Department of Pediatrics,
+    University of Utah School of Medicine
+
+Copyright, 2010 and prior Ursa Logic Corporation
+
+- (Released as GPL v2 free software in September 2010 on 
+  `Launchpad <http://launchpad.net/qiteamspace>`_).
+
+
+License
+-------
+
+This software package and all modifications are released under the
+terms of the GNU General Public License, Version 2.
+
+See gpl-2.0.txt for full terms.
+

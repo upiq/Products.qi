@@ -1,12 +1,717 @@
-Products.qi Changelog
-=====================
 
-release-1.1 (unreleased)
-------------------------
+2.0-dev (unreleased)
+--------------------
 
-- Added dynamic view support to the 'qiproject' and 'qiteam' content types.
+* 2011-10-11  sean.upton@hsc.utah.edu
 
-release-1.0 (2008-02-20)
-------------------------
+  - Icon changes to ZCML for types using new icons.
 
-- Version demonstrated on February 20.
+  - Replace setup.py, add docs.
+
+* 2011-10-10  sean.upton@hsc.utah.edu
+
+  - rename profile.zcml to profiles.zcml to make tab-completion easier
+    in bash when navigating codebase.
+
+  - new type icons that have some unambiguous visual clarity, remove old
+    viewlet assignments from profile
+
+* 2011-10-07  sean.upton@hsc.utah.edu
+
+  - remove plone.path_bar override -- not needed in Plone versions
+    supporting INavigationRoot (including Plone 4).
+
+  - remove measure definition links from base menu
+
+  - removed unused view class Synchronize from
+    extranet.types.browser.project
+
+  - remove ZCML include of removed package
+
+  - removed footer viewlet and a registration in ZCML for an unused
+    utilities view
+
+  - remove colophon viewlet
+
+  - remove Products.qi homegrown logger... if we want logging facility,
+    we can use Python's built-in one
+
+  - remove additional sql/django/sqladmin deps
+
+  - setup.py -- adjusted deps
+
+  - removed all references to qi.sqladmin package in code
+
+  - remove ununsed content.py in root of Products.qi
+
+  - removed unused cleanup view module
+
+  - removed macros that are not used
+
+  - remove formvalidation, general (BrowserPlusView) base class(es).
+
+  - managemembers: stop using BrowserPlusView, switch to using plain
+    BrowserView, get project and team contexts using project_containing and
+    team_containing mfunctions from Products.qi.util.utils instead.  Remove
+    unused qi.sqladmin import.
+
+  - removed user list and user tracker views, we are not using these
+
+  - users: remove currentusers view
+
+  - remove team activation views -- this would be better done with
+    workflow and dublin-core dates on teams.
+
+  - remove all from project menu but manage members
+
+* 2011-10-06  sean.upton@hsc.utah.edu
+
+  - remove identifiers stuff from menu
+
+  - remove team nickname/identifiers view, this will get moved to schema
+
+  - removed tag view, apparently unused.
+
+  - more cruft removal: no more timeline view (we will replace this with
+    something on object schema later); no more database cleanup views.
+
+  - removed measures sub-package and some unrelated old plone3-specific
+    modules and setup handlers.
+
+  - removed ununsed stylesheet
+
+  - remove extranet pages sub-package
+
+  - remove extranet pages: override for sitemap not needed in Plone 4
+(uses navigation root); error page unneeded.
+
+  - more cruft removal: report/chart package, extranet.foldermanagement
+    package.
+
+  - branding for mail from properties in Products.qi, these should be
+    done in policy product, and are done in uu.qisite, but I wanted to
+    change the defaults.
+
+  - removed ref to deleted dirview from skins.xml
+
+  - removed more mailing list cruft: CSS styles, this time.
+
+  - removed pyExcelerator cruft (unused, and this is third-party
+    anyway).
+
+  - more mailing list cruft: removed this time from managemembers.py
+
+  - removed dashboard cruft
+
+  - more mail-related cruft removal: remove mail-specific logger, remove
+    mailing list function (unused) in utils.py
+
+  - removal of more mail-related cruft including reference in ZCML to
+    deleted mail package and the mail-related personal menu in the QI menu.
+
+  - cruft removal misc: remove mail package, all tools, qi-mail skins
+    layer/dirview, and removal of calendar portlet.
+
+  - replace teamspace logo with UPIQ logo.
+
+  - remove old plone 3 skin overrides cruft from Products.qi
+
+  - remove custom skins cruft from profile
+
+  - removed contact-info view/template stuff... it was never working
+    without old captcha add-on broken in Plone4 anyway.
+
+  - whitespace
+
+  - removal of forums from Products.qi -- we are not using this.
+
+  - initial removal of Products.qi team menu items.
+
+  - initial removal of unused menu items from project
+
+  - remove marker interface bindings from project, team for
+    Products.qi.datacapture, as we won't be using this.
+
+  - remove commented-out subscribers: noisy
+
+* 2011-10-03  sean.upton@hsc.utah.edu
+
+  - remove Products.qi setup import-step and handler for imap
+    configuration -- this is the job of a site-policy product.
+
+
+Pre-2.0 changes (UPIQ)
+----------------------
+
+*Many parts of Products.qi were removed or pared-down to essential
+groupware/workspace (project and team) components.  Below are changes
+that took place prior to this overhaul.*
+
+
+* 2011-09-08  sean.upton@hsc.utah.edu
+
+  - Removed incorrect UID method on team, and commented-out UID method
+    on project; these cause problems with plone.app.upgrade from 4.0 to
+    4.1 -- or at least they act as gasoline to make this bug worse:
+    http://dev.plone.org/plone/ticket/12185
+
+* 2011-08-22  sean.upton@hsc.utah.edu
+
+  - adjusted copyright description in register.py since some code is
+    from upstream
+
+* 2011-08-19  sean.upton@hsc.utah.edu
+
+  - cruft removal: remove unused zcml and handler for team add/modify
+
+  - remove spurious event handler for project modification event that
+    tried to add managers and faculty from unused object attributes
+
+  - removed old commented out subscribers from users.zcml in
+    Products.qi.extranet.types.handlers
+
+  - cruft removal: Products.qi.extranet.types.browser.project -- remove
+    ununsed imports and commented-out code
+
+  - default theme on class variable for Project matches form default in
+    IQIProject ("Sunburst Theme") appropriate to Plone 4.
+
+  - removed unused imports and commented-out menu items from
+    Products.qi.extranet.types.team
+
+  - Products.qi.extranet.types.project: remove unused imports, remove
+    unused getTeams() method; fix-up whitespace
+
+  - more purge of PLONE_VERSION==3 compatibility shims, we don't need
+    plone3 compatibility
+
+  - remove plone3 compatibilty shims, we won't use them -- they are
+    cruft at this point
+
+* 2011-08-02  sean.upton@hsc.utah.edu
+
+  - include plone.browserlayer in Products.qi zcml; this was omitted
+    accidentally before, but was not strictly necessary in integration with
+    other packages using it, but it is a good practice.
+
+* 2011-07-15  sean.upton@hsc.utah.edu
+
+  - removed reference to previously included overrides file for portlets
+    from main overrides.zcml
+
+* 2011-07-14  sean.upton@hsc.utah.edu
+
+  - qi_content_workflow: more reasonable role mappings for private state
+    permissions: allows use of the sharing tab; refs #231.
+
+* 2011-07-12  sean.upton@hsc.utah.edu
+
+  - Products.qi portlet purge: removed all portlets except Calendar --
+    especially and including overrides of stock Plone portlets.  The primary
+    reason for this is that Plone 4 ships with portlets for news, events,
+    recent items bound to navigation root (project), so the ad-hoc (and slow
+    getObject()) filtering in the qi portlets is a bad idea versus the stock
+    portlets which use path indexes and nav root.
+
+  - Removed old Plone3 setup profiles for Products.qi; we're not going
+    to ever use or need them as we are solidly depending on Plone 4 for a
+    long while now!
+
+* 2011-07-11  sean.upton@hsc.utah.edu
+
+  - database port environment variable QI_SQLADMIN_DBPORT wasn't being
+    set early enough in application startup by Products.qi, leading to
+    qi.sqladmin and Django to have incorrect database settings.  Now, we
+    call Products.qi.zope2.initialize(None) to set the environment variable
+    on first import of Products.qi (from zope.conf product-config section,
+    usualy via buildout config) instead of waiting for Zope2 to call
+    initialize (it seems to defer until the entire ZCML is processed for the
+    package, which becomes a problem).  The framework says: "don't call us,
+    we'll call you."  I say, "I'll call you anyway, thanks."
+
+* 2011-07-10  sean.upton@hsc.utah.edu
+
+  - replace tabs with spaces in python source for a handful of
+    Products.qi modules using vim %retab
+
+  - Products.qi uses plone.browserlayer layer: marker interface and GS
+    profile setup xml added; all viewlets and all views bound to any
+    interface are specifically bound to the product marker interface, and
+    the request will be modified only to provide that marker in sites where
+    the GS profile is installed.
+
+* 2011-06-27  sean.upton@hsc.utah.edu
+
+  - Added to zope2.initialize the ability to get product-config
+    sqladmin.port value as host:port for postgresql database connection.
+
+* 2011-06-17  sean.upton@hsc.utah.edu
+
+  - #211: replace deprecated transaction.commit() calls with
+    transaction.get().commit() and in some circumstances (in the XML export)
+    with transaction notes on the context for the undo log.
+
+  - #95: Products.qi now uses app config to get connection rather than
+    hardcoding a ZEO connection for spawned worker threads for mailing list
+    thread and XML export threads.  New module to get connection and
+    application root in Products.qi.util.zodbconn.
+
+* 2011-06-26  sean.upton@hsc.utah.edu
+
+  - merged Products.qi modifications from export of partial history from
+    uudev4 branch.  This includes moving to use hard-coded queries in Python
+    for SQL, and using ZODB connections via zconfg avoiding hardcoded ZEO.
+
+* 2011-06-17  sean.upton@hsc.utah.edu
+
+  - removed use of parameterized SQL fixtures from text files, moved
+    queries into source code and changed method name for running the queries
+    to more accurately reflect what is going on.  The only place that uses
+    raw SQL in Products.qi appears to be the datacapture sub-package for
+    querying form status.
+
+* 2011-06-03  sean.upton@hsc.utah.edu
+
+  - #175 - methods to use a hybrid of catalog queries and ancestral path
+    walk to find containing projects and teams.  This should be considered a
+    more explicit alternative to using the Project.getProject() and
+    Team.getTeam() via acquisition (not using acquisition increases clarity
+    of what is happening in callers).  Note: this does not yet deprecate any
+    existing use of the acquired methods on the types, but eventually doing
+    so would remove some complexity from the types themselves and ambiguity
+    from future code needing to resolve a containing project or team.
+
+* 2011-06-02  sean.upton@hsc.utah.edu
+
+  - missing zope2.py in package commit from changeset:uudev4,75
+
+  - Removed RPC Auth plugin for repoze.who integration: not in use.
+
+  - Replace deprecated imports from Globals from old Zope2 version
+    assumptions.
+
+* 2011-05-23  sean.upton@hsc.utah.edu
+
+  - filter calendar search links from project calendar portlet to filter
+    results to only Event type, excluding other types possibly defined with
+    a start, end date attributes.
+
+  - catalog-based getProjectsInContext and getTeamsInContext had
+    variable name typo
+
+  - more attempts to fix chart view use of non-existent data structures
+    on context, use list() to cast set rather than attempt to find an
+    attribute '_data' (in _data.keys(), which does not appear to work).
+
+  - measure ids in view were not correctly working; attempts to iterate
+    over measure ids in view.
+
+  - Removed bogus claim that chart type implements IReferenceable.
+
+* 2011-05-18  sean.upton@hsc.utah.edu
+
+  - CMF description accessor deals with None Description values on
+    Teams.
+
+  - stop using globals shared across classes for form field definition,
+    re trac ticket #161.
+
+  - remove unused function from Products.qi.util.utils
+
+  - use zope.app.component.hooks.setSite() in mailing list thread;
+    setSite to portal on begin(), then setSite to None on end.  This may be
+    necessity after moving to using zope.app.component.hooks.getSite() in
+    Products.qi.util.utils functions.
+
+* 2011-05-17  sean.upton@hsc.utah.edu
+
+  - remove Products.qi.util.utils.default_addable_types; not used in
+    meaningful substance; removed imports and calls in all callers, as this
+    was not adding functional value to the code.
+
+  - remove get_factory_permission() (now unused) from
+    Products.qi.util.utils
+
+  - remove unused imports in mail handler modules
+
+  - minor Products.qi.util.utils refactoring: getSite() removed,
+    replaced with use of zope.app.component.hooks.getSite(), calls adjusted
+    for argument-less signature; use path-index in catalog instead of ZDOM
+    traversal for getProjectsInContext() and getTeamsInContext() -- these
+    are more sensible than recursive walking of the object graph.  Removed
+    an unused function getListsForUser2, which appears to be a renamed
+    function not used now and never previously removed.
+
+  - Removed old, unused view classes for managing members in project,
+    team; it appears this has long-since moved to
+    extranet/users/browser/managemembers.py, so the old classes are unused
+    in Products.qi: be gone!
+
+  - remove more unused imports
+
+  - remove unused imports
+
+  - The only content event handler left (enable_addable_types) was
+    simply enabling add-permissions for a role that is not used.  Seems
+    suitable for removal (of cruft, risk).
+
+  - remove unused or no-op content event handlers.
+
+* 2011-04-19  sean.upton@hsc.utah.edu
+
+  - #135 - teams can add (normal Plone) folders to team and subteam
+    folders; changed allowed types in FTI.
+
+* 2011-04-18  sean.upton@hsc.utah.edu
+
+  - disabled QI Teamspace specific RSS portlet, unnecessary in Plone 4.
+
+* 2011-03-28  sean.upton@hsc.utah.edu
+
+  - Removed claim on Project class that it implements IReferenceable; it
+    does not.  Fixes #127.
+
+* 2011-02-23  sean.upton@hsc.utah.edu
+
+  - Move away from using overrides for QI Teamspace colophon and footer
+    viewlets, and register viewlets under product-specific names, add to
+    profile.  This is an interim workaround to having an isolated layer for
+    all viewlets that keeps viewlets from overriding from QI Teamspace sites
+    to other Plone sites in the same zope instance.  Fixes #107.
+
+  - Removed searchbox viewlet override from uudev4 Products.qi, not
+    needed for Plone 4, which searches site-wide using navigation root
+    (project); we should allow for the checkbox in the default Plone 4
+    searchSection to allow searching only a specific folder.
+
+  - Fix #66: Folder inside projects should not allow adding a project;
+    this codes such behavior into the FTIs for project and plone site within
+    the Products.qi default_plone4 profile.
+
+  - Made Sunburst Theme default for projects in uudev4 branch (assumes
+    Plone 4).
+
+* 2011-02-03  sean.upton@hsc.utah.edu
+
+  - member management view: adding users now generates random password
+    and emails user using registeredNotify(), from which the new user can
+    select their own password.  Help text explaining this is added to the
+    member management form, and the password inputs have been removed.  The
+    notify checkbox has been removed (since notification is always assumed,
+    and it was never hooked up in the first place).
+
+* 2011-02-02  sean.upton@hsc.utah.edu
+
+  - Site root menu item in "Shared Resources" menu, leaves site admins
+    with Manager role ability to click out of a project into the root of the
+    site, but does not allow others; needed to make absolute URL link
+    targets possible for QI menu for this to work.  Fixes trac ticket #47.
+
+* 2011-01-05  sean.upton@hsc.utah.edu
+
+  - removed search, search form skins overrides from
+    qi_plone4_overrides, these were not necessary for Plone 4 (since similar
+    context-specific search is default) and because they caused errors in
+    Plone 4.
+
+* 2011-01-04  sean.upton@hsc.utah.edu
+
+  - Products.qi fixes for compatibility with automated integration test
+    runner and PloneTestCase.  Logger now falls-back to stderr when log file
+    using product-config cannot be opened.  Path bar viewlet no longer
+    attempts to acquire another view in template, which is brittle, instead,
+    code needed is proxied from viewlet class itself, readapting the context
+(workable hack, reasonable for now).
+
+* 2010-12-28  sean.upton@hsc.utah.edu
+
+  - portlet title CSS: fix inconsistencies in typography.
+
+* 2010-12-28  sean.upton@hsc.utah.edu
+
+  - Additional CSS styles for portlets and globalnav, customizing Plone
+4 sunburst defaults to better match other customizations made.   Also
+    removed IEFixes CSS overrides, as these are likely out-of-date.
+
+* 2010-12-20  sean.upton@hsc.utah.edu
+
+  - default_plone4 profile: allow self-registration in rolemap.xml
+
+* 2010-12-20  sean.upton@hsc.utah.edu
+
+  - Add propertiestool.xml to default_plone4 profile, such that
+    use_email_as_login is set to True, a sensible setting for all QI
+    Teamspace sites.
+
+* 2010-12-20  sean.upton@hsc.utah.edu
+
+  - Products.qi default_plone4 profile makes all types except project
+    not implicitly addable, setting global_allow to False for most types.
+
+* 2010-12-20  sean.upton@hsc.utah.edu
+
+  - More modules cease using assumed relatative path to execution CWD,
+    and now use Products.qi.util.config.PathConfig to get paths from
+    zope.conf product configuration section instead: best-practice should be
+    to populate all paths used by source in zope.conf via buildout.cfg.
+
+* 2010-12-17  sean.upton@hsc.utah.edu
+
+  - mail/newListener.py: use portal property email_from_address for from
+    addr on admin_messages, if available, otherwise use hardcoded default
+(previous behavior).
+
+* 2010-12-17  sean.upton@hsc.utah.edu
+
+  - mail/newListener.py now uses Products.qi.util.config.ZEO_ADDRESS for
+    connection, which uses either product-config value from zope.conf or a
+    hardcoded default.
+
+* 2010-12-17  sean.upton@hsc.utah.edu
+
+  - Added imaphost to default (plone3) and default_plone4 extension
+    profiles, copied as-is from baseline, since it was missing.  Best
+    practice should be to use a policy product to override these values.
+
+* 2010-12-17  sean.upton@hsc.utah.edu
+
+  - Removed register.cpy* from qi_plone4_overrides, this functionality
+    is implemented in a new view for Plone 4 (in previous commit).
+
+* 2010-12-17  sean.upton@hsc.utah.edu
+
+  - XML export thread now gets ZEO address from product-config in
+    zope.conf (e.g. provided from buildout) section for Products.qi, instead
+    of using hardcoded value; if config option is not provided in zope.conf,
+    fallback is to previous hardcoded port number (trying to move
+    site-specific config out of code, where possible).
+
+* 2010-12-17  sean.upton@hsc.utah.edu
+
+  - remove print statement accidentally commited last rev
+
+* 2010-12-17  sean.upton@hsc.utah.edu
+
+  - Fix to datacapture/form/status/summary.py backported from Adrian's
+    bugfix here: - -
+    http://bazaar.launchpad.net/~qitdevs/qiteamspace/5.0/revision/17
+
+* 2010-12-17  sean.upton@hsc.utah.edu
+
+  - Fix for Django model select_related() calls, were not compatible
+    with recent Django versions [select_related(1) fails, where
+    select_related(depth=1) succeeds, so use kwarg]; form entry view: Django
+    DateField expects either datetime.date object or different date format
+    than provided previously, so just use datetime.date
+(today=datetime.now().date() == date.today()).
+
+* 2010-12-15  sean.upton@hsc.utah.edu
+
+  - QI Menu for Plone 4: new template and CSS to work well with Sunburst
+    theme, however, two distinct menu viewlets are registered in ZCML now,
+    one for Plone 3, one for Plone 4 -- relying on profiles to hide the
+    other version's viewlet from the viewlet manager, which works since we
+    have distinct GS extension profiles for different Plone versions.
+
+* 2010-12-14  sean.upton@hsc.utah.edu
+
+  - Find/replace all instances of view.context.request or
+    view/context/request in templates and macros, replacing with
+    view.request (appears necessary for Zope 2.12 compatibility in Plone 4,
+    possibly acquisition related -- the context object does not get an
+    attribute of request, which likely means it is not implicitly acquired,
+    so using explicit binding of view.request is more sane).
+
+* 2010-12-14  sean.upton@hsc.utah.edu
+
+  - Add last_activity to memberdata properties GS XML in default and
+    default_plone4 profiles, and adjust code using last_activity to
+    gracefully work when property is absent from member-data.
+
+* 2010-12-14  sean.upton@hsc.utah.edu
+
+  - New Project-specific registration form view for Products.qi on Plone
+4, replaces, fills same need as the registration override in Plone 3
+    skins (register.cpy): notify project managers of new registrations for a
+    project.
+
+* 2010-12-14  sean.upton@hsc.utah.edu
+
+  - viewlet GS profile xml for Plone 4 (only): hide path_bar from
+    portaltop manager, since that only makes sense for Plone 3; this is a
+    more sensible approach to supporting multiple Plone versions than
+    disabling ZCML registration to viewlet managers on a per-version basis.
+
+* 2010-12-13  sean.upton@hsc.utah.edu
+
+  - Plone 4: Products.qi: mass search and replace all instances of
+    self.context.request identifier in Browser Views with self.request
+    instead, as self.context.request does not work in many cases.  All
+    Browser Views multi-adapt both a context and a request, so self.request
+    should always exist.
+
+* 2010-12-13  sean.upton@hsc.utah.edu
+
+  - Fix for Plone 4: correctly configure skins layer qi_plone4_overrides
+
+* 2010-12-13  sean.upton@hsc.utah.edu
+
+  - merged into uudev4 import location fixes for Products.qi type
+    importing AT IReferenceable
+
+* 2010-12-13  sean.upton@hsc.utah.edu
+
+  - Replace import location for IReferenceable in content types (move
+    away from deprecated module location in Products.Archetypes that will
+    not work in Plone 4). Importing from AT interfaces package, instead of
+    specific module should work in both Plone 3 and Plone 4 without using
+    deprecated module location.
+
+* 2010-12-13  sean.upton@hsc.utah.edu
+
+  - remove import step putting ZPsycopgDA instance in the root of the
+    Plone site, does not appear to be used by any code in Products.qi
+    anyway; the only eggified Products.ZPsycopgDA package does not yet
+    support the fact the icons for DAs were moved into Products.ZSQLMethods
+    egg in Zope 2.12.9+.  There are several alternative solutions, the
+    easiest of which (other than not using ZPsycopgDA) is to symlink the old
+    Shared/DC/ZRDB folder into the Zope2 egg.  However, it was just easier
+    to remove this from buildout and import steps.
+
+* 2010-12-13  sean.upton@hsc.utah.edu
+
+  - login_success.pt override for Plone 4 now based on Plone 4 template,
+    with change made (use context/title instead of portal title for link) to
+    effect same behavior as Plone3 version.
+
+  - merges from uudev3 pull branch.
+
+* 2010-12-10  sean.upton@hsc.utah.edu
+
+  - First stab at a separate Plone 4 genericsetup extension profile
+    separate from and not (yet) replacing the default (Plone 3) profile;
+    added plone4 specific skins fsdirview, IAdding-based formlib add forms
+    needed FTI tweak per:
+    http://plone.org/documentation/manual/upgrade-guide/version/upgrading-plone-3-x-to-4.0/updating-add-on-products-for-plone-4.0/add-views-for-content-types
+
+* 2010-12-09  sean.upton@hsc.utah.edu
+
+  - Fix circular import problem I created earlier with PLONE_VERSION
+    detection code; moved this from Products.qi.util.utils to
+    Products.qi.util -- avoiding the issue
+
+* 2010-12-10  sean.upton@hsc.utah.edu
+
+  - Explicit defines in templates for all identifiers relying on
+    global_defines in Plone 3.  This should be compatible with both Plone 3
+    and Plone 4, which removes the global defines necessitating this
+    modification.  See:
+    http://plone.org/documentation/manual/upgrade-guide/version/upgrading-plone-3-x-to-4.0/updating-add-on-products-for-plone-4.0/no-more-global-definitions-in-templates
+
+* 2010-12-09  sean.upton@hsc.utah.edu
+
+  - merges into uudev4 branch from uudev branch (all fixes designed to
+    work in both Plone 3.3 and Plone 4), necessary, but not sufficient to
+    get QI Teamspace working in Plone 4.
+
+* 2010-12-08  sean.upton@hsc.utah.edu
+
+  - Fix XML well-formedness of all templates in Products.qi, such that
+    all templates parse with z3c.pt (Chameleon) templates.  This does not
+    guarantee XHTML validity, just that all templates are well-formed XML.
+    WHY?  Plone 4 will optionally support use of Chameleon, which is much
+    faster for templates, and later versions of Plone will eventually ship
+    with Chameleon.  These templates were checked with
+    z3c.pt.language.Parser().parse() and all now parse correctly.
+
+* 2010-12-07  sean.upton@hsc.utah.edu
+
+  - Make Zope2 interface inheritance conditional on PLONE_VERSION, only
+    use __implements__ declarations in Plone 3 (Zope 2.10), since Zope 2
+    interfaces no longer exist in Plone 4 and Zope 2.12.
+
+* 2010-12-06  sean.upton@hsc.utah.edu
+
+  - Appendum to last commmit: removing stray .metadata files in skins
+(qi_plone_overrides) for removed override files.
+
+* 2010-12-06  sean.upton@hsc.utah.edu
+
+  - Remove skin overrides for login_form.cpt and login_next.cpy; these
+    overrides were previously necessary to support mutliple WSGI apps
+    cross-linking to each other in a shared session, and keeping the
+    "came_from" state value (for redirect on login) to allow for login page
+    to redirect back to another application outside of Plone.  Without the
+    Django admin app being part of QI Teamspace, this ceases to serve
+    immediate, useful function, and is even less useful in a non-WSGI
+    hosting stack for the application.  Thus, these two overrides are simply
+    removed.
+
+* 2010-12-03  sean.upton@hsc.utah.edu
+
+  - Conditional use of SecureMailHost dependent MailHost method call in
+    contactinfo.py predicated on PLONE_VERSION==3. In Plone 4
+    MailHost.send() is called using stock Zope 2.12 MailHost and
+    zope.sendmail (which supports TLS out of the box).
+
+* 2010-12-03  sean.upton@hsc.utah.edu
+
+  - Created 'default' exension profile and disabled 'baseline' base
+    profile; the profiles appear to have parity with the base profile, and
+    are much easier to manage (however, proper skin layer ordering depends
+    upon a Plone 3.3.x buildout pinned to use Products.CMFCore==2.1.3, not
+    the stock 2.1.2 -- this is to remedy
+    https://bugs.launchpad.net/zope-cmf/+bug/161732 which was fixed in 2008,
+    but not released until 9/2010; this might be the default package from
+    some upcoming Plone 3.3.6).
+
+* 2010-12-03  sean.upton@hsc.utah.edu
+
+  - Calendar tool fixes for compatibility with Plone 3.3 calendar
+    portlets, and associated compatibly (method signature) change for QI
+    Calendar portlet.
+
+* 2010-11-18  sean.upton@hsc.utah.edu
+
+  - Added Products.qi.util.config.getcfg() function to make product
+    config more reusable for future use, this allows any product
+    configuration value in a <product-config qi> section to be obtained by
+    any running code.
+
+* 2010-11-16  sean.upton@hsc.utah.edu
+
+  - Plone 3.3 compatibility changes to portlet and jsregistry GS
+    profile, plus addition of path configuration accessible from code that
+    allows for common base paths (to var/, log/, src/sql, or whatever else)
+    to be queried from code reading/writing files.  Modified testquery()
+    function in Products.qi.util.utils to use new PathConfig lookup of base
+    path (best practice is to spell out zope-conf-additional section with
+    path configuration in buildout instance part).
+
+* 2010-11-11  sean.upton@hsc.utah.edu
+
+  - Import feedparser normally, as it is not included in newer versions
+    of plone.app.portlets, but distributed as is own egg on PyPI.  Falls
+    back to importing from plone.app.portlets if ImportError (e.g. egg is
+    not installed in older buildout).
+
+* 2010-11-10  sean.upton@hsc.utah.edu
+
+  - Minor setup.py modifications:
+
+    + setup.py: change url to launchpad project URL
+    + setup.py: should not need to import use_setuptools(), buildout should
+      provide; remove this from setup.py and remove ez_setup.py from package
+      directory.
+    + setup.py: change license to GPL
+    + setup.py: add these trove classifiers:
+        "Framework:: Plone"
+        "Framework :: Zope2"
+        "License :: OSI Approved :: GNU General Public License (GPL)"
+
+
+Historical upstream commits (Ursa Logic)
+----------------------------------------
+
+*See docs/HISTORY.txt for archived changes prior to UPIQ fork.*
+
