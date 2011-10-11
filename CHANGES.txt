@@ -4,6 +4,8 @@
 
 * 2011-10-11  sean.upton@hsc.utah.edu
 
+  - Re-pin dexterity requirement to >= 1.0.1
+
   - Icon changes to ZCML for types using new icons.
 
   - Replace setup.py, add docs.

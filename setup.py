@@ -25,7 +25,7 @@ setup(name='Products.qi',
       install_requires=[
           'setuptools',
           'zope.schema>=3.8.0',
-          'plone.app.dexterity>=1.0.3',
+          'plone.app.dexterity>=1.0.1',
           'Products.CMFPlone>=4.1',
           # -*- Extra requirements: -*-
       ],
