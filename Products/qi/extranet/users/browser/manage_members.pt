@@ -55,7 +55,6 @@
     tal:content="view/errors">ERRORS</span>
 </div>
 
-<a href="userlist.html">Printable Member List</a>
  <div>
  <h3></h3>
     
