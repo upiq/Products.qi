@@ -1,7 +1,6 @@
 #rethink this
-def add_managers_and_faculty(project, changeevent):
+def add_managers(project, changeevent):
     managers=project.managers
-    faculty=project.faculty
     plugin = project.acl_users.source_groups
     
     
@@ -10,13 +9,6 @@ def add_managers_and_faculty(project, changeevent):
     for oldmember in group.getMemberIds():
         group.removeMember(oldmember)
     for email in managers:
-        plugin.addPrincipalToGroup(email, group_id)
-        
-    group_id = project.getProjectGroup('faculty')
-    group= plugin.getGroup(group_id)
-    for oldmember in group.getMemberIds():
-        group.removeMember(oldmember)
-    for email in faculty:
         plugin.addPrincipalToGroup(email, group_id)
 
 

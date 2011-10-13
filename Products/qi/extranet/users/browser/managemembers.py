@@ -16,10 +16,9 @@ from plone.app.form.widgets.uberselectionwidget import UberMultiSelectionWidget
 from plone.app.vocabularies.users import UsersSource
 from plone.app.vocabularies.users import UsersSourceQueryView
 
-from Products.qi.extranet.types.handlers.users import add_managers_and_faculty, add_leads
+from Products.qi.extranet.types.handlers.users import add_managers, add_leads
 from Products.qi.util.utils import project_containing, team_containing
 from Products.qi.extranet.types.interfaces import IQITeam
-from Products.qi import MessageFactory as _
 
 from datetime import datetime
 import time
@@ -78,14 +77,6 @@ class TeamMembersView(BrowserView):
 
     def listManagers(self):
         userids= self.context.getProjectUsers('managers')
-        return self.getUserObjects(userids)
-
-    def listFaculty(self):
-        userids=self.context.getProjectUsers('faculty')
-        return self.getUserObjects(userids)
-
-    def listQics(self):
-        userids=self.context.getProjectUsers('qics')
         return self.getUserObjects(userids)
 
     def listLeads(self):
@@ -192,11 +183,10 @@ class TeamMembersView(BrowserView):
                         self.removeLead(user)
                     else:
                         self.removeManager(user)
-                        self.removeFaculty(user)
                 if team is not None:
                     add_leads(team, None)
                 else:
-                    add_managers_and_faculty(project, None)
+                    add_managers(project, None)
                 form.clear()
             if 'Revoke Team Lead Status' in form:
                 for user in form['users']:
@@ -212,40 +202,20 @@ class TeamMembersView(BrowserView):
                 for user in form['users']:
                     self.removeManager(user)
                 form.clear()
-                add_managers_and_faculty(project, None)
-            if 'Revoke Faculty Status' in form:
-                for user in form['users']:
-                    self.removeFaculty(user)
-                form.clear()
-                add_managers_and_faculty(project, None)
+                add_managers(project, None)
             if 'Grant Project Manager Status' in form:
                 for user in form['users']:
-                    self.removeFaculty(user)
                     self.addManager(user)
                 form.clear()
-                add_managers_and_faculty(project, None)
-            if 'Make QIC' in form:
-                for user in form['users']:
-                    self.addQIC(user)
-                form.clear()
-            if 'Revoke QIC Status' in form:
-                for user in form['users']:
-                    self.removeQIC(user)
-                form.clear()
-            if 'Grant Faculty Status' in form:
-                for user in form['users']:
-                    self.removeManager(user)
-                    self.addFaculty(user)
-                form.clear()
-                add_managers_and_faculty(project, None)
-
+                add_managers(project, None)
+    
     def addLead(self, user):
         team=self.context.getTeam()
         managers=team.managers
         if user not in managers:
             managers.append(user)
         team._p_changed=1;
-
+    
     def removeLead(self, user):
         team=self.context.getTeam()
         managers=team.managers
@@ -259,45 +229,28 @@ class TeamMembersView(BrowserView):
         if user not in managers:
             managers.append(user)
         project._p_changed=1;
-
+    
     def removeManager(self, user):
         project=self.context.getProject()
         managers=project.managers
         if user in managers:
             managers.remove(user)
         project._p_changed=1;
-
-    def addFaculty(self, user):
-        project=self.context.getProject()
-        faculty=project.faculty
-        if user not in faculty:
-            faculty.append(user)
-        project._p_changed=1;
-    def removeFaculty(self, user):
-        project=self.context.getProject()
-        faculty=project.faculty
-        if user in faculty:
-            faculty.remove(user)
-        project._p_changed=1;
-    def addQIC(self, user):
-        self._addUserToGroup(user,'qics')
-    def removeQIC(self, user):
-        self._removeUserFromGroup(user,'qics')
-
+    
     def url(self):
         return '%s/%s' % (self.context.absolute_url(), self.__name__)
-
+    
     def _getGroupId(self,groupname="members"):
         return self.context.getGroup(groupname)
-
+    
     def _getProjectGroupId(self):
         
         return self.context.getProjectGroup()
-
+    
     def _getGroupsPlugin(self):
         acl_users = self.context.acl_users # acquire
         return acl_users.source_groups
-
+    
     def _addUserToGroup(self, email, groupname="members"):
         project, team=self.getProjectTeam()
         plugin = self._getGroupsPlugin()

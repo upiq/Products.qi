@@ -6,7 +6,6 @@
  <permission>Access contents information</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
- <permission>Enter Data</permission>
  <state state_id="private" title="Private to owner">
   <exit-transition transition_id="publish"/>
   <exit-transition transition_id="restrict_to_subteam"/>
@@ -22,11 +21,6 @@
   </permission-map>
   <permission-map name="Add portal topics" acquired="True">
    <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-  </permission-map>
-  <permission-map name="Enter Data" acquired="True">
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
@@ -62,10 +56,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
-  <permission-map name="Enter Data" acquired="True">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-  </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
@@ -85,12 +75,6 @@
                   acquired="True">
   </permission-map>
   <permission-map name="View" acquired="True">
-  </permission-map>
-  <permission-map name="Enter Data" acquired="True">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>TeamViewer</permission-role>
-   <permission-role>QIC</permission-role>
   </permission-map>
  </state>
  <state state_id="restrict_to_team"
@@ -124,11 +108,6 @@
    <permission-role>TeamViewer</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
-  <permission-map name="Enter Data" acquired="True">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>TeamViewer</permission-role>
-  </permission-map>
  </state>
  <state state_id="sub_team"
         title="Restrict to SubTeam Members">
@@ -161,11 +140,6 @@
    <permission-role>Reader</permission-role>
    <permission-role>SubTeamViewer</permission-role>
   </permission-map>
-  <permission-map name="Enter Data" acquired="True">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>SubTeamViewer</permission-role>
-  </permission-map>
  </state>
  <state state_id="visible"
         title="Restrict to Project Members">
@@ -189,11 +163,6 @@
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
-  </permission-map>
-  <permission-map name="Enter Data" acquired="True">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>TeamViewer</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Contributor</permission-role>

@@ -15,44 +15,38 @@
             var element=document.getElementById("add_selected_users")
             element.disabled=false
         }
-		function showlist(idval)
-		{
+        function showlist(idval)
+        {
 
-			element=document.getElementById(idval)
-			element.style.display="block"
-		}
-		function hidelist(idval)
-		{
-			element=document.getElementById(idval)
-			element.style.display="none"
-		}
-		
+            element=document.getElementById(idval)
+            element.style.display="block"
+        }
+        function hidelist(idval)
+        {
+            element=document.getElementById(idval)
+            element.style.display="none"
+        }
+        
     </script>
 </head>
 
 <div metal:fill-slot="main"
      tal:define="   allmembers view/listProjectMembers;
                     managers view/listManagers;
-                    faculty view/listFaculty;
                     leads view/listLeads;
-                    qics view/listQics;
-					teammembers python:[k for k in allmembers if k not in leads];
-					projectmembers python:[k for k in allmembers if k not in faculty and k not in managers];
-					isteam python:hasattr(view.context,'getTeam');
-					nonmembersthingies python:(	 ('Managers',managers,not isteam,
-													('Remove Member','Revoke Manager Status'))
-												,('Leads',leads, isteam,
-													('Remove Member','Revoke Team Lead Status'))
-												,('Faculty',faculty,not isteam,
-													('Remove Member','Revoke Faculty Status','Grant Project Manager Status'))
-												,('QICs',qics, not isteam,
-												    ('Revoke QIC Status',))
-												,('Members',teammembers, isteam,
-														('Remove Member','Grant Team Lead Status'))
-												,('Members',projectmembers,not isteam		,
-																('Remove Member','Grant Faculty Status','Grant Project Manager Status','Make QIC'))
-											   )"
-					>
+                    teammembers python:[k for k in allmembers if k not in leads];
+                    projectmembers python:[k for k in allmembers if k not in managers];
+                    isteam python:hasattr(view.context,'getTeam');
+                    grouptuples python:(    ('Managers',managers,not isteam,
+                                                ('Remove Member','Revoke Manager Status')),
+                                            ('Leads',leads, isteam,
+                                                ('Remove Member','Revoke Team Lead Status')),
+                                            ('Members',teammembers, isteam,
+                                                ('Remove Member','Grant Team Lead Status')),
+                                            ('Members',projectmembers,not isteam        ,
+                                                ('Remove Member','Grant Project Manager Status')),
+                                               )"
+                    >
 
 <div class="error" tal:condition="view/errors">
 <h3>Error</h3>
@@ -64,70 +58,61 @@
 <a href="userlist.html">Printable Member List</a>
  <div>
  <h3></h3>
-	
-	<tal:othergroups repeat="grouptuple python:nonmembersthingies">
-	<tal:wrapper define="name python:grouptuple[0];
-						membership python:grouptuple[1];
-						condition python:grouptuple[2];
-						buttons python:grouptuple[3];
-						count repeat/grouptuple/index;
-						member context/@@plone_portal_state/member"
-				condition="python:condition and len(membership)>0">
-		<h3>
-		    <tal:name content="python:context.title" /> 
-		    <tal:groupname content="name" /> 
-		    (<tal:count content="python:len(membership)" />)
-		</h3>
+    
+    <tal:othergroups repeat="grouptuple python:grouptuples">
+    <tal:wrapper define="name python:grouptuple[0];
+                        membership python:grouptuple[1];
+                        condition python:grouptuple[2];
+                        buttons python:grouptuple[3];
+                        count repeat/grouptuple/index;
+                        member context/@@plone_portal_state/member"
+                condition="python:condition and len(membership)>0">
+        <h3>
+            <tal:name content="python:context.title" /> 
+            <tal:groupname content="name" /> 
+            (<tal:count content="python:len(membership)" />)
+        </h3>
 
-	    <form method="POST" action="."
-	        tal:attributes="action view/url">
-		<fieldset>
-			<legend>
-				<a href="javascript:showlist('x')"
-					tal:attributes="href python:'javascript:showlist(\'%i\')'%count">
-					Show
-				</a>
-				&nbsp;
-				<a href="javascript:hidelist('x')"
-					tal:attributes="href python:'javascript:hidelist(\'%i\')'%count">
-					Hide
-				</a>
-			</legend>
-		<ul style="display:None" id="x" tal:attributes="id repeat/grouptuple/index">
+        <form method="POST" action="."
+            tal:attributes="action view/url">
+        <fieldset>
+            <legend>
+                <a href="javascript:showlist('x')"
+                    tal:attributes="href python:'javascript:showlist(\'%i\')'%count">
+                    Show
+                </a>
+                &nbsp;
+                <a href="javascript:hidelist('x')"
+                    tal:attributes="href python:'javascript:hidelist(\'%i\')'%count">
+                    Hide
+                </a>
+            </legend>
+        <ul style="display:None" id="x" tal:attributes="id repeat/grouptuple/index">
 
-			<tal:members repeat="member membership">
-				<li>
-					<input type="checkbox" name="users:list" tal:attributes="value string:${member/id}" />
-					<img src="TeamLead.png"
-		                alt="Team Lead"
-		                tal:condition="python:not isteam and member['id'] in leads" />
-					<img src="ProjectManager.png"
-	                	alt="Project Manager"
-		                tal:condition="python:isteam and member['id'] in managers" />
-		            <img src="Faculty.png"
-		                alt="Project Faculty" 
-		                tal:condition="python:isteam and member['id'] in faculty"/>
-					<span tal:content="member/name">MEMBER NAME</span>
-		            <span tal:content="string:(${member/id})">(MEMBER_ID)</span> <br />
-					<span tal:condition="not:python:view.isUserOnline(member['id'])">
-						<tal:login define="login member/logintime">
-						last login: <span tal:content="login/Date" /> <span tal:content="login/TimeMinutes" />
-						</tal:login>
-					</span>
-					<span tal:condition="python:view.isUserOnline(member['id'])">
-						<img src="user.gif" alt="User Online" />
-						Online
-					</span>
-				</li>
-			</tal:members>
-		</ul>
-		</fieldset>
-		<tal:buttons repeat="button buttons">
-		<input type="submit" tal:attributes="name button; value button;" />
-		</tal:buttons>
-		</form>
-	</tal:wrapper>
-	</tal:othergroups>
+            <tal:members repeat="member membership">
+                <li>
+                    <input type="checkbox" name="users:list" tal:attributes="value string:${member/id}" />
+                    <span tal:content="member/name">MEMBER NAME</span>
+                    <span tal:content="string:(${member/id})">(MEMBER_ID)</span> <br />
+                    <span tal:condition="not:python:view.isUserOnline(member['id'])">
+                        <tal:login define="login member/logintime">
+                        last login: <span tal:content="login/Date" /> <span tal:content="login/TimeMinutes" />
+                        </tal:login>
+                    </span>
+                    <span tal:condition="python:view.isUserOnline(member['id'])">
+                        <img src="user.gif" alt="User Online" />
+                        Online
+                    </span>
+                </li>
+            </tal:members>
+        </ul>
+        </fieldset>
+        <tal:buttons repeat="button buttons">
+        <input type="submit" tal:attributes="name button; value button;" />
+        </tal:buttons>
+        </form>
+    </tal:wrapper>
+    </tal:othergroups>
 </div>
 
 
@@ -196,7 +181,7 @@
    <input type="text" id="full_name" name="full_name"
           tal:attributes="value request/full_name|nothing" />
    </div>
-	
+    
   <input type="submit" name="add_new_user" value="Add new member" />
   </fieldset>
  </form>

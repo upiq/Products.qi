@@ -83,7 +83,6 @@
   </permission-map>
   <permission-map name="qiproject: Add Team" acquired="True">
    <permission-role>Manager</permission-role>
-   <permission-role>QIC</permission-role>
   </permission-map>
  </state>
  <state state_id="restrict_to_managers"
@@ -125,7 +124,6 @@
   </permission-map>
   <permission-map name="qiproject: Add Team" acquired="True">
    <permission-role>Manager</permission-role>
-   <permission-role>QIC</permission-role>
   </permission-map>
  </state>
  <state state_id="visible"
@@ -179,7 +177,6 @@
   </permission-map>
   <permission-map name="qiproject: Add Team" acquired="True">
    <permission-role>Manager</permission-role>
-   <permission-role>QIC</permission-role>
   </permission-map>
  </state>
  <transition transition_id="hide"

@@ -66,14 +66,13 @@ class AddProjectSecurityTests(unittest.TestCase):
         add_project_group(project, None)
         self.assertEqual(len(project.acl_users.groups), 6)
         i = 0
-        for group_name in ('members', 'faculty', 'contributors', 'managers','pending','qics'):
+        for group_name in ('members', 'contributors', 'managers','pending'):
             name, title = project.acl_users.groups[i]
             self.assertEqual(name, 'myproject-%s' % group_name)
             self.assertEqual(title, 'My Project project %s' % group_name)
             i += 1
         self.assertEqual(len(project.acl_users.principals_to_groups), 1)
         princ_id, group_id = project.acl_users.principals_to_groups[0]
-        self.assertEqual(princ_id, 'myproject-faculty')
         self.assertEqual(group_id, 'myproject-contributors')
         #we have a data entry role as well now
         self.assertEqual(len(project.localrole_info), 5)

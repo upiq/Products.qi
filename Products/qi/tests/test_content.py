@@ -103,11 +103,7 @@ class TeamTests(unittest.TestCase):
         team.getTypeInfo = lambda: DummyFTI()
         team.dummy = DummyViewMethod()
         self.assertEqual(team.HEAD(request, response), 'Dummy HEAD')
-        
-    #if a project were identical to a team, this would fail
-    def test_noFaculty(self):
-        team = self._makeOne()
-        self.failIf(team.faculty)
+
 
 class DummyRequest:
     pass

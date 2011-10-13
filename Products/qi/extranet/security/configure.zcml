@@ -17,22 +17,5 @@
         id="Products.qi.AddSubTeam"
         title="qiteam: Add SubTeam"
         />
-        
-    <permission
-        id="Products.qi.Maintain"
-        title="Maintain qiteamspace"
-        />
-		
-	<permission 
-	    id="Products.qi.EnterData" 
-	    title="Enter Data"
-		/>
-	<permission 
-	    id="Products.qi.PostThread" 
-	    title="Post Threads"
-		/>
-    <utility
-        name="QIC"
-        factory=".roles.QICRole"
-        />
+
 </configure>

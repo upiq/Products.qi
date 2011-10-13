@@ -4,7 +4,6 @@
     <role name="TeamViewer"/>
     <role name="ProjectViewer"/>
     <role name="SubTeamViewer" />
-    <role name="QIC" />
   </roles>
   <permissions>
     <permission name="Add portal member" acquire="False">
@@ -12,20 +11,12 @@
       <role name="Owner"/>
       <role name="Anonymous"/><!-- allow self-registration -->
     </permission>
-    <permission name="Enter Data" acquire="True">
-      <role name="TeamMember" />
-      <role name="QIC" />
-      <role name="Manager"/>
-      <role name="Owner"/>
-    </permission>
     <permission name="qiproject: Add Team"  acquire="True">
       <role name="Manager"/>
-      <role name="QIC" />
     </permission>
     <!--
     <permission name="qiteam: Add SubTeam" acquire="True">
       <role name="Manager" />
-      <role name="QIC" />
     </permission>
     -->
   </permissions>

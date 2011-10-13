@@ -12,25 +12,18 @@ def add_project_security(project, event):
     proj_id = project.getId()
     proj_title = project.title or proj_id
     try:
-        for suffix in ('members', 'faculty', 'contributors', 'managers','pending','qics'):
+        for suffix in ('members', 'contributors', 'managers','pending'):
             group_name = '%s-%s' % (proj_id, suffix)
             source_groups.addGroup(
                 group_name, '%s project %s' % (proj_title, suffix)
                 )
-        # add the faculty group to the contributors group
-        source_groups.addPrincipalToGroup('%s-faculty' % proj_id,
-                                          '%s-contributors' % proj_id)
-    
+          
         settings = [
             {'type':'group', 'id':'%s-managers' % proj_id,
              'roles':[u'Contributor', u'Editor', u'Reader', u'Reviewer',
                       u'Manager']},
-            {'type':'group', 'id':'%s-faculty' % proj_id,
-             'roles':[u'Reader']},
             {'type':'group', 'id':'%s-members' % proj_id,
              'roles':[u'ProjectViewer']},
-            {'type':'group', 'id':'%s-qics' % proj_id,
-            'roles':[u'QIC']},
             {'type':'group', 'id':'%s-contributors' % proj_id,
              'roles':[u'Contributor', u'Editor', u'Reader']},
             # no proj-member roles here, nor anonymous roles
