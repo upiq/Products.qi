@@ -28,7 +28,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     implements(IProject, ITTWLockable, INameFromTitle, ILocalPortletAssignable)
     security = ClassSecurityInfo()
     portal_type = "qiproject"
-    dbid=None
     description = u""
     groupname=None
 
