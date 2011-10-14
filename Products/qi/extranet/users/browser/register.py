@@ -38,11 +38,16 @@ this user, and add them as a member of your project:
 (This message is an automated notification provided by QI Teamspace).
 """
 
-
 # Plone 4.x+
 from plone.app.users.browser.register import RegistrationForm
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
+
+from Products.qi.util.utils import project_containing
+
+
+_PROJECT_MANAGERS = '%s-managers'
+
 
 class ProjectRegistrationForm(RegistrationForm):
     """
@@ -50,19 +55,15 @@ class ProjectRegistrationForm(RegistrationForm):
     registrations for a project.
     """
     def _notification_subscribers(self, project):
+        group = _PROJECT_MANAGERS % (self.getId())
         users = getToolByName(self.context, 'acl_users')
-        if hasattr(self.context, 'ProjectEmail'):
-            return self.context.ProjectEmail
-        else:
-            addr = lambda u: users.getUserById(u).getProperty('email')
-            managers = project.getProjectUsers('managers')
-            return [addr(u) for u in managers]
-
+        listgroup = users.source_groups.listAssignedPrincipals
+        return [u[0] for u in listgroup(group)] or []
+    
     def _notify_project_managers(self, username):
         """Notify project managers about registration, given username"""
-        project = self.context.getProject()
-        mailhost = getToolByName(self.context, 'MailHost')
-        #site = getToolByName(self.context, 'portal_url').getPortalObject()
+        project = project_containing(self.context)
+        mailhost = getToolByName(project, 'MailHost')
         site = getUtility(ISiteRoot)
         recipients = self._notification_subscribers(project)
         if not recipients:

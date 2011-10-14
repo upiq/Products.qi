@@ -29,7 +29,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
 
     def __init__(self, id=None):
         super(Project, self).__init__(id)
-        self.managers = []
         self.logo = ''
 
 
