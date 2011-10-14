@@ -77,29 +77,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
         result.append(projectMenu)
         return result
         
-    security.declareProtected(View, 'HEAD')
-    def HEAD(self, REQUEST, RESPONSE):
-        """ Override HEAD method for HTTP HEAD requests.
-
-        o If the default view can't be acquired, return 404 (Not found).
-
-        o if the default view has no HEAD method, return 405
-          (Method not allowed).
-        """
-        view_id = self.getDefaultPage() or self.getLayout()
-        if view_id is None:
-            raise NotFound('No view method known for requested resource')
-
-        view_method = getattr(self, view_id, None)
-        if view_method is None:
-            raise NotFound('View method %s for requested resource is not ' 
-                             'available.' % view_id)
-
-        if getattr(aq_base(view_method), 'HEAD', None) is not None:
-            return view_method.__of__(self).HEAD(REQUEST, RESPONSE)
-
-        raise MethodNotAllowed('HEAD method not supported for this resource.')
-        
     def getProjectUsers(self, groupname='members'):
         group=self.getProjectGroup(groupname)
         acl_users = getToolByName(self, 'acl_users')
@@ -115,13 +92,7 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
             self.groupname=project_id
         group='%s-%s' %(self.groupname,groupname)
         return group
-        
-    def isSubTeam(self):
-        return False
-    
-    def isTeam(self):
-        return False
-        
+
 
 InitializeClass(Project)
 

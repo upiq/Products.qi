@@ -69,29 +69,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
     def getTeam(self):
         return self
 
-    security.declareProtected(View, 'HEAD')
-    def HEAD(self, REQUEST, RESPONSE):
-        """ Override HEAD method for HTTP HEAD requests.
-
-        o If the default view can't be acquired, return 404 (Not found).
-
-        o if the default view has no HEAD method, return 405
-          (Method not allowed).
-        """
-        view_id = self.getDefaultPage() or self.getLayout()
-        if view_id is None:
-            raise NotFound('No view method known for requested resource')
-
-        view_method = getattr(self, view_id, None)
-        if view_method is None:
-            raise NotFound('View method %s for requested resource is not ' 
-                             'available.' % view_id)
-
-        if getattr(aq_base(view_method), 'HEAD', None) is not None:
-            return view_method.__of__(self).HEAD(REQUEST, RESPONSE)
-
-        raise MethodNotAllowed('HEAD method not supported for this resource.')
-
     def getTeamUsers(self, groupname='members'):
         group=self.getGroup(groupname)
         plugin = self.acl_users.source_groups
@@ -110,13 +87,7 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
         project=self.getProject()
         group='%s-%s-%s' %(project.groupname,self.groupname,groupname)
         return group
-    def isSubTeam(self):
-        parent=aq_parent(aq_inner(self))
-        if parent.isTeam():
-            return True
-        return False
-    def isTeam(self):
-        return True
+
 
 InitializeClass(Team)
 teamFactory = Factory(Team, title=_(u"Create a new QI team"))
