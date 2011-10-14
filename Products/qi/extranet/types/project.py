@@ -39,22 +39,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     def getProject(self):
         return self
     
-    def getProjectUsers(self, groupname='members'):
-        group=self.getProjectGroup(groupname)
-        acl_users = getToolByName(self, 'acl_users')
-        plugin = acl_users.source_groups
-        return [x[0] for x in plugin.listAssignedPrincipals(group)]
-    
-    def getGroup(self, groupname="members"):
-        return self.getProjectGroup(groupname)
-    
-    def getProjectGroup(self, groupname="members"):
-        project_id = self.getId()
-        if self.groupname is None:
-            self.groupname=project_id
-        group='%s-%s' %(self.groupname,groupname)
-        return group
-
 
 InitializeClass(Project)
 

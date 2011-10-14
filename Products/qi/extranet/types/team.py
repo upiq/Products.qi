@@ -41,34 +41,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
             return self.description.encode('utf-8')
         return self.description or ''
     
-    baseItems=( 
-        ("members.html","Manage Team Members","Modify portal content"),
-        )
-
-    otherSources=()
-    
-    def getTeam(self):
-        return self
-
-    def getTeamUsers(self, groupname='members'):
-        group=self.getGroup(groupname)
-        plugin = self.acl_users.source_groups
-        return [x[0] for x in plugin.listAssignedPrincipals(group)]
-    
-    def getGroup(self, groupname="members"):
-        return self.getTeamGroup(groupname)
-    
-    def getTeamGroup(self, groupname="members"):
-        #exercise the project's ability to identify it's own name as necessary
-        projectgroup=self.getProjectGroup()
-        team_id= self.getId()
-        if self.groupname is None:
-            #we haven't had a chance like this yet
-            self.groupname=team_id
-        project=self.getProject()
-        group='%s-%s-%s' %(project.groupname,self.groupname,groupname)
-        return group
-
 
 InitializeClass(Team)
 teamFactory = Factory(Team, title=_(u"Create a new QI team"))
