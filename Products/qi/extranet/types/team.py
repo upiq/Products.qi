@@ -38,7 +38,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
     def __init__(self, id=None):
         super(Team, self).__init__(id)
         self.managers = []
-        self.addable_types = []
     
     def Description(self):
         """override CMF description accessor"""
