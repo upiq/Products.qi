@@ -32,9 +32,4 @@ def getUploadableTypes(context):
     project=context.aq_inner
     items=[(v.getName(),v.getName()) for v in project.getUploadTypes()]
     return SimpleVocabulary.fromItems(items)
-
-@implementer(IVocabularyFactory)
-def public_skins(context):
-    skins=context.portal_skins
-    return SimpleVocabulary.fromItems([(x,x) for x in skins.getSkinSelections()])
-    
+ 

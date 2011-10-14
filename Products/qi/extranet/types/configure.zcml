@@ -50,13 +50,7 @@
         provides="zope.app.schema.vocabulary.IVocabularyFactory"
         name="Products.qi.AddableTypes"
         />
- 
-    <utility
-        component=".vocabularies.public_skins"
-        provides="zope.app.schema.vocabulary.IVocabularyFactory"
-        name="Products.qi.Skins"
-        />
-       
+    
     <utility
         component=".vocabularies.getUploadableTypes"
         provides="zope.app.schema.vocabulary.IVocabularyFactory"
