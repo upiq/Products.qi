@@ -17,7 +17,7 @@ from plone.app.content.container import Container
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.qi import MessageFactory as _
-from interfaces import IQITeam
+from interfaces import ITeam
 from AccessControl.Permissions import view as View
 
 from plone.portlets.interfaces import ILocalPortletAssignable
@@ -26,7 +26,7 @@ from plone.portlets.interfaces import ILocalPortletAssignable
 class Team(BrowserDefaultMixin, OrderSupport, Container):
     """  QITeamspace implemenation of a project
     """
-    implements(IQITeam, ITTWLockable, INameFromTitle,ILocalPortletAssignable)
+    implements(ITeam, ITTWLockable, INameFromTitle,ILocalPortletAssignable)
     security = ClassSecurityInfo()
     portal_type = "qiteam"
     upload_types=[]

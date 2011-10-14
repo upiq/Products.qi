@@ -9,10 +9,10 @@ class ProjectTests(unittest.TestCase):
     def _makeOne(self, id='test', *args, **kw):
         return self._getTargetClass()(id=id, *args, **kw)
 
-    def test_class_conforms_to_IQIProject(self):
+    def test_class_conforms_to_IProject(self):
         from zope.interface.verify import verifyClass
-        from Products.qi.extranet.types.interfaces import IQIProject
-        verifyClass(IQIProject, self._getTargetClass())
+        from Products.qi.extranet.types.interfaces import IProject
+        verifyClass(IProject, self._getTargetClass())
 
     def test_class_conforms_to_ISelectableBrowserDefault(self):
         from zope.interface.verify import verifyClass
@@ -61,10 +61,10 @@ class TeamTests(unittest.TestCase):
     def _makeOne(self, id='test', *args, **kw):
         return self._getTargetClass()(id=id, *args, **kw)
 
-    def test_class_conforms_to_IQITeam(self):
+    def test_class_conforms_to_ITeam(self):
         from zope.interface.verify import verifyClass
-        from Products.qi.extranet.types.interfaces import IQITeam
-        verifyClass(IQITeam, self._getTargetClass())
+        from Products.qi.extranet.types.interfaces import ITeam
+        verifyClass(ITeam, self._getTargetClass())
 
     def test_class_conforms_to_ISelectableBrowserDefault(self):
         from zope.interface.verify import verifyClass

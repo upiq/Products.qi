@@ -18,11 +18,10 @@ from plone.app.vocabularies.users import UsersSourceQueryView
 
 from Products.qi.extranet.types.handlers.users import add_managers, add_leads
 from Products.qi.util.utils import project_containing, team_containing
-from Products.qi.extranet.types.interfaces import IQITeam
+from Products.qi.extranet.types.interfaces import ITeam
 
 from datetime import datetime
 import time
-#team_form_fields = form.Fields(IQITeam)
 
     
 def compareMembers(a,b):

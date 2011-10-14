@@ -5,13 +5,13 @@ from Products.Five.browser import BrowserView
 
 from plone.app.form import base
 
-from Products.qi.extranet.types.interfaces import IQIProject
+from Products.qi.extranet.types.interfaces import IProject
 from Products.qi import MessageFactory as _
 
 from Products.qi.extranet.types import project as content
 
 
-project_form_fields = form.Fields(IQIProject)
+project_form_fields = form.Fields(IProject)
 
 class ProjectAddForm(base.AddForm):
     """Add form for projects

@@ -31,7 +31,7 @@ class IProject(ISelectableBrowserDefault, IOrderedContainer):
         required=False,
         )
  
-IQIProject = IProject # b/c
+IProject = IProject # b/c
 
 class ITeam(ISelectableBrowserDefault, IOrderedContainer):
     """ QITeamspace Team"""
@@ -49,7 +49,6 @@ class ITeam(ISelectableBrowserDefault, IOrderedContainer):
         )
     
 
-IQITeam = ITeam
 
 _PROJECT_LOGO_NAME = 'project_logo.jpg'
 
@@ -60,5 +59,4 @@ class ISubTeam(ITeam):
     #duplicates ITeam entirely
     pass
 
-IQISubTeam = ISubTeam
 

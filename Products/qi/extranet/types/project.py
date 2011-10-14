@@ -18,7 +18,7 @@ from plone.app.content.container import Container
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.qi import MessageFactory as _
-from interfaces import IQIProject
+from interfaces import IProject
 from AccessControl.Permissions import view as View
 
 from plone.portlets.interfaces import ILocalPortletAssignable
@@ -27,7 +27,7 @@ from plone.portlets.interfaces import ILocalPortletAssignable
 class Project(BrowserDefaultMixin, OrderSupport, Container):
     """  QITeamspace implemenation of a project
     """
-    implements(IQIProject, ITTWLockable, INameFromTitle, ILocalPortletAssignable)
+    implements(IProject, ITTWLockable, INameFromTitle, ILocalPortletAssignable)
     security = ClassSecurityInfo()
     portal_type = "qiproject"
     dbid=None

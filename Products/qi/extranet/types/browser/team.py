@@ -14,8 +14,8 @@ from plone.app.form.widgets.uberselectionwidget import UberMultiSelectionWidget
 from Products.qi.extranet.users.qiuser import QiUsersSource as UsersSource
 from plone.app.vocabularies.users import UsersSourceQueryView
 
-from Products.qi.extranet.types.interfaces import IQITeam
-from Products.qi.extranet.types.interfaces import IQISubTeam
+from Products.qi.extranet.types.interfaces import ITeam
+from Products.qi.extranet.types.interfaces import ISubTeam
 from Products.qi.extranet.types.project import Project
 from Products.qi.extranet.types.handlers.users import add_leads
 from Products.qi import MessageFactory as _
@@ -31,7 +31,7 @@ class TeamAddForm(base.AddForm):
     """Add form for teams
     """
 
-    form_fields = form.Fields(IQITeam)
+    form_fields = form.Fields(ITeam)
 
     label = _(u"Add Team")
     form_name = _(u"Team settings")
@@ -72,7 +72,7 @@ class SubTeamAddForm(base.AddForm):
     """Add form for teams
     """
 
-    form_fields = form.Fields(IQISubTeam)
+    form_fields = form.Fields(ISubTeam)
 
     label = _(u"Add Team")
     form_name = _(u"Team settings")
@@ -113,7 +113,7 @@ class TeamEditForm(base.EditForm):
     """Edit form for team
     """
 
-    form_fields = form.Fields(IQITeam) 
+    form_fields = form.Fields(ITeam) 
 
     label = _(u"Edit team")
     form_name = _(u"Team settings")
