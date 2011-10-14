@@ -33,7 +33,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     dbid=None
     title = u""
     description = u""
-    UploadTypes=[]
     groupname=None
 
     def __init__(self, id=None):
@@ -43,18 +42,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     
     def getProject(self):
         return self
-    
-    def getUploadTypes(self):
-        if not self.UploadTypes:
-            self.UploadTypes=[]
-        return self.UploadTypes
-    
-    def deleteTypes(self,types):
-        for t in types:
-            self.UploadTypes.remove(t)
-    
-    def addType(self,uploadType):
-        self.UploadTypes.append(uploadType)
     
     # fixed project-level menu items: 
     baseItems=(

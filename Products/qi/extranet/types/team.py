@@ -29,7 +29,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
     implements(ITeam, ITTWLockable, INameFromTitle,ILocalPortletAssignable)
     security = ClassSecurityInfo()
     portal_type = "qiteam"
-    upload_types=[]
     dbid=None
     title = u""
     description = u""

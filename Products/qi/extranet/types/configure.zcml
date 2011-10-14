@@ -5,8 +5,6 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
 
-
-
     <five:registerClass
         class=".project.Project"
         meta_type="qiproject"
@@ -40,21 +38,10 @@
         component=".team.teamFactory"
         name="Products.qi.Team"
         />
+
     <utility
         component=".subteam.subTeamFactory"
         name="Products.qi.SubTeam"
-        />
-
-    <utility
-        component=".vocabularies.globally_allowed_types"
-        provides="zope.app.schema.vocabulary.IVocabularyFactory"
-        name="Products.qi.AddableTypes"
-        />
-    
-    <utility
-        component=".vocabularies.getUploadableTypes"
-        provides="zope.app.schema.vocabulary.IVocabularyFactory"
-        name="Products.qi.UploadableTypes"
         />
 
     <class class=".project.Project">
