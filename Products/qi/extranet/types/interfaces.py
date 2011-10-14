@@ -7,9 +7,6 @@ from zope import schema
 
 from Products.qi import MessageFactory as _
 
-from plone.app.vocabularies.users import UsersSource
-from Products.qi.extranet.users.qiuser import QiUsersSource as UsersSource2
-
 class IProject(ISelectableBrowserDefault, IOrderedContainer):
     """ QITeamspace project"""
     
