@@ -7,6 +7,10 @@ from zope import schema
 
 from Products.qi import MessageFactory as _
 
+
+_PROJECT_LOGO_NAME = 'project_logo.jpg'
+
+
 class IProject(ISelectableBrowserDefault, IOrderedContainer):
     """ QITeamspace project"""
     
@@ -27,9 +31,8 @@ class IProject(ISelectableBrowserDefault, IOrderedContainer):
         description=_(u"Project logo"),
         required=False,
         )
- 
-IProject = IProject # b/c
 
+ 
 class ITeam(ISelectableBrowserDefault, IOrderedContainer):
     """ QITeamspace Team"""
     
@@ -44,16 +47,8 @@ class ITeam(ISelectableBrowserDefault, IOrderedContainer):
         description=_(u"A short summary of the team"),
         required=False,
         )
-    
 
-
-_PROJECT_LOGO_NAME = 'project_logo.jpg'
-
-
-#from Products.qi.extranet.types.interfaces import ITeam
 
 class ISubTeam(ITeam):
-    #duplicates ITeam entirely
-    pass
-
+    """marker for sub-team"""
 
