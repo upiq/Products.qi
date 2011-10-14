@@ -1,9 +1,6 @@
 from AccessControl import ClassSecurityInfo
-from Acquisition import aq_base, aq_inner, aq_parent
 from App.class_init import default__class_init__ as InitializeClass
 from OFS.OrderSupport import OrderSupport
-from zExceptions import MethodNotAllowed
-from zExceptions import NotFound
 from zope.component.factory import Factory
 from zope.interface import implements
 
