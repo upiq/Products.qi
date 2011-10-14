@@ -34,7 +34,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     title = u""
     description = u""
     UploadTypes=[]
-    projectTheme='Sunburst Theme'
     groupname=None
 
     def __init__(self, id=None):

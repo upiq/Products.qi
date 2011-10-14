@@ -21,13 +21,6 @@ class IProject(ISelectableBrowserDefault, IOrderedContainer):
                               description=_(u"A short summary of the project"),
                               required=True)
     
-    projectTheme =  schema.Choice(
-        title=u"Theme",
-        description=u"Project theme",
-        default=u"Sunburst Theme",
-        vocabulary="Products.qi.Skins",
-        required=True)
-    
     logo = schema.Bytes(title=_(u"Logo"),
                         description=_(u"Project logo"),
                         required=False)
