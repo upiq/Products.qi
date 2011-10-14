@@ -33,7 +33,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     dbid=None
     title = u""
     description = u""
-    hideinactiveteams = False
     UploadTypes=[]
     projectTheme='Sunburst Theme'
     groupname=None

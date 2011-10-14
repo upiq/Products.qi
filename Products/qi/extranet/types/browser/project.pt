@@ -17,8 +17,6 @@
     
     <div class="documentDescription" tal:content="context/description" />
 
-	<div class="documentDescription" tal:content="context/hideinactiveteams" />
-
     <div tal:replace="structure provider:plone.abovecontentbody" />
     
     <div metal:use-macro="context/folder_listing/macros/listing" />

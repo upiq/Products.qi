@@ -21,10 +21,6 @@ class IProject(ISelectableBrowserDefault, IOrderedContainer):
                               description=_(u"A short summary of the project"),
                               required=True)
     
-    hideinactiveteams = schema.Bool(title=_(u"Hide inactive teams?"),
-                                    description=_(u"Keep inactive teams out of search results"),
-                                    required=False)
-    
     projectTheme =  schema.Choice(
         title=u"Theme",
         description=u"Project theme",
