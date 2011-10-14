@@ -11,20 +11,4 @@
         permission="cmf.AddPortalMember"
         />
 
-    <browser:page
-        for="Products.qi.extranet.types.interfaces.IProject"
-        name="members.html"
-        class=".managemembers.TeamMembersView"
-        template="manage_members.pt"
-        permission="cmf.ModifyPortalContent"
-        />
-    
-    <browser:page
-        for="Products.qi.extranet.types.interfaces.ITeam"
-        name="members.html"
-        class=".managemembers.TeamMembersView"
-        template="manage_members.pt"
-        permission="cmf.ModifyPortalContent"
-        />
-    
 </configure>
