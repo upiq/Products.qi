@@ -1,13 +1,6 @@
-import os
-import re
-
-from zope import dottedname
-from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName 
-from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 from Products.qi.extranet.types import project, team
-from Products.qi.util.config import PathConfig
 
 
 def find_parents(context, typename=None, findone=False, start_depth=2):
@@ -77,105 +70,4 @@ def getTeamsInContext(context):
         'Type' : 'QI Team',
         }
     return [b._unrestrictedGetObject() for b in catalog.search(query)]
-
-
-def getPloneProject(dbproject, context):
-    if dbproject is None:
-        return None
-    projects=getProjectsInContext(getSite())
-    for project in projects:
-        if project.dbid==dbproject.id:
-            return project
-
-
-def getPloneTeam(dbteam, context):
-    if dbteam is None:
-        return None
-    teams=getTeamsInContext(getSite())
-    for team in teams:
-        if team.dbid==dbteam.id:
-            return team 
-
-
-def getTeamGroups(project,dblist):
-    plonegroups=[]
-    teams=getTeamsInContext(project)
-    subscribedteams=[team.id for team in dblist.teams.all()]
-    for kteam in teams:
-        if kteam.dbid in subscribedteams:
-            plonegroups.append(kteam.getGroup())
-    return plonegroups
-    
-
-def getAllPloneGroups(dblist,project, team, context):
-    plonegroups=[]
-    groups=dblist.groups.all()
-    for group in groups:
-        addgroups(
-            plonegroups,
-            getPloneGroupNames(
-                group.groupname,
-                project,
-                team,
-                context))
-    return plonegroups
-    
-    
-def addgroups(plonegroups, groups):
-    plonegroups[len(plonegroups):]=groups
-    
-
-def getPloneGroupNames(group, project, team, context):
-    result=[]
-    if project is None:
-        if group=='managers':
-            site=getSite()
-            allprojects=getProjectsInContext(site)
-            for eachproject in allprojects:
-                result.appendeachproject.getProjectGroup('managers')
-            return result
-            
-    if project is not None and team is None:
-        if group=='leads':
-            allteams=getTeamsInContext(project)
-            for eachteam in allteams:
-                result.append(eachteam.getGroup('leads'))
-            return result
-        else:
-            return [project.getProjectGroup(group),]
-    if project is not None and team is not None:
-        target='%s-%s-%s'%(project.getId(),team.getId(),group)    
-        return [target,]
-
-
-def getProjectsAndTeamsForUser(user, context):
-    teams=[]
-    projects=[]
-    
-    site=getSite()
-    allprojects=getProjectsInContext(site)
-    allteams=getTeamsInContext(site)
-    for project in allprojects:
-        for projuser in project.getProjectUsers():
-            if projuser==str(user):
-                projects.append(project)
-    for team in allteams:
-        for teamuser in team.getTeamUsers():
-            if teamuser==str(user):
-                teams.append(team)
-    return projects,teams
-
-
-
-#this is only for the natsort function below    
-def convert(text):
-    if text.isdigit():
-        return int(text)
-    else:
-        return text
-
-
-def natsort(tosort, f=lambda arg: arg.lower()):
-    alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', f(key)) ] 
-    return sorted(tosort, key=alphanum_key )
 
