@@ -52,32 +52,6 @@ class TestManageProjectLogo(unittest.TestCase):
         self.assertEqual(project.logo, '')
         self.assertEqual(getattr(project, _PROJECT_LOGO_NAME).data, 'thelogo')
 
-class AddProjectSecurityTests(unittest.TestCase):
-    def _getFUT(self):
-        from Products.qi.extranet.types.handlers.security import add_project_security
-        return add_project_security
-
-    def test_it(self):
-        project = DummyProject()
-        project.acl_users = DummyPAS()
-        project.portal_workflow = DummyWorkflowTool()
-        project.portal_membership = DummyMembershipTool()
-        add_project_group = self._getFUT()
-        add_project_group(project, None)
-        self.assertEqual(len(project.acl_users.groups), 6)
-        i = 0
-        for group_name in ('members', 'contributors', 'managers','pending'):
-            name, title = project.acl_users.groups[i]
-            self.assertEqual(name, 'myproject-%s' % group_name)
-            self.assertEqual(title, 'My Project project %s' % group_name)
-            i += 1
-        self.assertEqual(len(project.acl_users.principals_to_groups), 1)
-        princ_id, group_id = project.acl_users.principals_to_groups[0]
-        self.assertEqual(group_id, 'myproject-contributors')
-        #we have a data entry role as well now
-        self.assertEqual(len(project.localrole_info), 5)
-
-
 
 class DummyTypesTool:
     def constructContent(self, type, container, name, **kw):

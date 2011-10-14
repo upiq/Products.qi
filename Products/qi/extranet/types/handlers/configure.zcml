@@ -5,7 +5,6 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
 
-    <include file="security.zcml" />
     <include file="lookandfeel.zcml" />
 
 </configure>
