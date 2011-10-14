@@ -10,8 +10,6 @@ from zope.interface import implements
 
 from Products.CMFCore.utils import getToolByName
 
-from Products.qi.extranet.viewlets.menu.menu import MenuItem
-
 from plone.locking.interfaces import ITTWLockable
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.content.container import Container
@@ -31,7 +29,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     security = ClassSecurityInfo()
     portal_type = "qiproject"
     dbid=None
-    title = u""
     description = u""
     groupname=None
 
@@ -43,27 +40,6 @@ class Project(BrowserDefaultMixin, OrderSupport, Container):
     def getProject(self):
         return self
     
-    # fixed project-level menu items: 
-    baseItems=(
-        ("members.html","Manage Project Members","Modify portal content"),
-        )
-    
-    otherSources=()
-    
-    def getMenuItems(self):
-        result=[]
-        projectMenu=MenuItem(context=self, name="%s Tasks"%self.title)
-        projectMenu.items=[]
-        for item in self.baseItems:
-            newitem=MenuItem(context=self,
-                target=item[0], name=item[1],permission=item[2])
-            if item[0]=='':
-                newitem.islinked=False
-            projectMenu.items.append(newitem)
-                
-        result.append(projectMenu)
-        return result
-        
     def getProjectUsers(self, groupname='members'):
         group=self.getProjectGroup(groupname)
         acl_users = getToolByName(self, 'acl_users')

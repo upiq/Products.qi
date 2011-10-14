@@ -9,8 +9,6 @@ from zope.interface import implements
 
 from Products.CMFCore.utils import getToolByName
 
-from Products.qi.extranet.viewlets.menu.menu import MenuItem
-
 from plone.locking.interfaces import ITTWLockable
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.content.container import Container
@@ -29,7 +27,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
     implements(ITeam, ITTWLockable, INameFromTitle,ILocalPortletAssignable)
     security = ClassSecurityInfo()
     portal_type = "qiteam"
-    dbid=None
     title = u""
     description = u""
     groupname=None
@@ -50,21 +47,6 @@ class Team(BrowserDefaultMixin, OrderSupport, Container):
 
     otherSources=()
     
-    def getMenuItems(self):
-        parent=aq_parent(aq_inner(self))
-        result=parent.getMenuItems()
-        projectMenu=MenuItem(context=self, name="%s Tasks"%self.title)
-        projectMenu.items=[]
-        for item in self.baseItems:
-            newitem=MenuItem(context=self,
-                target=item[0], name=item[1],permission=item[2])
-            if item[0]=='':
-                newitem.islinked=False
-            projectMenu.items.append(newitem)
-                
-        result.append(projectMenu)
-        return result
-
     def getTeam(self):
         return self
 
