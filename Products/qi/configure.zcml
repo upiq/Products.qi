@@ -8,7 +8,6 @@
     <five:registerPackage package="." initialize=".zope2.initialize" />
 
     <include package="plone.browserlayer" />
-    <include package="plone.app.portlets.portlets" />
     
     <include package=".extranet" />
 
