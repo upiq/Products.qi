@@ -3,9 +3,6 @@
  <object name="Qi-Images"
      meta_type="Filesystem Directory View"
      directory="Products.qi:skins/Qi-Images"/>
- <object name="qi-macros"
-     meta_type="Filesystem Directory View"
-     directory="Products.qi:skins/qi-macros"/>
  <object name="qi_plone4_overrides"
      meta_type="Filesystem Directory View"
      directory="Products.qi:skins/qi_plone4_overrides"/>
