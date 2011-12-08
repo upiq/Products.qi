@@ -12,8 +12,6 @@
     
     <include package=".extranet" />
 
-    <include package=".util" />
-    
     <include file="profiles.zcml" />
     
 </configure>
