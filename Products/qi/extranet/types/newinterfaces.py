@@ -9,6 +9,12 @@ from zope import schema
 from Products.qi import MessageFactory as _
 
 
+NamedImage = filefield.NamedImage
+if HAVE_BLOBS:
+    NamedImage = filefield.NamedBlobImage
+
+
+
 class IWorkspace(form.Schema, IOrderedContainer):
     """
     A workspace is a folder for use as or in a project. A 
@@ -65,18 +71,11 @@ class IProject(IWorkspace, INavigationRoot):
         defaultFactory=list, #requires zope.schema >= 3.8.0
         )
     
-    logo = filefield.NamedImage(
+    logo = NamedImage(
         title=_(u'Project logo'),
         description=_(u'Upload a project logo file as PNG or JPEG image.'),
         required=False,
         )
-
-    if HAVE_BLOBS:
-        logo = filefield.NamedBlobImage(
-            title=_(u'Project logo'),
-            description=_(u'Upload a project logo file as PNG or JPEG image.'),
-            required=False,
-            )
 
 
 class ITeam(IWorkspace):
