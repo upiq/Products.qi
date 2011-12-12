@@ -17,12 +17,12 @@ __license__ = 'GPL'
 from zope.component import getUtility, getMultiAdapter
 
 
-NEW_REG_SUBJ = '[QI Teamspace] New User Registered'
+NEW_REG_SUBJ = '[%s] New User Registered'
 
 NEW_REG_MSG = """
 A new user registration related to your project is pending your approval.
 
-A user has registered for the QI Teamspace site, because they wish to
+A user has registered for the %s site, because they wish to
 join the %s project.
 
 The user name provided on registration is: %s
@@ -35,11 +35,12 @@ this user, and add them as a member of your project:
 
 --
 
-(This message is an automated notification provided by QI Teamspace).
+Please note: This is an automated notification provided by the 
+%s site.
 """
 
-# Plone 4.x+
 from plone.app.users.browser.register import RegistrationForm
+from zope.app.component.hooks import getSite
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 
@@ -62,7 +63,10 @@ class ProjectRegistrationForm(RegistrationForm):
     
     def _notify_project_managers(self, username):
         """Notify project managers about registration, given username"""
+        portal = getSite()
+        site_title = str(portal.Title())
         project = project_containing(self.context)
+        project_title = str(project.Title())
         mailhost = getToolByName(project, 'MailHost')
         site = getUtility(ISiteRoot)
         recipients = self._notification_subscribers(project)
@@ -70,13 +74,16 @@ class ProjectRegistrationForm(RegistrationForm):
             return
         sender = site.getProperty('email_from_address')
         message = NEW_REG_MSG.strip() % ( 
-            str(project.title),
+            site_title,
+            project_title,
             username,
-            '%s/members.html' % project.absolute_url(),)
+            '%s/members.html' % project.absolute_url(),
+            site_title,
+            )
         mailhost.send(message,
                       mto=recipients,
                       mfrom=sender,
-                      subject=NEW_REG_SUBJ)
+                      subject=NEW_REG_SUBJ % project_title)
 
     @property
     def showForm(self):
