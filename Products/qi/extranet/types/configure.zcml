@@ -6,4 +6,7 @@
     i18n_domain="Products.qi">
 
     <include package=".browser" />
+
+    <include file="permissions.zcml" />
+
 </configure>
