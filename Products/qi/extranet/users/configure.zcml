@@ -1,3 +1,0 @@
-<configure>
-    <include package=".browser" />
-</configure>
