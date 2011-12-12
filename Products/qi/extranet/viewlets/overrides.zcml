@@ -1,14 +1,14 @@
 <configure 
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="Products.qi">
-        
-    <browser:viewlet
-        name="plone.logo"
-        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
-        class=".viewlets.LogoViewlet"
-        layer="Products.qi.interfaces.IQIProductLayer"
-        permission="zope2.View"
-        />
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="Products.qi">
+       
+  <browser:viewlet
+    name="plone.logo"
+    manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+    class=".viewlets.ProjectLogoViewlet"
+    layer="Products.qi.interfaces.IQIProductLayer"
+    permission="zope2.View"
+    />
 
 </configure>

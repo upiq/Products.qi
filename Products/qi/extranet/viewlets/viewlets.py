@@ -1,44 +1,27 @@
-from Products.Five.browser import BrowserView
-from zope.viewlet.interfaces import IViewlet
-from zope.interface import implements
-from Products.qi.extranet.types.interfaces import _PROJECT_LOGO_NAME
-from zope.component import getMultiAdapter
+from plone.app.layout.viewlets.common import LogoViewlet
+from plone.app.layout.navigation.root import getNavigationRootObject
 
+TAG = '<img src="%s" title="%s" alt="%s" />'
 
-class LogoViewlet(BrowserView):
-
-    implements(IViewlet)
-    def __init__(self, context, request, view, manager):
-        super(LogoViewlet, self).__init__(context, request)
-        self.__parent__ = view
-        self.context = context
-        self.request = request
-        self.view = view
-        self.manager = manager
-
+class ProjectLogoViewlet(BaseViewlet):
+    
     def update(self):
-        pass
-
-    def render(self):
-        securelogo = self.context.restrictedTraverse('logoprivate.jpg',None)
-        logo = self.context.restrictedTraverse(_PROJECT_LOGO_NAME, None)
-        if logo is None:
-            logo=self.context.restrictedTraverse('logo.jpg', None)
-        if securelogo is None:
-            securelogo=logo
-        portal_state = getMultiAdapter((self.context, self.request),
-                                                    name=u'plone_portal_state')    
-        #state=None
-        """try:
-            state = self.context.portal_workflow.getInfoFor(self.context, 'review_state')
-        except:
-            pass"""
-        if not portal_state.anonymous():
-            logo=securelogo
-        hometag="<a class=\"logo\" href='%s'>%s</a>"
-        if hasattr(self.context,'getProject'):
-            homelink=self.context.getProject().absolute_url()
-        else:
-            homelink=self.context.absolute_url()
-        return hometag%(homelink, logo.tag())
+        super(ProjectLogoViewlet, self).update()
+        portal = self.portal_state.portal()
+        navroot = getNavigationRootObject(self.context, portal)
+        logo_title = navroot.Title()
+        logofile = getattr(navroot, 'logo', None)
+        if logofile is not None:
+            filename = getattr(logofile, 'filename', None)
+            if filename and logofile.getSize():
+                # logo field has filename and data is not zero-byte/empty
+                url = '%s/@@download/logo/%s' % (
+                    self.navigation_root_url,
+                    filename,
+                    )
+                self.logo_tag = TAG % (url, logo_title, logo_title)
+        if 'project_logo.jpg' in navroot.contentIds():
+            # backward-compatibility, old Products.qi custom logo content item
+            url = '%s/project_logo.jpg/image' % self.navigation_root_url
+            self.logo_tag = TAG % (url, logo_title, logo_title)
 
