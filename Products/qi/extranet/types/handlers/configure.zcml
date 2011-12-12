@@ -5,7 +5,11 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
 
-    <include file="lookandfeel.zcml" />
+    <subscriber
+        for="Products.qi.extranet.types.interfaces.IProject
+             zope.app.container.interfaces.IObjectAddedEvent"
+        handler=".lookandfeel.manage_project_logo"
+        />
 
 </configure>
 

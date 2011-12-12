@@ -5,59 +5,6 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="Products.qi">
 
-    <five:registerClass
-        class=".project.Project"
-        meta_type="qiproject"
-        permission="Products.qi.AddProject"
-        addview="Products.qi.Project"
-        icon="homefolder.png"
-        />
-
-    <five:registerClass
-        class=".team.Team"
-        meta_type="qiteam"
-        permission="Products.qi.AddTeam"
-        addview="Products.qi.Team"
-        icon="workspace.png"
-        />
-
-    <five:registerClass
-        class=".subteam.SubTeam"
-        meta_type="qisubteam"
-        permission="Products.qi.AddTeam"
-        addview="Products.qi.SubTeam"
-        icon="workspace.png"
-        />
-        
-    <utility
-        component=".project.projectFactory"
-        name="Products.qi.Project"
-        />
-
-    <utility
-        component=".team.teamFactory"
-        name="Products.qi.Team"
-        />
-
-    <utility
-        component=".subteam.subTeamFactory"
-        name="Products.qi.SubTeam"
-        />
-
-    <class class=".project.Project">
-        <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
-        <implements interface="plone.app.layout.navigation.interfaces.INavigationRoot" />
-    </class>
-    <class class=".team.Team">
-        <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
-    </class>
-    <class class=".subteam.SubTeam">
-        <implements interface="plone.contentrules.engine.interfaces.IRuleAssignable" />
-    </class>
-
-
-
-    
     <include package=".browser" />
     <include package=".handlers" />
 </configure>

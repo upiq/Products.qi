@@ -1,7 +1,7 @@
 from zope.interface import implements
 from plone.dexterity.content import Container
 
-from Products.qi.extranet.types.newinterfaces import IProject, ITeam, ISubTeam
+from Products.qi.extranet.types.interfaces import IProject, ITeam, ISubTeam
 
 
 class Workspace(Container):
