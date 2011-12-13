@@ -8,8 +8,6 @@
     <viewlet name="plone.app.i18n.locales.languageselector"/>
   </hidden>
   <hidden manager="plone.portaltop" skinname="Plone Default">
-    <!-- for Plone 3: hide language selector from portaltop -->
-    <viewlet name="plone.app.i18n.locales.languageselector"/>
     <!-- for Plone 4: hide path_bar from portaltop, since
          Products.qi registers it here, but Products.CMFPlone
          now registers in new plone.abovecontent manager, which
