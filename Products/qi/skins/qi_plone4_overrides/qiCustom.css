@@ -13,12 +13,6 @@ div#viewlet-above-content {
   background-color:#ffd;
 }
 
-/*
-div#content {
-  margin-left:1em;
-}
-*/
-
 div.documentEditable {
     border:0.1em solid #ddd;
 }
@@ -63,7 +57,6 @@ div#edit-bar {
     border: 0.25em solid #444;
     border-bottom:0.1em solid #ddd;
 }
-
 
 body {
   background-color:#fff;
