@@ -6,6 +6,5 @@
     i18n_domain="Products.qi">
     
     <include package=".types" />
-    <include package=".viewlets" />
     
 </configure>
