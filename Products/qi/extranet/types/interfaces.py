@@ -1,4 +1,5 @@
 from plone.app.layout.navigation.interfaces import INavigationRoot
+from plone.uuid.interfaces import IAttributeUUID
 from plone.directives import form
 from plone.namedfile import field as filefield
 from plone.namedfile.interfaces import HAVE_BLOBS
@@ -15,7 +16,7 @@ if HAVE_BLOBS:
 
 
 
-class IWorkspace(form.Schema, IOrderedContainer):
+class IWorkspace(form.Schema, IOrderedContainer, IAttributeUUID):
     """
     A workspace is a folder for use as or in a project. A 
     workspace may have its own designated membership and 
