@@ -1,8 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope">
     
-    <!-- Local roles managed in the @@sharing view -->
-    
     <permission
         id="Products.qi.AddProject"
         title="qiproject: Add Project"
