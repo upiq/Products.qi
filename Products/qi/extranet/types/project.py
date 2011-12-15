@@ -8,4 +8,6 @@ class Project(Workspace):
     """QI project container"""
     
     implements(IProject)
+    
+    portal_type = 'qiproject'
 

@@ -8,4 +8,6 @@ class Team(Workspace):
     """QI team container"""
     
     implements(ITeam)
+    
+    portal_type = 'qiteam'
 
