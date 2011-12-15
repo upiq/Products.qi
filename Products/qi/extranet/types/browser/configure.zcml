@@ -1,18 +1,20 @@
 <configure 
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="Products.qi">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="Products.qi">
     
-    <!-- resources: content type icons -->
+  <!-- resources: content type icons -->
+
+  <browser:resource
+    name="workspace.png"
+    image="workspace.png"
+    layer="Products.qi.interfaces.IQIProductLayer"
+    />
     
-    <browser:resource
-        name="workspace.png"
-        image="workspace.png"
-        />
-    
-    <browser:resource
-        name="homefolder.png"
-        image="homefolder.png"
-        />
+  <browser:resource
+    name="homefolder.png"
+    image="homefolder.png"
+    layer="Products.qi.interfaces.IQIProductLayer"
+    />
     
 </configure>
