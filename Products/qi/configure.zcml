@@ -9,7 +9,7 @@
 
     <include package="plone.browserlayer" />
     
-    <include package=".extranet" />
+    <include package=".extranet.types" />
 
     <include file="profiles.zcml" />
     
