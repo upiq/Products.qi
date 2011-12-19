@@ -2,7 +2,6 @@
 <object>
   <!-- hide these viewlets: -->
   <hidden manager="plone.portalheader" skinname="Plone Default">
-    <viewlet name="plone.global_sections"/>
     <viewlet name="plone.skip_links"/>
     <!-- for Plone 4: hide language selector from portalheader -->
     <viewlet name="plone.app.i18n.locales.languageselector"/>
