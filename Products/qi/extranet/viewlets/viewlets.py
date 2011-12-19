@@ -3,7 +3,7 @@ from plone.app.layout.navigation.root import getNavigationRootObject
 
 TAG = '<img src="%s" title="%s" alt="%s" />'
 
-class ProjectLogoViewlet(BaseViewlet):
+class ProjectLogoViewlet(LogoViewlet):
     
     def update(self):
         super(ProjectLogoViewlet, self).update()
