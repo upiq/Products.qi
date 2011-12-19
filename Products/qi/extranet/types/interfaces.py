@@ -3,7 +3,9 @@ from plone.uuid.interfaces import IAttributeUUID
 from plone.directives import form
 from plone.namedfile import field as filefield
 from plone.namedfile.interfaces import HAVE_BLOBS
-from zope.interface import Interface
+from z3c.form.converter import TextLinesConverter
+from z3c.form.browser import textlines
+from zope.interface import Interface, Invalid, invariant
 from zope.container.interfaces import IOrderedContainer
 from zope import schema
 
@@ -14,6 +16,24 @@ NamedImage = filefield.NamedImage
 if HAVE_BLOBS:
     NamedImage = filefield.NamedBlobImage
 
+
+class UTF8LinesConverter(TextLinesConverter):
+    """
+    lines converter for (assumed utf-8 encoded) List of BytesLine field.
+    Useful for lists of textual strings (e.g. email addresses and identifiers)
+    that are not natively Unicode strings, but may optionally be extended
+    by encodings (though values for these are usually ASCII, casting alone
+    should be considered too implicit and too prone to break).
+    """
+    
+    def toWidgetValue(self, value):
+        value = list(element.decode('utf-8') for element in value)
+        return super(UTF8LinesConverter, self).toWidgetValue(value)
+    
+    def toFieldValue(self, value):
+        collection_type = self.field._type
+        lines = super(UTF8LinesConverter, self).toFieldValue(value)
+        return collection_type(element.encode('utf-8') for element in lines)
 
 
 class IWorkspace(form.Schema, IOrderedContainer, IAttributeUUID):
@@ -65,11 +85,13 @@ class IProject(IWorkspace, INavigationRoot):
         required=False,
         )
     
+    form.widget(contacts=textlines.TextLinesFieldWidget)
     contacts = schema.List(
         title=_(u'Contact email'),
         description=_(u'Project contact email addresses, one per line.'),
-        value_type=schema.BytesLine(),
+        value_type=schema.BytesLine(required=False),
         defaultFactory=list, #requires zope.schema >= 3.8.0
+        required=False,
         )
     
     logo = NamedImage(
@@ -77,6 +99,14 @@ class IProject(IWorkspace, INavigationRoot):
         description=_(u'Upload a project logo file as PNG or JPEG image.'),
         required=False,
         )
+    
+    @invariant
+    def start_end_valid_range(data):
+        if data.start is None and data.end:
+            raise Invalid('End date provided, but no start date')
+        if data.end and data.start:
+            if data.start > data.end:
+                raise Invalid('Start after end: invalid date range')
 
 
 class ITeam(IWorkspace):
