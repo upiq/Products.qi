@@ -7,7 +7,7 @@
   <!-- Basic metadata -->
   <property name="title" i18n:translate="">QI Team</property>
   <property name="description" i18n:translate="">A team workspace within a QI project workspace.</property>
-  <property name="content_icon">+++resource++workspace.png</property>
+  <property name="content_icon">++resource++workspace.png</property>
   <property name="allow_discussion">False</property>
   <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
