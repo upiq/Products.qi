@@ -38,10 +38,10 @@ class UTF8LinesConverter(TextLinesConverter):
 
 class IWorkspace(form.Schema, IOrderedContainer, IAttributeUUID):
     """
-    A workspace is a folder for use as or in a project. A 
-    workspace may have its own designated membership and 
+    A workspace is a folder for use as or in a project. A
+    workspace may have its own designated membership and
     user-groups associated with it (these abilities should
-    be accomplished via adaptation -- this interface does 
+    be accomplished via adaptation -- this interface does
     not mandate a specific interface for handling that).
     """
     
@@ -90,7 +90,7 @@ class IProject(IWorkspace, INavigationRoot):
         title=_(u'Contact email'),
         description=_(u'Project contact email addresses, one per line.'),
         value_type=schema.BytesLine(required=False),
-        defaultFactory=list, #requires zope.schema >= 3.8.0
+        defaultFactory=list,    # requires zope.schema >= 3.8.0
         required=False,
         )
     
