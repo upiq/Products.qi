@@ -14,9 +14,6 @@
     
     <!-- install custom filesystem directory view -->
     <cmf:registerDirectory
-        name="Qi-Images"/>
-
-    <cmf:registerDirectory
         name="qi_plone4_overrides"/>
     
 </configure>
