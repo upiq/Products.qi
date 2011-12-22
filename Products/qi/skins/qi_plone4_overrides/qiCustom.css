@@ -176,3 +176,28 @@ dl.portletNavigationTree dd.portletItem ul.navTree li.navTreeCurrentNode a.navTr
     border:0.1em solid #242;
 }
 
+/* home icons viewlet adjacent to personal tools menu: */
+
+div.home_icons {
+  float:right;
+  border-bottom: 0.1em solid #acf;
+  padding-bottom:0.2em;
+  background-color:transparent;
+
+  margin-left:0.3em;
+}
+
+div.home_icons a {
+    margin-left:0.2em;
+}
+
+#portal-personaltools-wrapper { 
+    height:1.6em;
+    width:50%;
+    float:right;
+}
+
+#portal-personaltools {
+    padding-bottom:0.4em !Important;
+}
+

@@ -17,4 +17,10 @@
     layer="Products.qi.interfaces.IQIProductLayer"
     />
     
+  <browser:resource
+    name="go-top.png"
+    image="go-top.png"
+    layer="Products.qi.interfaces.IQIProductLayer"
+    />
+    
 </configure>

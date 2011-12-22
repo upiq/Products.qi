@@ -7,10 +7,12 @@
     
     <five:registerPackage package="." initialize=".zope2.initialize" />
 
+    <!-- external zcml inclues -->
     <include package="plone.browserlayer" />
     
+    <!-- internal zcml includes -->
     <include package=".extranet.types" />
-
+    <include package=".extranet.viewlets" />
     <include file="profiles.zcml" />
     
 </configure>

@@ -1,5 +1,8 @@
-from plone.app.layout.viewlets.common import LogoViewlet
+from plone.app.layout.viewlets.common import LogoViewlet, ViewletBase
 from plone.app.layout.navigation.root import getNavigationRootObject
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
 
 TAG = '<img src="%s" title="%s" alt="%s" />'
 
@@ -25,4 +28,39 @@ class ProjectLogoViewlet(LogoViewlet):
             # backward-compatibility, old Products.qi custom logo content item
             url = '%s/project_logo.jpg/image' % self.navigation_root_url
             self.logo_tag = TAG % (url, logo_title, logo_title)
+
+
+class HomeIconsViewlet(ViewletBase):
+    """
+    Viewlet for home and/or site icons for any context inside a
+    site of project and team workspaces.
+    """ 
+    
+    index = ViewPageTemplateFile('home_icons.pt')
+     
+    def links(self):
+        """
+        returns list of dict containing icon link, link target, title.
+        should only be accessed after calling self.update() (called
+        by template should be fine).
+        """
+        result = []
+        portal = self.portal_state.portal()
+        navroot = getNavigationRootObject(self.context, portal)
+        if navroot is portal:
+            return result # empty links: in non-workspace (indirect) contexts
+        mtool = getToolByName(portal, 'portal_membership')
+        result.append({
+            'url': self.navigation_root_url,    # set by ViewletBase.update()
+            'icon': '%s/%s' % (self.site_url, '++resource++homefolder.png'),
+            'title': u'Go to home workspace / project',
+            })
+        if mtool.checkPermission('Manage site', navroot):
+            # for the moment, only project managers see site root link.
+            result.append({
+                'url': self.site_url,           # set by ViewletBase.update()
+                'icon': '%s/%s' % (self.site_url, '++resource++go-top.png'),
+                'title': u'Got to site root',
+                })
+        return result
 
