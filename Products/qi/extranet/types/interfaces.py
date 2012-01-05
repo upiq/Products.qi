@@ -17,6 +17,12 @@ if HAVE_BLOBS:
     NamedImage = filefield.NamedBlobImage
 
 
+# package constants for FTI portal_type names:
+PROJECT_TYPE = 'qiproject'
+TEAM_TYPE = 'qiteam'
+SUBTEAM_TYPE = 'qisubteam'
+
+
 class UTF8LinesConverter(TextLinesConverter):
     """
     lines converter for (assumed utf-8 encoded) List of BytesLine field.
