@@ -60,7 +60,7 @@ class HomeIconsViewlet(ViewletBase):
             result.append({
                 'url': self.site_url,           # set by ViewletBase.update()
                 'icon': '%s/%s' % (self.site_url, '++resource++go-top.png'),
-                'title': u'Got to site root',
+                'title': u'Go to site root',
                 })
         return result
 
