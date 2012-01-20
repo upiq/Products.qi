@@ -76,3 +76,26 @@ def getTeamsInContext(context):
         }
     return [b._unrestrictedGetObject() for b in catalog.search(query)]
 
+
+class WorkspaceUtilityView(object):
+    """Workspace utility view"""
+    
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+    
+    def __call__(self, *args, **kwargs):
+        content, response = self.__doc__, self.request.response
+        response.setHeader('Content-type', 'text/plain')
+        response.setHeader('Content-Length', len(content))
+        return content
+    
+    def team(self):
+        return team_containing(self.context)        # may be None
+    
+    def project(self):
+        return project_containing(self.context)     # may be None
+    
+    def workspace(self):
+        return self.team() or self.project()        # may be None
+

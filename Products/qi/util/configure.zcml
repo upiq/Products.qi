@@ -1,0 +1,12 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser">
+  
+  <browser:page
+    for="Products.CMFCore.interfaces.IContentish"
+    name="workspace_utils"
+    class=".utils.WorkspaceUtilityView"
+    permission="zope2.View"
+    />
+
+</configure>
