@@ -1,6 +1,9 @@
+from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 
+
 from Products.qi.extranet.types import project, team
+from Products.qi.extranet.types.interfaces import IWorkspaceContext
 
 
 def find_parents(context, typename=None, findone=False, start_depth=2):
@@ -78,24 +81,36 @@ def getTeamsInContext(context):
 
 
 class WorkspaceUtilityView(object):
-    """Workspace utility view"""
+    """
+    Workspace utility view: view or adapter for content context in
+    a Plone site to get team or project workspace context.
+    """
     
-    def __init__(self, context, request):
+    implements(IWorkspaceContext)
+    
+    def __init__(self, context, request=None):
         self.context = context
         self.request = request
     
     def __call__(self, *args, **kwargs):
-        content, response = self.__doc__, self.request.response
+        content = "Workspace utility view"
+        response = self.request.response
         response.setHeader('Content-type', 'text/plain')
         response.setHeader('Content-Length', len(content))
         return content
     
     def team(self):
+        """get team containing or None"""
         return team_containing(self.context)        # may be None
     
     def project(self):
+        """get project containing or None"""
         return project_containing(self.context)     # may be None
     
     def workspace(self):
+        """
+        get most immediate workspace team or project 
+        containing or None
+        """
         return self.team() or self.project()        # may be None
 

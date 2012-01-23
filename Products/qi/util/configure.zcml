@@ -3,9 +3,10 @@
   xmlns:browser="http://namespaces.zope.org/browser">
   
   <browser:page
-    for="Products.CMFCore.interfaces.IContentish"
+    for="*"
     name="workspace_utils"
     class=".utils.WorkspaceUtilityView"
+    allowed_interface="Products.qi.extranet.types.interfaces.IWorkspaceContext"
     permission="zope2.View"
     />
 

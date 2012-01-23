@@ -123,3 +123,26 @@ class ISubTeam(ITeam):
     """Marker for a specifically sub-team workspace"""
 
 
+class IWorkspaceContext(Interface):
+    """
+    Adapter interface providing the workspace context for projects and
+    teams, given some location being adapted.
+    """
+    
+    def team():
+        """
+        Return containing team workspace for context or None
+        """
+    
+    def project():
+        """
+        Return containing project workspace for context or None
+        """
+    
+    def workspace():
+        """
+        Return containing project or team workspace for context or None.
+        If there is a team context, return that in preference to outer
+        containing project.
+        """
+
