@@ -21,6 +21,7 @@ if HAVE_BLOBS:
 PROJECT_TYPE = 'qiproject'
 TEAM_TYPE = 'qiteam'
 SUBTEAM_TYPE = 'qisubteam'
+WORKSPACE_TYPES = (PROJECT_TYPE, TEAM_TYPE, SUBTEAM_TYPE)
 
 
 class UTF8LinesConverter(TextLinesConverter):
