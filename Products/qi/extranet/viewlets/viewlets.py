@@ -24,9 +24,13 @@ class ProjectLogoViewlet(LogoViewlet):
                     filename,
                     )
                 self.logo_tag = TAG % (url, logo_title, logo_title)
-        if 'project_logo.jpg' in navroot.contentIds():
+        elif 'project_logo.jpg' in navroot.contentIds():
             # backward-compatibility, old Products.qi custom logo content item
             url = '%s/project_logo.jpg/image' % self.navigation_root_url
+            self.logo_tag = TAG % (url, logo_title, logo_title)
+        else:
+            # fallback to application logo image, navroot title alt text
+            url = '%s/logo.jpg' % (self.navigation_root_url,)
             self.logo_tag = TAG % (url, logo_title, logo_title)
 
 
