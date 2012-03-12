@@ -30,7 +30,7 @@ class ProjectLogoViewlet(LogoViewlet):
             self.logo_tag = TAG % (url, logo_title, logo_title)
         else:
             # fallback to application logo image, navroot title alt text
-            url = '%s/logo.jpg' % (self.navigation_root_url,)
+            url = '%s/logo.png' % (self.navigation_root_url,)
             self.logo_tag = TAG % (url, logo_title, logo_title)
 
 
