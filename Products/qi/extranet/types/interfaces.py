@@ -63,9 +63,6 @@ class IWorkspace(form.Schema, IOrderedContainer, IAttributeUUID):
                      u'of project.'),
         required=False,
         )
-    
-    def getId():
-        """Return the id fo the workspace as a string"""
 
 
 class IProject(IWorkspace, INavigationRoot):
