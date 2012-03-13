@@ -1,8 +1,0 @@
-<configure
-  xmlns="http://namespaces.zope.org/zope"
-  i18n_domain="Products.qi">
-
-  <!-- include override conifguration in extrnet.viewlets (for logo) -->
-  <include package=".extranet.viewlets" file="overrides.zcml"/>
-
-</configure>

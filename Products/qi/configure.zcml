@@ -12,7 +12,6 @@
     
     <!-- internal zcml includes -->
     <include package=".extranet.types" />
-    <include package=".extranet.viewlets" />
     <include file="profiles.zcml" />
     
 </configure>

@@ -1,4 +1,3 @@
-from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.uuid.interfaces import IAttributeUUID
 from plone.directives import form
 from plone.namedfile import field as filefield
@@ -65,10 +64,9 @@ class IWorkspace(form.Schema, IOrderedContainer, IAttributeUUID):
         )
 
 
-class IProject(IWorkspace, INavigationRoot):
+class IProject(IWorkspace):
     """
-    Project is a folder with project workspace that is also
-    an INavigationRoot.
+    Project is a top-level folder with project workspace.
     """
     
     form.fieldset(
