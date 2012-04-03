@@ -27,6 +27,7 @@ setup(name='Products.qi',
           'zope.schema>=3.8.0',
           'plone.app.dexterity>=1.1',
           'Products.CMFPlone>=4.1',
+          'uu.smartdate',
           # -*- Extra requirements: -*-
       ],
       extras_require = {

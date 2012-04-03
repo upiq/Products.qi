@@ -9,6 +9,7 @@ from zope.container.interfaces import IOrderedContainer
 from zope import schema
 
 from Products.qi import MessageFactory as _
+from uu.smartdate.browser.widget import SmartdateFieldWidget
 
 
 NamedImage = filefield.NamedImage
@@ -75,12 +76,14 @@ class IProject(IWorkspace):
         fields=['start', 'stop', 'contact', 'logo'],
         )
     
+    form.widget(start=SmartdateFieldWidget)
     start = schema.Date(
         title=_(u'Project start'),
         description=_(u'Date project begins.'),
         required=False,
         )
-    
+   
+    form.widget(end=SmartdateFieldWidget) 
     end = schema.Date(
         title=_(u'Project end'),
         description=_(u'Date project ends.'),
