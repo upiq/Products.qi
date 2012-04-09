@@ -34,13 +34,17 @@ class UTF8LinesConverter(TextLinesConverter):
     """
     
     def toWidgetValue(self, value):
-        value = list(element.decode('utf-8') for element in value)
+        if value and isinstance(value[0], str):
+            value = list(element.decode('utf-8') for element in value)
         return super(UTF8LinesConverter, self).toWidgetValue(value)
     
     def toFieldValue(self, value):
         collection_type = self.field._type
+        value_type = self.field.value_type._type
         lines = super(UTF8LinesConverter, self).toFieldValue(value)
-        return collection_type(element.encode('utf-8') for element in lines)
+        if value_type is str:
+            return collection_type(element.encode('utf-8') for element in lines)
+        return lines  # default unicode values
 
 
 class IWorkspace(form.Schema, IOrderedContainer, IAttributeUUID):
