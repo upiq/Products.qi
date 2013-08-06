@@ -58,12 +58,12 @@ class IWorkspace(form.Schema, IOrderedContainer, IAttributeUUID):
     
     title = schema.TextLine(
         title=_(u'Title'),
-        description=_(u'Project name or display title.'),
+        description=_(u'Workspace name or display title.'),
         required=True)
     
     description = schema.Text(
         title=_(u'Description'),
-        description=(u'Project description; may be displayed for viewers '\
+        description=(u'Project description; may be displayed for viewers '
                      u'of project.'),
         required=False,
         )
@@ -87,7 +87,7 @@ class IProject(IWorkspace):
         required=False,
         )
    
-    form.widget(end=SmartdateFieldWidget) 
+    form.widget(end=SmartdateFieldWidget)
     end = schema.Date(
         title=_(u'Project end'),
         description=_(u'Date project ends.'),
@@ -111,8 +111,6 @@ class IProject(IWorkspace):
     
     @invariant
     def start_end_valid_range(data):
-        if data.start is None and data.end:
-            raise Invalid('End date provided, but no start date')
         if data.end and data.start:
             if data.start > data.end:
                 raise Invalid('Start after end: invalid date range')
