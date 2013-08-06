@@ -6,8 +6,8 @@ from Products.qi.extranet.types.workspace import Workspace
 
 class Project(Workspace):
     """QI project container"""
-    
+
     implements(IProject)
-    
+
     portal_type = 'qiproject'
 

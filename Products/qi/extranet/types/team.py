@@ -6,8 +6,8 @@ from Products.qi.extranet.types.workspace import Workspace
 
 class Team(Workspace):
     """QI team container"""
-    
+
     implements(ITeam)
-    
+
     portal_type = 'qiteam'
 

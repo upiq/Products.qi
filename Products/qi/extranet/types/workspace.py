@@ -6,6 +6,6 @@ from Products.qi.extranet.types.interfaces import IWorkspace
 
 class Workspace(Container):
     """Workspace base class"""
-    
+
     implements(IWorkspace)
 
