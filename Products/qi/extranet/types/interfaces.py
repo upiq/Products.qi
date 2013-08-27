@@ -122,7 +122,7 @@ class ITeam(IWorkspace):
     form.fieldset(
         'configuration',
         label=_(u'Configuration'),
-        fields=['start', 'stop'],
+        fields=['start', 'end'],
         )
 
 
@@ -132,7 +132,7 @@ class ISubTeam(ITeam):
     form.fieldset(
         'configuration',
         label=_(u'Configuration'),
-        fields=['start', 'stop'],
+        fields=['start', 'end'],
         )
 
 
