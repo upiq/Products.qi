@@ -91,7 +91,7 @@ class IProject(IWorkspace):
     form.fieldset(
         'configuration',
         label=_(u'Configuration'),
-        fields=['start', 'stop', 'contact', 'logo'],
+        fields=['start', 'end', 'contact', 'logo'],
         )
 
     form.widget(contacts=textlines.TextLinesFieldWidget)
