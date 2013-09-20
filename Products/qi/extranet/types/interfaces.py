@@ -129,12 +129,6 @@ class ITeam(IWorkspace):
 class ISubTeam(ITeam):
     """Marker for a specifically sub-team workspace"""
 
-    form.fieldset(
-        'configuration',
-        label=_(u'Configuration'),
-        fields=['start', 'end'],
-        )
-
 
 class IWorkspaceContext(Interface):
     """
