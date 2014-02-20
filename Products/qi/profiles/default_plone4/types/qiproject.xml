@@ -22,6 +22,10 @@
     <element value="News Item"/>
     <element value="Topic"/>
     <element value="qiteam"/>
+    <element value="uu.eventintegration.calendar" />
+    <element value="uu.formlibrary.library" />
+    <element value="uu.formlibrary.measurelibrary" />
+    <element value="uu.chart.report" />
   </property>
 
   <!-- schema interface -->

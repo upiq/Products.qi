@@ -22,6 +22,8 @@
     <element value="News Item"/>
     <element value="Topic"/>
     <element value="qisubteam"/>
+    <element value="uu.formlibrary.series" />
+    <element value="uu.chart.report" />
   </property>
 
   <!-- schema interface -->
