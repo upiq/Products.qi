@@ -17,4 +17,7 @@
     for="zope.schema.interfaces.ITuple z3c.form.interfaces.ITextLinesWidget"
     />
 
+  <!-- traversal adapter -->
+  <adapter factory=".workspace.WorkspacePublishTraverse" />
+
 </configure>
